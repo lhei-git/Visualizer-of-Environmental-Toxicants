@@ -1,0 +1,56 @@
+# Author: Evan de Jesus
+
+version: "3.8"
+services:
+  static:
+    build:
+      context: ./frontend
+      dockerfile: static.Dockerfile
+    ports:
+      - 3001:80
+    volumes:
+      - ./frontend:/reactApp
+      - /reactApp/node_modules
+    depends_on:
+      - backend
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+    stdin_open: true
+    volumes:
+      - ./frontend:/reactApp
+      - /reactApp/node_modules
+    depends_on:
+      - backend
+  backend:
+    build: ./backend
+    command: sh -c 'until pg_isready --username=postgres --host=postgres_local; do sleep 1; done && python manage.py runserver 0.0.0.0:8000'
+    env_file: backend/.env
+    environment:
+      DB_HOST: postgres_local
+      API_KEY: foobar
+      DJANGO_SETTINGS: dev
+    volumes:
+      - ./backend:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    container_name: postgres_local
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: ubuntu
+      POSTGRES_PASSWORD: ubuntu
+      POSTGRES_DB: ubuntu
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ubuntu"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./custom_mount:/var/lib/postgresql/data
+      - ./backend/pg_dump:/docker-entrypoint-initdb.d

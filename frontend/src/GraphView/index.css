@@ -1,0 +1,169 @@
+:root {
+  --black: #3f3844;
+}
+
+.graph-header {
+  text-align: left;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.graph-header h1,
+.graph-header h2 {
+  margin: 0;
+}
+
+.graph-header h2 {
+  opacity: 0.7;
+}
+
+.graph-header span {
+  color: #9c27b0;
+}
+
+.graph-container {
+  position: relative;
+  background: #fff;
+  min-height: 100vh;
+  padding: 0;
+  margin-top: 200px;
+}
+
+.graph-container .selector {
+  z-index: 100;
+}
+
+.graph-container .selector ul {
+  text-align: center;
+  border-radius: 5px;
+}
+
+.graph-container .selector li {
+  display: inline-block;
+  cursor: pointer;
+  background: #efefef;
+  color: #444;
+  border: 1px solid #e2e2e2;
+  padding: 14px 45px;
+}
+
+.graph-container .selector li:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+.graph-container .selector li:last-child {
+  border-radius: 0 7px 7px 0;
+}
+
+.graph-container .selector li.active {
+  background: #fff;
+  font-weight: 600;
+}
+
+.graph-container > .content {
+  min-width: 1000px;
+  max-width: 50vw;
+  overflow-x: visible;
+  margin: 0 auto;
+}
+
+.graph-container .graphs {
+  width: 100%;
+}
+
+.graph-container .graph {
+  position: relative;
+  justify-content: center;
+  padding-top: 75px;
+  padding-bottom: 40px;
+  width: 100%;
+  border-radius: 25px;
+}
+
+.graph-container .dropdown-icon {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  margin-right: 20px;
+}
+
+.graph-container .dropdown-icon.active {
+  transform: rotate(180deg);
+  transform-origin: 60% 50%;
+}
+
+.graph-container .top-ten {
+  position: relative;
+}
+
+.graph-container .filter-container .control-container {
+  display: block;
+}
+
+.dynamic-table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.sticky-header {
+  border-collapse: collapse;
+  background-color: #ccc;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 0.25em 0.5em 0.25em 1em;
+}
+
+.odd-row {
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.even-row {
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #ddd;
+}
+
+.even-overflow-column {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 40%;
+  min-width: 200px;
+  background-color: #ddd;
+}
+
+.odd-overflow-column {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 40%;
+  min-width: 200px;
+  background-color: #fff;
+}
+
+.summary th,
+.summary td {
+  padding: 10px;
+  font-size: 22px;
+}
+.summary tr {
+  min-height: 40px;
+  border-bottom: 1px solid var(--black);
+}
+
+.summary table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.summary td,
+.summary th {
+  text-align: right;
+}
+
+.summary td:nth-child(1),
+.summary th:nth-child(1) {
+  text-align: left;
+}

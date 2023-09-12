@@ -1,0 +1,49 @@
+.control-header {
+  flex: 1;
+  text-align: center;
+  display: inline-block;
+}
+
+.control-container {
+  flex: 2;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  background: #fafbfc;
+
+  --primary: #9c27b0;
+  --primary-light: #d05ce3;
+  --primary-dark: #6a0080;
+  --black: #3f3844;
+}
+
+.control-container .content {
+  cursor: pointer;
+  border-radius: 0 0 5px 5px;
+  min-height: 30px;
+  font-size: 18px;
+}
+
+.control-container .content input,
+.control-container .content select {
+  margin: 15px;
+}
+
+.control-container .content input[type="checkbox"] {
+  position: relative;
+  top: 3px;
+  margin: 5px 10px;
+}
+
+.control-container .content select {
+  padding-left: 3px;
+  padding-right: 20px;
+  font-size: 18px;
+  /* max-width: 190px; */
+}
+
+.control-container .checkbox-group {
+  display: inline-block;
+  margin: 15px;
+  cursor: pointer;
+}

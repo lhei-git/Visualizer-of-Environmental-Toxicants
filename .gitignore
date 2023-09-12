@@ -1,0 +1,7 @@
+*.zip
+**/.vscode
+**/node_modules
+**/http-instance.config
+
+backup*
+custom_mount
