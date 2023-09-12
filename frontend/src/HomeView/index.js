@@ -85,7 +85,7 @@ function Home(props) {
       <div className="content-group">
         <div className="header">Visualizer of Environmental Toxicants</div>
         <div className="caption">
-          Please Select a location to see U.S. facilities emitting toxic chemicals into
+          Select a location to see U.S. facilities emitting toxic chemicals into
           the air, land and water; statistics and trends on releases of
           toxicants into the environment; as well as detailed information on
           potential health hazards from these toxic chemicals.
