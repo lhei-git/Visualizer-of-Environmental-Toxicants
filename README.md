@@ -1,7 +1,7 @@
 # ToxicantVisualizer
 ![Build Status](https://github.com/lhei-git/ToxicantVisualizer/actions/workflows/deploy.yml/badge.svg)
 
-Fall 2020 Capstone Project
+Fall 2023 Capstone Project
 
 ## Contributing
 1. Select an issue to write code for. If no issue exists for the addition you would like to make, create one. 
