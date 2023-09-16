@@ -108,10 +108,11 @@ Navbar.propTypes = {
 };
 
 /* Footer component */
+/* Added VET 2023 upgrade */
 function Footer() {
   return (
     <div className="footer">
-      <div className="copyright">&#169; VET 2021</div>
+      <div className="copyright">&#169; VET 2023</div>
     </div>
   );
 }
