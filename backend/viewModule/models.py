@@ -13,7 +13,7 @@ class Facility(models.Model):
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     parent_co_name = models.TextField(
-        db_column="resoved_parent_co", blank=True, null=True)
+        db_column="resolved_parent_co", blank=True, null=True)
     industry_sector_code = models.TextField(blank=True, null=True)
     industry_sector = models.TextField(blank=True, null=True)
 
