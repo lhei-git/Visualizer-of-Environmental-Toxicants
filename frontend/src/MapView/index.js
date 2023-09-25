@@ -149,13 +149,15 @@ function MapView({ map, filters, onFilterChange }) {
                 <div className="caption">
                   Click on toxicant to see detailed chemical information.
                 </div>
-                <ChemicalList
-                  onClick={(chemical) => {
-                    dispatch(showPubchemInfo());
-                    dispatch(setCurrentChemical(chemical));
-                  }}
-                  chemicals={state.chemicals}
-                ></ChemicalList>
+                <div className = "chemicalList">
+                  <ChemicalList
+                    onClick={(chemical) => {
+                      dispatch(showPubchemInfo());
+                      dispatch(setCurrentChemical(chemical));
+                    }}
+                    chemicals={state.chemicals}
+                  ></ChemicalList>
+                </div>
               </div>
             )}
           </div>

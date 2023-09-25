@@ -1,4 +1,5 @@
 module.exports.years = {
   start: 2005,
-  end: 2019,
+  /*sets range to updatet to latest year*/
+  end: 2022,
 };

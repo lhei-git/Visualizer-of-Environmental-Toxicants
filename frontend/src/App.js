@@ -34,7 +34,8 @@ const initialState = {
     pbt: false,
     carcinogen: false,
     releaseType: "all",
-    year: 2019,
+    /*sets initial state to latest year*/
+    year: 2022,
   },
   errorMessage: "",
 };
@@ -82,8 +83,8 @@ const Navbar = (props) => {
         <li className={location.pathname === "/" ? "active" : ""}>
           <Link to="/">Search Toxicant Release</Link>
         </li>
-        <li className={location.pathname === "/" ? "active" : ""}>
-          <Link to="/eph">Search Public Health</Link>  
+        <li className={location.pathname === "/eph" ? "active" : ""}>
+          <Link to="/eph">Search Public Health</Link>
         </li>
         <li className={location.pathname === "/about" ? "active" : ""}>
           <Link to="/about">About</Link>
