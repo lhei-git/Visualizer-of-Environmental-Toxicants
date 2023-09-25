@@ -5,7 +5,7 @@ function EPHChart() {
       <div className='eph-chart-container'>
         {/* Your iframe code goes here */}
         <iframe
-          src="https://ephtracking.cdc.gov/DataExplorer/?query=e2b1e9e8-d4fb-41a4-b558-aa9be5a9a69b&G1=2"
+          src="https://ephtracking.cdc.gov/DataExplorer/?query=96874ebc-6ddf-4804-bf5b-0a1752576cba&G1=2" 
           width="600"
           height="450"
           title="CDC Tracking Network Chart"
@@ -15,5 +15,6 @@ function EPHChart() {
       </div>
     );
   }
+
   
 export default EPHChart;
