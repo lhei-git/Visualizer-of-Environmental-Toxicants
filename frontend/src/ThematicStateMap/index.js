@@ -12,7 +12,8 @@ class ThematicStateMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latestYear: 2019,
+      /*update to latest year*/
+      latestYear: 2022,
       contentCounty: "",
       geoUrl: "",
       stateName: "",

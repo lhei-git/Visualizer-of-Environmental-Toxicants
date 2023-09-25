@@ -9,8 +9,8 @@ from django.core import serializers as szs
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import re
-
-latest_year = 2019
+'Sets initial map view dropdown menu to latest year'
+latest_year = 2022
 
 
 def health_check(request):

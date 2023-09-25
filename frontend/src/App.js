@@ -21,8 +21,10 @@ import Home from "./HomeView";
 import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
+
 import EPHSearch from "./EPHHomeview/index"
 import EPHData from "./EPHData/index"  
+
 import React, { useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
@@ -35,7 +37,8 @@ const initialState = {
     pbt: false,
     carcinogen: false,
     releaseType: "all",
-    year: 2019,
+    /*sets initial state to latest year*/
+    year: 2022,
   },
   errorMessage: "",
 };
@@ -119,10 +122,11 @@ Navbar.propTypes = {
 };
 
 /* Footer component */
+/* Added VET 2023 upgrade */
 function Footer() {
   return (
     <div className="footer">
-      <div className="copyright">&#169; VET 2021</div>
+      <div className="copyright">&#169; VET 2023</div>
     </div>
   );
 }
