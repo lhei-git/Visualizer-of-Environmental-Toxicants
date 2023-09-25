@@ -1,10 +1,11 @@
 import "./index.css";
+import EPHChart from "../EPHCharts/index.js"
 const React = require("react");
 
 function EPHHome() {
   return (
     <div className="eph-container">
-      random text for testing
+      <EPHChart/>
     </div>
   );
 }
