@@ -87,14 +87,12 @@ function Home(props) {
   function filterBySpecificIndicators() {
 
   }
-
   /*style for home filter button */
   const filterButtonStyle = {
     color: "black",
     padding: "10px",
     fontFamily: "Sans-Serif"
   };
-
 
   /*This function presents home view information as well as a button to search specific filters*/
   return (
@@ -105,7 +103,7 @@ function Home(props) {
       <div className="content-group">
         <div className="header">Visualizer of Environmental Toxicants</div>
         <div className="caption">
-          Select a location to see U.S. facilities emitting toxic chemicals into
+          Please select a location to see U.S. facilities emitting toxic chemicals into
           the air, land and water; statistics and trends on releases of
           toxicants into the environment; as well as detailed information on
           potential health hazards from these toxic chemicals.
