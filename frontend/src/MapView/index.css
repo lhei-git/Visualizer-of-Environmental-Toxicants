@@ -152,6 +152,10 @@
   top: 5px;
 }
 
+.pubchem-wrapper .chemical-list {
+  cursor: pointer;
+}
+
 .chemicals .placeholder {
   position: relative;
   text-align: center;
