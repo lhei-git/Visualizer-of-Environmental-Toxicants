@@ -82,7 +82,7 @@ function Home(props) {
 
   }
 
-
+  /*style for home filter button */
   const filterButtonStyle = {
     color: "black",
     padding: "10px",
