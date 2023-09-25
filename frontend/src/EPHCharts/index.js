@@ -2,7 +2,7 @@ import React from 'react'
 
 function EPHChart() {
     return (
-      <div>
+      <div className='eph-chart-container'>
         {/* Your iframe code goes here */}
         <iframe
           src="https://ephtracking.cdc.gov/DataExplorer/?query=e2b1e9e8-d4fb-41a4-b558-aa9be5a9a69b&G1=2"
