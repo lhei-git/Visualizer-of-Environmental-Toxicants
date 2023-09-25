@@ -33,7 +33,7 @@ const initialState = {
     pbt: false,
     carcinogen: false,
     releaseType: "all",
-    year: 2019,
+    year: 2022,
   },
   errorMessage: "",
 };
