@@ -10,7 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 import re
 
-latest_year = 2019
+latest_year = 2022
 
 
 def health_check(request):

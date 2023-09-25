@@ -82,6 +82,14 @@ function Home(props) {
 
   }
 
+
+  const filterButtonStyle = {
+    color: "black",
+    padding: "10px",
+    fontFamily: "Sans-Serif"
+  };
+
+
   /*This function presents home view information as well as a button to search specific filters*/
   return (
     <div className="home-container">
@@ -96,12 +104,13 @@ function Home(props) {
           toxicants into the environment; as well as detailed information on
           potential health hazards from these toxic chemicals.
         </div>
-
+        
         <div className="filter">
           <a href="/" className="filterButton">
-            <button type="button" onClick={filterBySpecificIndicators}>Filters</button>
+            <button style={filterButtonStyle} type="button" onClick={filterBySpecificIndicators}>Filters</button>
           </a> 
         </div>
+      
       
         <div className="search-bar">
           <PlacesAutocomplete
@@ -143,6 +152,7 @@ function Home(props) {
                         const className = `suggestion-item ${
                           suggestion.active ? "active" : ""
                         }`;
+                        
 
                         return (
                           <div
@@ -158,6 +168,7 @@ function Home(props) {
                             </small>
                           </div>
                         );
+                        
                       })}
                     </div>
                   )}
