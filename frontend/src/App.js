@@ -21,9 +21,8 @@ import Home from "./HomeView";
 import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
-
-import EPHSearch from "./EPHHomeview/index"
-import EPHData from "./EPHData/index"  
+import EPHSearch from "./EPHHomeView/index";
+import EPHData from "./EPHData/index";
 
 import React, { useReducer } from "react";
 import MapView from "./MapView";
