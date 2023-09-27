@@ -59,7 +59,7 @@ function EPHHome(props) {
   /* start geocoding process when location is selected or user hits enter (topmost location used) */
   function handleSelect(location, placeId, suggestion) {
     /* Redirects website to "National Insights" page if the user types in "United States" */
-    if (location == "United States"){
+    if (location === "United States"){
         window.alert("Please select a specific city, county, or state.");
     }
     else {
@@ -89,7 +89,7 @@ function EPHHome(props) {
           <div className="overlay"></div>
         </div>
         <div className="content-group">
-          <div className="header">Visualizer of Environmental Toxicants</div>
+          <div className="header">Visualizer of Environmental Toxicants - EPH</div>
           <div className="caption">
             Select a location to see information regarding the area's public health
              based on several different categories. You will be able to see statistical 
