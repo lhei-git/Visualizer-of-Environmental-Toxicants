@@ -1,4 +1,4 @@
 module.exports.years = {
   start: 2005,
-  end: 2019,
+  end: 2022,
 };
