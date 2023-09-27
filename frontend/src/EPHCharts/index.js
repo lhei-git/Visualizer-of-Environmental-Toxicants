@@ -33,7 +33,7 @@ function EPHChart() {
   function TimeSeries({ data }) {
     
     return (
-      <LineChart width={800} height={400} margin={100}data={data}>
+      <LineChart width={800} height={400} data={data}>
         <CartesianGrid />
         <XAxis dataKey="year" />
         <YAxis>
@@ -41,7 +41,8 @@ function EPHChart() {
             style={{textAnchor: "middle"}}
             angle={270} 
             position='insideLeft'
-            value={"Concentration (micrograms/deciliter)"}/>
+            value={"Concentration (micrograms/deciliter)"}
+            margin={200}/>
 
         </YAxis>
         <Tooltip />
