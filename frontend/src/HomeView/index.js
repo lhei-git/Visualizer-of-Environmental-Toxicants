@@ -83,7 +83,6 @@ function Home(props) {
     clearSuggestions();
   }
 
-  
 
   /*This function presents home view information as well as a button to search specific filters*/
   return (
