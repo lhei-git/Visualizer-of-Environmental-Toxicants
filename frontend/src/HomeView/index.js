@@ -83,16 +83,6 @@ function Home(props) {
     clearSuggestions();
   }
 
-  /* handles dropdown filter for specific indicators*/
-  function filterBySpecificIndicators() {
-
-  }
-  /*style for home filter button */
-  const filterButtonStyle = {
-    color: "black",
-    padding: "10px",
-    fontFamily: "Sans-Serif"
-  };
 
   /*This function presents home view information as well as a button to search specific filters*/
   return (
@@ -109,11 +99,7 @@ function Home(props) {
           potential health hazards from these toxic chemicals.
         </div>
         
-        <div className="filter">
-          <a href="/" className="filterButton">
-            <button style={filterButtonStyle} type="button" onClick={filterBySpecificIndicators}>Filters</button>
-          </a> 
-        </div>
+        
       
       
         <div className="search-bar">
