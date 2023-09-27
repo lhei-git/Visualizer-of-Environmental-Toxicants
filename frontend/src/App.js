@@ -21,7 +21,7 @@ import Home from "./HomeView";
 import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
-import EPHSearch from "./EPHHomeView/index";
+import EPHHome from "./EPHHomeview";
 import EPHData from "./EPHData/index";
 
 import React, { useReducer } from "react";
@@ -210,7 +210,7 @@ const App = (props) => {
           <Route path="/ephdata" component={EPHData}></Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/eph">
-              <EPHSearch onSuccess={handleEPHSuccess} />
+              <EPHHome onSuccess={handleEPHSuccess} />
           </Route>
           <Route path="/">
             {/* home page */}
