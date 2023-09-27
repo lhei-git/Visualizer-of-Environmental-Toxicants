@@ -59,7 +59,7 @@ function Home(props) {
   /* start geocoding process when location is selected or user hits enter (topmost location used) */
   function handleSelect(location, placeId, suggestion) {
     /* Redirects website to "National Insights" page if the user types in "United States" */
-    if (location == "United States"){
+    if (location === "United States"){
       window.alert("Please select a specific city, county, or state.");
     }
     else {
