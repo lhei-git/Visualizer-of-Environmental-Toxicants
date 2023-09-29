@@ -18,7 +18,8 @@ class ThematicMapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latestYear: 2019,
+      /*update thematic map view to show latest year*/
+      latestYear: 2022,
       contentState: "",
       contentCounty: "",
       stateData: null,

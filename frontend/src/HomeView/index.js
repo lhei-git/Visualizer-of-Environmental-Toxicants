@@ -58,11 +58,17 @@ function Home(props) {
 
   /* start geocoding process when location is selected or user hits enter (topmost location used) */
   function handleSelect(location, placeId, suggestion) {
+    /* Redirects website to "National Insights" page if the user types in "United States" */
+    if (location === "United States"){
+      window.alert("Please select a specific city, county, or state.");
+    }
+    else {
     geocodeLocation(suggestion ? suggestion.description : location)
       .then((map) => {
         props.onSuccess(map);
       })
       .catch((error) => console.error("Error", error));
+    }
   }
 
   /* x on right side of search bar */
@@ -77,6 +83,8 @@ function Home(props) {
     clearSuggestions();
   }
 
+
+  /*This function presents home view information as well as a button to search specific filters*/
   return (
     <div className="home-container">
       <div className="background">
@@ -85,11 +93,15 @@ function Home(props) {
       <div className="content-group">
         <div className="header">Visualizer of Environmental Toxicants</div>
         <div className="caption">
-          Select a location to see U.S. facilities emitting toxic chemicals into
+          Please select a location to see U.S. facilities emitting toxic chemicals into
           the air, land and water; statistics and trends on releases of
           toxicants into the environment; as well as detailed information on
           potential health hazards from these toxic chemicals.
         </div>
+        
+        
+      
+      
         <div className="search-bar">
           <PlacesAutocomplete
             onChange={handleChange}
@@ -130,6 +142,7 @@ function Home(props) {
                         const className = `suggestion-item ${
                           suggestion.active ? "active" : ""
                         }`;
+                        
 
                         return (
                           <div
@@ -145,6 +158,7 @@ function Home(props) {
                             </small>
                           </div>
                         );
+                        
                       })}
                     </div>
                   )}

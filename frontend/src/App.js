@@ -21,6 +21,12 @@ import Home from "./HomeView";
 import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
+
+//import EPHHome from "./EPHHomeView";
+import EPHHome from "./EPHHomeView/index";
+
+import EPHData from "./EPHData/index";
+
 import React, { useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
@@ -33,7 +39,8 @@ const initialState = {
     pbt: false,
     carcinogen: false,
     releaseType: "all",
-    year: 2019,
+    /*sets initial state to latest year*/
+    year: 2022,
   },
   errorMessage: "",
 };
@@ -79,15 +86,23 @@ const Navbar = (props) => {
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
-          <Link to="/">Search</Link>
+        <Link to="/">Search Toxicant Release</Link>
+        </li>
+        <li className={location.pathname === "/eph" ? "active" : ""}>
+          <Link to="/eph">Search Public Health</Link>  
         </li>
         <li className={location.pathname === "/about" ? "active" : ""}>
           <Link to="/about">About</Link>
         </li>
+        
+        
         {props.visible && (
           <>
             <li className={location.pathname === "/map" ? "active" : ""}>
               <Link to="/map">Facility Map</Link>
+            </li>
+            <li className={location.pathname === "/ephdata" ? "active" : ""}>
+              <Link to="/ephdata">EPH Data and Map</Link>
             </li>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
@@ -97,6 +112,7 @@ const Navbar = (props) => {
             >
               <Link to="/thematicmaps">National Insights</Link>
             </li>
+            
           </>
         )}
       </ul>
@@ -128,7 +144,7 @@ const App = (props) => {
       dispatch(setErrorMessage(""));
     }, 10000);
   }
-
+/*
   /* The geocoder has completed a successful search */
   function handleSuccess(map) {
     /* Set app-wide location setting */
@@ -137,6 +153,12 @@ const App = (props) => {
     sessionStorage.removeItem("facilityData");
     /* redirect to the /map page */
     history.push("/map");
+  }
+
+  function handleEPHSuccess(ephdata) {
+    dispatch(setMap(ephdata));
+    //sessionStorage.removeItem("ephData");
+    history.push("/ephdata");
   }
 
   return (
@@ -174,6 +196,7 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
+          
           <Route path="/thematicmaps">
             {/* county and state-level thematic maps for U.S. */}
             {state.map ? (
@@ -187,7 +210,11 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
+          <Route path="/ephdata" component={EPHData}></Route>
           <Route path="/about" component={AboutPage}></Route>
+          <Route path="/eph">
+              <EPHHome onSuccess={handleEPHSuccess} />
+          </Route>
           <Route path="/">
             {/* home page */}
             <Home onSuccess={handleSuccess} />
