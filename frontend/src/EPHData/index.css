@@ -1,11 +1,37 @@
-.lead-header{
-    height: 40vh; /* Magic here */
+.eph-container .eph-dropdown{
+    display: flex;
+    margin: 6em 10em 1px 10em;
+    justify-content: center;
+    align-items: center;   
+}
+.eph-container .eph-dropdown #category{
+    display: flex;
+    margin: 3px 10em 1px 10em;
+    justify-content: right;
+    align-items: right;   
+}
+.eph-container .eph-header{
+    margin: 1px 10em 1px 10em;
+    height: 30vh; /* Magic here */
     display: flex;
     justify-content: center;
     align-items: center;   
 }
 .chart{
     height: 40vh; /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding-bottom: 100px;   
+}
+.lead-header{
+    height: 10vh; /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.chart{
+    height: 60vh; /* Magic here */
     display: flex;
     justify-content: center;
     align-items: center; 
