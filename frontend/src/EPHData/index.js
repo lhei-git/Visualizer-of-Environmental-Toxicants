@@ -1,48 +1,54 @@
 import "./index.css";
-import EPHChart from "../EPHCharts/index.js"
+import EPHChart from "../EPHCharts/index.js";
+import {useState} from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 const React = require("react");
 
-handleMeasureChange = (event) => {
-  // Update the selected option when the dropdown changes
-  this.setState({ selectedOption: event.target.value });
-};
+
 
 function EPHData() {
+  const [value,setValue] = useState('');
+  const handleSelect = (e) =>{
+    console.log(e);
+    setValue(e);
+  }
   return (
-    
     <div className="eph-container">
       <div className="eph-dropdown">
-        <p>Please choose a measure: </p>
-        <select id="category" onChange = {this.handleMeasureChange()}>
-              <option value="lead">Lead in Blood</option>
-              <option value="metals">Metals and Metalloids</option>
-              <option value="pfos">PFOS & PFOA Surfactants in Blood</option>
-        </select>
+        
       </div>
       <div className="lead-header">
-        <h1>Lead in Blood</h1>
+      <Dropdown onSelect={handleSelect}>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item eventKey="lead">Lead in Blood</Dropdown.Item>
+            <Dropdown.Item eventKey="pfos">PPFOS & PFOA Surfactants in Blood</Dropdown.Item>
+            <Dropdown.Item eventKey="metals">Metals and Metalloids</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
       <div className="chart">
-        {/* Display content based on the selected option */}
-        {this.state.selectedOption === 'lead' && (
-        <div>
-          <EPHChart/> {/*change later once chart accepts different inputs*/}
-        </div>
-        )}
-        {this.state.selectedOption === 'metals' && (
-        <div>
-          metals chart {/*change later once chart accepts different inputs*/}
-        </div>
-        )}
-        {this.state.selectedOption === 'pfos' && (
-        <div>
-          PFOS chart {/*change later once chart accepts different inputs*/}
-        </div>
-        )}
-        
+        <Tab value={value}/>
       </div>
     </div>
   );
+}
+
+function Tab({value}){
+  if (value.toString() == 'lead'){ //maybe change tostring and ===
+    return <EPHChart/>
+  }
+  else if (value.toString() == 'pfos'){
+    return <p>pfos</p>
+  }
+  else if (value.toString() == 'metals'){
+    return <p>metals</p>
+  }
+  else{
+    return <p>errors</p>
+  }
 }
 
 export default EPHData;
