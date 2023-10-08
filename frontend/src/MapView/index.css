@@ -120,7 +120,7 @@
 
 .pubchem-wrapper .chemicals .caption:hover {
   opacity: 1;
-  cursor: pointer;
+  cursor: text;
 }
 
 .map-wrapper {
