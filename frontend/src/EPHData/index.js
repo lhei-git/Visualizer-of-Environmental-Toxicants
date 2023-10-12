@@ -1,54 +1,45 @@
 import "./index.css";
-import EPHChart from "../EPHCharts/index.js";
+import EPHChart from "../EPHCharts/index.js"
+import AsthmaChart from "../EPHCharts/asthma";
+import CancerChart from "../EPHCharts/cancer";
 import {useState} from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 const React = require("react");
 
 
 
 function EPHData() {
-  const [value,setValue] = useState('');
-  const handleSelect = (e) =>{
-    console.log(e);
-    setValue(e);
-  }
+  
   return (
     <div className="eph-container">
       <div className="eph-dropdown">
-      <Dropdown onSelect={handleSelect}>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Dropdown Button
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item eventKey="lead">Lead in Blood</Dropdown.Item>
-            <Dropdown.Item eventKey="pfos">PPFOS & PFOA Surfactants in Blood</Dropdown.Item>
-            <Dropdown.Item eventKey="metals">Metals and Metalloids</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <p>Please choose a category: </p>
+        <select id="category">
+              <option value="lib">Lead in Blood</option>
+              <option value="asthma">Asthma</option>
+              <option value="cancer">Cancer</option>
+        </select>
       </div>
       <div className="lead-header">
-      
+        <h1>Lead in Blood</h1>
       </div>
       <div className="chart">
-        <Tab value={value}/>
+        <EPHChart/>
+      </div>
+      <div className="lead-header">
+        <h1>Asthma</h1>
+      </div>
+      <div className="chart">
+        <AsthmaChart/>
+      </div>
+      <div className="lead-header">
+        <h1>Cancer</h1>
+      </div>
+      <div className="chart">
+        <CancerChart/>
       </div>
     </div>
   );
 }
 
-function Tab({value}){
-  if (value.toString() == 'lead'){ //maybe change tostring and ===
-    return <EPHChart/>
-  }
-  else if (value.toString() == 'pfos'){
-    return <p>pfos</p>
-  }
-  else if (value.toString() == 'metals'){
-    return <p>metals</p>
-  }
-  else{
-    return <p>errors</p>
-  }
-}
 
 export default EPHData;
