@@ -84,7 +84,7 @@ const Navbar = (props) => {
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
-        <Link to="/">Search Location of Interest</Link>
+        <Link to="/">Search</Link>
         </li>
         
         
@@ -94,7 +94,7 @@ const Navbar = (props) => {
               <Link to="/map">Facility Map</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
-              <Link to="/ephdata">EPH Data and Map</Link>
+              <Link to="/ephdata">Health Outcomes</Link>
             </li>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
