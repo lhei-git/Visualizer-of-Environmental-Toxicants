@@ -1,7 +1,8 @@
 import "./index.css";
-import EPHChart from "../EPHCharts/index.js";
+import EPHChart from "../EPHCharts/index.js"
+import AsthmaChart from "../EPHCharts/asthma";
+import CancerChart from "../EPHCharts/cancer";
 import {useState} from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 const React = require("react");
 
 
@@ -23,6 +24,18 @@ function EPHData() {
       </div>
       <div className="chart">
         <EPHChart/>
+      </div>
+      <div className="lead-header">
+        <h1>Asthma</h1>
+      </div>
+      <div className="chart">
+        <AsthmaChart/>
+      </div>
+      <div className="lead-header">
+        <h1>Cancer</h1>
+      </div>
+      <div className="chart">
+        <CancerChart/>
       </div>
     </div>
   );

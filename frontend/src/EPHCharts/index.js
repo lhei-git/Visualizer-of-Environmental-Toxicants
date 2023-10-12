@@ -29,7 +29,8 @@ const EPHChart = ({size}) => {
     </div>
   );
 
-  }
+
+}
 
   EPHChart.propTypes = {
     size: PropTypes.shape({

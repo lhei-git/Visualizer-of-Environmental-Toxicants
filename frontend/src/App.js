@@ -21,7 +21,8 @@ import Home from "./HomeView";
 import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
-import EPHHome from "./EPHHomeView/index";
+
+
 import EPHData from "./EPHData/index";
 import DataComp from "./DataComparison/index"
 
@@ -86,9 +87,6 @@ const Navbar = (props) => {
         <li className={location.pathname === "/" ? "active" : ""}>
         <Link to="/">Search</Link>
         </li>
-        <li className={location.pathname === "/about" ? "active" : ""}>
-          <Link to="/about">About</Link>
-        </li>
         
         
         {props.visible && (
@@ -97,7 +95,7 @@ const Navbar = (props) => {
               <Link to="/map">Facility Map</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
-              <Link to="/ephdata">EPH Data and Map</Link>
+              <Link to="/ephdata">Health Outcomes</Link>
             </li>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
@@ -110,6 +108,9 @@ const Navbar = (props) => {
             </li>
           </>
         )}
+                <li className={location.pathname === "/about" ? "active" : ""}>
+          <Link to="/about">About</Link>
+        </li>
       </ul>
     </div>
   );
@@ -208,9 +209,6 @@ const App = (props) => {
           <Route path="/ephdata" component={EPHData}></Route>
           <Route path="/datacomp" component={DataComp}></Route>
           <Route path="/about" component={AboutPage}></Route>
-          <Route path="/eph">
-              <EPHHome onSuccess={handleEPHSuccess} />
-          </Route>
           <Route path="/">
             {/* home page */}
             <Home onSuccess={handleSuccess} />
