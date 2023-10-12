@@ -2,9 +2,9 @@
   --primary-dark: #6a0080;
 }
 
-.map-container.loading {
-  /* opacity: 0.3; */
-}
+/*.map-container.loading {
+  opacity: 0.3;
+}*/
 
 .map-container .map {
   position: absolute;
