@@ -23,6 +23,7 @@ import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 import EPHHome from "./EPHHomeView/index";
 import EPHData from "./EPHData/index";
+import DataComp from "./DataComparison/index"
 
 import React, { useReducer } from "react";
 import MapView from "./MapView";
@@ -83,10 +84,7 @@ const Navbar = (props) => {
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
-        <Link to="/">Search Toxicant Release</Link>
-        </li>
-        <li className={location.pathname === "/eph" ? "active" : ""}>
-          <Link to="/eph">Search Public Health</Link>  
+        <Link to="/">Search</Link>
         </li>
         <li className={location.pathname === "/about" ? "active" : ""}>
           <Link to="/about">About</Link>
@@ -104,12 +102,12 @@ const Navbar = (props) => {
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
             </li>
-            <li
-              className={location.pathname === "/thematicmaps" ? "active" : ""}
-            >
+            <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
               <Link to="/thematicmaps">National Insights</Link>
             </li>
-            
+            <li className={location.pathname === "/datacomp" ? "active" : ""}>
+              <Link to="/datacomp">Toxicant vs. Health Data Comparison</Link> {/*awkward wording*/}
+            </li>
           </>
         )}
       </ul>
@@ -208,6 +206,7 @@ const App = (props) => {
             )}
           </Route>
           <Route path="/ephdata" component={EPHData}></Route>
+          <Route path="/datacomp" component={DataComp}></Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/eph">
               <EPHHome onSuccess={handleEPHSuccess} />
