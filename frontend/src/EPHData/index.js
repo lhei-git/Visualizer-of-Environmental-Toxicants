@@ -15,9 +15,6 @@ function EPHData() {
   return (
     <div className="eph-container">
       <div className="eph-dropdown">
-        
-      </div>
-      <div className="lead-header">
       <Dropdown onSelect={handleSelect}>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Dropdown Button
@@ -28,6 +25,9 @@ function EPHData() {
             <Dropdown.Item eventKey="metals">Metals and Metalloids</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+      </div>
+      <div className="lead-header">
+      
       </div>
       <div className="chart">
         <Tab value={value}/>
