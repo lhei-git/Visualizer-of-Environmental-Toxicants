@@ -96,6 +96,7 @@ const Navbar = (props) => {
         </li>
         
         
+        
         {props.visible && (
           <>
             <li className={location.pathname === "/map" ? "active" : ""}>

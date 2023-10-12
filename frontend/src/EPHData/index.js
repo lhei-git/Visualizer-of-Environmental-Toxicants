@@ -8,6 +8,7 @@ const React = require("react");
 function EPHHome() {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
+  
 
   const toggleLeftCloseButton = () => {
     setLeftCloseButton(!containerColumnLeftClose);
