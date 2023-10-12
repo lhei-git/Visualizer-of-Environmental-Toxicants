@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
 
 const EPHChart = ({size}) => {
@@ -44,9 +44,17 @@ const EPHChart = ({size}) => {
       <LineChart width={size.width} height={size.height} data={data}>
         <CartesianGrid />
         <XAxis dataKey="year" />
-        <YAxis />
+        <YAxis>
+          <Label 
+            style={{textAnchor: "middle"}}
+            angle={270} 
+            position='insideLeft'
+            value={"Concentration (micrograms/deciliter)"}
+            margin={200}/>
+
+        </YAxis>
         <Tooltip />
-        <Line type="monotone" dataKey="dataValue" stroke="purple" />
+        <Line name="Concentration" type="monotone" dataKey="dataValue" stroke="purple" />
       
       </LineChart>
     );
