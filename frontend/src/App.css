@@ -76,6 +76,7 @@
 }
 
 .footer {
+  z-index: 2;
   position: absolute;
   text-align: center;
   left: 0;
