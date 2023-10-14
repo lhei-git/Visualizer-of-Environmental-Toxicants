@@ -10,7 +10,7 @@
   height: 100%;
   opacity: 1;
   overflow: hidden;
-  background-image: url("../../src/assets/oil.jpg");
+  background-image: url("../../src/assets/oil.jpg");  /* Need to find longer picture possibly */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,10 +31,10 @@
   max-height: 100%;
   width: 100%;
   color: #3f3844;
-  font-size: 24px;
+  font-size: 20px;
   z-index: 3;
   position: absolute;
-  top: 150px;
+  top: 120px;
   width: 70%;
   padding: 40px;
   left: 50%;

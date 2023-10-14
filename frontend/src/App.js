@@ -80,7 +80,7 @@ const Navbar = (props) => {
       className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
     >
       <div className="logo">
-        <Link to="/">VET.</Link>
+        <Link to="/">ETHOS.</Link>
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
@@ -123,7 +123,7 @@ Navbar.propTypes = {
 function Footer() {
   return (
     <div className="footer">
-      <div className="copyright">&#169; VET 2023</div>
+      <div className="copyright">&#169; ETHOS 2023</div>
     </div>
   );
 }
