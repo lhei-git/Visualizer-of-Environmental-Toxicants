@@ -25,20 +25,25 @@
 
   .data-comp-container .data-reps{
     display: flex;
-    
-    width: 80%;
+    width: 100%;
     justify-content: center;
-    color: #faf;
+    color: #222;
   }
 
   .data-comp-container .tri-data{
     margin: 30px;
     flex-basis: 100%;
-    background-color: palegreen;
+    /*background-color: palegreen;*/
+    justify-content: center;
   }
 
   .data-comp-container .eph-data{
     margin: 30px;
     flex-basis: 100%;
-    background-color: hotpink;
+    /*background-color: hotpink;*/
+    justify-content: center;
+  }
+
+  .data-comp-container .eph-data{
+    justify-content: center;
   }

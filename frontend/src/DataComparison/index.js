@@ -29,11 +29,14 @@ function DataComp(){
                 </div>
                 <div className="data-reps">
                     <div className="tri-data">
-                        {/*insert graphview*/}
-                        <EPHChart size = {testSize}/>
+                        <h2>Toxicant Release</h2>
+                        <h3>Fake graph for testing</h3>
+                        <EPHChart size = {testSize} className="tri-chart"/>
                     </div>
                     <div className="eph-data">
-                        <EPHChart size = {testSize}/>
+                        <h2>Public Health Data</h2>
+                        <h3>Lead in Blood</h3>
+                        <EPHChart size = {testSize} className="eph-chart"/>
                     </div>
                 </div> {/*data reps*/}
             </div>
