@@ -8,7 +8,7 @@ const React = require("react");
 
 
 function EPHData() {
-  
+  const leadSize = {width:800, height:400 }
   return (
     <div className="eph-container">
       <div className="eph-dropdown">
@@ -23,15 +23,15 @@ function EPHData() {
         <h1>Lead in Blood</h1>
       </div>
       <div className="chart">
-        <EPHChart/>
+        <EPHChart size={leadSize}/>
       </div>
-      <div className="lead-header">
+      <div className="asthma-header">
         <h1>Asthma</h1>
       </div>
       <div className="chart">
         <AsthmaChart/>
       </div>
-      <div className="lead-header">
+      <div className="cancer-header">
         <h1>Cancer</h1>
       </div>
       <div className="chart">
