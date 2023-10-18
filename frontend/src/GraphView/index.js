@@ -963,6 +963,12 @@ function GraphView({ map, filters, onFilterChange }) {
           >
             Appendix
           </li>
+          <li
+            onClick={() => chooseTab(3)}
+            className={currentTab === 3 ? "active" : ""}
+          >
+            Map View
+          </li>
         </ul>
       </div>
       <div className="content">

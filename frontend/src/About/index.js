@@ -10,7 +10,7 @@ function About() {
       <div className="content">
         <h1>About</h1>
         <div>
-          ETHOS, previously known as The Visualizer of Environmental Toxicants (VET) web application was
+          VETHOS, previously known as The Visualizer of Environmental Toxicants (VET) web application was
           developed to obtain information from the{" "}
           <a href="https://www.epa.gov/toxics-release-inventory-tri-program">
             Toxic Releases Inventory (TRI)
@@ -63,7 +63,7 @@ function About() {
           VET was developed for the Lab for Health and Environmental Information
           (LHEI) at Wayne State University by Evan de Jesus, Adwait Wadekar,
           Richard Moore, and Calvin Brooks as part of their Senior Capstone
-          Project, during the Fall of 2020. ETHOS, the updated version of the website,
+          Project, during the Fall of 2020. VETHOS, the updated version of the website,
           was revised by Al-Taimee Hassan, Katherine O’Donnell, Amrita Dhar, and Farzana
           Israt. The project was guided by Nic DePaula, Director of LHEI and Assistant 
           Professor at the School of Information Sciences at Wayne State University.
