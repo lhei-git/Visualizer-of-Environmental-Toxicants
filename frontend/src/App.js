@@ -22,9 +22,6 @@ import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
-//import EPHHome from "./EPHHomeView";
-import EPHHome from "./EPHHomeView/index";
-
 import EPHData from "./EPHData/index";
 
 import React, { useImperativeHandle, useReducer } from "react";
@@ -157,12 +154,6 @@ const App = (props) => {
     history.push("/map");
   }
 
-  function handleEPHSuccess(ephdata) {
-    dispatch(setMap(ephdata));
-    //sessionStorage.removeItem("ephData");
-    history.push("/ephdata");
-  }
-
   /*function scrollBtnUp() {
     return {
       <div className="scollUp">
@@ -224,9 +215,6 @@ const App = (props) => {
           </Route>
           <Route path="/ephdata" component={EPHData}></Route>
           <Route path="/about" component={AboutPage}></Route>
-          <Route path="/eph">
-              <EPHHome onSuccess={handleEPHSuccess} />
-          </Route>
           <Route path="/">
             {/* home page */}
             <Home onSuccess={handleSuccess} />
