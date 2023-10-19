@@ -1,5 +1,7 @@
 import "./index.css";
 import EPHChart from "../EPHCharts/index.js"
+import AsthmaChart from "../EPHCharts/asthma";
+import CancerChart from "../EPHCharts/cancer";
 const React = require("react");
 
 function EPHHome() {
@@ -19,6 +21,18 @@ function EPHHome() {
       </div>
       <div className="chart">
         <EPHChart/>
+      </div>
+      <div className="lead-header">
+        <h1>Asthma</h1>
+      </div>
+      <div className="chart">
+        <AsthmaChart/>
+      </div>
+      <div className="lead-header">
+        <h1>Cancer</h1>
+      </div>
+      <div className="chart">
+        <CancerChart/>
       </div>
     </div>
   );

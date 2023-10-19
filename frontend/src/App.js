@@ -22,14 +22,13 @@ import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
-//import EPHHome from "./EPHHomeView";
-import EPHHome from "./EPHHomeView/index";
 
 import EPHData from "./EPHData/index";
 
 import React, { useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
+import EPHDataViewer from "./EPHDataViewer";
 
 /* Initial state of app */
 const initialState = {
@@ -86,13 +85,7 @@ const Navbar = (props) => {
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
-        <Link to="/">Search Toxicant Release</Link>
-        </li>
-        <li className={location.pathname === "/eph" ? "active" : ""}>
-          <Link to="/eph">Search Public Health</Link>  
-        </li>
-        <li className={location.pathname === "/about" ? "active" : ""}>
-          <Link to="/about">About</Link>
+        <Link to="/">Search</Link>
         </li>
         
         
@@ -102,7 +95,7 @@ const Navbar = (props) => {
               <Link to="/map">Facility Map</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
-              <Link to="/ephdata">EPH Data and Map</Link>
+              <Link to="/ephdata">Health Outcomes</Link>
             </li>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
@@ -115,6 +108,9 @@ const Navbar = (props) => {
             
           </>
         )}
+                <li className={location.pathname === "/about" ? "active" : ""}>
+          <Link to="/about">About</Link>
+        </li>
       </ul>
     </div>
   );
@@ -210,11 +206,10 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
-          <Route path="/ephdata" component={EPHData}></Route>
-          <Route path="/about" component={AboutPage}></Route>
-          <Route path="/eph">
-              <EPHHome onSuccess={handleEPHSuccess} />
+          <Route path="/ephdata">
+            <EPHDataViewer />
           </Route>
+          <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
             {/* home page */}
             <Home onSuccess={handleSuccess} />
