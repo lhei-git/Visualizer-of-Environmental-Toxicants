@@ -4,9 +4,17 @@ import Filters from "../Filters";
 import Title from "../Title";
 import MapView from "../MapView";
 import PropTypes from "prop-types";
+
 const vetapi = require("../api/vetapi");
 const { amountAsLabel, formatAmount } = require("../helpers");
 const { years } = require("../contants");
+
+const initialState = {
+  location: "",
+  showPubchemInfo: false,
+  chemicals: [],
+  currentChemical: "",
+};
 
 const {
   BarChart,
@@ -50,6 +58,34 @@ const timelineAspectRatio = 17 / 9;
 
 // Cut off labels and add parentheses
 const maxLabelLength = 20;
+
+// Amrita - Copied from App.js file
+/* handler for updating state */
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setMap":
+      /* Store latest searched location in session */
+      sessionStorage.setItem("map", JSON.stringify(action.payload));
+      return {
+        ...state,
+        map: action.payload,
+      };
+    case "setFilters":
+      const newFilters = Object.assign({}, action.payload);
+      return { ...state, filters: newFilters };
+
+    case "setErrorMessage":
+      return { ...state, errorMessage: action.payload };
+    default:
+      throw new Error();
+  }
+};
+
+/* individual state setters */
+const setMap = (payload) => ({ type: "setMap", payload });
+const setFilters = (payload) => ({ type: "setFilters", payload });
+const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
+
 
 function handleError(err) {
   console.error(err);
@@ -928,8 +964,10 @@ async function TableAllChemicals({ map, filters }) {
   }
 }
 
+
 /* Wrapping component for graphs */
 function GraphView({ map, filters, onFilterChange }) {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
   const [currentTab, setCurrentTab] = React.useState(
     /* Stores which tab user was last on. Might be worth taking out */
     parseInt(sessionStorage.getItem("currentTab")) || 0
@@ -943,13 +981,14 @@ function GraphView({ map, filters, onFilterChange }) {
 
   return (
     <div className="graph-container">
+      {/* The top bar on TRI Data page where user can choose between the different types of views*/}
       <div className="selector">
         <ul>
           <li
             onClick={() => chooseTab(0)}
             className={currentTab === 0 ? "active" : ""}
           >
-            Top Tens
+            Maps
           </li>
           <li
             onClick={() => chooseTab(1)}
@@ -967,7 +1006,7 @@ function GraphView({ map, filters, onFilterChange }) {
             onClick={() => chooseTab(3)}
             className={currentTab === 3 ? "active" : ""}
           >
-            Map View
+            Top Tens
           </li>
         </ul>
       </div>
@@ -981,58 +1020,16 @@ function GraphView({ map, filters, onFilterChange }) {
           ></Filters>
         </div>
         <div className="graphs">
-          {currentTab === 0 && (
-            <div className="top-tens">
-              <GraphContainer
+        {currentTab === 0 && (
+            <div
+              className="map-view"
+              style={{ display: currentTab === 0 ? "block" : "none" }}
+            >
+              <MapView
                 map={map}
                 filters={filters}
-                graph={GraphTopTenFacilities}
-                title={
-                  <Title
-                    text={"for top 10 facilities"}
-                    map={map}
-                    filters={filters}
-                  ></Title>
-                }
-              ></GraphContainer>
-              <GraphContainer
-                map={map}
-                filters={filters}
-                graph={GraphTopTenParents}
-                title={
-                  <Title
-                    text={"for top 10 parent companies"}
-                    map={map}
-                    filters={filters}
-                  ></Title>
-                }
-              ></GraphContainer>
-              <GraphContainer
-                map={map}
-                filters={filters}
-                graph={GraphTopTenChemicals}
-                title={
-                  <Title
-                    text={"for top 10 chemicals"}
-                    map={map}
-                    filters={filters}
-                    showChemicalName={false}
-                  ></Title>
-                }
-              ></GraphContainer>
-              <GraphContainer
-                map={map}
-                filters={filters}
-                graph={GraphTopTenPBTs}
-                title={
-                  <Title
-                    text={"for top 10 PBT chemicals"}
-                    map={map}
-                    filters={filters}
-                    showChemicalName={false}
-                  ></Title>
-                }
-              ></GraphContainer>
+                onFilterChange={(filters) => dispatch(setFilters(filters))}
+              ></MapView>
             </div>
           )}
           {currentTab === 1 && (
@@ -1163,6 +1160,60 @@ function GraphView({ map, filters, onFilterChange }) {
                     map={map}
                     filters={filters}
                     showReleaseType={false}
+                    showChemicalName={false}
+                  ></Title>
+                }
+              ></GraphContainer>
+            </div>
+          )}
+          {currentTab === 3 && (
+            <div className="top-tens">
+              <GraphContainer
+                map={map}
+                filters={filters}
+                graph={GraphTopTenFacilities}
+                title={
+                  <Title
+                    text={"for top 10 facilities"}
+                    map={map}
+                    filters={filters}
+                  ></Title>
+                }
+              ></GraphContainer>
+              <GraphContainer
+                map={map}
+                filters={filters}
+                graph={GraphTopTenParents}
+                title={
+                  <Title
+                    text={"for top 10 parent companies"}
+                    map={map}
+                    filters={filters}
+                  ></Title>
+                }
+              ></GraphContainer>
+              <GraphContainer
+                map={map}
+                filters={filters}
+                graph={GraphTopTenChemicals}
+                title={
+                  <Title
+                    text={"for top 10 chemicals"}
+                    map={map}
+                    filters={filters}
+                    showChemicalName={false}
+                  ></Title>
+                }
+              ></GraphContainer>
+              <GraphContainer
+                map={map}
+                filters={filters}
+                graph={GraphTopTenPBTs}
+                title={
+                  <Title
+                    text={"for top 10 PBT chemicals"}
+                    map={map}
+                    filters={filters}
                     showChemicalName={false}
                   ></Title>
                 }
