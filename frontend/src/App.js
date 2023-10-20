@@ -90,20 +90,16 @@ const Navbar = (props) => {
         
         {props.visible && (
           <>
-            <li className={location.pathname === "/map" ? "active" : ""}>
-              <Link to="/map">Facility Map</Link>
+            <li className={location.pathname === "/graphs" ? "active" : ""}>
+              <Link to="/graphs">Toxic Releases</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
               <Link to="/ephdata">Health Outcomes</Link>
             </li>
-            <li className={location.pathname === "/graphs" ? "active" : ""}>
-              <Link to="/graphs">Location Insights</Link>
-            </li>
-            <li
-              className={location.pathname === "/thematicmaps" ? "active" : ""}
-            >
+            {/* Remove national insights page
+            <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
               <Link to="/thematicmaps">National Insights</Link>
-            </li>
+            </li>*/}
             
           </>
         )}
@@ -147,7 +143,7 @@ const App = (props) => {
     /* Clear existing facility data */
     sessionStorage.removeItem("facilityData");
     /* redirect to the /map page */
-    history.push("/map");
+    history.push("/graphs");
   }
 
   function handleEPHSuccess(ephdata) {

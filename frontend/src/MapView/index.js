@@ -112,14 +112,6 @@ function MapView({ map, filters, onFilterChange }) {
 
   return (
     <div className="map-view">
-      <div className="filters">
-        {/* Filter component */}
-        <FilterView
-          map={map}
-          filters={filters}
-          onFilterChange={onFilterChange}
-        ></FilterView>
-      </div>
       <div className="flex-container top">
         {/* Only show pubchem sidebar if facility has been clicked */}
         {state.chemicals.length !== 0 && (
