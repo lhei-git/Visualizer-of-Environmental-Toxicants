@@ -29,6 +29,7 @@ import DataComp from "./DataComparison/index"
 import React, { useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
+import EPHDataViewer from "./EPHDataViewer";
 
 /* Initial state of app */
 const initialState = {
@@ -206,8 +207,9 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
-          <Route path="/ephdata" component={EPHData}></Route>
-          <Route path="/datacomp" component={DataComp}></Route>
+          <Route path="/ephdata">
+            <EPHDataViewer />
+          </Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
             {/* home page */}
