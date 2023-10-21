@@ -1,7 +1,17 @@
 .control-header {
-  flex: 1;
+  flex: 0.7;  /* Changed from 1 to keep filtering bar 1 line long for most searches */
   text-align: center;
   display: inline-block;
+  background: #fafbfc;
+}
+
+select {
+  max-width: 20em;
+}
+
+.checkbox-group {
+  display: flex;
+  justify-content: space-around
 }
 
 .control-container {
@@ -10,6 +20,7 @@
   display: flex;
   justify-content: flex-start;
   background: #fafbfc;
+  padding-top: 13px;
 
   --primary: #9c27b0;
   --primary-light: #d05ce3;
