@@ -1,19 +1,26 @@
+/*Author of file: Farzana Israt*/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   ComposableMap,
   Geographies,
   Geography,
+  ZoomableGroup
 } from 'react-simple-maps';
 import "./index.css"
 
 
+//URL to create map
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
-// Define a color scale function
+
+// Colors for shades of map
 function getColorScale(dataValue) {
-  // Adjust this range to match your color preferences
-  return dataValue < 9
+  //Making this shades of blue to match the theme
+  //Make sure to make states that don't have data grey
+  return dataValue == null
+    ? '#D6D6DA'
+    :dataValue < 9
     ? '#bbe9fa'
     : dataValue < 12
     ? '#8bdefc'
@@ -23,39 +30,66 @@ function getColorScale(dataValue) {
 }
 
 
-
-function SimpleMap() {
-  
+const SimpleMap = ({ longitude, latitude }) => {
+  const [selectedYear, setSelectedYear] = useState('2011');
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const url = "https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0";
+  const [selectedState, setSelectedState] = useState([]);
+  
 
-    axios.get(url)
+
+  //Fetch data for each year
+  const dataForEachYear = (year) => {
+    setSelectedYear(year);
+    
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`)
       .then((response) => {
         setData(response.data.tableResult);
       })
       .catch((error) => {
-        console.error(error);
+        console.error("error:", error);
       });
-  }, []);
+  };
 
-  const [selectedState, setSelectedState] = useState(null);
-
-  const handleStateClick = (stateData, event) => {
-    setSelectedState(stateData);
-  }
-
+  useEffect(() => {
+    if (selectedYear) {
+      dataForEachYear(selectedYear); 
+    }
+  }, [selectedYear]);
   
-
+ 
   return (
     
     <div className='mapView'>
+      <h1>Asthma in children</h1>
+      {/* dropdown for user to choose year */}
+      <div className="dropdown">
+        <label> Year: </label>
+        <select
+          value={selectedYear}
+          onChange={(e) => dataForEachYear(e.target.value)}
+        >
+          <option value=""> Select Year </option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+        </select>
+      </div>
+          
       <ComposableMap
         projection="geoAlbersUsa"
         projectionConfig={{
-          scale: 1000,
+          scale: 1000
         }}
       >
+
+        <ZoomableGroup center={[longitude, latitude]} zoom={4}>
         <Geographies geography={GEOJSON_URL}>
           {({ geographies }) =>
             geographies.map((geo) => {
@@ -65,29 +99,35 @@ function SimpleMap() {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
+                  
                   style={{
-                    default: { fill: fillColor, stroke: '#000', // Outline color
-                    strokeWidth: 1,},
-                    pressed: { fill: '#F53', cursor: 'pointer' }
+                    default: { fill: fillColor, stroke: '#000', 
+                    strokeWidth: 1, outline: "none"},
+                    hover: { fill: '#000000', cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                    pressed: { outline: "none"}
                   }}
-
-                  onMouseEnter={() => handleStateClick(stateData)}
+                  
+                  onMouseEnter={() => setSelectedState(stateData)}
+                  
                 >
                   </Geography>
-                
+                  
               );
             })
           }
+          
         </Geographies>
+        </ZoomableGroup>
       </ComposableMap>
-
+      
+         
+      
       {selectedState && (
         <div className="tooltip">
           <p>Percent Concentration: {selectedState.displayValue}</p>
         </div> 
     
       )}
-      
     </div>
 
     
