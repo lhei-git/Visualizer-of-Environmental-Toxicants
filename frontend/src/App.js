@@ -22,11 +22,14 @@ import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
+
 import EPHData from "./EPHData/index";
+import DataComp from "./DataComparison/index"
 
 import React, { useImperativeHandle, useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
+import EPHDataViewer from "./EPHDataViewer";
 
 /* Initial state of app */
 const initialState = {
@@ -83,13 +86,7 @@ const Navbar = (props) => {
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
-        <Link to="/">Search Toxicant Release</Link>
-        </li>
-        <li className={location.pathname === "/eph" ? "active" : ""}>
-          <Link to="/eph">Search Public Health</Link>  
-        </li>
-        <li className={location.pathname === "/about" ? "active" : ""}>
-          <Link to="/about">About</Link>
+        <Link to="/">Search</Link>
         </li>
         
         
@@ -105,14 +102,17 @@ const Navbar = (props) => {
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
             </li>
-            <li
-              className={location.pathname === "/thematicmaps" ? "active" : ""}
-            >
+            <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
               <Link to="/thematicmaps">National Insights</Link>
             </li>
-            
+            <li className={location.pathname === "/datacomp" ? "active" : ""}>
+              <Link to="/datacomp">Toxicant vs. Health Data Comparison</Link> {/*awkward wording*/}
+            </li>
           </>
         )}
+                <li className={location.pathname === "/about" ? "active" : ""}>
+          <Link to="/about">About</Link>
+        </li>
       </ul>
     </div>
   );
@@ -213,7 +213,9 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
-          <Route path="/ephdata" component={EPHData}></Route>
+          <Route path="/ephdata">
+            <EPHDataViewer />
+          </Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
             {/* home page */}
