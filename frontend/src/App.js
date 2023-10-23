@@ -26,7 +26,7 @@ import AboutPage from "./About/index";
 import EPHData from "./EPHData/index";
 import DataComp from "./DataComparison/index"
 
-import React, { useReducer } from "react";
+import React, { useImperativeHandle, useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
 import EPHDataViewer from "./EPHDataViewer";
@@ -90,6 +90,7 @@ const Navbar = (props) => {
         </li>
         
         
+        
         {props.visible && (
           <>
             <li className={location.pathname === "/map" ? "active" : ""}>
@@ -130,6 +131,7 @@ function Footer() {
   );
 }
 
+
 const App = (props) => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -152,11 +154,15 @@ const App = (props) => {
     history.push("/map");
   }
 
-  function handleEPHSuccess(ephdata) {
-    dispatch(setMap(ephdata));
-    //sessionStorage.removeItem("ephData");
-    history.push("/ephdata");
-  }
+  /*function scrollBtnUp() {
+    return {
+      <div className="scollUp">
+        <a href="#" class="scroll-btn">
+          <i class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    };
+  }*/
 
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
