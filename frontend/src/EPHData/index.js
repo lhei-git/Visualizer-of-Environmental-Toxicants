@@ -68,26 +68,7 @@ function EPHHome() {
       {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
       {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
       {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
-        {/*
-      
-      <h1>Pesticides in urine</h1>
-      <div className="chart">
-        <NationalTimeSeries size={leadSize} measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>
-      </div> */}
-    
-    {/* 
-    <div className="eph-container">
-      
-      <h1>Lead in Blood</h1>
-      <div className="chart">
-        <NationalTimeSeries size={{width:800, height:400}} measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/>
-      </div>
-      <h1>Metals in Urine</h1>
-      <div className="chart">
-        <NationalTimeSeries size={{width:800, height:400}} measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/>
-      </div>
-      
-    </div>*/}
+        
   </div>
   
 

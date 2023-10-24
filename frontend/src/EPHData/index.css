@@ -173,4 +173,32 @@ a:hover {
   .graph-container .filter-container .control-container {
     display: block;
   }
+
+  /*.national-container {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }*/
+
+  .national-container {
+    width: 400px;
+    height: 400px;
+  }
+
+  @media (min-width: 469px) {
+    .national-container {
+      height: auto;
+      width: auto;
+      display: block;
+    }
+  }
+
+@media (max-width: 2880px) {
+  .national-container {
+    width: 100%; 
+    max-width: 100%; 
+    position: static; 
+  }
+}
   
