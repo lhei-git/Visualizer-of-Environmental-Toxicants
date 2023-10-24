@@ -988,25 +988,25 @@ function GraphView({ map, filters, onFilterChange }) {
             onClick={() => chooseTab(0)}
             className={currentTab === 0 ? "active" : ""}
           >
-            Maps
+            Summary
           </li>
           <li
             onClick={() => chooseTab(1)}
             className={currentTab === 1 ? "active" : ""}
           >
-            Timelines
+            Top Tens
           </li>
           <li
             onClick={() => chooseTab(2)}
             className={currentTab === 2 ? "active" : ""}
           >
-            Appendix
+            Timelines
           </li>
           <li
             onClick={() => chooseTab(3)}
             className={currentTab === 3 ? "active" : ""}
           >
-            Top Tens
+            Appendix
           </li>
         </ul>
       </div>
@@ -1032,10 +1032,10 @@ function GraphView({ map, filters, onFilterChange }) {
               ></MapView>
             </div>
           )}
-          {currentTab === 1 && (
+          {currentTab === 2 && (
             <div
               className="timelines"
-              style={{ display: currentTab === 1 ? "block" : "none" }}
+              style={{ display: currentTab === 2 ? "block" : "none" }}
             >
               <GraphContainer
                 map={map}
@@ -1107,10 +1107,10 @@ function GraphView({ map, filters, onFilterChange }) {
               ></GraphContainer>
             </div>
           )}
-          {currentTab === 2 && (
+          {currentTab === 3 && (
             <div
               className="indexes"
-              style={{ display: currentTab === 2 ? "block" : "none" }}
+              style={{ display: currentTab === 3 ? "block" : "none" }}
             >
               <GraphContainer
                 map={map}
@@ -1166,7 +1166,7 @@ function GraphView({ map, filters, onFilterChange }) {
               ></GraphContainer>
             </div>
           )}
-          {currentTab === 3 && (
+          {currentTab === 1 && (
             <div className="top-tens">
               <GraphContainer
                 map={map}
