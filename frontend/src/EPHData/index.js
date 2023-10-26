@@ -7,29 +7,27 @@ const React = require("react");
 
 
 function EPHHome() {
-  /*created to make the close button on left column functional*/
+  /*created by Taimee to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
-  
-
   const toggleLeftCloseButton = () => {
     setLeftCloseButton(!containerColumnLeftClose);
   };
 
   const [currentTab, setCurrentTab] = React.useState(
-    /* Stores which tab user was last on. Might be worth taking out */
+    /* stores which tab user was last on*/
     parseInt(sessionStorage.getItem("currentTab")) || "0"
   );
 
-  /* Setter for current tab */
+ 
   function chooseMeasure(i) {
     sessionStorage.setItem("currentTab", i);
     setCurrentTab(i);
   }
 
   useEffect(() => {
-    // Set the default tab when the component mounts
-    chooseMeasure("2");
-  }, []); // Empty dependency array to ensure this effect runs only once
+    // Set the default measure when EPHHome is loaded
+    chooseMeasure("2"); //default bisphenol, change to arsenic ASAP
+  }, []); // empty dependency array so effect runs only once
 
  
   return (
@@ -64,14 +62,14 @@ function EPHHome() {
           </ul>
         </div>
       )}
-      {currentTab === "0" && (  <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
+      {currentTab === "0" && (  <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"} description=""/> )}
 
-      {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
-      {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
-      {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
-      {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
-      {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
-      {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
+      {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"} description=""/> )}
+      {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"} description=""/> )}
+      {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} description=""/> )}
+      {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"} description=""/>)}
+      {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"} description=""/>)}
+      {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"} description=""/>)}
      
     
     {/* 
