@@ -1,6 +1,6 @@
 
 .mapView {
-  width: 900px; /* Adjust the width as needed */
+  width: 600px; /* Adjust the width as needed */
   height: 300px; /* Adjust the height as needed */
   position: relative;
   background: #fff;
@@ -16,6 +16,8 @@
   .graph-container .filter-container .control-container {
     display: block;
   }
+
+  
 /*
 .tooltip {
   position: absolute;

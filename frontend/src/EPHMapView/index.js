@@ -1,5 +1,8 @@
-/*Author of file: Farzana Israt*/
+/*Author of file*/
+/*Farzana Israt*/
+
 import React, { useState, useEffect } from 'react';
+import { getLocationString } from "../helpers";
 import axios from 'axios';
 import {
   ComposableMap,
@@ -9,18 +12,15 @@ import {
 } from 'react-simple-maps';
 import "./index.css"
 
-
-//URL to create map
+/*json file for all states*/
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 
-// Colors for shades of map
+/*get colors*/
 function getColorScale(dataValue) {
-  //Making this shades of blue to match the theme
-  //Make sure to make states that don't have data grey
   return dataValue == null
     ? '#D6D6DA'
-    :dataValue < 9
+    : dataValue < 9
     ? '#bbe9fa'
     : dataValue < 12
     ? '#8bdefc'
@@ -30,17 +30,20 @@ function getColorScale(dataValue) {
 }
 
 
-const SimpleMap = ({ longitude, latitude }) => {
-  const [selectedYear, setSelectedYear] = useState('2011');
+
+/*create map*/
+const SimpleMap = ({ map }) => {
+  const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  
 
 
-  //Fetch data for each year
+
+
+  /* fetch data for each year*/
   const dataForEachYear = (year) => {
     setSelectedYear(year);
-    
+
     axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`)
       .then((response) => {
         setData(response.data.tableResult);
@@ -50,18 +53,25 @@ const SimpleMap = ({ longitude, latitude }) => {
       });
   };
 
+
+
+
   useEffect(() => {
     if (selectedYear) {
-      dataForEachYear(selectedYear); 
+      dataForEachYear(selectedYear);
     }
   }, [selectedYear]);
-  
- 
+
+
+
+
   return (
-    
     <div className='mapView'>
-      <h1>Asthma in children</h1>
-      {/* dropdown for user to choose year */}
+     {/*return data for asthma in children for the typed in location*/}
+      <h1>Asthma in Children in {" "}
+      {getLocationString(map, true)}</h1>
+
+      {/*user chooses year from dropdown*/}
       <div className="dropdown">
         <label> Year: </label>
         <select
@@ -81,58 +91,54 @@ const SimpleMap = ({ longitude, latitude }) => {
           <option value="2011">2011</option>
         </select>
       </div>
-          
+
+
+    {/*create the react-simple-map*/}
       <ComposableMap
-        projection="geoAlbersUsa"
+        projection="geoAlbers"
         projectionConfig={{
           scale: 1000
         }}
       >
-
-        <ZoomableGroup center={[longitude, latitude]} zoom={4}>
-        <Geographies geography={GEOJSON_URL}>
-          {({ geographies }) =>
-            geographies.map((geo) => {
-              const stateData = data.find((d) => d.geo === geo.properties.name);
-              const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
-              return (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  
-                  style={{
-                    default: { fill: fillColor, stroke: '#000', 
-                    strokeWidth: 1, outline: "none"},
-                    hover: { fill: '#000000', cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
-                    pressed: { outline: "none"}
-                  }}
-                  
-                  onMouseEnter={() => setSelectedState(stateData)}
-                  
-                >
-                  </Geography>
-                  
-              );
-            })
-          }
-          
-        </Geographies>
+        {/*zoom into user's searched coordinates*/}
+        <ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={3}>
+          <Geographies geography={GEOJSON_URL}>
+            {({ geographies }) =>
+              geographies.map((geo) => {
+                const stateData = data.find((d) => d.geo === geo.properties.name); //making sure state from topojson file matches state from eph api
+                const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA'; //create shaded map
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    style={{
+                      default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+                      hover: { fill: '#000000', cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                      pressed: { outline: "none" }
+                    }}
+                    onMouseEnter={() => {
+                      if (stateData) {
+                        setSelectedState(stateData);
+                      }
+                    }}
+                  />
+                );
+              })
+            }
+          </Geographies>
         </ZoomableGroup>
       </ComposableMap>
-      
-         
-      
+      {/* display percent concentration for the state*/}
       {selectedState && (
         <div className="tooltip">
           <p>Percent Concentration: {selectedState.displayValue}</p>
-        </div> 
-    
+        </div>
       )}
     </div>
-
-    
   );
 }
+
+
 
 
 export default SimpleMap;
