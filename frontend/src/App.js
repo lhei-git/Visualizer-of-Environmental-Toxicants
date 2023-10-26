@@ -122,7 +122,7 @@ Navbar.propTypes = {
 };
 
 /* Footer component */
-/* Added VET 2023 upgrade */
+/* Added VET 2023 upgrade written by Al-Taimee*/
 function Footer() {
   return (
     <div className="footer">
@@ -153,6 +153,13 @@ const App = (props) => {
     /* redirect to the /map page */
     history.push("/map");
   }
+
+  /*if no internet detected, display alert written by Al-Taimee*/
+  var checkIfOnline = navigator.onLine;
+    if (checkIfOnline == false) {
+        alert("Internet not detected, please reload once connection has been re-established"); 
+        setTimeout(5000)
+      }
 
   /*function scrollBtnUp() {
     return {
