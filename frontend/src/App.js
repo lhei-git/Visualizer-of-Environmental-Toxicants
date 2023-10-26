@@ -3,6 +3,7 @@
 // Date:   12/10/2020
 //==========================================
 
+
 /* eslint-disable import/first */
 require("dotenv").config();
 import {
@@ -23,12 +24,13 @@ import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
 
-import EPHData from "./EPHData/index";
-
 import React, { useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
-import EPHDataViewer from "./EPHDataViewer";
+import SimpleMap from "./EPHMapView/index";
+
+
+
 
 /* Initial state of app */
 const initialState = {
@@ -44,6 +46,7 @@ const initialState = {
   errorMessage: "",
 };
 
+
 /* handler for updating state */
 const reducer = (state, action) => {
   switch (action.type) {
@@ -58,6 +61,7 @@ const reducer = (state, action) => {
       const newFilters = Object.assign({}, action.payload);
       return { ...state, filters: newFilters };
 
+
     case "setErrorMessage":
       return { ...state, errorMessage: action.payload };
     default:
@@ -65,15 +69,18 @@ const reducer = (state, action) => {
   }
 };
 
+
 /* individual state setters */
 const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
+
 /* Navbar component */
 const Navbar = (props) => {
   // webpage path
   const location = useLocation();
+
 
   /* Only shows other paths when a search has been initiated */
   return (
@@ -81,14 +88,14 @@ const Navbar = (props) => {
       className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
     >
       <div className="logo">
-        <Link to="/">VET.</Link>
+        <Link to="/">VETHOS.</Link>
       </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
         <Link to="/">Search</Link>
         </li>
-        
-        
+       
+       
         {props.visible && (
           <>
             <li className={location.pathname === "/map" ? "active" : ""}>
@@ -105,7 +112,7 @@ const Navbar = (props) => {
             >
               <Link to="/thematicmaps">National Insights</Link>
             </li>
-            
+           
           </>
         )}
                 <li className={location.pathname === "/about" ? "active" : ""}>
@@ -119,6 +126,7 @@ Navbar.propTypes = {
   visible: PropTypes.bool,
 };
 
+
 /* Footer component */
 /* Added VET 2023 upgrade */
 function Footer() {
@@ -129,9 +137,11 @@ function Footer() {
   );
 }
 
-const App = (props) => {
+
+const App = () => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
+
 
   /* Error handler when API is down */
   function toggleError() {
@@ -139,24 +149,19 @@ const App = (props) => {
     setTimeout(() => {
       dispatch(setErrorMessage(""));
     }, 10000);
+ 
   }
-/*
-  /* The geocoder has completed a successful search */
+
+
   function handleSuccess(map) {
-    /* Set app-wide location setting */
     dispatch(setMap(map));
-    /* Clear existing facility data */
     sessionStorage.removeItem("facilityData");
-    /* redirect to the /map page */
     history.push("/map");
   }
+ 
 
-  function handleEPHSuccess(ephdata) {
-    dispatch(setMap(ephdata));
-    //sessionStorage.removeItem("ephData");
-    history.push("/ephdata");
-  }
 
+ 
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
     <Router history={history}>
@@ -192,7 +197,7 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
-          
+         
           <Route path="/thematicmaps">
             {/* county and state-level thematic maps for U.S. */}
             {state.map ? (
@@ -206,8 +211,10 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
+          
           <Route path="/ephdata">
-            <EPHDataViewer />
+            {/*farzana israt*/}
+            <SimpleMap map={state.map}/>
           </Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
@@ -215,10 +222,12 @@ const App = (props) => {
             <Home onSuccess={handleSuccess} />
           </Route>
         </Switch>
-        <Footer></Footer>
       </div>
     </Router>
   );
 };
 
+
 export default withRouter(App);
+
+
