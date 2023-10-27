@@ -24,7 +24,10 @@ import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
 
-import React, { useReducer } from "react";
+import EPHData from "./EPHData/index";
+import DataComp from "./DataComparison/index"
+
+import React, { useImperativeHandle, useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
 import SimpleMap from "./EPHMapView/index";
@@ -107,12 +110,12 @@ const Navbar = (props) => {
             <li className={location.pathname === "/graphs" ? "active" : ""}>
               <Link to="/graphs">Location Insights</Link>
             </li>
-            <li
-              className={location.pathname === "/thematicmaps" ? "active" : ""}
-            >
+            <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
               <Link to="/thematicmaps">National Insights</Link>
             </li>
-           
+            <li className={location.pathname === "/datacomp" ? "active" : ""}>
+              <Link to="/datacomp">Toxicant vs. Health Data Comparison</Link> {/*awkward wording*/}
+            </li>
           </>
         )}
                 <li className={location.pathname === "/about" ? "active" : ""}>
@@ -128,7 +131,7 @@ Navbar.propTypes = {
 
 
 /* Footer component */
-/* Added VET 2023 upgrade */
+/* Added VET 2023 upgrade written by Al-Taimee*/
 function Footer() {
   return (
     <div className="footer">
@@ -137,8 +140,7 @@ function Footer() {
   );
 }
 
-
-const App = () => {
+const App = (props) => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -158,10 +160,24 @@ const App = () => {
     sessionStorage.removeItem("facilityData");
     history.push("/map");
   }
- 
 
+  /*if no internet detected, display alert written by Al-Taimee*/
+  var checkIfOnline = navigator.onLine;
+    if (checkIfOnline == false) {
+        alert("Internet not detected, please reload once connection has been re-established"); 
+        setTimeout(5000)
+      }
 
- 
+  /*function scrollBtnUp() {
+    return {
+      <div className="scollUp">
+        <a href="#" class="scroll-btn">
+          <i class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    };
+  }*/
+
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
     <Router history={history}>
