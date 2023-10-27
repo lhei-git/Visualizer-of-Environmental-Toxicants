@@ -58,9 +58,9 @@ function Home(props) {
 
   /* start geocoding process when location is selected or user hits enter (topmost location used) */
   function handleSelect(location, placeId, suggestion) {
-    /* Redirects website to "National Insights" page if the user types in "United States" */
+    /* Amrita - Error to prevent website from crashing if user types in United States */
     if (location === "United States"){
-      window.alert("Please select a specific city, county, or state.");
+      setErrorMessage(" Please select a specific city, county, or state.")
     }
     else {
     geocodeLocation(suggestion ? suggestion.description : location)
@@ -79,7 +79,7 @@ function Home(props) {
   /* handle problems on google's side */
   function handleError(status, clearSuggestions) {
     console.log("Error from Google Maps API", status); // eslint-disable-line no-console
-    if (status === "ZERO_RESULTS") setErrorMessage("No results found");
+    if (status === "ZERO_RESULTS") setErrorMessage(" No results found");
     clearSuggestions();
   }
 
@@ -169,7 +169,9 @@ function Home(props) {
             }}
           </PlacesAutocomplete>
           {errorMessage.length > 0 && (
-            <div className="error-message">{errorMessage}</div>
+            /* Amrita - Need span part to read the error icon */
+            <div className="error-message"><span className="error-icon">&#9888;</span>
+            {errorMessage}</div>
           )}
         </div>
       </div>

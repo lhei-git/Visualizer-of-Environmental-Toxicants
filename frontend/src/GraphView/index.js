@@ -803,11 +803,7 @@ async function GraphAllFacilities({ map, filters }) {
       releaseType === "all"
     );
     return (
-      <div
-        width="100%"
-        height="300px"
-        style={{ overflowY: "auto", maxHeight: "500px" }}
-      >
+      <div className="all-facilities-chart">
         <ResponsiveContainer
           width="100%"
           height={Math.max(res.data.length * 50, 500)}
@@ -981,7 +977,7 @@ function GraphView({ map, filters, onFilterChange }) {
 
   return (
     <div className="graph-container">
-      {/* The top bar on TRI Data page where user can choose between the different types of views*/}
+      {/* Amrita - The top bar on TRI Data page where user can choose between the different types of views*/}
       <div className="selector">
         <ul>
           <li
@@ -1019,7 +1015,9 @@ function GraphView({ map, filters, onFilterChange }) {
             onFilterChange={onFilterChange}
           ></Filters>
         </div>
+        {/* Amrita - Added Summary (Map) and edited currentTab values based on reorganized TRI tab bar */}
         <div className="graphs">
+        {/* Summary (Map) View */}
         {currentTab === 0 && (
             <div
               className="map-view"
@@ -1032,6 +1030,7 @@ function GraphView({ map, filters, onFilterChange }) {
               ></MapView>
             </div>
           )}
+          {/* Timeline View */}
           {currentTab === 2 && (
             <div
               className="timelines"
@@ -1107,6 +1106,7 @@ function GraphView({ map, filters, onFilterChange }) {
               ></GraphContainer>
             </div>
           )}
+          {/* Appendix View */}
           {currentTab === 3 && (
             <div
               className="indexes"
@@ -1166,6 +1166,7 @@ function GraphView({ map, filters, onFilterChange }) {
               ></GraphContainer>
             </div>
           )}
+          {/* Top Tens View */}
           {currentTab === 1 && (
             <div className="top-tens">
               <GraphContainer
