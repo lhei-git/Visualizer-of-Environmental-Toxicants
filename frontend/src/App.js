@@ -3,6 +3,7 @@
 // Date:   12/10/2020
 //==========================================
 
+
 /* eslint-disable import/first */
 require("dotenv").config();
 import {
@@ -22,12 +23,14 @@ import GraphView from "./GraphView";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
-
 import EPHData from "./EPHData/index";
-
 import React, { useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
+import SimpleMap from "./EPHMapView/index";
+
+
+
 
 /* Initial state of app */
 const initialState = {
@@ -43,6 +46,7 @@ const initialState = {
   errorMessage: "",
 };
 
+
 /* handler for updating state */
 const reducer = (state, action) => {
   switch (action.type) {
@@ -57,6 +61,7 @@ const reducer = (state, action) => {
       const newFilters = Object.assign({}, action.payload);
       return { ...state, filters: newFilters };
 
+
     case "setErrorMessage":
       return { ...state, errorMessage: action.payload };
     default:
@@ -64,15 +69,18 @@ const reducer = (state, action) => {
   }
 };
 
+
 /* individual state setters */
 const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
+
 /* Navbar component */
 const Navbar = (props) => {
   // webpage path
   const location = useLocation();
+
 
   /* Only shows other paths when a search has been initiated */
   return (
@@ -86,8 +94,8 @@ const Navbar = (props) => {
         <li className={location.pathname === "/" ? "active" : ""}>
         <Link to="/">Search</Link>
         </li>
-        
-        
+       
+       
         {props.visible && (
           <>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
@@ -114,6 +122,7 @@ Navbar.propTypes = {
   visible: PropTypes.bool,
 };
 
+
 /* Footer component */
 /* Added VET 2023 upgrade */
 function Footer() {
@@ -124,9 +133,11 @@ function Footer() {
   );
 }
 
+
 const App = (props) => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
+
 
   /* Error handler when API is down */
   function toggleError() {
@@ -134,8 +145,9 @@ const App = (props) => {
     setTimeout(() => {
       dispatch(setErrorMessage(""));
     }, 10000);
+ 
   }
-/*
+
   /* The geocoder has completed a successful search */
   function handleSuccess(map) {
     /* Set app-wide location setting */
@@ -145,13 +157,10 @@ const App = (props) => {
     /* redirect to the /map page */
     history.push("/graphs");
   }
+ 
 
-  function handleEPHSuccess(ephdata) {
-    dispatch(setMap(ephdata));
-    //sessionStorage.removeItem("ephData");
-    history.push("/ephdata");
-  }
 
+ 
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
     <Router history={history}>
@@ -187,7 +196,7 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
-          
+         
           <Route path="/thematicmaps">
             {/* county and state-level thematic maps for U.S. */}
             {state.map ? (
@@ -201,7 +210,11 @@ const App = (props) => {
               <Redirect to="/" />
             )}
           </Route>
-          <Route path="/ephdata" component={EPHData}></Route>
+          
+          <Route path="/ephdata">
+            {/*farzana israt*/}
+            <SimpleMap map={state.map}/>
+          </Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
             {/* home page */}
@@ -214,4 +227,7 @@ const App = (props) => {
   );
 };
 
+
 export default withRouter(App);
+
+
