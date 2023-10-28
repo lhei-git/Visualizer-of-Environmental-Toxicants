@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
 
-function EPHChart() {
+const EPHChart = ({size}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -23,18 +24,25 @@ function EPHChart() {
   }, []);
 
   return (
-    <div className="TimeSeries">
-      <TimeSeries data={data} />
+    <div className="TimeSeries" style={{width: size.width, height: size.height }}>
+      <TimeSeries data={data} size={size} />
     </div>
   );
 
 
 }
 
-  function TimeSeries({ data }) {
+  EPHChart.propTypes = {
+    size: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  };
+
+  function TimeSeries({ data, size }) {
     
     return (
-      <LineChart width={800} height={400} data={data}>
+      <LineChart width={size.width} height={size.height} data={data}>
         <CartesianGrid />
         <XAxis dataKey="year" />
         <YAxis>
@@ -52,6 +60,13 @@ function EPHChart() {
       </LineChart>
     );
   }
+
+  TimeSeries.propTypes = {
+    size: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  };
   
   
 export default EPHChart;

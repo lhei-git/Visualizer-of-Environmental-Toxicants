@@ -1,8 +1,8 @@
-/*Author of file*/
-/*Farzana Israt*/
+//==========================================
+// Author: Farzana Israt
+//==========================================
 
 import React, { useState, useEffect } from 'react';
-import { getLocationString } from "../helpers";
 import axios from 'axios';
 import {
   ComposableMap,
@@ -10,13 +10,18 @@ import {
   Geography,
   ZoomableGroup
 } from 'react-simple-maps';
+import { getLocationString } from '../helpers';
 import "./index.css"
+import ReactTooltip from 'react-tooltip';
 
-/*json file for all states*/
+
+
+
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 
-/*get colors*/
+
+
 function getColorScale(dataValue) {
   return dataValue == null
     ? '#D6D6DA'
@@ -31,8 +36,8 @@ function getColorScale(dataValue) {
 
 
 
-/*create map*/
-const SimpleMap = ({ map }) => {
+
+const SimpleMap = ({ map, setToolTipContent }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
@@ -40,7 +45,7 @@ const SimpleMap = ({ map }) => {
 
 
 
-  /* fetch data for each year*/
+  // Fetch data for each year
   const dataForEachYear = (year) => {
     setSelectedYear(year);
 
@@ -67,11 +72,9 @@ const SimpleMap = ({ map }) => {
 
   return (
     <div className='mapView'>
-     {/*return data for asthma in children for the typed in location*/}
-      <h1>Asthma in Children in {" "}
-      {getLocationString(map, true)}</h1>
-
-      {/*user chooses year from dropdown*/}
+     
+      {/*return data for asthma in children for the typed in location*/}
+      <h1>Asthma in Children in U.S.</h1>
       <div className="dropdown">
         <label> Year: </label>
         <select
@@ -93,47 +96,49 @@ const SimpleMap = ({ map }) => {
       </div>
 
 
-    {/*create the react-simple-map*/}
       <ComposableMap
         projection="geoAlbers"
         projectionConfig={{
           scale: 1000
         }}
       >
-        {/*zoom into user's searched coordinates*/}
-        <ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={3}>
+        {/*<ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={1}>*/}
           <Geographies geography={GEOJSON_URL}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const stateData = data.find((d) => d.geo === geo.properties.name); //making sure state from topojson file matches state from eph api
-                const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA'; //create shaded map
+                const stateData = data.find((d) => d.geo === geo.properties.name);
+                const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
+                    data-tip={geo.properties.name}
                     style={{
                       default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
-                      hover: { fill: '#000000', cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                      hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
                       pressed: { outline: "none" }
                     }}
+                    
                     onMouseEnter={() => {
-                      if (stateData) {
-                        setSelectedState(stateData);
-                      }
+                      ReactTooltip.rebuild();
                     }}
+                    
+                    
                   />
                 );
               })
             }
           </Geographies>
-        </ZoomableGroup>
+        {/*</ZoomableGroup>*/}
       </ComposableMap>
-      {/* display percent concentration for the state*/}
+      <ReactTooltip />
+{/*
       {selectedState && (
         <div className="tooltip">
           <p>Percent Concentration: {selectedState.displayValue}</p>
         </div>
       )}
+      */}
     </div>
   );
 }

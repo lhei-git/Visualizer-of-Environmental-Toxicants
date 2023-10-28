@@ -92,3 +92,85 @@
   padding: 0 20px;
   margin: 10px 0;
 }
+
+
+
+/* Responsive styles written by Al-Taimee */
+/* Styles for screens wider than 469px */
+@media (min-width: 469px) {
+  .navigation {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    color: #fff;
+    background: #7d3a8b;
+  }
+
+  .navigation .logo {
+    margin: 0 20px;
+    font-size: 38px;
+  }
+
+  .navigation a {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+/* Styles for screens 2880px and below */
+@media (max-width: 2880px) {
+  .navigation {
+    height: auto;
+    line-height: 1.5;
+    background: #7d3a8b;
+  }
+
+  .navigation .logo {
+    font-size: 24px;
+    margin: 10px;
+  }
+
+  .navigation a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+  }
+
+  .navigation li,
+  .go-home {
+    padding: 0;
+  }
+
+  .navigation ul {
+    text-align: center;
+  }
+
+  .navigation li.active {
+    font-weight: bold;
+  }
+}
+
+.navigation.transparent {
+  background: transparent;
+}
+
+.footer {
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  border-top: 1px solid rgba(32, 33, 36, 0.28);
+  border-bottom: 1px solid rgba(32, 33, 36, 0.28);
+  background: #f8f8f8;
+}
+
+.footer .copyright {
+  padding: 0 20px;
+  margin: 10px 0;
+}
+
