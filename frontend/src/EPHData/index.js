@@ -4,9 +4,11 @@ import NationalTimeSeries from "../EPHCharts/national";
 import NationalData from "./national";
 import AsthmaChart from "../EPHCharts/asthma";
 import CancerChart from "../EPHCharts/cancer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
+import EPHThematicMapView from "../EPHThematicMapView";
+import SimpleMap from "../EPHMapView/index"
 const React = require("react");
 
 
@@ -30,6 +32,46 @@ function EPHHome() {
     sessionStorage.setItem("currentTab", i);
     setCurrentTab(i);
   }
+  /* Initial state of app */
+const initialState = {
+  map: JSON.parse(sessionStorage.getItem("map")),
+  filters: {
+    chemical: "all",
+    pbt: false,
+    carcinogen: false,
+    releaseType: "all",
+    /*sets initial state to latest year*/
+    year: 2022,
+  },
+  errorMessage: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setMap":
+      /* Store latest searched location in session */
+      sessionStorage.setItem("map", JSON.stringify(action.payload));
+      return {
+        ...state,
+        map: action.payload,
+      };
+    case "setFilters":
+      const newFilters = Object.assign({}, action.payload);
+      return { ...state, filters: newFilters };
+
+
+    case "setErrorMessage":
+      return { ...state, errorMessage: action.payload };
+    default:
+      throw new Error();
+  }
+};
+
+const setMap = (payload) => ({ type: "setMap", payload });
+const setFilters = (payload) => ({ type: "setFilters", payload });
+const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
+const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <div className="health-outcomes-container">
       {containerColumnLeftClose && (
@@ -40,7 +82,7 @@ function EPHHome() {
           <h2>Health Indicators</h2>
           <ul>
             <li onClick={() => chooseTab(0)} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
-            <li><a href="#">Asthma</a></li> {/* 1 */}
+            <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma</a></li> {/* 1 */}
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
             <li><a href="#">Cancer</a></li> {/* 3 */}
             <li><a href="#">Childhood cancer</a></li> {/* 4 */}
@@ -62,13 +104,16 @@ function EPHHome() {
           </ul>
         </div>
       )}
+      
+      {/*national measures*/}
       {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
       {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
       {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
       {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
       {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
       {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
-        
+      {/* state measures */}
+      {currentTab === "1" && ( <SimpleMap map={state.map}/> )}
   </div>
   
 

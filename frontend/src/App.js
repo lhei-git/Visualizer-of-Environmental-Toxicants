@@ -31,6 +31,7 @@ import React, { useImperativeHandle, useReducer } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
 import SimpleMap from "./EPHMapView/index";
+import EPHHome from "./EPHData/index";
 
 
 
@@ -230,7 +231,7 @@ const App = (props) => {
           
           <Route path="/ephdata">
             {/*farzana israt*/}
-            <SimpleMap map={state.map}/>
+            <EPHHome />
           </Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
