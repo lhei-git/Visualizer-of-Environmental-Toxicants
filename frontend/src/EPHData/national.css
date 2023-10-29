@@ -1,0 +1,33 @@
+.national-container{
+    padding:2%;
+}
+.national-container .selector {
+    z-index: 100;
+  }
+ 
+  .national-container .selector ul {
+    text-align: center;
+    border-radius: 5px;
+  }
+ 
+  .national-container .selector li {
+    display: inline-block;
+    cursor: pointer;
+    background: #efefef;
+    color: #444;
+    border: 1px solid #e2e2e2;
+    padding: 14px 45px;
+  }
+ 
+  .national-container .selector li:first-child {
+    border-radius: 7px 0 0 7px;
+  }
+ 
+  .national-container .selector li:last-child {
+    border-radius: 0 7px 7px 0;
+  }
+ 
+  .national-container .selector li.active {
+    background: #fff;
+    font-weight: 600;
+  }
