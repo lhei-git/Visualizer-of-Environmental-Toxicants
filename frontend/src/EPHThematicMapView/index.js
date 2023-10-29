@@ -4,7 +4,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import Filters from "../Filters";
 import vetapi from "../api/vetapi";
 import Title from "../Title/index.js";
-import EPHReusable from "../EPHMapView/EPHReusable/index.js";
+import EPHReusable from "../EPHReusable/index.js";
 import axios from "axios";
 const React = require("react");
 const Component = React.Component;
@@ -71,6 +71,7 @@ class EPHThematicMapView extends Component {
           {this.state.stateData ? (
             <>
             <EPHReusable
+              map={this.state.map}
               data={this.state.stateData}
               geoUrl={stateGeoUrl}
               mapType={"states"}

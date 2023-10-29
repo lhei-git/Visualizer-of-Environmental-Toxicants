@@ -17,7 +17,7 @@ import ReactTooltip from 'react-tooltip';
 
 
 
-const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 
 
 
@@ -37,11 +37,11 @@ function getColorScale(dataValue) {
 
 
 
-const SimpleMap = ({ map, setToolTipContent }) => {
+const SimpleMap = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-
+  const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
 
 
 
@@ -49,9 +49,9 @@ const SimpleMap = ({ map, setToolTipContent }) => {
   const dataForEachYear = (year) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`)
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${year}/0/0?PMDisplayId=1,2,3&apiToken=${EPH_API_KEY}`, )
       .then((response) => {
-        setData(response.data.tableResult);
+        setData(response.data.cwsTableResult);
       })
       .catch((error) => {
         console.error("error:", error);
@@ -72,9 +72,10 @@ const SimpleMap = ({ map, setToolTipContent }) => {
 
   return (
     <div className='mapView'>
-     
+     <div className='container'>
       {/*return data for asthma in children for the typed in location*/}
       <h1>Asthma in Children in U.S.</h1>
+      </div>
       <div className="dropdown">
         <label> Year: </label>
         <select
@@ -82,6 +83,8 @@ const SimpleMap = ({ map, setToolTipContent }) => {
           onChange={(e) => dataForEachYear(e.target.value)}
         >
           <option value=""> Select Year </option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
           <option value="2020">2020</option>
           <option value="2019">2019</option>
           <option value="2018">2018</option>
@@ -92,45 +95,45 @@ const SimpleMap = ({ map, setToolTipContent }) => {
           <option value="2013">2013</option>
           <option value="2012">2012</option>
           <option value="2011">2011</option>
+          <option value="2020">2010</option>
         </select>
       </div>
 
 
-      <ComposableMap
-        projection="geoAlbers"
-        projectionConfig={{
-          scale: 1000
-        }}
-      >
-        {/*<ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={1}>*/}
-          <Geographies geography={GEOJSON_URL}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const stateData = data.find((d) => d.geo === geo.properties.name);
-                const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    data-tip={geo.properties.name}
-                    style={{
-                      default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
-                      hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
-                      pressed: { outline: "none" }
-                    }}
-                    
-                    onMouseEnter={() => {
-                      ReactTooltip.rebuild();
-                    }}
-                    
-                    
-                  />
-                );
-              })
-            }
-          </Geographies>
-        {/*</ZoomableGroup>*/}
-      </ComposableMap>
+<ComposableMap
+  projection="geoAlbers"
+  projectionConfig={{
+    scale: 1000
+  }}
+>
+  <ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={3}>
+  <Geographies geography={GEOJSON_URL}>
+    {({ geographies }) =>
+      geographies.map((geo) => {
+        const stateData = data.find((d) => d.geo === geo.properties.name);
+        const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+        return (
+          <Geography
+            key={geo.rsmKey}
+            geography={geo}
+            data-tip={geo.properties.name}
+            style={{
+              default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+              hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+              pressed: { outline: "none" }
+            }}
+            
+            onMouseEnter={() => {
+              ReactTooltip.rebuild();
+            }}
+          />
+        );
+      })
+    }
+  </Geographies>
+  </ZoomableGroup>
+</ComposableMap>
+
       <ReactTooltip />
 {/*
       {selectedState && (

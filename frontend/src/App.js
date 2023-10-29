@@ -231,7 +231,7 @@ const App = (props) => {
           
           <Route path="/ephdata">
             {/*farzana israt*/}
-            <EPHHome />
+            <EPHHome map={state.map}/>
           </Route>
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
