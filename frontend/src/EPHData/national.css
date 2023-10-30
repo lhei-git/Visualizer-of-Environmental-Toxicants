@@ -24,7 +24,7 @@ gap: 20px;
   justify-content: center;
 }
 
-h1 {
+.national-container .h1 {
   padding-top: 100px;
   font-size: 1.5rem;
 }
