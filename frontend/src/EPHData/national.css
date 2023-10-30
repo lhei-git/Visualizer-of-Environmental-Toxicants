@@ -5,12 +5,14 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  
 }
 .national-container .filter-container{
 display: flex;
 width: 100%;
 justify-content: center;
 gap: 20px;
+margin-bottom: 20px;
 }
 
 .national-container .desc{
@@ -19,13 +21,17 @@ gap: 20px;
 
 }
 
+.national-container .about-data{
+  width: 100%;
+}
+
 .national-container .time-series{
   align-items: center;
   justify-content: center;
 }
 
   .national-container h1 {
-    padding-top: 100px;
+    padding-top: 30px;
     font-size: 1.5rem;
   }
 

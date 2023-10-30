@@ -52,7 +52,7 @@ const AdultAsthma = ({ map }) => {
         <div className='mapView'>
          <div className='container'>
           {/*return data for asthma in children for the typed in location*/}
-          <h2>Asthma among Adults in {" "} {getLocationString(map, true)}</h2>
+          <h2>Asthma among Adults near {" "} {getLocationString(map, true)}</h2>
           </div>
           <div className="dropdown">
             <label> Year: </label>

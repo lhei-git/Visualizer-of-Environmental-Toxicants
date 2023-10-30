@@ -52,7 +52,7 @@ const HeartAttack = ({ map }) => {
         <div className='mapView'>
          <div className='container'>
           {/*return data for asthma in children for the typed in location*/}
-          <h2>Mortality from Heart Attack in {" "} {getLocationString(map, true)}</h2>
+          <h2>Mortality from Heart Attack near {" "} {getLocationString(map, true)}</h2>
           </div>
           <div className="dropdown">
             <label> Year: </label>
