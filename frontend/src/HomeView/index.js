@@ -134,7 +134,8 @@ function Home(props) {
                         className="clear-button"
                         onClick={handleCloseClick}
                       >
-                        x
+                        {/* Amrita- Changed the clearing search button from the letter x to a symbol for a neater look */}
+                        <div className="clear-message"><span className="clear-icon">&#10005;</span></div>
                       </button>
                     )}
                   </div>

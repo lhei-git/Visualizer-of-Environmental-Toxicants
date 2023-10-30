@@ -45,18 +45,29 @@ h1{
     z-index: 0;
 }
 /*left column styles*/
-.health-outcomes-container {
-    display: flex;
+.health-outcomes-container h2 {
+  padding-top: 1px;
+  
 }
+.health-outcomes-container li {
+  padding-top: 2px;
+}
+
+.health-outcomes-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 h2 {
     padding-top: 30px;
 }
 .container-column {
     flex: 1;
-    padding: 20px;
+    padding: 20px 10px;
     border: 1px solid #ddd;
     text-align: center;
-    background-color: lightblue;
+    background-color: #E6E6FA;
 }
 .container-column:first-child {
     flex: 0.5;
@@ -89,6 +100,7 @@ a:hover {
   .national-container {
     width: 400px;
     height: 400px;
+    
   }
 
   @media (min-width: 469px) {
@@ -106,4 +118,38 @@ a:hover {
     position: static; 
   }
 }
-  
+
+.national-container .measure-title {
+  position: absolute;
+  text-align: center;
+  top: 3em;
+  left: 16em;
+}
+
+.description {
+  position: fixed;
+  left: 25%;
+  top: 70%;
+  padding-top: 2em;
+}
+
+.description-content {
+  position: relative;
+  margin-bottom: 3em;
+  padding: 2em 30em 2em 2em;
+  max-width: 45em;
+  max-height: 2em;
+  border: solid;
+  border-radius: 1em;
+  background-color: #CBC3E3;
+  color: #800080;
+}
+
+.timeseries {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

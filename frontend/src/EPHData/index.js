@@ -77,6 +77,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="health-outcomes-container">
+      <div className="health-outcomes-sidebar">
       {containerColumnLeftClose && (
         <div className="container-column">
           <button className="close-button-left" onClick={toggleLeftCloseButton}>
@@ -107,7 +108,9 @@ const [state, dispatch] = useReducer(reducer, initialState);
           </ul>
         </div>
       )}
-      
+      </div>
+
+      <div className="national-measures">
       {/*national measures*/}
       {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
       {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
@@ -115,6 +118,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
       {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
       {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
       {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
+      </div>
       {/* state measures */}
       {currentTab === "1" && ( <SimpleMap map={state.map}/> )}
   </div>
