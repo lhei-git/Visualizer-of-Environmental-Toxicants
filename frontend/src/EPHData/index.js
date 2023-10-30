@@ -48,7 +48,7 @@ function EPHHome(map) {
 
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
-    chooseTab("2"); //default bisphenol, change to arsenic ASAP
+    chooseTab("0"); //default bisphenol, change to arsenic ASAP
   }, []); // empty dependency array so effect runs only once
 
   /* Initial state of app */
@@ -93,6 +93,39 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="health-outcomes-container">
+      {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
+            <div className="eph-national-container">
+      {/*national measures*/}
+      {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
+      {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
+      {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
+      {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
+      {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
+      {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
+      
+            {/* county measures */}
+      
+            {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
+      {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
+      {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
+      {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
+      {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
+      {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
+      {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
+      {currentTab === "11" && ( <PCEWater map={state.map}/> )}
+      {currentTab === "14" && ( <PFASWater map={state.map}/> )}
+      {currentTab === "16" && ( <Prematurity map={state.map}/> )}
+      {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
+      {currentTab === "18" && ( <TCEWater map={state.map}/> )}
+      {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
+      {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
+      {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
+
+            {/* state measures */}
+            {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
+      {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
+      {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
+      </div>
       <div className="health-outcomes-sidebar">
       {containerColumnLeftClose && (
         <div className="container-column">
@@ -126,38 +159,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
           </ul>
         </div>
       )}
-      
-      {/*national measures*/}
-      {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
-      {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
-      {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
-      {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
-      {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
-      {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
-      </div>
-      {/* state measures */}
-      {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
-      {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
-      {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
-
-
-      {/* county measures */}
-      
-      {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
-      {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
-      {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
-      {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
-      {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
-      {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
-      {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
-      {currentTab === "11" && ( <PCEWater map={state.map}/> )}
-      {currentTab === "14" && ( <PFASWater map={state.map}/> )}
-      {currentTab === "16" && ( <Prematurity map={state.map}/> )}
-      {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
-      {currentTab === "18" && ( <TCEWater map={state.map}/> )}
-      {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
-      {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
-      {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
+            </div>
       {/*
       {currentTab === "19" && ( 
         map && (

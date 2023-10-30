@@ -1,4 +1,10 @@
-
+/* Amrita - Added to fix spacing between sidebar and EPH content */
+.eph-national-container {
+  width: 30%;
+  float: right;
+  padding: 20px;
+  margin-right: 500px;
+}
 
 .eph-container .eph-dropdown{
     display: flex;
@@ -24,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center; 
+    margin-right: 200px;
     padding-bottom: 100px;   
 }
 .health-outcomes-container h1{
@@ -43,7 +50,7 @@
 }
 /*left column styles*/
 .health-outcomes-container h2 {
-  padding-top: 1px;
+  padding-top: 50px;
   
 }
 .health-outcomes-container li {
@@ -54,11 +61,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-right: 1em;
 }
 
-.health-outcomes-container h2 {
-    padding-top: 100px;
-}
+
 .container-column {
     flex: 1;
     padding: 20px 10px;
@@ -98,36 +104,6 @@
     background: #ff3333;
   }
 
-  /*Responsive styles written by Al-Taimee for national-container*/
-  .national-container {
-    width: 400px;
-    height: 400px;
-    
-  }
-
-  @media (min-width: 469px) {
-    .national-container {
-      height: auto;
-      width: auto;
-      display: block;
-    }
-    
-  }
-
-@media (max-width: 2880px) {
-  .national-container {
-    width: 100%; 
-    max-width: 100%; 
-    position: static; 
-  }
-}
-
-.national-container .measure-title {
-  position: absolute;
-  text-align: center;
-  top: 3em;
-  left: 16em;
-}
 
 .description {
   position: fixed;
