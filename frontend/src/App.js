@@ -91,9 +91,6 @@ const Navbar = (props) => {
     <div
       className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
     >
-      <div className="logo">
-        <Link to="/">VETHOS.</Link>
-      </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
         <Link to="/">Search</Link>
@@ -119,6 +116,9 @@ const Navbar = (props) => {
           <Link to="/about">About</Link>
         </li>
       </ul>
+      <div className="logo">
+        <Link to="/">VETHOS.</Link>
+      </div>
     </div>
   );
 };

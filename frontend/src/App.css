@@ -21,6 +21,10 @@
   top: 0;
   color: #fff;
   background: #7d3a8b;
+  /* Amrita - Vertically centered navigation bar's elements */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navigation.transparent {
