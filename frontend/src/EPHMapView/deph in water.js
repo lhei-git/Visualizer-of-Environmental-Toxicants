@@ -52,7 +52,7 @@ const DEPHWater = ({ map }) => {
         <div className='mapView'>
          <div className='container'>
           {/*return data for asthma in children for the typed in location*/}
-          <h2>DEPH in Community Water Systems in {" "} {getLocationString(map, true)}</h2>
+          <h2>DEPH in Community Water Systems near {" "} {getLocationString(map, true)}</h2>
           </div>
           <div className="dropdown">
             <label> Year: </label>

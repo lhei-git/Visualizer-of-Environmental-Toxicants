@@ -52,7 +52,7 @@ const Prematurity = ({ map }) => {
         <div className='mapView'>
          <div className='container'>
           {/*return data for asthma in children for the typed in location*/}
-          <h1>Prematurity in {" "} {getLocationString(map, true)}</h1>
+          <h1>Prematurity near {" "} {getLocationString(map, true)}</h1>
           </div>
           <div className="dropdown">
             <label> Year: </label>

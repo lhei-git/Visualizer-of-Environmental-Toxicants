@@ -52,7 +52,7 @@ const ArsenicWater = ({ map }) => {
         <div className='mapView'>
          <div className='container'>
           {/*return data for asthma in children for the typed in location*/}
-          <h2>Arsenic in Community Water in {" "} {getLocationString(map, true)}</h2>
+          <h2>Arsenic in Community Water near {" "} {getLocationString(map, true)}</h2>
           </div>
           <div className="dropdown">
             <label> Year: </label>
