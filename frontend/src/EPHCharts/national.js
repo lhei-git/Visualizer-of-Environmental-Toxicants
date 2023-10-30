@@ -11,7 +11,7 @@ Content area for all ntnl measures: Biomonitoring: Population exposure
 
 //written by Katherine O'Donnell
 
-const NationalTimeSeries = ({size, measure, units, percentile}) => {
+const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => {
   const [data, setData] = useState([]);
   const apiURL = getApiURL(measure);    //api endpoint selected based on measure
 
@@ -33,24 +33,24 @@ const NationalTimeSeries = ({size, measure, units, percentile}) => {
   function getApiURL(selectedMeasure){
     if (selectedMeasure === "lead in blood") {
         //us population, ug/dL
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=16&PercentileId=${percentile}`;
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=${demographic}&PercentileId=${percentile}`;
     } else if (selectedMeasure === "metals in urine") {
         //analyte: total arsenic, 50th percentile, us population, ug/g
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/856/2205/all/all/2/2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=3&DemographicId=16&PercentileId=${percentile}`;
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/856/2205/all/all/2/2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=3&DemographicId=${demographic}&PercentileId=${percentile}`;
     } else if (selectedMeasure === "Phthalate Metabolites in urine (creatinine corrected)"){
         //analyte: MBzP, 50th percentile, us population, ug/g
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/863/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=44&DemographicId=16&PercentileId=${percentile}`;
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/863/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=44&DemographicId=${demographic}&PercentileId=${percentile}`;
     } else if (selectedMeasure === "Bisphenol and paraben in urine"){
         //measure Personal care and consumer products metabolities in urine (creatinine corrected)
         //analyte: BPA, 50th %ile, nat population, ug/g
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/859/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004/0/0?AnalyteId=43&DemographicId=16&PercentileId=${percentile}`;
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/859/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004/0/0?AnalyteId=43&DemographicId=${demographic}&PercentileId=${percentile}`;
     } else if (selectedMeasure === "PFAS in blood"){
         //analyte: PFOS, 50h %ile, nat pop, ug/L
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/826/2205/all/all/2/2018,2016,2014,2012,2010,2008,2006,2004,2000/0/0?AnalyteId=27&DemographicId=16&PercentileId=${percentile}`;
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/826/2205/all/all/2/2018,2016,2014,2012,2010,2008,2006,2004,2000/0/0?AnalyteId=27&DemographicId=${demographic}&PercentileId=${percentile}`;
     } else if (selectedMeasure === "Pesticides in urine"){
         //Pesticide Metabolites: Pyrethroid metabolities in urine (creatinine corrected) ADD DIFF MEASURE FILTERS
         //analyte: OPM, 50th %ile, nat pop, ug/g
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/861/2205/all/all/2/2014,2012,2010,2008,2002,2000/0/0?AnalyteId=34&DemographicId=16&PercentileId=${percentile}`;
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/861/2205/all/all/2/2014,2012,2010,2008,2002,2000/0/0?AnalyteId=34&DemographicId=${demographic}&PercentileId=${percentile}`;
     } else {
         // error handling????
         return '';
@@ -73,6 +73,7 @@ const NationalTimeSeries = ({size, measure, units, percentile}) => {
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
     //lineName: PropTypes.string.isRequired,      //type of measure (e.g. concentration) selected on eph page
     percentile: PropTypes.number.isRequired,         //1=50th, 2=95th
+    demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
 
   };
 
