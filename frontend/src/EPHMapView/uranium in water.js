@@ -105,7 +105,7 @@ const UraniumWater = ({ map }) => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                data-tip={geo.properties.name}
+                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
                 style={{
                   default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                   hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -123,6 +123,30 @@ const UraniumWater = ({ map }) => {
       </ZoomableGroup>
     </ComposableMap>
     <ReactTooltip />
+    <div className="legend">
+  <h3>Percent Concentration</h3>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+    <span>Null Data</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
+    <span>0-0.1</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
+    <span>0.1-0.3</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
+    <span>0.3-1</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
+    <span>1+</span>
+  </div>
+</div>
+    
     {/*
           {selectedState && (
             <div className="tooltip">

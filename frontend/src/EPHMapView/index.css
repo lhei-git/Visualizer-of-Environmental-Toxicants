@@ -11,6 +11,8 @@
   left: 50%;
   transform: translate(-50%, -10%);
   */
+  width: 600px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +23,7 @@
 
 
 
-h2 {
+.mapView h2 {
   margin-bottom: 20px; 
 }
 
@@ -30,6 +32,43 @@ h2 {
   .graph-container .filter-container .control-container {
     display: block;
   }
+
+.mapView .legend {
+  position: absolute;
+  bottom: 20px;
+  left: 450px;
+  margin-bottom: 166px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.legend h3 {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.legend-item span {
+  margin: 0;
+}
+
+
 
   
 /*

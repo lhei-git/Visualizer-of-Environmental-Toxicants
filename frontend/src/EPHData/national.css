@@ -24,22 +24,42 @@ gap: 20px;
   justify-content: center;
 }
 
-.national-container .h1 {
-  padding-top: 100px;
-  font-size: 1.5rem;
+  .national-container h1 {
+    padding-top: 100px;
+    font-size: 1.5rem;
+  }
+
+/* Amrita - Added formatting for health measures' description */
+.eph-description {
+  position: fixed;
+  left: 25%;
+  top: 70%;
+  padding-top: 2em;
 }
 
-@media (min-width: 469px) {
-  .national-container {
-    height: auto;
-    width: auto;
-    display: block;
-  }
-  h1 {
-    font-size: 2rem;
-  }
-  
+.eph-description-content {
+  position: relative;
+  margin-bottom: 3em;
+  padding: 2em 30em 2em 2em;
+  max-width: 45em;
+  max-height: 2em;
+  border: solid;
+  border-radius: 1em;
+  background-color: #CBC3E3;
+  color: #800080;
 }
+
+  @media (min-width: 469px) {
+    .national-container {
+      height: auto;
+      width: auto;
+      display: block;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    
+  }
 
 @media (max-width: 2880px) {
   .national-container {

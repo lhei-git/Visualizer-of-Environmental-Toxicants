@@ -17,11 +17,11 @@ const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 function getColorScale(dataValue) {
   return dataValue == null
     ? '#D6D6DA'
-    : dataValue < 9
+    : dataValue < 30
     ? '#bbe9fa'
-    : dataValue < 12
+    : dataValue < 60
     ? '#8bdefc'
-    : dataValue < 14
+    : dataValue < 100
     ? '#62cdf5'
     : '#1ab3eb';
 }
@@ -102,7 +102,7 @@ const LowBirthweight = ({ map }) => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                data-tip={geo.properties.name}
+                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
                 style={{
                   default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                   hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -120,6 +120,29 @@ const LowBirthweight = ({ map }) => {
       </ZoomableGroup>
     </ComposableMap>
     <ReactTooltip />
+    <div className="legend">
+  <h3>Percent Concentration</h3>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+    <span>Null Data</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
+    <span>0-30</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
+    <span>30-60</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
+    <span>60-100</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
+    <span>100+</span>
+  </div>
+</div>
     {/*
           {selectedState && (
             <div className="tooltip">

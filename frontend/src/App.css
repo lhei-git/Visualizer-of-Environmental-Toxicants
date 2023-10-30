@@ -2,7 +2,7 @@
 .thematic-view-wrapper .filter-container {
   z-index: 100;
   position: fixed;
-  top: 80px;
+  top: 75px;  /* Amrita - Adjusted to fix gap between nav bar and filter bar */
   width: 100%;
   left: 0;
   background: #fff;
@@ -80,7 +80,7 @@
 }
 
 .footer {
-  z-index: 2;
+  z-index: 100; /* Amrita - Changed from 2 because it wasn't overlapping in TRI Page */
   position: absolute;
   text-align: center;
   left: 0;
