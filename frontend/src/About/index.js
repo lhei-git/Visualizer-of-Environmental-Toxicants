@@ -10,7 +10,7 @@ function About() {
       <div className="content">
         <h1>About</h1>
         <div>
-          The Visualizer of Environmental Toxicants (VET) web application was
+          VETHOS, previously known as The Visualizer of Environmental Toxicants (VET) web application was
           developed to obtain information from the{" "}
           <a href="https://www.epa.gov/toxics-release-inventory-tri-program">
             Toxic Releases Inventory (TRI)
@@ -21,7 +21,12 @@ function About() {
             PubChem database of the National Library of Medicine
           </a>
           , to map, organize and visualize information about releases of toxic
-          chemicals into the air, land and water across the United States.
+          chemicals into the air, land and water across the United States. It was
+          recently updated to further expand its goal to include awareness on Public
+          Health conditions in varying areas of the United States using data from the {" "}
+          <a href="https://ephtracking.cdc.gov/">
+            CDC's Environmental Public Health (EPH) Tracking Network. 
+          </a>{" "}
         </div>
         <br />
 
@@ -36,24 +41,32 @@ function About() {
 
         <div>
           Toxicity is a complex issue, and the hazards of a chemical are
-          dependent on amount and concentration of the chemical, among other
-          factors. This tool is thus for exploratory purposes only, and it is
+          dependent on amount and concentration of the chemical. While correlations
+          may be found between the toxicant release levels and the public health data, 
+          it is important to consider other factors that may impact the results.
+          This tool is thus for exploratory purposes only, and it is
           not intended to diagnose any particular disease or prescribe any
           particular treatment. Further documentation about the variables used
           here are found under the{" "}
           <a href="https://www.epa.gov/toxics-release-inventory-tri-program/what-toxics-release-inventory">
             TRI documentation
           </a>{" "}
-          and the PubChem website.
+          <a href="https://pubchem.ncbi.nlm.nih.gov/docs/about">
+          , the PubChem website, and
+          </a>{" "}
+          <a href="https://www.cdc.gov/nceh/tracking/about.htm">
+            the CDC EPH Tracking website.
+          </a>{" "}
         </div>
         <br />
         <div>
           VET was developed for the Lab for Health and Environmental Information
           (LHEI) at Wayne State University by Evan de Jesus, Adwait Wadekar,
           Richard Moore, and Calvin Brooks as part of their Senior Capstone
-          Project, during the Fall of 2020. The project was guided by Nic
-          DePaula, Director of LHEI and Assistant Professor at the School of
-          Information Sciences at Wayne State University.
+          Project, during the Fall of 2020. VETHOS, the updated version of the website,
+          was revised by Al-Taimee Hassan, Katherine O’Donnell, Amrita Dhar, and Farzana
+          Israt. The project was guided by Nic DePaula, Director of LHEI and Assistant 
+          Professor at the School of Information Sciences at Wayne State University.
         </div>
         <br />
 

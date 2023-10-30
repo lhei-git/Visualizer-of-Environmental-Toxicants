@@ -1,7 +1,19 @@
 .control-header {
-  flex: 1;
+  flex: 0.7;  /* Amrita - Changed from 1 to keep filtering bar 1 line long for most searches */
   text-align: center;
   display: inline-block;
+  background: #fafbfc;
+}
+
+/* Amrita - Added max width for select so it doesn't take up too much space for longer toxicants */
+select {
+  max-width: 20em;
+}
+
+/* Amrita - Grouping together the toxicants */
+.checkbox-group {
+  display: flex;
+  justify-content: space-around
 }
 
 .control-container {
@@ -10,6 +22,7 @@
   display: flex;
   justify-content: flex-start;
   background: #fafbfc;
+  padding-top: 13px;  /* Amrita - Added padding so it stays centered */
 
   --primary: #9c27b0;
   --primary-light: #d05ce3;

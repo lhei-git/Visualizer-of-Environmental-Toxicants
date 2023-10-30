@@ -1,3 +1,5 @@
+
+
 .eph-container .eph-dropdown{
     display: flex;
     margin: 6em 10em 1px 10em;
@@ -12,31 +14,26 @@
 }
 .eph-container .eph-header{
     margin: 1px 10em 1px 10em;
-    height: 30vh; /* Magic here */
+    height: 30vh; 
     display: flex;
     justify-content: center;
     align-items: center;   
 }
 .chart{
-    height: 40vh; /* Magic here */
+    height: 40vh; 
     display: flex;
     justify-content: center;
     align-items: center; 
     padding-bottom: 100px;   
 }
 h1{
-    height: 10vh; /* Magic here */
+    height: 10vh; 
     display: flex;
     justify-content: center;
     align-items: center;   
 }
-.chart{
-    /*height: 60vh; /* Magic here */
-    /*display: flex;
-    justify-content: center;
-    align-items: center; 
-    padding-bottom: 100px;*/   
 
+.chart{
     height: 60vh; /* Adjust the height as needed */
     display: flex;
     justify-content: center;
@@ -45,18 +42,29 @@ h1{
     z-index: 0;
 }
 /*left column styles*/
-.health-outcomes-container {
-    display: flex;
+.health-outcomes-container h2 {
+  padding-top: 1px;
+  
 }
+.health-outcomes-container li {
+  padding-top: 2px;
+}
+
+.health-outcomes-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 h2 {
-    padding-top: 30px;
+    padding-top: 100px;
 }
 .container-column {
     flex: 1;
-    padding: 20px;
+    padding: 20px 10px;
     border: 1px solid #ddd;
     text-align: center;
-    background-color: lightblue;
+    background-color: #E6E6FA;
 }
 .container-column:first-child {
     flex: 0.5;
@@ -64,6 +72,11 @@ h2 {
 ul {
     list-style: none;
     padding: 0;
+}
+li {
+  text-align: left;
+  text-indent: 1px;
+  padding-bottom: 10px;
 }
 a {
     text-decoration: none;
@@ -85,92 +98,61 @@ a:hover {
     background: #ff3333;
   }
 
-
-
-  .graph-container {
-    /*position: relative;
-    background: #fff;
-    min-height: 100vh;
-    padding: 0;
-    margin-top: 200px;*/
-
-    position: absolute;
-    right: 0;
-    top: 200px;
-    width: calc(50% - 10em);
+  /*Responsive styles written by Al-Taimee for national-container*/
+  .national-container {
+    width: 400px;
+    height: 400px;
     
-    z-index: 1;
-    padding: 0;
   }
-  
-  .graph-container .selector {
-    z-index: 100;
+
+  @media (min-width: 469px) {
+    .national-container {
+      height: auto;
+      width: auto;
+      display: block;
+    }
+    
   }
-  
-  .graph-container .selector ul {
-    text-align: center;
-    border-radius: 5px;
+
+@media (max-width: 2880px) {
+  .national-container {
+    width: 100%; 
+    max-width: 100%; 
+    position: static; 
   }
-  
-  .graph-container .selector li {
-    display: inline-block;
-    cursor: pointer;
-    background: #efefef;
-    color: #444;
-    border: 1px solid #e2e2e2;
-    padding: 14px 45px;
-  }
-  
-  .graph-container .selector li:first-child {
-    border-radius: 7px 0 0 7px;
-  }
-  
-  .graph-container .selector li:last-child {
-    border-radius: 0 7px 7px 0;
-  }
-  
-  .graph-container .selector li.active {
-    background: #fff;
-    font-weight: 600;
-  }
-  
-  .graph-container > .content {
-    min-width: 1000px;
-    max-width: 50vw;
-    overflow-x: visible;
-    margin: 0 auto;
-  }
-  
-  .graph-container .graphs {
-    width: 100%;
-  }
-  
-  .graph-container .graph {
-    position: relative;
-    justify-content: center;
-    padding-top: 75px;
-    padding-bottom: 40px;
-    width: 100%;
-    border-radius: 25px;
-  }
-  
-  .graph-container .dropdown-icon {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    margin-right: 20px;
-  }
-  
-  .graph-container .dropdown-icon.active {
-    transform: rotate(180deg);
-    transform-origin: 60% 50%;
-  }
-  
-  .graph-container .top-ten {
-    position: relative;
-  }
-  
-  .graph-container .filter-container .control-container {
-    display: block;
-  }
-  
+}
+
+.national-container .measure-title {
+  position: absolute;
+  text-align: center;
+  top: 3em;
+  left: 16em;
+}
+
+.description {
+  position: fixed;
+  left: 25%;
+  top: 70%;
+  padding-top: 2em;
+}
+
+.description-content {
+  position: relative;
+  margin-bottom: 3em;
+  padding: 2em 30em 2em 2em;
+  max-width: 45em;
+  max-height: 2em;
+  border: solid;
+  border-radius: 1em;
+  background-color: #CBC3E3;
+  color: #800080;
+}
+
+.timeseries {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

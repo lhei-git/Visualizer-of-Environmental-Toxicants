@@ -5,7 +5,7 @@
     "latitude": 62.385,
     "longitude": -152.2683,
     "scale": 700,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/AK-02-alaska-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/AK.json"
   },
   {
     "state": "AL",
@@ -13,7 +13,7 @@
     "latitude": 32.799,
     "longitude": -86.8073,
     "scale": 5000,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/AL-01-alabama-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/AL.json"
   },
   {
     "state": "AR",
@@ -21,7 +21,7 @@
     "latitude": 34.9513,
     "longitude": -92.3809,
     "scale": 6800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/AR-05-arkansas-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/AR.json"
   },
   {
     "state": "AZ",
@@ -29,7 +29,7 @@
     "latitude": 33.7712,
     "longitude": -111.3877,
     "scale": 4200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/AZ-04-arizona-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/AZ.json"
   },
   {
     "state": "CA",
@@ -37,7 +37,7 @@
     "latitude": 37.17,
     "longitude": -119.7462,
     "scale": 2600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/CA-06-california-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/CA.json"
   },
   {
     "state": "CO",
@@ -45,7 +45,7 @@
     "latitude": 39.0646,
     "longitude": -105.3272,
     "scale": 5900,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/CO-08-colorado-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/CO.json"
   },
   {
     "state": "CT",
@@ -53,7 +53,7 @@
     "latitude": 41.5834,
     "longitude": -72.7622,
     "scale": 19900,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/CT-09-connecticut-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/CT.json"
   },
   {
     "state": "DE",
@@ -61,7 +61,7 @@
     "latitude": 39.3498,
     "longitude": -75.5148,
     "scale": 12900,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/DE-10-delaware-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/DE.json"
   },
   {
     "state": "FL",
@@ -69,7 +69,7 @@
     "latitude": 27.6648,
     "longitude": -81.717,
     "scale": 4000,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/FL-12-florida-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/FL.json"
   },
   {
     "state": "GA",
@@ -77,7 +77,7 @@
     "latitude": 32.5866,
     "longitude": -83.6487,
     "scale": 5600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/GA-13-georgia-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/GA.json"
   },
   {
     "state": "HI",
@@ -85,7 +85,7 @@
     "latitude": 21.1098,
     "longitude": -157.5311,
     "scale": 6600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/HI-15-hawaii-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/HI.json"
   },
   {
     "state": "IA",
@@ -93,7 +93,7 @@
     "latitude": 42.0046,
     "longitude": -93.614,
     "scale": 7000,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/IA-19-iowa-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/IA.json"
   },
   {
     "state": "ID",
@@ -101,7 +101,7 @@
     "latitude": 45.7394,
     "longitude": -114.5103,
     "scale": 3200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/ID-16-idaho-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/ID.json"
   },
   {
     "state": "IL",
@@ -109,7 +109,7 @@
     "latitude": 39.8363,
     "longitude": -89.0022,
     "scale": 4500,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/IL-17-illinois-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/IL.json"
   },
   {
     "state": "IN",
@@ -117,7 +117,7 @@
     "latitude": 39.8647,
     "longitude": -86.2604,
     "scale": 6200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/IN-18-indiana-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/IN.json"
   },
   {
     "state": "KS",
@@ -125,7 +125,7 @@
     "latitude": 38.5111,
     "longitude": -98.4005,
     "scale": 5800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/KS-20-kansas-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/KS.json"
   },
   {
     "state": "KY",
@@ -133,7 +133,7 @@
     "latitude": 37.669,
     "longitude": -85.6514,
     "scale": 5800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/KY-21-kentucky-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/KY.json"
   },
   {
     "state": "LA",
@@ -141,7 +141,7 @@
     "latitude": 31.1801,
     "longitude": -91.8749,
     "scale": 6200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/LA-22-louisiana-parishes.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/LA.json"
   },
   {
     "state": "MA",
@@ -149,7 +149,7 @@
     "latitude": 42.2373,
     "longitude": -71.5314,
     "scale": 10200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MA-25-massachusetts-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MA.json"
   },
   {
     "state": "MD",
@@ -157,7 +157,7 @@
     "latitude": 39.0724,
     "longitude": -77.3502,
     "scale": 9900,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MD-24-maryland-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MD.json"
   },
   {
     "state": "ME",
@@ -165,7 +165,7 @@
     "latitude": 45.3074,
     "longitude": -69.3977,
     "scale": 4900,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/ME-23-maine-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/ME.json"
   },
   {
     "state": "MI",
@@ -173,7 +173,7 @@
     "latitude": 45.3504,
     "longitude": -85.5603,
     "scale": 3400,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MI-26-michigan-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MI.json"
   },
   {
     "state": "MN",
@@ -181,7 +181,7 @@
     "latitude": 46.5326,
     "longitude": -93.9196,
     "scale": 3800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MN-27-minnesota-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MN.json"
   },
   {
     "state": "MO",
@@ -189,7 +189,7 @@
     "latitude": 38.4623,
     "longitude": -92.302,
     "scale": 5300,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MO-29-missouri-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MO.json"
   },
   {
     "state": "MS",
@@ -197,7 +197,7 @@
     "latitude": 32.7673,
     "longitude": -89.6812,
     "scale": 5500,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MS-28-mississippi-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MS.json"
   },
   {
     "state": "MT",
@@ -205,7 +205,7 @@
     "latitude": 46.9048,
     "longitude": -110.3261,
     "scale": 3500,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/MT-30-montana-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/MT.json"
   },
   {
     "state": "NC",
@@ -213,7 +213,7 @@
     "latitude": 35.6411,
     "longitude": -79.8431,
     "scale": 5500,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NC-37-north-carolina-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NC.json"
   },
   {
     "state": "ND",
@@ -221,7 +221,7 @@
     "latitude": 47.5362,
     "longitude": -100.393,
     "scale": 5500,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/ND-38-north-dakota-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/ND.json"
   },
   {
     "state": "NE",
@@ -229,7 +229,7 @@
     "latitude": 41.6289,
     "longitude": -99.6883,
     "scale": 5200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NE-31-nebraska-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NE.json"
   },
   {
     "state": "NH",
@@ -237,7 +237,7 @@
     "latitude": 44.0108,
     "longitude": -71.5653,
     "scale": 7800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NH-33-new-hampshire-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NH.json"
   },
   {
     "state": "NJ",
@@ -245,7 +245,7 @@
     "latitude": 40.114,
     "longitude": -74.5089,
     "scale": 9800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NJ-34-new-jersey-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NJ.json"
   },
   {
     "state": "NM",
@@ -253,7 +253,7 @@
     "latitude": 34.1375,
     "longitude": -106.2371,
     "scale": 4600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NM-35-new-mexico-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NM.json"
   },
   {
     "state": "NV",
@@ -261,7 +261,7 @@
     "latitude": 38.4199,
     "longitude": -117.1219,
     "scale": 3600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NV-32-nevada-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NV.json"
   },
   {
     "state": "NY",
@@ -269,7 +269,7 @@
     "latitude": 42.8497,
     "longitude": -75.9384,
     "scale": 5400,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/NY-36-new-york-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/NY.json"
   },
   {
     "state": "OH",
@@ -277,7 +277,7 @@
     "latitude": 40.3736,
     "longitude": -82.7755,
     "scale": 6300,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/OH-39-ohio-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/OH.json"
   },
   {
     "state": "OK",
@@ -285,7 +285,7 @@
     "latitude": 35.5376,
     "longitude": -98.7247,
     "scale": 5200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/OK-40-oklahoma-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/OK.json"
   },
   {
     "state": "OR",
@@ -293,7 +293,7 @@
     "latitude": 44.5672,
     "longitude": -120.6269,
     "scale": 4600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/OR-41-oregon-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/OR.json"
   },
   {
     "state": "PA",
@@ -301,7 +301,7 @@
     "latitude": 41.0773,
     "longitude": -77.764,
     "scale": 7600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/PA-42-pennsylvania-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/PA.json"
   },
   {
     "state": "RI",
@@ -309,7 +309,7 @@
     "latitude": 41.6772,
     "longitude": -71.5101,
     "scale": 22600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/RI-44-rhode-island-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/RI.json"
   },
   {
     "state": "SC",
@@ -317,7 +317,7 @@
     "latitude": 33.8191,
     "longitude": -80.9066,
     "scale": 7600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/SC-45-south-carolina-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/SC.json"
   },
   {
     "state": "SD",
@@ -325,7 +325,7 @@
     "latitude": 44.2853,
     "longitude": -100.2632,
     "scale": 5400,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/SD-46-south-dakota-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/SD.json"
   },
   {
     "state": "TN",
@@ -333,7 +333,7 @@
     "latitude": 35.7449,
     "longitude": -85.7489,
     "scale": 5000,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/TN-47-tennessee-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/TN.json"
   },
   {
     "state": "TX",
@@ -341,7 +341,7 @@
     "latitude": 31.106,
     "longitude": -99.6475,
     "scale": 2600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/TX-48-texas-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/TX.json"
   },
   {
     "state": "UT",
@@ -349,7 +349,7 @@
     "latitude": 39.5135,
     "longitude": -111.8535,
     "scale": 4800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/UT-49-utah-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/UT.json"
   },
   {
     "state": "VA",
@@ -357,7 +357,7 @@
     "latitude": 37.768,
     "longitude": -79.6057,
     "scale": 5600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/VA-51-virginia-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/VA.json"
   },
   {
     "state": "VT",
@@ -365,7 +365,7 @@
     "latitude": 44.0407,
     "longitude": -72.7093,
     "scale": 9200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/VT-50-vermont-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/VT.json"
   },
   {
     "state": "WA",
@@ -373,7 +373,7 @@
     "latitude": 47.3917,
     "longitude": -120.5708,
     "scale": 5200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/WA-53-washington-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/WA.json"
   },
   {
     "state": "WI",
@@ -381,7 +381,7 @@
     "latitude": 44.8563,
     "longitude": -89.6385,
     "scale": 5200,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/WI-55-wisconsin-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/WI.json"
   },
   {
     "state": "WV",
@@ -389,7 +389,7 @@
     "latitude": 39.068,
     "longitude": -80.5696,
     "scale": 6800,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/WV-54-west-virginia-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/WV.json"
   },
   {
     "state": "WY",
@@ -397,6 +397,6 @@
     "latitude": 43.0475,
     "longitude": -107.5085,
     "scale": 5600,
-    "geoUrl": "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/WY-56-wyoming-counties.json"
+    "geoUrl": "https://raw.githubusercontent.com/missisrat/topology/main/WY.json"
   }
 ]

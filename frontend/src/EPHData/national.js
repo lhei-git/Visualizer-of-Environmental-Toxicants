@@ -25,6 +25,7 @@ const NationalData = ({measure, units, description}) => {
     useEffect(() => {
         chooseFilters(1, 16); //default 50th percentile, us population
       }, []); // empty dependency array so effect runs only once
+    
 
     return(
         <div className="national-container">
