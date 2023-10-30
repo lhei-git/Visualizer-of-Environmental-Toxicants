@@ -78,7 +78,7 @@ const NationalData = ({measure, units, description}) => {
                 />
             )}
 
-            <p>{description}</p>
+            <p className="eph-description">{description}</p>
         </div>
     );
 }

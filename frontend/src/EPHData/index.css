@@ -91,6 +91,10 @@
 .health-outcomes-container a:hover {
     color: #007bff;
 }
+/* Amrita - Added so the current tab in the sidebar is bold */
+.health-outcomes-container li.active {
+  font-weight: bold;
+}
 .close-button-left {
     color: darkblue;
     border: none;
@@ -100,29 +104,10 @@
     background: none;
     cursor: pointer;
   }
-  .close-button:hover {
-    background: #ff3333;
-  }
-
-
-.description {
-  position: fixed;
-  left: 25%;
-  top: 70%;
-  padding-top: 2em;
+.close-button:hover {
+  background: #ff3333;
 }
-
-.description-content {
-  position: relative;
-  margin-bottom: 3em;
-  padding: 2em 30em 2em 2em;
-  max-width: 45em;
-  max-height: 2em;
-  border: solid;
-  border-radius: 1em;
-  background-color: #CBC3E3;
-  color: #800080;
-}
+  
 
 .timeseries {
   position: fixed;

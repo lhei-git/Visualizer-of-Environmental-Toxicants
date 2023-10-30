@@ -80,7 +80,7 @@
 }
 
 .footer {
-  z-index: 2;
+  z-index: 100; /* Amrita - Changed from 2 because it wasn't overlapping in TRI Page */
   position: absolute;
   text-align: center;
   left: 0;
