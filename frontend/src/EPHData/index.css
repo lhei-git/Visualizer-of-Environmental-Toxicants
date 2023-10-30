@@ -1,9 +1,9 @@
 /* Amrita - Added to fix spacing between sidebar and EPH content */
 .eph-national-container {
-  width: 30%;
+  width: 80%;
   float: right;
   padding: 20px;
-  margin-right: 500px;
+  margin-left: 100px;
 }
 
 .eph-container .eph-dropdown{
