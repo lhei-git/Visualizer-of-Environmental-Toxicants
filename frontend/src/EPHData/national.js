@@ -89,7 +89,7 @@ const NationalData = ({measure, units}) => {
                 <h2>About the Data</h2>
                 <h3>Where is the data from?</h3>
                 <p>The data above is provided by the Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals. You can find the official updated tables for the report here: http://www.cdc.gov/exposurereport/</p>
-                <p>The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
+                <p>{samples}</p>
                 <p>Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on {formattedDate}.</p>
                 <h3>What group does the data represent?</h3>
                 <p>Data samples are population-weighted, representing the U.S. civilian non-institutionalized Census population. The purpose of weighting the samples is to create unbiased national estimates, meaning that the measures represent the entire U.S. population. </p>
@@ -112,27 +112,27 @@ NationalData.propTypes = {
 var samples = "Biomonitoring is conducted via individual and pooled blood or urine samples tested by CDC scientists. Samples have been collected from individuals across teh United States that took part in the CDC's National Health and Nutrition Examination Survey (NHANES). The NHANES study is designed so that the sample measures of chemicals in participants can be representatives of exposures in the entire U.S. civilian population, and the data can be filtered to represent smaller demographic groups.";
 
 var details = {
-    "lead in blood": {
+    "Lead in Blood": {
         desc: "lead in blood, in micrograms of lead per liter of blood. ",
         lod: "The LOD (µg/dL) for Lead for the Survey years 1999-2000, 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010, 2011-2012, 2013-2014 and 2015-2016 are the following: 0.3, 0.3, 0.28, 0.25, 0.25, 0.25, 0.25, 0.07 and 0.07, respectively."
     },
-    "metals in urine":  {
+    "Metals in Urine":  {
         desc: "arsenic in urine, in micrograms of arsenic per gram of urine. ",
         lod: ""
     },
-    "Phthalate Metabolites in urine (creatinine corrected)": {
+    "Phthalate Metabolites in Urine (creatinine corrected)": {
         desc: "phthalate metabolites in urine, in micrograms of MBzP per gram of urine. ",
         lod: ""
     },
-    "Bisphenol and paraben in urine": {
+    "Bisphenol and Paraben in Urine": {
         desc: "bisphenol and paraben in urine, in micrograms of BPA per gram of urine. ",
         lod: ""
     },
-    "PFAS in blood": {
+    "PFAS in Blood": {
         desc: "PFAS in blood,  in micrograms of PFOS per liter of blood. ",
         lod: ""
     },
-    "Pesticides in urine": {
+    "Pesticides in Urine": {
         desc: "pesticides in urine, in micrograms of OPM per gram of urine. ",
         lod: ""
     }
