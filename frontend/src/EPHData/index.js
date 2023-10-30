@@ -6,7 +6,7 @@ import AsthmaChart from "../EPHCharts/asthma";
 import CancerChart from "../EPHCharts/cancer";
 import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
-import SimpleMap from "../EPHMapView/index"
+import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import PropTypes from "prop-types";
 import PFASWater from "../EPHMapView/pfas in water";
@@ -24,6 +24,8 @@ import HeartAttack from "../EPHMapView/HeartAttack";
 import LowBirthweight from "../EPHMapView/LowBirthweight";
 import Prematurity from "../EPHMapView/Prematurity";
 import ArsenicWater from "../EPHMapView/ArsenicWater";
+import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
+import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 
 const React = require("react");
 
@@ -99,9 +101,13 @@ const [state, dispatch] = useReducer(reducer, initialState);
           <ul>
             <li onClick={() => chooseTab("0")} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
             <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma in Adults</a></li> {/* 1 */}
+            <li onClick={() => chooseTab("22")} className={currentTab === "22" ? "active" : ""}><a href="#">Asthma in Children</a></li>
+            <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
             <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
-            <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood cancer</a></li> {/* 4 */}
+            <li onClick={() => chooseTab("23")} className={currentTab === "23" ? "active" : ""}><a href="#">Childhood Cancer Brain & Central Nervous System</a></li>
+            <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood cancer Leukemia</a></li> {/* 4 */}
+            <li onClick={() => chooseTab("21")} className={currentTab === "21" ? "active" : ""}><a href="#">DEPH in Water</a></li>
             <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility rate</a></li> {/* 5 */}
             <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart attack</a></li> {/* 6 */}
             <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant mortality</a></li> {/* 7 */}
@@ -117,8 +123,6 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("17")} className={currentTab === "17" ? "active" : ""}><a href="#">Radium in water</a></li> {/* 17 */}
             <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in water</a></li> {/* 18 */}
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
-            <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
-            <li onClick={() => chooseTab("21")} className={currentTab === "21" ? "active" : ""}><a href="#">DEPH in Water</a></li>
           </ul>
         </div>
       )}
@@ -131,7 +135,10 @@ const [state, dispatch] = useReducer(reducer, initialState);
       {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
       {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
       {/* state measures */}
-      {/*{currentTab === "1" && ( <SimpleMap map={state.map}/> )} */}
+      {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
+      {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
+      {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
+
 
       {/* county measures */}
       

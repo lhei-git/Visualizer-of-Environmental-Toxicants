@@ -37,7 +37,7 @@ function getColorScale(dataValue) {
 
 
 
-const SimpleMap = ({ map }) => {
+const ChildhoodBrain = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
@@ -49,7 +49,7 @@ const SimpleMap = ({ map }) => {
   const dataForEachYear = (year) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`, )
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/1/all/all/1/${year}/0/0`, )
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -74,7 +74,7 @@ const SimpleMap = ({ map }) => {
     <div className='mapView'>
      <div className='container'>
       {/*return data for asthma in children for the typed in location*/}
-      <h2>Asthma in Children in U.S.</h2>
+      <h2>Childhood Cancer Brain & Central Nervous System</h2>
       </div>
       <div className="dropdown">
         <label> Year: </label>
@@ -93,6 +93,17 @@ const SimpleMap = ({ map }) => {
           <option value="2013">2013</option>
           <option value="2012">2012</option>
           <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+          <option value="2007">2007</option>
+          <option value="2006">2006</option>
+          <option value="2005">2005</option>
+          <option value="2004">2004</option>
+          <option value="2003">2003</option>
+          <option value="2002">2002</option>
+          <option value="2001">2001</option>
+          
         </select>
       </div>
 
@@ -145,4 +156,4 @@ const SimpleMap = ({ map }) => {
 
 
 
-export default SimpleMap;
+export default ChildhoodBrain;
