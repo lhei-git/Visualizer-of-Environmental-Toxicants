@@ -144,6 +144,15 @@ const HospitalAsthma = ({ map }) => {
     <span>14+</span>
   </div>
 </div>
+
+<div className='mapDescription'>
+  <h2></h2>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+  The hospital data shown here are provided by state and/or local public health departments to the National Environmental Public Health Tracking Program. Data are based on the date of admission rather than the date of discharge.Hospital admission records are selected using primary diagnosis codes. These data represent number of admissions rather than number of individuals admitted to the hospital. For example, a person admitted twice in one year would count as two admissions.  </div>
+</div>
     {/*
           {selectedState && (
             <div className="tooltip">

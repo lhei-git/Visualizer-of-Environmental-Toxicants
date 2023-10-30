@@ -146,6 +146,11 @@ const UraniumWater = ({ map }) => {
     <span>1+</span>
   </div>
 </div>
+
+
+<div className='mapDescription'>
+The National Environmental Public Health Tracking Network (Tracking Network) brings together health data and environmental data from national, state, and city sources and provides supporting information to make the data easier to understand. The Tracking Network has data and information on environments and hazards, health effects, and population health.
+</div>
     
     {/*
           {selectedState && (

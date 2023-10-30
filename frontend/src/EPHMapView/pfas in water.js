@@ -84,7 +84,7 @@ const PFASWater = ({ map }) => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                data-tip={geo.properties.name}
+                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
                 style={{
                   default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                   hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -101,8 +101,8 @@ const PFASWater = ({ map }) => {
       </Geographies>
       </ZoomableGroup>
     </ComposableMap>
-    
-          <ReactTooltip />
+<ReactTooltip />
+
 <div className="legend">
   <h3>Percent Concentration</h3>
   <div className="legend-item">
@@ -124,6 +124,16 @@ const PFASWater = ({ map }) => {
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
     <span>14+</span>
+  </div>
+</div>
+
+<div className='mapDescription'>
+  <h2></h2>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+    The National Environmental Public Health Tracking Network (Tracking Network) brings together health data and environmental data from national, state, and city sources and provides supporting information to make the data easier to understand. The Tracking Network has data and information on environments and hazards, health effects, and population health.
   </div>
 </div>
     {/*

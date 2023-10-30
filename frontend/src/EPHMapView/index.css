@@ -65,6 +65,38 @@
   margin: 0;
 }
 
+.mapDescription {
+  position: relative;
+  margin-left: 0px;
+}
+
+.measureDescription {
+  /* Your styles for the description text */
+}
+
+.questionMark {
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; /* Position it below the question mark */
+  left: 0;
+  width: 500px; /* Set the tooltip width as needed */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  display: none; /* Initially hide the tooltip */
+}
+
+.questionMark:hover + .tooltip {
+  display: block; /* Show the tooltip when hovering over the question mark */
+  
+}
+
+
+
 
 
   

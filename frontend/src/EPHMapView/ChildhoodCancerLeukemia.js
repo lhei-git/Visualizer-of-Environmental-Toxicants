@@ -165,6 +165,16 @@ const ChildhoodLeukemia = ({ map }) => {
     <span>100+</span>
   </div>
 </div>
+
+<div className='mapDescription'>
+  <h2></h2>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+  U.S. Cancer Statistics data are provided by CDC's National Program of Cancer RegistriePs as submitted to CDC and NCI in the most recent data submission.
+  </div>
+</div>
 {/*
       {selectedState && (
         <div className="tooltip">
