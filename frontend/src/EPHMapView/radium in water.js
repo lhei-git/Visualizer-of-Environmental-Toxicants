@@ -123,6 +123,29 @@ const RadiumWater = ({ map }) => {
       </ZoomableGroup>
     </ComposableMap>
     <ReactTooltip />
+    <div className="legend">
+  <h3>Percent Concentration</h3>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+    <span>Null Data</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
+    <span>0-0.5</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
+    <span>0.5-2</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
+    <span>2-5</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
+    <span>5+</span>
+  </div>
+</div>
     {/*
           {selectedState && (
             <div className="tooltip">
