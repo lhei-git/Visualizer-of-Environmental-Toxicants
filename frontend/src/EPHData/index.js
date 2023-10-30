@@ -130,7 +130,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
       {containerColumnLeftClose && (
         <div className="container-column">
           
-          <h2>Health Indicators</h2>
+          <h2>Select a Health Issue</h2>
           <ul>
             <li onClick={() => chooseTab("0")} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
             <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma in Adults</a></li> {/* 1 */}
