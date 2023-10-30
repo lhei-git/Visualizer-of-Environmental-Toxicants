@@ -26,6 +26,7 @@ function EPHHome() {
   function chooseMeasure(i) {
     sessionStorage.setItem("currentTab", i);
     setCurrentTab(i);
+  }
 
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
