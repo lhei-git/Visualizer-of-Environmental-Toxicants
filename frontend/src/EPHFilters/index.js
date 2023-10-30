@@ -9,11 +9,11 @@ function filters(){
   return(
     <div className="filter-container">
       <div className="indicator-filter">
-      <select id="indicator">
-              <option value="emergency">Emergency Department Visits For Asthma</option>
-              <option value="hospitalizations">Hospitalizations for Asthma</option>
-              <option value="adult">Prevalence of Asthma among Adults</option>
-              <option value="children">Prevalence of Asthma among Children</option>
+        <select id="indicator">
+          <option value="emergency">Emergency Department Visits For Asthma</option>
+          <option value="hospitalizations">Hospitalizations for Asthma</option>
+          <option value="adult">Prevalence of Asthma among Adults</option>
+          <option value="children">Prevalence of Asthma among Children</option>
         </select>
       </div>
       <div className="measure-filter">
@@ -27,3 +27,5 @@ function filters(){
   )
 
 }
+
+export default filters();

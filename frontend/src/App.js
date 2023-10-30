@@ -91,9 +91,6 @@ const Navbar = (props) => {
     <div
       className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
     >
-      <div className="logo">
-        <Link to="/">VETHOS.</Link>
-      </div>
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
         <Link to="/">Search</Link>
@@ -102,27 +99,26 @@ const Navbar = (props) => {
        
         {props.visible && (
           <>
-            <li className={location.pathname === "/map" ? "active" : ""}>
-              <Link to="/map">Facility Map</Link>
+            <li className={location.pathname === "/graphs" ? "active" : ""}>
+              <Link to="/graphs">Toxic Releases</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
               <Link to="/ephdata">Health Outcomes</Link>
             </li>
-            <li className={location.pathname === "/graphs" ? "active" : ""}>
-              <Link to="/graphs">Location Insights</Link>
-            </li>
+            {/* Remove national insights page
             <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
               <Link to="/thematicmaps">National Insights</Link>
-            </li>
-            <li className={location.pathname === "/datacomp" ? "active" : ""}>
-              <Link to="/datacomp">Toxicant vs. Health Data Comparison</Link> {/*awkward wording*/}
-            </li>
+            </li>*/}
+            
           </>
         )}
                 <li className={location.pathname === "/about" ? "active" : ""}>
           <Link to="/about">About</Link>
         </li>
       </ul>
+      <div className="logo">
+        <Link to="/">VETHOS.</Link>
+      </div>
     </div>
   );
 };
@@ -136,10 +132,11 @@ Navbar.propTypes = {
 function Footer() {
   return (
     <div className="footer">
-      <div className="copyright">&#169; VET 2023</div>
+      <div className="copyright">&#169; VETHOS 2023</div>
     </div>
   );
 }
+
 
 const App = (props) => {
   /* Use reducer method to update state */
@@ -155,11 +152,14 @@ const App = (props) => {
  
   }
 
-
+  /* The geocoder has completed a successful search */
   function handleSuccess(map) {
+    /* Set app-wide location setting */
     dispatch(setMap(map));
+    /* Clear existing facility data */
     sessionStorage.removeItem("facilityData");
-    history.push("/map");
+    /* redirect to the /map page */
+    history.push("/graphs");
   }
 
   /*if no internet detected, display alert written by Al-Taimee*/
@@ -239,6 +239,7 @@ const App = (props) => {
             <Home onSuccess={handleSuccess} />
           </Route>
         </Switch>
+        <Footer></Footer>
       </div>
     </Router>
   );

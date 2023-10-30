@@ -11,6 +11,8 @@
   left: 50%;
   transform: translate(-50%, -10%);
   */
+  width: 600px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,10 +33,11 @@
     display: block;
   }
 
-.legend {
+.mapView .legend {
   position: absolute;
   bottom: 20px;
-  right: 20px;
+  left: 450px;
+  margin-bottom: 166px;
   background: white;
   border: 1px solid #ccc;
   padding: 10px;
