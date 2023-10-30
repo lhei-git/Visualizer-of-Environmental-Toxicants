@@ -1,3 +1,5 @@
+
+
 .eph-container .eph-dropdown{
     display: flex;
     margin: 6em 10em 1px 10em;
@@ -12,44 +14,31 @@
 }
 .eph-container .eph-header{
     margin: 1px 10em 1px 10em;
-    height: 30vh; /* Magic here */
+    height: 30vh; 
     display: flex;
     justify-content: center;
     align-items: center;   
 }
 .chart{
-    height: 40vh; /* Magic here */
+    height: 40vh; 
     display: flex;
     justify-content: center;
     align-items: center; 
     padding-bottom: 100px;   
 }
 h1{
-    height: 10vh; /* Magic here */
+    height: 10vh; 
     display: flex;
     justify-content: center;
     align-items: center;   
 }
-.chart{
-    /*height: 60vh; /* Magic here */
-    /*display: flex;
-    justify-content: center;
-    align-items: center; 
-    padding-bottom: 100px;*/   
 
-    height: 60vh; /* Adjust the height as needed */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 100px;
-    z-index: 0;
-}
 /*left column styles*/
 .health-outcomes-container {
     display: flex;
 }
 h2 {
-    padding-top: 30px;
+    padding-top: 100px;
 }
 .container-column {
     flex: 1;
@@ -64,6 +53,11 @@ h2 {
 ul {
     list-style: none;
     padding: 0;
+}
+li {
+  text-align: left;
+  text-indent: 1px;
+  padding-bottom: 10px;
 }
 a {
     text-decoration: none;
@@ -97,13 +91,14 @@ a:hover {
       width: auto;
       display: block;
     }
+    
   }
 
-@media (max-width: 2880px) {
-  .national-container {
-    width: 100%; 
-    max-width: 100%; 
-    position: static; 
+  @media (max-width: 2880px) {
+    .national-container {
+      width: 100%; 
+      max-width: 100%; 
+      position: static; 
+    }
   }
-}
   

@@ -21,6 +21,7 @@ const NationalData = ({measure, units, description}) => {
     useEffect(() => {
         chooseTab(1); //default50th percentile
       }, []); // empty dependency array so effect runs only once
+    
 
     return(
         <div className="national-container">

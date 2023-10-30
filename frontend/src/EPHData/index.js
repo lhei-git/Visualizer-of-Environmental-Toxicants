@@ -24,7 +24,11 @@ function EPHHome() {
   function chooseMeasure(i) {
     sessionStorage.setItem("currentTab", i);
     setCurrentTab(i);
+
+    
   }
+
+  
   /* Initial state of app */
 const initialState = {
   map: JSON.parse(sessionStorage.getItem("map")),
@@ -76,13 +80,11 @@ const [state, dispatch] = useReducer(reducer, initialState);
     <div className="health-outcomes-container">
       {containerColumnLeftClose && (
         <div className="container-column">
-          <button className="close-button-left" onClick={toggleLeftCloseButton}>
-              X
-          </button>
+          
           <h2>Health Indicators</h2>
           <ul>
             <li onClick={() => chooseMeasure("0")} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
-            <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma</a></li> {/* 1 */}
+            <li onClick={() => chooseMeasure("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma</a></li> {/* 1 */}
             <li onClick={() => chooseMeasure("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
             <li><a href="#">Cancer</a></li> {/* 3 */}
             <li><a href="#">Childhood cancer</a></li> {/* 4 */}
@@ -116,27 +118,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
       {currentTab === "1" && ( <SimpleMap map={state.map}/> )}
       {currentTab === "0" && (  <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"} description=""/> )}
 
-      {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"} description=""/> )}
-      {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"} description=""/> )}
-      {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} description=""/> )}
-      {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"} description=""/>)}
-      {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"} description=""/>)}
-      {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"} description=""/>)}
      
-    
-    {/* 
-    <div className="eph-container">
-      
-      <h1>Lead in Blood</h1>
-      <div className="chart">
-        <NationalTimeSeries size={{width:800, height:400}} measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/>
-      </div>
-      <h1>Metals in Urine</h1>
-      <div className="chart">
-        <NationalTimeSeries size={{width:800, height:400}} measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/>
-      </div>
-      
-    </div>*/}
   </div>
   
 
