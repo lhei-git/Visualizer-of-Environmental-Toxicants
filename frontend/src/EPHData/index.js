@@ -1,8 +1,6 @@
 import "./index.css";
 
 import NationalData from "./national";
-import AsthmaChart from "../EPHCharts/asthma";
-import CancerChart from "../EPHCharts/cancer";
 import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
@@ -28,7 +26,6 @@ function EPHHome() {
   function chooseMeasure(i) {
     sessionStorage.setItem("currentTab", i);
     setCurrentTab(i);
-  }
 
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
@@ -80,13 +77,11 @@ const [state, dispatch] = useReducer(reducer, initialState);
       <div className="health-outcomes-sidebar">
       {containerColumnLeftClose && (
         <div className="container-column">
-          <button className="close-button-left" onClick={toggleLeftCloseButton}>
-              X
-          </button>
+          
           <h2>Health Indicators</h2>
           <ul>
             <li onClick={() => chooseMeasure("0")} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
-            <li><a href="#">Asthma</a></li> {/* 1 */}
+            <li onClick={() => chooseMeasure("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma</a></li> {/* 1 */}
             <li onClick={() => chooseMeasure("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
             <li><a href="#">Cancer</a></li> {/* 3 */}
             <li><a href="#">Childhood cancer</a></li> {/* 4 */}
@@ -108,9 +103,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
           </ul>
         </div>
       )}
-      </div>
-
-      <div className="national-measures">
+      
       {/*national measures*/}
       {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
       {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
