@@ -20,11 +20,11 @@ const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 function getColorScale(dataValue) {
   return dataValue == null
     ? '#D6D6DA'
-    : dataValue < 9
+    : dataValue < 0.1
     ? '#bbe9fa'
-    : dataValue < 12
+    : dataValue < 0.30
     ? '#8bdefc'
-    : dataValue < 14
+    : dataValue < 1
     ? '#62cdf5'
     : '#1ab3eb';
 }
@@ -107,7 +107,7 @@ const PCEWater = ({ map }) => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                data-tip={geo.properties.name}
+                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
                 style={{
                   default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                   hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
