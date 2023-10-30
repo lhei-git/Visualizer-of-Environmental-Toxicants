@@ -26,7 +26,7 @@
     align-items: center; 
     padding-bottom: 100px;   
 }
-h1{
+.health-outcomes-container h1{
     height: 10vh; 
     display: flex;
     justify-content: center;
@@ -56,7 +56,7 @@ h1{
   align-items: flex-start;
 }
 
-h2 {
+.health-outcomes-container h2 {
     padding-top: 100px;
 }
 .container-column {
@@ -69,20 +69,20 @@ h2 {
 .container-column:first-child {
     flex: 0.5;
 }
-ul {
+.health-outcomes-container ul {
     list-style: none;
     padding: 0;
 }
-li {
+.health-outcomes-container li {
   text-align: left;
   text-indent: 1px;
   padding-bottom: 10px;
 }
-a {
+.health-outcomes-container a {
     text-decoration: none;
     color: #333;
 }
-a:hover {
+.health-outcomes-container a:hover {
     color: #007bff;
 }
 .close-button-left {
