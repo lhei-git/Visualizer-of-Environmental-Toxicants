@@ -82,11 +82,12 @@ const NationalData = ({measure, units}) => {
                 />
             )}
 
-            <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}{samples}</p>
+            <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
             <div className="about-data">
                 <h2>About the Data</h2>
                 <h3>Where is the data from?</h3>
                 <p>The data above is provided by the Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals. You can find the official updated tables for the report here: http://www.cdc.gov/exposurereport/</p>
+                <p>{samples}</p>
                 <p>Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on {formattedDate}.</p>
                 <h3>What group does the data represent?</h3>
                 <p>Data samples are population-weighted, representing the U.S. civilian non-institutionalized Census population. The purpose of weighting the samples is to create unbiased national estimates, meaning that the measures represent the entire U.S. population. </p>
@@ -106,7 +107,7 @@ NationalData.propTypes = {
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
 };
 
-var samples = "The data comes from the National Report on Human Exposure to Environmental Chemicals (details below). Biomonitoring is conducted via individual and pooled blood or urine samples tested by CDC scientists. Samples have been collected from individuals across teh United States that took part in the CDC's National Health and Nutrition Examination Survey (NHANES). The NHANES study is designed so that the sample measures of chemicals in participants can be representatives of exposures in the entire U.S. civilian population, and the data can be filtered to represent smaller demographic groups.";
+var samples = "Biomonitoring is conducted via individual and pooled blood or urine samples tested by CDC scientists. Samples have been collected from individuals across teh United States that took part in the CDC's National Health and Nutrition Examination Survey (NHANES). The NHANES study is designed so that the sample measures of chemicals in participants can be representatives of exposures in the entire U.S. civilian population, and the data can be filtered to represent smaller demographic groups.";
 
 var details = {
     "lead in blood": {
