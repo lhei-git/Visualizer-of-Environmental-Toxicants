@@ -1,0 +1,13 @@
+.mapView {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 80px;
+    min-height: 500px;
+  }
+  
+  .geography-attributes {
+    margin-bottom: 120px;
+    font-size: 18px;
+  }
+  

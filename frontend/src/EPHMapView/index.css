@@ -1,7 +1,8 @@
 
 .mapView {
-  width: 700px; /* Adjust the width as needed */
-  height: 300px; /* Adjust the height as needed */
+  /*
+  width: 600px; 
+  height: 300px; 
   position: relative;
   background: #fff;
   min-height: 100vh;
@@ -9,13 +10,21 @@
   margin-top: 200px;
   left: 50%;
   transform: translate(-50%, -10%);
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  margin-left: 200px;
 }
 
-h1 {
-  position: relative;
-  text-align: center;
 
+
+h2 {
+  margin-bottom: 20px; 
 }
+
 
  
   .graph-container .filter-container .control-container {
