@@ -11,6 +11,7 @@
   left: 50%;
   transform: translate(-50%, -10%);
   */
+  
   width: 600px;
   height: 500px;
   display: flex;
@@ -35,8 +36,8 @@
 
 .mapView .legend {
   position: absolute;
-  bottom: 20px;
-  left: 450px;
+  bottom: 100px;
+  left: 1150px;
   margin-bottom: 166px;
   background: white;
   border: 1px solid #ccc;
@@ -70,7 +71,9 @@
 
 .mapDescription {
   position: relative;
-  margin-left: 0px;
+  margin-right: 750px;
+  top: -50px;
+
 }
 
 .measureDescription {
@@ -83,18 +86,18 @@
 
 .tooltip {
   position: absolute;
-  top: 100%; /* Position it below the question mark */
+  top: 100%; 
   left: 0;
-  width: 500px; /* Set the tooltip width as needed */
+  width: 700px; 
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  display: none; /* Initially hide the tooltip */
+  /*display: none; */
 }
 
 .questionMark:hover + .tooltip {
-  display: block; /* Show the tooltip when hovering over the question mark */
+  display: block; 
   
 }
 
