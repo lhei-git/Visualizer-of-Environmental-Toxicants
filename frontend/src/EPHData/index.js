@@ -24,6 +24,7 @@ import ArsenicWater from "../EPHMapView/ArsenicWater";
 import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
 import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 
+
 const React = require("react");
 
 
@@ -38,6 +39,81 @@ function EPHHome(map) {
   const [currentTab, setCurrentTab] = React.useState(
     /* stores which tab user was last on*/
     parseInt(sessionStorage.getItem("currentTab")) || "0"
+  );
+
+
+  // Initial State to hold the search bar input created by Al-Taimee
+  const [searchBarInput, setSearchBarInput] = useState("");
+  
+
+  // Function to handle the search bar input changes created by Al-Taimee
+  const handleSearchBar = (e) => {
+    setSearchBarInput(e.target.value);
+  };
+
+  // Test list to be removed to create dynamic list items created by Al-Taimee
+  const listItems = [
+    "Arsenic in water",
+    "Asthma in Adults",
+    "Asthma in Children",
+    "Asthma Hospitalizations",
+    "Bisphenol and paraben in urine",
+    "Prevalence of Cancer",
+    "Childhood Cancer Brain & Central Nervous System",
+    "Childhood cancer Leukemia",
+    "DEPH in Water",
+    "Fertility rate",
+    "Heart attack",
+    "Infant mortality",
+    "Lead in blood",
+    "Low birthweight",
+    "Metals in urine",
+    "PCE in water",
+    "Pesticides in urine",
+    "PFAS in blood",
+    "PFAS in water",
+    "Phthalates in urine",
+    "Premature birth",
+    "Radium in water",
+    "TCE in water",
+    "Uranium in water",
+  ];
+
+  // Function to filter the search list items based on the search input bar value created by Al-Taimee
+  const filterSearch = (
+    <ul>
+      {listItems
+        .filter((item, index) =>
+          item.toLowerCase().includes(searchBarInput.toLowerCase())
+        )
+        .map((item, index) => (
+          <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}>
+            <a href="#">{item}</a>
+          </li>
+        ))}
+
+      {listItems
+        .filter((item, index) =>
+          item.toLowerCase().includes(searchBarInput.toLowerCase())
+        )
+        .map((item, index) => (
+          <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}>
+            <a href="#">{item}</a>
+          </li>
+        ))}
+
+      {listItems
+        .filter((item, index) =>
+          item.toLowerCase().includes(searchBarInput.toLowerCase())
+        )
+        .map((item, index) => (
+          <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}>
+            <a href="#">{item}</a>
+          </li>
+        ))}
+
+
+    </ul>
   );
 
  
@@ -126,17 +202,22 @@ const [state, dispatch] = useReducer(reducer, initialState);
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
       </div>
+      <div className="health-outcomes-container">
       <div className="health-outcomes-sidebar">
-      {containerColumnLeftClose && (
         <div className="container-column">
-          
-          <h2>Select a Health Issue</h2>
+          {/*Updated sidebar title created by Al-Taimee*/}
+          <h2>Health Issues and Toxic Exposure</h2>
+          {/*Search bar input field behavior created by Al-Taimee*/}
+          <input type="text" placeholder="Search Health Issues" value={searchBarInput} onChange={handleSearchBar}></input>{filterSearch}
           <ul>
             <li onClick={() => chooseTab("0")} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
+            {/*List headings created by Al-Taimee*/}
+            <li className="boldHeadings">Asthma</li>
             <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma in Adults</a></li> {/* 1 */}
             <li onClick={() => chooseTab("22")} className={currentTab === "22" ? "active" : ""}><a href="#">Asthma in Children</a></li>
             <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
+            <li className="boldHeadings">Cancer</li>
             <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
             <li onClick={() => chooseTab("23")} className={currentTab === "23" ? "active" : ""}><a href="#">Childhood Cancer Brain & Central Nervous System</a></li>
             <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood cancer Leukemia</a></li> {/* 4 */}
@@ -158,8 +239,9 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
           </ul>
         </div>
-      )}
-            </div>
+      </div>
+      </div>
+      
       {/*
       {currentTab === "19" && ( 
         map && (
