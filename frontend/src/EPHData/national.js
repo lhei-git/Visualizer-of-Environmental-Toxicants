@@ -83,8 +83,7 @@ const NationalData = ({measure, units}) => {
             )}
             </div>
 
-            <div className="desc">
-            <p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc} The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
+            <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
             <div className="about-data">
                 <h2>About the Data</h2>
                 <h3>Where is the data from?</h3>

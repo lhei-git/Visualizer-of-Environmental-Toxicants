@@ -99,7 +99,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
           
           <h2>Health Indicators</h2>
           <ul>
-            <li onClick={() => chooseTab("0")} className={currentTab === 0 ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
+            <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
             <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma in Adults</a></li> {/* 1 */}
             <li onClick={() => chooseTab("22")} className={currentTab === "22" ? "active" : ""}><a href="#">Asthma in Children</a></li>
             <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
