@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
-import "/index.css";
+import "./index.css";
 
 /* NOTES:
 indicator for all ntnl measures: National report on human exposure to environmental chemicals
