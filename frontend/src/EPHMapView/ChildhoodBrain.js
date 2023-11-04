@@ -25,11 +25,11 @@ const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 function getColorScale(dataValue) {
   return dataValue == null
     ? '#D6D6DA'
-    : dataValue < 9
+    : dataValue < 20
     ? '#bbe9fa'
-    : dataValue < 12
+    : dataValue < 50
     ? '#8bdefc'
-    : dataValue < 14
+    : dataValue < 100
     ? '#62cdf5'
     : '#1ab3eb';
 }
@@ -37,7 +37,7 @@ function getColorScale(dataValue) {
 
 
 
-const SimpleMap = ({ map }) => {
+const ChildhoodBrain = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
@@ -49,7 +49,7 @@ const SimpleMap = ({ map }) => {
   const dataForEachYear = (year) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`, )
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/1/all/all/1/${year}/0/0`, )
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -74,7 +74,7 @@ const SimpleMap = ({ map }) => {
     <div className='mapView'>
      <div className='container'>
       {/*return data for asthma in children for the typed in location*/}
-      <h2>Asthma in Children in U.S.</h2>
+      <h2>Childhood Cancer Brain & Central Nervous System</h2>
       </div>
       <div className="dropdown">
         <label> Year: </label>
@@ -83,7 +83,7 @@ const SimpleMap = ({ map }) => {
           onChange={(e) => dataForEachYear(e.target.value)}
         >
           <option value=""> Select Year </option>
-          <option value="2020">2020</option>
+          <option value="2019">2020</option>
           <option value="2019">2019</option>
           <option value="2018">2018</option>
           <option value="2017">2017</option>
@@ -93,6 +93,17 @@ const SimpleMap = ({ map }) => {
           <option value="2013">2013</option>
           <option value="2012">2012</option>
           <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+          <option value="2007">2007</option>
+          <option value="2006">2006</option>
+          <option value="2005">2005</option>
+          <option value="2004">2004</option>
+          <option value="2003">2003</option>
+          <option value="2002">2002</option>
+          <option value="2001">2001</option>
+          
         </select>
       </div>
 
@@ -139,22 +150,21 @@ const SimpleMap = ({ map }) => {
   </div>
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-9</span>
+    <span>0-20</span>
   </div>
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>9-12</span>
+    <span>20-50</span>
   </div>
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>12-14</span>
+    <span>50-100</span>
   </div>
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>14+</span>
+    <span>100+</span>
   </div>
 </div>
-
 {/*
       {selectedState && (
         <div className="tooltip">
@@ -169,4 +179,4 @@ const SimpleMap = ({ map }) => {
 
 
 
-export default SimpleMap;
+export default ChildhoodBrain;

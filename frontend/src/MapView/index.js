@@ -5,11 +5,12 @@ import GraphSummary from "../GraphView/Summary";
 import PubchemView from "../Pubchem";
 import FilterView from "../Filters";
 import MapLegend from "../MapLegend";
+import Hazards from "../Pubchem/hazardsonly";
 import ThematicStateMap from "../ThematicStateMap/index.js";
 import { formatChemical, formatAmount } from "../helpers";
 import vetapi from "../api/vetapi";
 import "./index.css";
-import React from "react";
+import React, { useState } from 'react';
 import PropTypes from "prop-types";
 
 const initialState = {
@@ -66,8 +67,23 @@ const getChemicals = async (facilityId, filters) => {
   return chemicals;
 };
 
+{/* Amrita - Function that shows the pop-up window when user hovers over a toxicant on the list */}
+{/* It checks to see if it's hovered over a chemical, and then returns the pictograms */}
+function ChemicalPopup ({ isVisible, hazards }) {
+  if (!isVisible) return null;
+  if (!hazards) return null;
+
+  return (
+    <div className="chemical-popup">
+        <p>{hazards}</p>
+    </div>
+  );
+};
+
 /* Component for a facility's list of chemicals, shows when facility is clicked */
 function ChemicalList({ chemicals, onClick }) {
+  const [hoveredChemical, setHoveredChemical] = useState(null);
+
   if (chemicals.length === 0) return <div></div>;
 
   /* Format each chemical into a split row using name and release amount */
@@ -78,6 +94,12 @@ function ChemicalList({ chemicals, onClick }) {
       c.name = formatChemical(c.name);
       return (
         <li
+          onMouseEnter={() => { // Amrita - When mouse hovers over chemical, its name goes into setHoveredChemical
+            setHoveredChemical(c.name); // Set the currently hovered chemical
+          }}
+          onMouseLeave={() => {
+            setHoveredChemical(null); // Amrita - When mouse stops hovering over a chemical, setHoveredChemical is null 
+          }}
           onClick={() => {
             onClick(c.name);
           }}
@@ -88,6 +110,8 @@ function ChemicalList({ chemicals, onClick }) {
           </div>
           <span className="align-right">{formatAmount(c.total)} lbs</span>
           <div style={{ clear: "both" }}></div>
+          {/* Amrita - Calls ChemicalPopup function to display pop-up for each toxicant hovered over */}
+          <ChemicalPopup isVisible={hoveredChemical === c.name} hazards={<Hazards chemName={c.name}></Hazards>}/>
         </li>
       );
     });
@@ -112,14 +136,6 @@ function MapView({ map, filters, onFilterChange }) {
 
   return (
     <div className="map-view">
-      <div className="filters">
-        {/* Filter component */}
-        <FilterView
-          map={map}
-          filters={filters}
-          onFilterChange={onFilterChange}
-        ></FilterView>
-      </div>
       <div className="flex-container top">
         {/* Only show pubchem sidebar if facility has been clicked */}
         {state.chemicals.length !== 0 && (

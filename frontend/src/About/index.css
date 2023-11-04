@@ -1,15 +1,17 @@
 .about-container {
-  width: 100vw;
+  width: 120vw;
   max-width: 100%;
-  height: 100vh;
+  height: 170vh;  /* Amrita - Enlarges content box */
   max-height: 100%;
 }
 
 .about-container .background {
   z-index: 2;
+  position: fixed;
+  width: 100%;
   height: 100%;
   opacity: 1;
-  overflow: hidden;
+  overflow: auto; /* Amrita - Changed this because if user scrolls while window is minimized, it had white-space when user maximizes again */
   background-image: url("../../src/assets/oil.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -26,21 +28,24 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
+/*Responsive styles added by Al-Taimee */
 .about-container .content {
   /* overflow-y: scroll; */
-  max-height: 100%;
+  max-height: 73%;
   width: 100%;
   color: #3f3844;
-  font-size: 24px;
+  font-size: 22px;
   z-index: 3;
   position: absolute;
-  top: 150px;
-  width: 70%;
-  padding: 40px;
+  top: 0;
   left: 50%;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   transform: translateX(-50%);
+  overflow-y: auto;
+  box-sizing: border-box;
   border-radius: 4px;
+  overflow-y: auto;
 }
 
 .about-container a {
@@ -51,6 +56,17 @@
 /* .about-container .content > div {
   margin: 20px 0;
 } */
+
+/* Responsive Style written by Al-Taimee*/
+@media (min-width: 469px) {
+  .about-container .content {
+    width: 70%;
+    top: 150px;
+    padding: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 
 .about-container .credits {
   /* position: relative;

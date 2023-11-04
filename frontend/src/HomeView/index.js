@@ -58,9 +58,9 @@ function Home(props) {
 
   /* start geocoding process when location is selected or user hits enter (topmost location used) */
   function handleSelect(location, placeId, suggestion) {
-    /* Redirects website to "National Insights" page if the user types in "United States" */
+    /* Amrita - Error to prevent website from crashing if user types in United States */
     if (location === "United States"){
-      window.alert("Please select a specific city, county, or state.");
+      setErrorMessage(" Please select a specific city, county, or state.")
     }
     else {
     geocodeLocation(suggestion ? suggestion.description : location)
@@ -79,7 +79,7 @@ function Home(props) {
   /* handle problems on google's side */
   function handleError(status, clearSuggestions) {
     console.log("Error from Google Maps API", status); // eslint-disable-line no-console
-    if (status === "ZERO_RESULTS") setErrorMessage("No results found");
+    if (status === "ZERO_RESULTS") setErrorMessage(" No results found");
     clearSuggestions();
   }
 
@@ -91,12 +91,14 @@ function Home(props) {
         <div className="overlay"></div>
       </div>
       <div className="content-group">
-        <div className="header">Visualizer of Environmental Toxicants</div>
+        <div className="header">Visualizer of Environmental Toxicants and Health Outcomes</div>
         <div className="caption">
           Please select a location to see U.S. facilities emitting toxic chemicals into
           the air, land and water; statistics and trends on releases of
           toxicants into the environment; as well as detailed information on
-          potential health hazards from these toxic chemicals.
+          potential health hazards from these toxic chemicals. You will also be able to 
+          view information on public health measures concerning the people in the specified 
+          location.
         </div>
         
         
@@ -132,7 +134,8 @@ function Home(props) {
                         className="clear-button"
                         onClick={handleCloseClick}
                       >
-                        x
+                        {/* Amrita- Changed the clearing search button from the letter x to a symbol for a neater look */}
+                        <div className="clear-message"><span className="clear-icon">&#10005;</span></div>
                       </button>
                     )}
                   </div>
@@ -167,7 +170,9 @@ function Home(props) {
             }}
           </PlacesAutocomplete>
           {errorMessage.length > 0 && (
-            <div className="error-message">{errorMessage}</div>
+            /* Amrita - Need span part to read the error icon */
+            <div className="error-message"><span className="error-icon">&#9888;</span>
+            {errorMessage}</div>
           )}
         </div>
       </div>

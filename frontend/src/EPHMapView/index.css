@@ -1,7 +1,8 @@
 
 .mapView {
-  width: 900px; /* Adjust the width as needed */
-  height: 300px; /* Adjust the height as needed */
+  /*
+  width: 600px; 
+  height: 300px; 
   position: relative;
   background: #fff;
   min-height: 100vh;
@@ -9,6 +10,21 @@
   margin-top: 200px;
   left: 50%;
   transform: translate(-50%, -10%);
+  */
+  width: 600px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  margin-left: 200px;
+}
+
+
+
+.mapView h2 {
+  margin-bottom: 20px; 
 }
 
 
@@ -16,6 +32,45 @@
   .graph-container .filter-container .control-container {
     display: block;
   }
+
+.mapView .legend {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  margin-bottom: 166px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.legend h3 {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.legend-item span {
+  margin: 0;
+}
+
+
+
+  
 /*
 .tooltip {
   position: absolute;

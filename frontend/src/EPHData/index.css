@@ -1,3 +1,11 @@
+/* Amrita - Added to fix spacing between sidebar and EPH content */
+.eph-national-container {
+  width: 80%;
+  float: right;
+  padding: 20px;
+  margin-left: 100px;
+}
+
 .eph-container .eph-dropdown{
     display: flex;
     margin: 6em 10em 1px 10em;
@@ -12,29 +20,102 @@
 }
 .eph-container .eph-header{
     margin: 1px 10em 1px 10em;
-    height: 30vh; /* Magic here */
+    height: 30vh; 
     display: flex;
     justify-content: center;
     align-items: center;   
 }
 .chart{
-    height: 40vh; /* Magic here */
+    height: 40vh; 
     display: flex;
     justify-content: center;
     align-items: center; 
+    margin-right: 200px;
     padding-bottom: 100px;   
 }
-.lead-header{
-    height: 10vh; /* Magic here */
+.health-outcomes-container h1{
+    height: 10vh; 
     display: flex;
     justify-content: center;
     align-items: center;   
-}
-.chart{
-    height: 60vh; /* Magic here */
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    padding-bottom: 100px;   
 }
 
+.chart{
+    height: 60vh; /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+    z-index: 0;
+}
+/*left column styles*/
+.health-outcomes-container h2 {
+  padding-top: 50px;
+  
+}
+.health-outcomes-container li {
+  padding-top: 2px;
+}
+
+.health-outcomes-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 1em;
+}
+
+
+.container-column {
+    flex: 1;
+    padding: 20px 10px;
+    padding-right: 50px;
+    min-width: 200px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background-color: #E6E6FA;
+}
+.container-column:first-child {
+    flex: 0.5;
+}
+.health-outcomes-container ul {
+    list-style: none;
+    padding: 0;
+}
+.health-outcomes-container li {
+  text-align: left;
+  text-indent: 1px;
+  padding-bottom: 10px;
+}
+.health-outcomes-container a {
+    text-decoration: none;
+    color: #333;
+}
+.health-outcomes-container a:hover {
+    color: #007bff;
+}
+/* Amrita - Added so the current tab in the sidebar is bold */
+.health-outcomes-container li.active {
+  font-weight: bold;
+}
+.close-button-left {
+    color: darkblue;
+    border: none;
+    padding-top: 100px;
+    font-size: 20px;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+  }
+.close-button:hover {
+  background: #ff3333;
+}
+  
+
+.timeseries {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
