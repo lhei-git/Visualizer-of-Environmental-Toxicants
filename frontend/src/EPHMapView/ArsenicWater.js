@@ -1,3 +1,6 @@
+//==========================================
+// Author: Farzana Israt
+//==========================================
 import React from 'react';
 import {
     ComposableMap,
@@ -50,6 +53,7 @@ const ArsenicWater = ({ map }) => {
 
       return (
         <div className='mapView'>
+          
          <div className='container'>
           {/*return data for asthma in children for the typed in location*/}
           <h2>Arsenic in Community Water near {" "} {getLocationString(map, true)}</h2>
@@ -123,6 +127,8 @@ const ArsenicWater = ({ map }) => {
       </ZoomableGroup>
     </ComposableMap>
     <ReactTooltip />
+
+   
     <div className="legend">
   <h3>Percent Concentration</h3>
   <div className="legend-item">
@@ -154,6 +160,7 @@ const ArsenicWater = ({ map }) => {
   <div className='tooltip'>
   Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water.  </div>
 </div>
+
     {/*
           {selectedState && (
             <div className="tooltip">
@@ -162,6 +169,7 @@ const ArsenicWater = ({ map }) => {
           )}
           */}
         </div>
+        
       );
     }
     export default ArsenicWater;

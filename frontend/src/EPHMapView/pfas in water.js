@@ -1,3 +1,6 @@
+//==========================================
+// Author: Farzana Israt
+//==========================================
 import React from 'react';
 import {
     ComposableMap,

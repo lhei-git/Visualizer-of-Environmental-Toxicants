@@ -140,7 +140,6 @@ const SimpleMap = ({ map }) => {
 </div>
 
 <div className='mapDescription'>
-  <h2></h2>
   <div className='measureDescription'>
   </div>
   <span className='questionMark'>ⓘ</span>

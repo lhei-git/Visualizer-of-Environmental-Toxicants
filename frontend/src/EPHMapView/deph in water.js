@@ -1,4 +1,8 @@
-import React from 'react';
+
+//==========================================
+// Author: Farzana Israt
+//==========================================
+/*import React from 'react';
 import {
     ComposableMap,
     Geographies,
@@ -51,7 +55,8 @@ const DEPHWater = ({ map }) => {
       return (
         <div className='mapView'>
          <div className='container'>
-          {/*return data for asthma in children for the typed in location*/}
+          {/*return data for asthma in children for the typed in location*/
+          {/*}
           <h2>DEPH in Community Water Systems near {" "} {getLocationString(map, true)}</h2>
           </div>
           <div className="dropdown">
@@ -94,6 +99,7 @@ const DEPHWater = ({ map }) => {
         scale: 1000
       }}
     >
+    
 
       <ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={3}>
       <Geographies geography={GEOJSON_URL}>
@@ -163,7 +169,9 @@ const DEPHWater = ({ map }) => {
             </div>
           )}
           */}
+          {/*}
         </div>
       );
     }
     export default DEPHWater;
+  */}
