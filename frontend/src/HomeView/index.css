@@ -68,7 +68,7 @@
 .home-container .search-bar-container {
   width: 90%;
   max-width: 700px;
-  margin: 50px auto 0 20px; /* Amrita - Edited to make more centered */
+  margin: 50px auto 0;
 }
 
 .home-container .search-input-container {

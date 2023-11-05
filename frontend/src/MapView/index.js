@@ -200,11 +200,9 @@ function MapView({ map, filters, onFilterChange }) {
         </div>
       </div>
       {/* Summary table and state thematic map. Only show if a search has been completed */}
+      {/* Amrita - Switched order so thematic map appears on left side and table on the right */}
       {map && (
         <div className="summary-container">
-          <div>
-            <GraphSummary map={map} filters={filters}></GraphSummary>
-          </div>
           {!["US", "DC"].includes(map.state) && (
             <div>
               <ThematicStateMap
@@ -214,6 +212,9 @@ function MapView({ map, filters, onFilterChange }) {
               ></ThematicStateMap>
             </div>
           )}
+          <div>
+            <GraphSummary map={map} filters={filters}></GraphSummary>
+          </div>
         </div>
       )}
     </div>
