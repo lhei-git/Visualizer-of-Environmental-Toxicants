@@ -1,9 +1,13 @@
-import React from 'react';
-import { BoxPlot, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import React from 'react'
+import PropTypes from 'prop-types';
+import { useEffect, useState } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
+import axios from 'axios';
+import "./index.css";
 
 //written by Katherine O'Donnell
 
-const CountyTimeSeries = ({size, measure, measureID, units, percentile, demographic}) => {
+const CountyTimeSeries = ({size, measure, measureID, units, percentile, demographic, countyID}) => {
     const [data, setData] = useState([]);
     const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=${demographic}&PercentileId=${percentile}`;
     ;    //api endpoint selected based on measure
@@ -43,6 +47,7 @@ const CountyTimeSeries = ({size, measure, measureID, units, percentile, demograp
       percentile: PropTypes.number.isRequired,         //1=50th, 2=95th
       demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
       measureID: PropTypes.number.isRequired,           //selected measure id to pass to api endpoint 
+      countyID: PropTypes.number.isRequired,           //searched county id to pass to api endpoint 
     };
   
     function TimeSeries({ data, size, units }) {
