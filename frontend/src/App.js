@@ -119,6 +119,7 @@ const Navbar = (props) => {
       <div className="logo">
         <Link to="/">VETHOS.</Link>
       </div>
+      
     </div>
   );
 };
@@ -136,6 +137,16 @@ function Footer() {
     </div>
   );
 }
+
+// Scroll to the bottom of the page
+const scrollToBottom = () => {
+  window.scrollTo(0, document.body.scrollHeight);
+};
+
+// Scroll to the top of the page
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
 
 
 const App = (props) => {
@@ -169,6 +180,11 @@ const App = (props) => {
         setTimeout(5000)
       }
 
+      
+
+      
+
+
   /*function scrollBtnUp() {
     return {
       <div className="scollUp">
@@ -178,18 +194,29 @@ const App = (props) => {
       </div>
     };
   }*/
-
+  
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
     <Router history={history}>
       <Navbar visible={!!state.map} />
+
       {state.errorMessage !== "" && (
         <div className="error" onClick={() => dispatch(setErrorMessage(""))}>
           {state.errorMessage}
           <div>x</div>
         </div>
       )}
+      
       <div className="app-container">
+      {/*Buttons to scroll up and down on page*/}
+      <div className="scroll-btn-container">
+      <button className="scroll-btn" onClick={scrollToBottom}>
+        Scroll to Bottom
+      </button>
+      <button className="scroll-btn" onClick={scrollToTop}>
+        Scroll to Top
+      </button>
+      </div>
         <Switch>
           <Route exact path="/map">
             {/* Map, summary, and state thematic map */}
