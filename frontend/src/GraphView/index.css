@@ -4,7 +4,6 @@
 
 .graph-header {
   text-align: center;
-  width: 80%;
   margin-bottom: 30px;
 }
 
@@ -76,7 +75,6 @@
   position: relative;
   justify-content: center;
   /* padding-top: 75px; */
-  margin-top: 2em; /* Amrita - Add spacing on top of summary table */
   padding-bottom: 40px;
   width: 100%;
   border-radius: 25px;
@@ -156,7 +154,7 @@
 
 /* Amrita - Adjusted so table properly fits in with layout and has enough space around it */
 .summary table {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   margin-bottom: 5em;
