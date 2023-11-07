@@ -28,7 +28,7 @@ const React = require("react");
 
 
 
-function EPHHome(map) {
+function EPHHome({ map }) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
@@ -90,6 +90,7 @@ const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const [state, dispatch] = useReducer(reducer, initialState);
+const [visible, setVisible] = useState(false);
 
   return (
     <div className="health-outcomes-container">
@@ -119,7 +120,15 @@ const [state, dispatch] = useReducer(reducer, initialState);
         {currentTab === "18" && ( <TCEWater map={state.map}/> )}
         {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
         {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
-        {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
+        {!["US", "DC"].includes(map.state) && (
+        <div>
+        {currentTab === "21" && ( 
+        <EPHThematicStateMap 
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        </div>
+        )}
 
         {/* state measures */}
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
@@ -129,7 +138,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
       <div className="health-outcomes-sidebar">
       {containerColumnLeftClose && (
         <div className="container-column">
-          
+         
           <h2>Select a Health Issue</h2>
           <ul>
             <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
@@ -157,6 +166,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in water</a></li> {/* 18 */}
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
           </ul>
+          
         </div>
       )}
             </div>

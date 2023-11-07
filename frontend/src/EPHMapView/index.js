@@ -8,19 +8,12 @@ import {
   ComposableMap,
   Geographies,
   Geography,
-  ZoomableGroup
 } from 'react-simple-maps';
-import { getLocationString } from '../helpers';
 import "./index.css"
 import ReactTooltip from 'react-tooltip';
 
 
-
-
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
-
-
-
 
 function getColorScale(dataValue) {
   return dataValue == null
@@ -34,17 +27,11 @@ function getColorScale(dataValue) {
     : '#1ab3eb';
 }
 
-
-
-
 const SimpleMap = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  //const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
-
-
-
+  
   // Fetch data for each year
   const dataForEachYear = (year) => {
     setSelectedYear(year);
@@ -59,15 +46,11 @@ const SimpleMap = ({ map }) => {
   };
 
 
-
-
   useEffect(() => {
     if (selectedYear) {
       dataForEachYear(selectedYear);
     }
   }, [selectedYear]);
-
-
 
 
   return (
@@ -130,6 +113,7 @@ const SimpleMap = ({ map }) => {
   </Geographies>
 </ComposableMap>
 
+
       <ReactTooltip />
   <div className="legend">
   <h3>Percent Concentration</h3>
@@ -154,6 +138,16 @@ const SimpleMap = ({ map }) => {
     <span>14+</span>
   </div>
 </div>
+
+<div className='mapDescription'>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+  Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.
+  </div>
+</div>
+
 
 {/*
       {selectedState && (

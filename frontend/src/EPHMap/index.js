@@ -9,12 +9,8 @@ import {
 } from 'react-simple-maps'
 import ReactTooltip from 'react-tooltip';
 
-const EPHReusableMap = (props) => {
+const EPHMap = (props) => {
     const [position, setPosition] = useState({coordinates: [-96, 38], zoom: 1});
-
-
-    
-
 
     function textColorScale(color) {
         var r = parseInt(color.toString().substr(1, 2), 16);
@@ -317,4 +313,4 @@ else if(props.mapType === "counties")
 
 };
 
-export default EPHReusableMap;
+export default EPHMap;
