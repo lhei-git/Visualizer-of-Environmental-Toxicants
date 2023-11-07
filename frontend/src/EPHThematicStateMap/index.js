@@ -16,7 +16,7 @@ class EPHThematicStateMap extends Component {
     this.state = {
       /*update to latest year*/
       latestYear: 2022,
-      contentCounty: "",
+      //contentCounty: "",
       geoUrl: "",
       stateName: "",
       prevStateName: "",
@@ -35,25 +35,42 @@ class EPHThematicStateMap extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.stateName && this.state.prevStateName !== this.props.stateName) {
+    if (prevProps.filter !== this.props.filter) {
+      this.setState(
+        {
+          countyData: null,
+        },
+        () => {
+          this.getCountyData();
+        }
+      );
+    }
+    //sets scaling and positioning for the map projection
+    if (this.state.prevStateName !== this.props.stateName) {
       this.setState({ prevStateName: this.props.stateName });
+      console.log("this.props.stateName:", this.props.stateName);
       const found = data.find((e) => e.state === this.props.stateName);
+      console.log("Found:", found);
   
-      if (found) {
+      
+      if(found) {
         this.setState({
           lat: found.latitude,
           lon: found.longitude,
           scale: found.scale,
           geoUrl: found.geoUrl,
           stateLongName: found.name,
+
+        
         });
-      } else {
+      }
+    else {
         this.setState({
           lat: 45.3504,
           lon: -85.5603,
           scale: 3400,
           geoUrl: "https://raw.githubusercontent.com/missisrat/topology/main/MI.json",
-          stateLongName: "Michigan"
+          
         })
       }
     }
@@ -76,7 +93,7 @@ class EPHThematicStateMap extends Component {
     return (
       <div className="thematic-view-container">
         <div className="flex-item">
-          {this.state.countyData && (
+          {this.state.countyData ? (
             
               <EPHMap
                 data={this.state.countyData}
@@ -87,7 +104,9 @@ class EPHThematicStateMap extends Component {
                 scale={this.state.scale}
                />
             
-          ) 
+          ) : (
+            <LoadSpinner />
+          )
           }
         </div>
       </div>
