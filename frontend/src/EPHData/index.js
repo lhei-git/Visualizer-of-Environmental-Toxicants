@@ -93,11 +93,44 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="health-outcomes-container">
+      {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
+      <div className="eph-national-container">
+        {/*national measures*/}
+        {currentTab === "8" && ( <NationalData measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}/> )}
+        {currentTab === "10" && ( <NationalData measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"}/> )}
+        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
+        {currentTab === "2" && (<NationalData measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"}/>)}
+        {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"}/>)}
+        {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"}/>)}
+        
+        {/* county measures */}
+        
+        {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
+        {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
+        {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
+        {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
+        {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
+        {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
+        {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
+        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
+        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
+        {currentTab === "16" && ( <Prematurity map={state.map}/> )}
+        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
+        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
+        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
+        {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
+        {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
+
+        {/* state measures */}
+        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
+        {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
+        {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
+      </div>
       <div className="health-outcomes-sidebar">
       {containerColumnLeftClose && (
         <div className="container-column">
           
-          <h2>Health Indicators</h2>
+          <h2>Select a Health Issue</h2>
           <ul>
             <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
             <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma in Adults</a></li> {/* 1 */}
@@ -124,56 +157,25 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in water</a></li> {/* 18 */}
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
           </ul>
-       
-          </div>
-        )}
-       
-        {/*national measures*/}
-        {currentTab === "8" && ( <NationalData measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"} description={"lead in blood data blsh blah"}/> )}
-        {currentTab === "10" && ( <NationalData measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"}/> )}
-        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
-        {currentTab === "2" && (<NationalData measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"}/>)}
-        {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"}/>)}
-        {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"}/>)}
-        {/* state measures */}
-        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
-        {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
-        {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
-      {/* county measures */}
-      {/* county measures */}
+        </div>
+      )}
+            </div>
+      {/*
+      {currentTab === "19" && ( 
+        map && (
+          !["US", "DC"].includes(map.state) && (
+      <EPHThematicStateMap 
+        stateName={map.state}
+        ></EPHThematicStateMap> )))}
+          */}
+        
       
-        {/* county measures */}
-      
-        {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
-        {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
-        {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
-        {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
-        {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
-        {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
-        {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
-        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
-        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
-        {currentTab === "16" && ( <Prematurity map={state.map}/> )}
-        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
-        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
-        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
-        {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
-        {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
-        {/*
-        {currentTab === "19" && ( 
-          map && (
-            !["US", "DC"].includes(map.state) && (
-        <EPHThematicStateMap 
-          stateName={map.state}
-          ></EPHThematicStateMap> )))}
-            */}
-    
   </div>
-</div>
+  
+
   );
 }
 
 
 
 export default EPHHome;
-
