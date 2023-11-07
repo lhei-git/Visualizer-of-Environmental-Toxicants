@@ -12,6 +12,7 @@ Content area for all ntnl measures: Biomonitoring: Population exposure
 
 //written by Katherine O'Donnell
 
+//this function creates a time series graph for any measure with national level data
 const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => {
   const [data, setData] = useState([]);
   const apiURL = getApiURL(measure);    //api endpoint selected based on measure
@@ -31,6 +32,8 @@ const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => 
       });
   }, [apiURL]);
 
+
+  //selects API endpoint based on measure passed
   function getApiURL(selectedMeasure){
     if (selectedMeasure === "Lead in Blood") {
         //us population, ug/dL
@@ -65,45 +68,47 @@ const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => 
   );
 }
 
-  NationalTimeSeries.propTypes = {
-    size: PropTypes.shape({                     //size of chart to be displayed
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }).isRequired,
-    measure: PropTypes.string.isRequired,       //measure selected on eph page
-    units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
-    //lineName: PropTypes.string.isRequired,      //type of measure (e.g. concentration) selected on eph page
-    percentile: PropTypes.number.isRequired,         //1=50th, 2=95th
-    demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
+NationalTimeSeries.propTypes = {
+  size: PropTypes.shape({                     //size of chart to be displayed
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
+  measure: PropTypes.string.isRequired,       //measure selected on eph page
+  units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
+  //lineName: PropTypes.string.isRequired,      //type of measure (e.g. concentration) selected on eph page
+  percentile: PropTypes.number.isRequired,         //1=50th, 2=95th
+  demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
 
-  };
+};
 
-  function TimeSeries({ data, size, units }) {
-    
-    return (
-      <LineChart width={size.width} height={size.height} data={data}>
-        <CartesianGrid />
-        <XAxis dataKey="year" />
-        <YAxis>
-          <Label 
-            style={{textAnchor: "middle"}}
-            angle={270} 
-            position='insideLeft'
-            value={units}
-            margin={200}/>
-        </YAxis>
-        <Tooltip />
-        <Line name="Concentration" type="monotone" dataKey="dataValue" stroke="purple" />
-      </LineChart>
-    );
-  }
 
-  TimeSeries.propTypes = {
-    size: PropTypes.shape({                     //same size prop as chart
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }).isRequired,
-    units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
-  };
+//creates time series graph -- might move to own file for reusability
+function TimeSeries({ data, size, units }) {
+  return (
+    <LineChart width={size.width} height={size.height} data={data}>
+      <CartesianGrid />
+      <XAxis dataKey="year" />
+      <YAxis>
+        <Label 
+          style={{textAnchor: "middle"}}
+          angle={270} 
+          position='insideLeft'
+          value={units}
+          margin={200}/>
+      </YAxis>
+      <Tooltip />
+      <Line name="Concentration" type="monotone" dataKey="dataValue" stroke="purple" />
+    </LineChart>
+  );
+}
+
+TimeSeries.propTypes = {
+  size: PropTypes.shape({                     //same size prop as chart
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
+  units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
+};
+
 
 export default NationalTimeSeries;

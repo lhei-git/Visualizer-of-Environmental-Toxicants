@@ -8,6 +8,9 @@ import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 const React = require("react");
 
+
+//calling NationalData on the eph page will generate a data layout for any measure selected
+//NationalData returns a .jsx layout with a header, time series graph, filters, and custom description for each national measure
 const NationalData = ({measure, units}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
@@ -27,10 +30,12 @@ const NationalData = ({measure, units}) => {
         chooseFilters(1, 16); //default 50th percentile, us population
       }, []); // empty dependency array so effect runs only once
 //end of filter code
-//create date object to be used in citation 
+
+//create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
+    //.jsx layout
     return(
         <div className="national-container">
             <h1>{measure +" (national data)"}</h1>
@@ -62,6 +67,7 @@ const NationalData = ({measure, units}) => {
                     </select>
                 </div>
             </div>
+            {/*code below changes data representation based on filter changes*/}
             <div className = "time-series">
             {selectedPercentile === 1 && (
                 <NationalTimeSeries
@@ -81,6 +87,7 @@ const NationalData = ({measure, units}) => {
                 demographic={selectedDemographic}
                 />
             )}
+            
             </div>
 
             <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
@@ -110,6 +117,7 @@ NationalData.propTypes = {
 
 var samples = "Biomonitoring is conducted via individual and pooled blood or urine samples tested by CDC scientists. Samples have been collected from individuals across teh United States that took part in the CDC's National Health and Nutrition Examination Survey (NHANES). The NHANES study is designed so that the sample measures of chemicals in participants can be representatives of exposures in the entire U.S. civilian population, and the data can be filtered to represent smaller demographic groups.";
 
+//diff info passed to the 'about data' section for each measure 
 var details = {
     "Lead in Blood": {
         desc: "lead in blood, in micrograms of lead per liter of blood. ",
