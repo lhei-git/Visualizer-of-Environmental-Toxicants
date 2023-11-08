@@ -76,8 +76,12 @@
   justify-content: center;
   /* padding-top: 75px; */
   padding-bottom: 40px;
-  width: 100%;
-  border-radius: 25px;
+  padding-top: 80px;
+  padding-right: 80px;
+  margin-left: 10px;
+  padding-bottom: 50px;
+  width: 42%;
+  float: left;  /* Amrita - Makes graphs/charts on TRI page next to each other */
 }
 
 .graph-container .dropdown-icon {
