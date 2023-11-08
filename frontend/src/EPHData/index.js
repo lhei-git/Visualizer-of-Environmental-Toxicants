@@ -1,5 +1,4 @@
 import "./index.css";
-
 import NationalData from "./national";
 import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
@@ -107,28 +106,71 @@ const [visible, setVisible] = useState(false);
         {/* county measures */}
         
         {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
-        {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
-        {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
-        {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
-        {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
-        {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
-        {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
-        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
-        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
-        {currentTab === "16" && ( <Prematurity map={state.map}/> )}
-        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
-        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
-        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
-        {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
-        {!["US", "DC"].includes(map.state) && (
-        <div>
-        {currentTab === "21" && ( 
+        {currentTab === "1" && ( 
+          /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                measure={"adult asthma"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
         </EPHThematicStateMap> )}
-        </div>
-        )}
+
+        {currentTab === "3" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"prevalence of cancer"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "5" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"fertility rate"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "6" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"heart attack"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "7" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"infant mortality"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "9" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"low birthweight"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
+        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
+        {currentTab === "16" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"prematurity"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
+        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
+        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
+        {currentTab === "20" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                measure={"asthma hospitalizations"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+       
+      {/*  {currentTab === "21" && ()} */}
+
 
         {/* state measures */}
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 

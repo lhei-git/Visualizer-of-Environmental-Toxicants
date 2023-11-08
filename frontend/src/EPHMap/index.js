@@ -158,7 +158,7 @@ if(props.mapType === "states")
       return (
         <>
         <div className='mapView'>
-            <ComposableMap data-tip="" projection="geoAlbers">
+            <ComposableMap projection="geoAlbers">
                 <Geographies geography={props.geoURL}>
                     {({ geographies }) =>
                      geographies.map((geo) => {
@@ -171,7 +171,7 @@ if(props.mapType === "states")
                             <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
-                                data-tip={geo.properties.NAME}
+                                data-tip={`${geo.properties.NAME}: ${stateData && stateData.displayValue}`}
                                 style={{
                                     default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                     hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -189,7 +189,7 @@ if(props.mapType === "states")
                                 <Geography
                                     key={geo.rsmKey}
                                     geography={geo}
-                                    data-tip={geo.properties.NAME}
+                                    data-tip={`${geo.properties.NAME}: ${stateData && stateData.displayValue}`}
                                     style={{
                                         stroke: "#000",
                                     }}
@@ -264,14 +264,14 @@ else if(props.mapType === "counties")
                         <Geographies geography={props.geoUrl}>
                             {({ geographies }) => 
                                 geographies.map((geo) => {
-                                    const countyData = props.data.find((d) =>  d.geo === geo.properties.NAME);
+                                    const countyData = props.data.find((d) =>  d.geoId === geo.properties.GEOID);
                                     const fillColor = countyData ? getColorScale(countyData.dataValue) : '#D6D6DA';
                                     if (countyData != undefined) {
                                         return (
                                             <Geography
                                             key={geo.rsmKey}
                                             geography={geo}
-                                            data-tip={geo.properties.NAME}
+                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.displayValue }`}
                                             style={{
                                                 default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                                 hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
