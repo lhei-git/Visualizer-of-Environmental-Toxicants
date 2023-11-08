@@ -4,6 +4,7 @@ import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
+import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
 import PropTypes from "prop-types";
 import PFASWater from "../EPHMapView/pfas in water";
 import PCEWater from "../EPHMapView/pce in water";
@@ -105,7 +106,12 @@ const [visible, setVisible] = useState(false);
         
         {/* county measures */}
         
-        {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
+        {currentTab === "0" && ( 
+        <EPHThematicWaterStateMap 
+                measure={"arsenic in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
         {currentTab === "1" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
@@ -149,8 +155,18 @@ const [visible, setVisible] = useState(false);
                 stateName={map.state}
                 stateLongName={map.stateLong}>
         </EPHThematicStateMap> )}
-        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
-        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
+        {currentTab === "11" && ( 
+        <EPHThematicWaterStateMap 
+                measure={"pce in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "14" && ( 
+        <EPHThematicWaterStateMap 
+                measure={"pfas in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
         {currentTab === "16" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
@@ -158,9 +174,24 @@ const [visible, setVisible] = useState(false);
                 stateName={map.state}
                 stateLongName={map.stateLong}>
         </EPHThematicStateMap> )}
-        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
-        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
-        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
+        {currentTab === "17" && ( 
+        <EPHThematicWaterStateMap 
+                measure={"radium in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "18" && ( 
+        <EPHThematicWaterStateMap 
+                measure={"tce in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "19" && ( 
+        <EPHThematicWaterStateMap 
+                measure={"uranium in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
         {currentTab === "20" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
