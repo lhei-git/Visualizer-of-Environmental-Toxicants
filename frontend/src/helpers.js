@@ -1,3 +1,5 @@
+//import { useEffect, useState, useReducer } from "react"; //added to simplify getLocationParents
+
 const chemicalMap = {
   "certain glycol ethers": "Glycol",
   "polycyclic aromatic compounds": "Polycyclic Aromatic Compounds",
@@ -72,3 +74,59 @@ module.exports.getLocationString = (map, long) => {
   str += long ? map.stateLong : map.state;
   return str;
 };
+
+//written by Katherine O'Donnell
+//gets 'parents' of location searched
+module.exports.getLocationParents = (map, parentType) => {
+  //returns state abbreviation
+  if (parentType === "state"){ return map.state; }
+  //returns full state name
+  else if (parentType === "stateLong"){ return map.stateLong; }
+  //returns county name
+  else if (parentType === "county"){ return map.county; } //POSSIBLY: map.county + " County"
+}
+
+/*
+add the code below to a function to use helper functions w/ "state.map":
+
+import { useEffect, useState, useReducer } from "react";
+const { getLocationParents, (etc) } = require("../helpers");
+
+//below code pulls searched location from app session storage/
+    // Initial state of app 
+    const initialState = {
+      map: JSON.parse(sessionStorage.getItem("map")),
+      filters: {
+      chemical: "all",
+      pbt: false,
+      carcinogen: false,
+      releaseType: "all",
+      //sets initial state to latest year/
+      year: 2022,
+      },
+      errorMessage: "",
+  };
+  const reducer = (state, action) => {
+      switch (action.type) {
+        case "setMap":
+          // Store latest searched location in session /
+          sessionStorage.setItem("map", JSON.stringify(action.payload));
+          return {
+            ...state,
+            map: action.payload,
+          };
+        case "setFilters":
+          const newFilters = Object.assign({}, action.payload);
+          return { ...state, filters: newFilters };
+    
+    
+        case "setErrorMessage":
+          return { ...state, errorMessage: action.payload };
+        default:
+          throw new Error();
+      }
+    };
+  const [state] = useReducer(reducer, initialState);
+  //end of storage retrieval code
+
+*/
