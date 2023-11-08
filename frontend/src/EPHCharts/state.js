@@ -7,10 +7,47 @@ import "./index.css";
 
 //written by Katherine O'Donnell
 
+/* NOTES: */
+/*
+
+
+- asthma among children
+  - measureID 587
+  - displayValue: "Data Not Collected", when dataValue: null
+  - 2011-2020
+  - endpoint w/ no filters: https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0
+  - possible filters:
+    - age group: 0-4, 5-9, 10-14, 15-17
+    - gender
+    - race/ethnicity: White not incl Hispanic, Black not incl Hispanic, Other not incl Hispanic, Multi Race not incl Hispanic, Hispanic
+
+- incidence of brain and central nervous system cancer among children
+  - measureID 67
+  - displayValue: "Suppressed" when dataValue: null
+    - some states not hoverable? nebraska not hoverable but returns valid data
+  - 2001 - 2019
+  - endpoint w/ no filters: https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/1/all/all/1/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001/0/0
+  - possible filters:
+    - gender
+    - race/ethnicity: Asian/Pacific Islander (includes Hispanic), Black (includes Hispanic), Hispanic (all races), American Indian/Alaskan Native (includes Hispanic), White (includes Hispanic)
+
+
+
+- incidence of leukemia among children
+  - measureID 71
+  - displayValue: "Suppressed" when dataValue: null
+  - 2001 - 2019
+  - endpoint w/ no filters: https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/1/all/all/1/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001/0/0
+   - possible filters:
+    - gender
+    - race/ethnicity: Asian/Pacific Islander (includes Hispanic), Black (includes Hispanic), Hispanic (all races), American Indian/Alaskan Native (includes Hispanic), White (includes Hispanic)
+ 
+*/
+
 const StateTimeSeries = ({size, measure, measureID, units, percentile, demographic, stateID}) => {
     const [data, setData] = useState([]);
-    const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=${demographic}&PercentileId=${percentile}`;
-    ;    //api endpoint selected based on measure
+    const apiURL = '';
+;    //api endpoint selected based on measure
         //double check all parameters
   
     useEffect(() => {
