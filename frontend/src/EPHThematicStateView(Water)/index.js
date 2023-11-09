@@ -9,6 +9,7 @@ import data from "../data/stateLocationData.json";
 import Title from "../Title/index.js";
 import axios from "axios";
 import EPHMap from "../EPHMap/index";
+import FadeInSection from "../FadeInSection.js"
 const React = require("react");
 const Component = React.Component;
 
@@ -27,6 +28,7 @@ class EPHThematicWaterStateMap extends Component {
       scale: null,
       lat: null,
       lon: null,
+      geoAverages: {}
 
     };
     
@@ -122,23 +124,39 @@ class EPHThematicWaterStateMap extends Component {
     try {
       const response = await axios.get(apiUrl);
       if (response.status === 200) {
-        this.setState({ countyData: response.data.cwsTableResult });
+        const countyData = response.data.cwsTableResult;
+
+        // Calculate averages for each geoId
+        const geoAverages = {};
+        countyData.forEach((item) => {
+          const geoId = item.geoId;
+          const dataValue = parseFloat(item.dataValue);
+          if (!isNaN(dataValue)) {
+            if (geoAverages[geoId] === undefined) {
+              geoAverages[geoId] = {
+                total: dataValue,
+                count: 1,
+              };
+            } else {
+              geoAverages[geoId].total += dataValue;
+              geoAverages[geoId].count += 1;
+            }
+          }
+        });
+
+        // Calculate final averages
+        for (const geoId in geoAverages) {
+          const average = geoAverages[geoId].total / geoAverages[geoId].count;
+          geoAverages[geoId] = average;
+        }
+
+        this.setState({ countyData, geoAverages });
       } else {
         console.error("Unexpected error. Status code:", response.status);
       }
     } catch (error) {
-      if (error.response) {
-        // Server responded with a non-2xx status code
-        console.error("Error response from the server:", error.response.status);
-      } else if (error.request) {
-        // Request was made but no response was received
-        console.error("No response received. Request made but no response.");
-      } else {
-        // Something happened in setting up the request
-        console.error("Error setting up the request:", error.message);
-      }
+      console.log("error: ", error);
     }
-    
   }
   
   
@@ -148,6 +166,7 @@ class EPHThematicWaterStateMap extends Component {
     return (
       <div className="thematic-view-container">
         <div className="flex-item">
+          <h1>{this.props.measure} in {this.props.stateLongName}</h1>
           {this.state.countyData ? (
             
               <EPHMap
@@ -167,13 +186,6 @@ class EPHThematicWaterStateMap extends Component {
       </div>
     );
   }
-
-  
-  
-  
-
-  
-  
 
   
 }

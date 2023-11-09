@@ -18,7 +18,7 @@ class EPHThematicStateMap extends Component {
     super(props);
     this.state = {
       /*update to latest year*/
-      latestYear: 2022,
+      selectedYear: this.props.yearRange[0],
       //contentCounty: "",
       geoUrl: "",
       stateName: "",
@@ -28,10 +28,12 @@ class EPHThematicStateMap extends Component {
       scale: null,
       lat: null,
       lon: null,
+      selectedYear: 2020,
 
     };
     
     this.handleContentCountyState = this.handleContentCountyState.bind(this);
+    this.handleYearChange = this.handleYearChange.bind(this);
   }
   
  
@@ -88,36 +90,94 @@ class EPHThematicStateMap extends Component {
     this.setState({ content: content });
   }
 
+
+/*
+  getMeasureInfo(measure) {
+    
+    const measureInfo = {
+      "adult asthma": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/{year}/0/0`,
+        yearRange: [2020, 2019, 2018],
+      },
+      "asthma hospitalizations": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/{year}/0/0`,
+        yearRange: [2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014],
+      },
+      "prevalence of cancer": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/{year}/0/0`,
+        yearRange: [2020, 2019, 2018],
+      },
+      "fertility rate": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/{year}/0/0`,
+        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+      },
+      "heart attack": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/{year}/1/0`,
+        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+      },
+      "infant mortality": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004/1/0`,
+        yearRange: [2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004],
+      },
+      "low birthweight": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/{year}/1/0`,
+        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+      },
+      "prematurity": {
+        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/{year}/1/0`,
+        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+      },
+    };
+
+    return measureInfo[measure] || null;
+  }
+
+*/
   getApiURL() {
     
+    const selectedYear = this.state.selectedYear;
     if(this.props.measure === "adult asthma") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/2020,2019,2018/0/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/${selectedYear}/0/0`
     }
     else if (this.props.measure === "asthma hospitalizations") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000/0/0`    
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/${selectedYear}/0/0`    
     }
     
     else if (this.props.measure === "prevalence of cancer") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/2020,2019,2018/0/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/${selectedYear}/0/0`
     }
 
     else if (this.props.measure === "fertility rate") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000/0/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/${selectedYear}/0/0`
     }
     else if (this.props.measure === "heart attack") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/${selectedYear}/1/0`
     }
     else if (this.props.measure === "infant mortality") { //not sure if this is the right one 
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/${selectedYear}/1/0`
     }
     else if (this.props.measure === "low birthweight") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/${selectedYear}/1/0`
     }
     else if (this.props.measure === "prematurity") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/${selectedYear}/1/0`
     }
     
+    /*
 
+    const { measure, selectedYear } = this.state;
+    const measureInfo = this.getMeasureInfo(measure);
+
+    if (measureInfo && measureInfo.yearRange.includes(selectedYear)) {
+      // Replace "{year}" in the URL with the selected year
+      return measureInfo.apiUrl.replace("{year}", selectedYear);
+    } else {
+      console.error(
+        `Selected year ${selectedYear} is not available for the current measure.`
+      );
+      return "";
+    }
+    */
   }
 
   async getCountyData() {
@@ -145,13 +205,36 @@ class EPHThematicStateMap extends Component {
     
   }
   
+  handleYearChange = (event) => {
+    this.setState({ selectedYear: event.target.value }, () => {
+      this.getCountyData(); // Fetch data with the updated year
+    });
+  };
   
+  handleMeasureChange = (event) => {
+    this.setState({ measure: event.target.value }, () => {
+      this.getCountyData(); // Fetch data with the updated measure
+    });
+  };
     
   render() {
-    
+    const selectedYear = this.state.selectedYear;
+    const yearOptions = this.props.yearRange;
+
     return (
       <div className="thematic-view-container">
         <div className="flex-item">
+        <select
+          value={selectedYear}
+          onChange={this.handleYearChange}
+        >
+          {yearOptions.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+
           {this.state.countyData ? (
             
               <EPHMap

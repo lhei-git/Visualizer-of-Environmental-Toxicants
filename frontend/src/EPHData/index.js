@@ -107,6 +107,7 @@ const [visible, setVisible] = useState(false);
         {/* county measures */}
         
         {currentTab === "0" && ( 
+          
         <EPHThematicWaterStateMap 
                 measure={"arsenic in water"}
                 stateName={map.state}
@@ -115,6 +116,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "1" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[2020, 2019, 2018]}
                 measure={"adult asthma"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -123,6 +125,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "3" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[2020, 2019, 2018]}
                 measure={"prevalence of cancer"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -130,6 +133,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "5" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
                 measure={"fertility rate"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -137,6 +141,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "6" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
                 measure={"heart attack"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -144,6 +149,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "7" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004]}
                 measure={"infant mortality"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -151,6 +157,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "9" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
                 measure={"low birthweight"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -170,6 +177,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "16" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
                 measure={"prematurity"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -195,12 +203,18 @@ const [visible, setVisible] = useState(false);
         {currentTab === "20" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
+                yearRange={[2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]}
                 measure={"asthma hospitalizations"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
         </EPHThematicStateMap> )}
        
-      {/*  {currentTab === "21" && ()} */}
+        {currentTab === "21" && (
+        <EPHThematicWaterStateMap 
+                measure={"deph in water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap>)}
 
 
         {/* state measures */}
