@@ -28,7 +28,6 @@ class EPHThematicStateMap extends Component {
       scale: null,
       lat: null,
       lon: null,
-      selectedYear: 2020,
 
     };
     
@@ -136,30 +135,30 @@ class EPHThematicStateMap extends Component {
   getApiURL() {
     
     const selectedYear = this.state.selectedYear;
-    if(this.props.measure === "adult asthma") {
+    if(this.props.measure === "Asthma Among Adults") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/${selectedYear}/0/0`
     }
-    else if (this.props.measure === "asthma hospitalizations") {
+    else if (this.props.measure === "Hospitalizations from Asthma") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/${selectedYear}/0/0`    
     }
     
-    else if (this.props.measure === "prevalence of cancer") {
+    else if (this.props.measure === "Prevalence of Cancer") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/${selectedYear}/0/0`
     }
 
-    else if (this.props.measure === "fertility rate") {
+    else if (this.props.measure === "Fertility Rate") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/${selectedYear}/0/0`
     }
-    else if (this.props.measure === "heart attack") {
+    else if (this.props.measure === "Heart Attack") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/${selectedYear}/1/0`
     }
-    else if (this.props.measure === "infant mortality") { //not sure if this is the right one 
+    else if (this.props.measure === "Infant Mortality") { //not sure if this is the right one 
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/${selectedYear}/1/0`
     }
-    else if (this.props.measure === "low birthweight") {
+    else if (this.props.measure === "Low Birthweight") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/${selectedYear}/1/0`
     }
-    else if (this.props.measure === "prematurity") {
+    else if (this.props.measure === "Prematurity") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/${selectedYear}/1/0`
     }
     
@@ -224,6 +223,7 @@ class EPHThematicStateMap extends Component {
     return (
       <div className="thematic-view-container">
         <div className="flex-item">
+        <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <select
           value={selectedYear}
           onChange={this.handleYearChange}
@@ -249,7 +249,32 @@ class EPHThematicStateMap extends Component {
           ) : (
             <LoadSpinner />
           )
+          
           }
+
+<div className="legend">
+  <h3>Percent Concentration</h3>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+    <span>Null Data</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
+    <span>0-9</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
+    <span>9-12</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
+    <span>12-14</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
+    <span>14+</span>
+  </div>
+</div>
         </div>
       </div>
     );

@@ -268,19 +268,20 @@ else if(props.mapType === "counties")
                             {({ geographies }) => 
                                 geographies.map((geo) => {
                                     const countyData = props.data.find((d) =>  d.geoId === geo.properties.GEOID);
-                                    const fillColor = countyData ? getColorScale(countyData.dataValue) : '#D6D6DA';
+                                    const fillColor = countyData ? getColorScale(countyData.dataValue.toFixed(2)) : '#D6D6DA';
+                                    console.log("countyData:", countyData);
                                     if (countyData != undefined) {
                                         return (
                                             <Geography
                                             key={geo.rsmKey}
                                             geography={geo}
-                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.displayValue }`}
+                                            
+                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.dataValue !== null ? countyData.dataValue.toFixed(2) : "No Data"}`}
                                             style={{
-                                                default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
-                                                hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
-                                                pressed: { outline: "none" }
+                                              default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+                                              hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                                              pressed: { outline: "none" }
                                             }}
-
                                             onMouseEnter={() => {
                                                 ReactTooltip.rebuild();
 
@@ -294,7 +295,11 @@ else if(props.mapType === "counties")
                                                 key={geo.rsmKey}
                                                 geography={geo}
                                                 data-tip={geo.properties.NAME}
-                                                style={{default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" }}}
+                                                style={{
+                                                  default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+                                                  hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                                                  pressed: { outline: "none" }
+                                                }}
                                                 onMouseEnter={() => {
                                                     ReactTooltip.rebuild();
                                                 }}
@@ -308,6 +313,29 @@ else if(props.mapType === "counties")
                         </Geographies>
                     </ComposableMap>
                     <ReactTooltip />
+                    <div className="legend">
+  <h3>Percent Concentration</h3>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+    <span>Null Data</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
+    <span>0-9</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
+    <span>9-12</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
+    <span>12-14</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
+    <span>14+</span>
+  </div>
+</div>
                     
             </div>
             </>

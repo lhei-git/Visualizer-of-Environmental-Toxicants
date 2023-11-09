@@ -10,4 +10,37 @@
     margin-bottom: 120px;
     font-size: 18px;
   }
+  .mapView .legend {
+    position: absolute;
+    bottom: 100px;
+    left: 1150px;
+    margin-bottom: 166px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
   
+  .legend h3 {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }
+  
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .legend-item span {
+    margin: 0;
+  }

@@ -31,12 +31,14 @@ const SimpleMap = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
+  const [selectedGenderId, setSelectedGenderId] = useState([]);
   
-  // Fetch data for each year
-  const dataForEachYear = (year) => {
+
+  const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`, )
+    axios
+      .get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/4/all/all/1/${year}/0/0?GenderId=${genderId}`)
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -45,14 +47,16 @@ const SimpleMap = ({ map }) => {
       });
   };
 
-
   useEffect(() => {
     if (selectedYear) {
-      dataForEachYear(selectedYear);
+      dataForEachYear(selectedYear, selectedGenderId);
     }
-  }, [selectedYear]);
+  }, [selectedYear, selectedGenderId]);
 
-
+  const handleGenderChange = (event) => {
+    setSelectedGenderId(event.target.value);
+  };
+  
   return (
     <div className='mapView'>
      <div className='container'>
@@ -63,7 +67,7 @@ const SimpleMap = ({ map }) => {
         <label> Year: </label>
         <select
           value={selectedYear}
-          onChange={(e) => dataForEachYear(e.target.value)}
+          onChange={(e) => setSelectedYear(e.target.value)}
         >
           <option value=""> Select Year </option>
           <option value="2020">2020</option>
@@ -77,6 +81,14 @@ const SimpleMap = ({ map }) => {
           <option value="2012">2012</option>
           <option value="2011">2011</option>
         </select>
+      </div>
+      <div className='dropdown'>
+      <label htmlFor="gender">Select Gender:</label>
+      <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
+        <option value="">Select a Gender</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
       </div>
 
 
