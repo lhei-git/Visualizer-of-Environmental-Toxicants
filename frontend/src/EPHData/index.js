@@ -1,6 +1,7 @@
 import "./index.css";
 
 import NationalData from "./national";
+import StateData from "./state"
 import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
@@ -122,7 +123,8 @@ const [state, dispatch] = useReducer(reducer, initialState);
         {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
 
         {/* state measures */}
-        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
+        {/*  {currentTab === "22" && ( <SimpleMap map={state.map}/> )} */}
+        {currentTab === "22" && ( <StateData measureID={587} units={"Percent"}/> )} 
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
       </div>
