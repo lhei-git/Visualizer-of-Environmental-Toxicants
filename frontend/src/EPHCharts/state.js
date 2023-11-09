@@ -47,7 +47,7 @@ const { getLocationParents} = require("../helpers");
 */
 
 var stateIDs = {
-  Michigan: 26,
+  Michigan: "26",
 //!!!add other IDs or get from json
 }
 
@@ -88,12 +88,16 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
     };
   const [state] = useReducer(reducer, initialState);
   //use helper function to get the name of the searched state from the stored location search
-  //get ID of the state from the stateIDs variable
-  const stateID = stateIDs[getLocationParents(state.map, "stateLong")];
+  //get ID of the state from the stateIDs variable, convert to string to use in endpoint
+  const stateID = String(stateIDs[getLocationParents(state.map, "stateLong")]);
 
 //below code gets data from API and stores it as 'data' object to be accessed by time series function
   const [data, setData] = useState([]);
-  const apiURL = 'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/' + {measureID} + '/1/1/'+ {stateID} + '/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0';
+  //const apiURL = 'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/1/26/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0';
+  //console.log('measureID:', measureID);
+  //console.log('stateID:', stateID);
+  const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0`;
+  //const apiURL = 'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0';
   useEffect(() => {
     axios.get(apiURL)
       .then((response) => {
@@ -111,6 +115,10 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
 
   return (
     <div className="TimeSeries" style={{width: size.width, height: size.height }}>
+      <p>{measureID}</p>
+      <p>{stateID}</p>
+      <p>old url: https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/1/26/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0</p>
+      <p>new url: {apiURL}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
