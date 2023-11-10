@@ -28,7 +28,7 @@ class EPHThematicWaterStateMap extends Component {
       scale: null,
       lat: null,
       lon: null,
-      geoAverages: {}
+      //geoAverages: {}
 
     };
     

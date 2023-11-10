@@ -268,15 +268,15 @@ else if(props.mapType === "counties")
                             {({ geographies }) => 
                                 geographies.map((geo) => {
                                     const countyData = props.data.find((d) =>  d.geoId === geo.properties.GEOID);
-                                    const fillColor = countyData ? getColorScale(countyData.dataValue.toFixed(2)) : '#D6D6DA';
-                                    console.log("countyData:", countyData);
+                                    const fillColor = countyData ? getColorScale(countyData.dataValue) : '#D6D6DA';
+                                    
                                     if (countyData != undefined) {
                                         return (
                                             <Geography
                                             key={geo.rsmKey}
                                             geography={geo}
                                             
-                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.dataValue !== null ? countyData.dataValue.toFixed(2) : "No Data"}`}
+                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.dataValue !== null ? countyData.dataValue: "No Data"}`}
                                             style={{
                                               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -313,7 +313,7 @@ else if(props.mapType === "counties")
                         </Geographies>
                     </ComposableMap>
                     <ReactTooltip />
-                    <div className="legend">
+<div className="legend">
   <h3>Percent Concentration</h3>
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
