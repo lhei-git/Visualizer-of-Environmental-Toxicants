@@ -12,6 +12,7 @@ import {
 } from 'react-simple-maps'
 import ReactTooltip from 'react-tooltip';
 import FadeInSection from '../FadeInSection';
+import "./index.css"
 
 const EPHMap = (props) => {
     const [position, setPosition] = useState({coordinates: [-96, 38], zoom: 1});
@@ -289,7 +290,16 @@ else if(props.mapType === "counties")
                                             }}
 
                                             />
+
+                                            
                                         )
+
+
+
+
+
+                                        
+                                        
                                     } else {
                                         return (
                                             <Geography
@@ -315,6 +325,7 @@ else if(props.mapType === "counties")
                     </ComposableMap>
                     <ReactTooltip />
 
+
 <div className="legend">
   <h3>Percent Concentration</h3>
   <div className="legend-item">
@@ -338,7 +349,6 @@ else if(props.mapType === "counties")
     <span>14+</span>
   </div>
 </div>
-
 </div>
              
 

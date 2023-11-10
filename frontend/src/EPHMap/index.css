@@ -12,9 +12,9 @@
   }
   .mapView .legend {
     position: absolute;
-    bottom: 100px;
-    left: 1150px;
-    margin-bottom: 166px;
+    bottom: 0px;
+    left: 700px;
+    margin-bottom: 60px;
     background: white;
     border: 1px solid #ccc;
     padding: 10px;

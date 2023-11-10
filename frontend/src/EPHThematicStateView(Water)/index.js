@@ -9,7 +9,8 @@ import data from "../data/stateLocationData.json";
 import Title from "../Title/index.js";
 import axios from "axios";
 import EPHMap from "../EPHMap/index";
-import FadeInSection from "../FadeInSection.js"
+import FadeInSection from "../FadeInSection.js";
+import "./index.css";
 const React = require("react");
 const Component = React.Component;
 
@@ -187,10 +188,13 @@ class EPHThematicWaterStateMap extends Component {
     return (
       <div className="thematic-view-container">
         <div className="flex-item">
+          
           <h1>{this.props.measure} in {this.props.stateLongName}</h1>
+          <div className="centered-year">
           <select
             value={selectedYear}
             onChange={this.handleYearChange}
+            style={{ fontSize: '18px', marginBottom: '30px' }}
           >
             {yearOptions.map((year) => (
               <option key={year} value={year}>
@@ -198,6 +202,10 @@ class EPHThematicWaterStateMap extends Component {
               </option>
             ))}
           </select>
+
+          </div>
+
+          
           {this.state.countyData ? (
             
               <EPHMap
@@ -213,6 +221,7 @@ class EPHThematicWaterStateMap extends Component {
             <LoadSpinner />
           )
           }
+          
         </div>
       </div>
     );

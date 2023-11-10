@@ -224,9 +224,11 @@ class EPHThematicStateMap extends Component {
       <div className="thematic-view-container">
         <div className="flex-item">
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
+        <div className="centered-year">
         <select
           value={selectedYear}
           onChange={this.handleYearChange}
+          style={{ fontSize: '18px', marginBottom: '50px' }}
         >
           {yearOptions.map((year) => (
             <option key={year} value={year}>
@@ -234,6 +236,7 @@ class EPHThematicStateMap extends Component {
             </option>
           ))}
         </select>
+        </div>
 
           {this.state.countyData ? (
             
@@ -252,29 +255,7 @@ class EPHThematicStateMap extends Component {
           
           }
 
-<div className="legend">
-  <h3>Percent Concentration</h3>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-    <span>Null Data</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-9</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>9-12</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>12-14</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>14+</span>
-  </div>
-</div>
+
         </div>
       </div>
     );
