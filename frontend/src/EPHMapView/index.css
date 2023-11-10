@@ -1,4 +1,4 @@
-
+/*File written by Farzana Israt*/
 .mapView {
   /*
   width: 600px; 
@@ -11,6 +11,7 @@
   left: 50%;
   transform: translate(-50%, -10%);
   */
+  
   width: 600px;
   height: 500px;
   display: flex;
@@ -31,8 +32,8 @@
 
 .legend {
   position: absolute;
-  bottom: 20px;
-  left: 450px;
+  bottom: 100px;
+  left: 1150px;
   margin-bottom: 166px;
   background: white;
   border: 1px solid #ccc;
@@ -47,8 +48,8 @@
 
 .mapView .legend {
   position: absolute;
-  bottom: 20px;
-  left: 450px;
+  bottom: 100px;
+  left: 1150px;
   margin-bottom: 166px;
   background: white;
   border: 1px solid #ccc;
@@ -107,6 +108,41 @@
     height: 16px; 
     margin-right: 8px; 
   }
+}
+
+.mapDescription {
+  position: relative;
+  margin-right: 750px;
+  top: -50px;
+
+}
+
+.measureDescription {
+  /* Your styles for the description text */
+}
+
+.questionMark {
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 700px; 
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  /*display: none; */
+}
+
+.questionMark:hover + .tooltip {
+  display: block; 
+  
+}
+
+
 
 
 
@@ -128,4 +164,4 @@
     padding: 5px;
     border-radius: 5px;
     pointer-events: none;
-  }}
+  }

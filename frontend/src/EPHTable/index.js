@@ -1,3 +1,6 @@
+/* DELETE FILE POSSIBLY */ 
+
+import "./index.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 

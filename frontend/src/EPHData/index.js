@@ -1,6 +1,7 @@
 import "./index.css";
 
 import NationalData from "./national";
+import StateData from "./state"
 import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
@@ -29,7 +30,7 @@ import EPHTable from "../EPHTable";
 const React = require("react");
 
 
-
+//returns .jsx layout for the entire EPH data viewing page
 function EPHHome(map) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
@@ -251,4 +252,3 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
 
 export default EPHHome;
-

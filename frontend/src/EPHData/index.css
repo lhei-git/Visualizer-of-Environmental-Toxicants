@@ -68,6 +68,8 @@
 .container-column {
     flex: 1;
     padding: 20px 10px;
+    padding-right: 50px;
+    min-width: 200px;
     border: 1px solid #ddd;
     text-align: center;
     background-color: #E6E6FA;
