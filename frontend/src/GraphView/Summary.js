@@ -95,7 +95,7 @@ function GraphSummary({ map, filters }) {
 
   return (
     body !== null && (
-      <div className="graph standalone summary">
+      <div className="graph-standalone summary">
         <div className="graph-header">
           <h1>
             Summary statistics of total releases for{" "}

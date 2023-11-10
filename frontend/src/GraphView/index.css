@@ -74,7 +74,7 @@
 .graph-container .graph {
   position: relative;
   justify-content: center;
-  max-height: 32em;
+  max-height: 30em;
   padding-top: 100px;
   padding-right: 80px;
   margin-left: 10px;
