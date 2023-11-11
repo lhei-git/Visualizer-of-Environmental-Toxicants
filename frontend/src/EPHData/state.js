@@ -2,6 +2,7 @@
 //created by Katherine O'Donnell, added map code from Farzana Israt
 import "./index.css";
 import StateTimeSeries from "../EPHCharts/state";
+import StateTable from "../EPHTable/state";
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 const React = require("react");
@@ -55,26 +56,31 @@ const StateData = ({measureID, units}) => {
             </div>
             {/*code below changes data representation based on filter changes*/}
             <div className = "time-series">
-            {selectedPercentile === 1 && (
-                <StateTimeSeries
-                size={{ width: 800, height: 400 }}
-                measureID={measureID}
-                units={units}
-                percentile={1}
-                demographic={selectedDemographic}
-                />
-            )}
-            {selectedPercentile === 2 && (
-                <StateTimeSeries
-                size={{ width: 800, height: 400 }}
-                measureID={measureID}
-                units={units}
-                percentile={2}
-                demographic={selectedDemographic}
-                />
-            )}
-            
+                {selectedPercentile === 1 && (
+                    <StateTimeSeries
+                    size={{ width: 800, height: 400 }}
+                    measureID={measureID}
+                    units={units}
+                    percentile={1}
+                    demographic={selectedDemographic}
+                    />
+                )}
+                {selectedPercentile === 2 && (
+                    <StateTimeSeries
+                    size={{ width: 800, height: 400 }}
+                    measureID={measureID}
+                    units={units}
+                    percentile={2}
+                    demographic={selectedDemographic}
+                    />
+                )}
             </div>
+            {/* ADD STATE TABLE HERE */}
+            <div className="eph-table-container">
+                <h2>Table</h2>
+                <StateTable measureID={measureID} />
+            </div>
+            
 
         </div>
     );

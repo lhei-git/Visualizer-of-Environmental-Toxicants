@@ -153,14 +153,14 @@ const [state, dispatch] = useReducer(reducer, initialState);
       {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
       <div className="eph-national-container">
         {/*national measures*/}
-        {currentTab === "8" && ( <NationalData measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}/> )}        
-        {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"} />)}
-        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} />)}
-        {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"} />)}
-        {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"} />)}
-        {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"} />)}
+        {currentTab === "8" && ( <NationalData measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}  measureID={858}/> )}        
+        {currentTab === "10" && ( <NationalData measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856}/>)}
+        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863}/>)}
+        {currentTab === "2" && (<NationalData measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859}/>)}
+        {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
+        {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
         
-        {/* county measures */}
+        {/* county measures - change to call <CountyData> */}
         
         {currentTab === "0" && ( <><ArsenicWater map={state.map} /></>)}
         {currentTab === "1" && ( <><AdultAsthma map={state.map} /></>)}
@@ -178,10 +178,15 @@ const [state, dispatch] = useReducer(reducer, initialState);
         {currentTab === "20" && ( <><HospitalAsthma map={state.map} /></>)}
         {currentTab === "21" && ( <><DEPHWater map={state.map} /></>)}
 
-        {/* state measures */}
-        {currentTab === "22" && ( <><SimpleMap map={state.map} /></>)} 
+        {/* state measures - change to call <StateData> */}
+        {/*{currentTab === "22" && ( <><SimpleMap map={state.map} /></>)} 
         {currentTab === "4" && ( <><ChildhoodLeukemia map={state.map} /></>)} 
-        {currentTab === "23" && ( <><ChildhoodBrain map={state.map} /></>)} 
+        {currentTab === "23" && ( <><ChildhoodBrain map={state.map} /></>)} */}
+        
+        {currentTab === "22" && (<StateData measureID={587} units={"units"} />)} 
+        {currentTab === "4" && (<StateData measureID={71} units={"units"} />)} 
+        {currentTab === "23" && (<StateData measureID={67} units={"units"} />)} 
+
       </div>
       <div className="health-outcomes-container">
       <div className="health-outcomes-sidebar">

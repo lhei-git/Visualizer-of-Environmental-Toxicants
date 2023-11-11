@@ -6,13 +6,13 @@ import "./national.css";
 import NationalTimeSeries from "../EPHCharts/national";
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import EPHTable from "../EPHTable";
+import NationalTable from "../EPHTable/national";
 const React = require("react");
 
 
 //calling NationalData on the eph page will generate a data layout for any measure selected
 //NationalData returns a .jsx layout with a header, time series graph, filters, and custom description for each national measure
-const NationalData = ({measure, units}) => {
+const NationalData = ({measure, units, measureID}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -35,8 +35,6 @@ const NationalData = ({measure, units}) => {
 //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-
-    
 
     //.jsx layout
     return(
@@ -92,8 +90,8 @@ const NationalData = ({measure, units}) => {
             )}
             
             </div>
-
-            <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
+            {/*
+             <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
             <div className="about-data">
                 <h2>About the Data</h2>
                 <h3>Where is the data from?</h3>
@@ -109,13 +107,27 @@ const NationalData = ({measure, units}) => {
                 <p>The limit of detection (LOD) is the smallest amount of substance that can be reliably distinguished from zero. LOD means less than the limit of detection, which may vary for some chemicals by year and by individual sample. {details[measure].lod}</p>
             </div>
             </div>
+            
+            */}
+           
             {/*Function to change tables based on measure selected created by AL-Taimee */}
-            {details[measure] && (
+            {/*
+             {details[measure] && (
                 <div className="eph-table-container">
                 <h2>EPHTable for {measure}</h2>
-                <EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=16&PercentileId=1'} />
+                <EPHTable url={apiURL} />
                 </div>
             )}
+
+            
+             */}
+            <div className="eph-table-container">
+                <h2>Table for {measure}</h2>
+                <NationalTable measure={measure} />
+                
+            </div>
+            
+
         </div>
     );
 }
@@ -123,6 +135,7 @@ const NationalData = ({measure, units}) => {
 NationalData.propTypes = {
     measure: PropTypes.string.isRequired,       //measure selected on eph page
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
+    measureID: PropTypes.number.isRequired      //measureID to pass to api endpoint for
 };
 
 var samples = "Biomonitoring is conducted via individual and pooled blood or urine samples tested by CDC scientists. Samples have been collected from individuals across teh United States that took part in the CDC's National Health and Nutrition Examination Survey (NHANES). The NHANES study is designed so that the sample measures of chemicals in participants can be representatives of exposures in the entire U.S. civilian population, and the data can be filtered to represent smaller demographic groups.";
