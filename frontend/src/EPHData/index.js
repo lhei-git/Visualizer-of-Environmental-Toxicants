@@ -153,35 +153,35 @@ const [state, dispatch] = useReducer(reducer, initialState);
       {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
       <div className="eph-national-container">
         {/*national measures*/}
-        {currentTab === "8" && ( <><NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=16&PercentileId=1'} /></>)}
-        {currentTab === "10" && ( <><NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "15" && ( <><NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "2" && (<><NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "13" && (<><NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "12" && (<><NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
+        {currentTab === "8" && ( <NationalData measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}/> )}        
+        {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"} />)}
+        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} />)}
+        {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"} />)}
+        {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"} />)}
+        {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"} />)}
         
         {/* county measures */}
         
-        {currentTab === "0" && ( <><ArsenicWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "1" && ( <><AdultAsthma map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "3" && ( <><PrevalenceCancer map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "5" && ( <><FertilityRate map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "6" && ( <><HeartAttack map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "7" && ( <><InfantMortality map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "9" && ( <><LowBirthweight map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "11" && ( <><PCEWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "14" && ( <><PFASWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "16" && ( <><Prematurity map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "17" && ( <><RadiumWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "18" && ( <><TCEWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "19" && ( <><UraniumWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "20" && ( <><HospitalAsthma map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
-        {currentTab === "21" && ( <><DEPHWater map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)}
+        {currentTab === "0" && ( <><ArsenicWater map={state.map} /></>)}
+        {currentTab === "1" && ( <><AdultAsthma map={state.map} /></>)}
+        {currentTab === "3" && ( <><PrevalenceCancer map={state.map} /></>)}
+        {currentTab === "5" && ( <><FertilityRate map={state.map} /></>)}
+        {currentTab === "6" && ( <><HeartAttack map={state.map} /></>)}
+        {currentTab === "7" && ( <><InfantMortality map={state.map} /></>)}
+        {currentTab === "9" && ( <><LowBirthweight map={state.map} /></>)}
+        {currentTab === "11" && ( <><PCEWater map={state.map} /></>)}
+        {currentTab === "14" && ( <><PFASWater map={state.map} /></>)}
+        {currentTab === "16" && ( <><Prematurity map={state.map} /></>)}
+        {currentTab === "17" && ( <><RadiumWater map={state.map} /></>)}
+        {currentTab === "18" && ( <><TCEWater map={state.map} /></>)}
+        {currentTab === "19" && ( <><UraniumWater map={state.map} /></>)}
+        {currentTab === "20" && ( <><HospitalAsthma map={state.map} /></>)}
+        {currentTab === "21" && ( <><DEPHWater map={state.map} /></>)}
 
         {/* state measures */}
-        {currentTab === "22" && ( <><SimpleMap map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)} 
-        {currentTab === "4" && ( <><ChildhoodLeukemia map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)} 
-        {currentTab === "23" && ( <><ChildhoodBrain map={state.map} /><EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=1,4,5,7,9,10,16&PercentileId=1'} /></>)} 
+        {currentTab === "22" && ( <><SimpleMap map={state.map} /></>)} 
+        {currentTab === "4" && ( <><ChildhoodLeukemia map={state.map} /></>)} 
+        {currentTab === "23" && ( <><ChildhoodBrain map={state.map} /></>)} 
       </div>
       <div className="health-outcomes-container">
       <div className="health-outcomes-sidebar">

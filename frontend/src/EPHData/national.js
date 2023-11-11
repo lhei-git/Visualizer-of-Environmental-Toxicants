@@ -6,6 +6,7 @@ import "./national.css";
 import NationalTimeSeries from "../EPHCharts/national";
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
+import EPHTable from "../EPHTable";
 const React = require("react");
 
 
@@ -34,6 +35,8 @@ const NationalData = ({measure, units}) => {
 //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+    
 
     //.jsx layout
     return(
@@ -71,12 +74,12 @@ const NationalData = ({measure, units}) => {
             <div className = "time-series">
             {selectedPercentile === 1 && (
                 <NationalTimeSeries
-                size={{ width: 800, height: 400 }}
-                measure={measure}
-                units={units}
-                percentile={1}
-                demographic={selectedDemographic}
-                />
+                        size={{ width: 800, height: 400 }}
+                        measure={measure}
+                        units={units}
+                        percentile={1}
+                        demographic={selectedDemographic} />
+                        
             )}
             {selectedPercentile === 2 && (
                 <NationalTimeSeries
@@ -106,6 +109,13 @@ const NationalData = ({measure, units}) => {
                 <p>The limit of detection (LOD) is the smallest amount of substance that can be reliably distinguished from zero. LOD means less than the limit of detection, which may vary for some chemicals by year and by individual sample. {details[measure].lod}</p>
             </div>
             </div>
+            {/*Function to change tables based on measure selected created by AL-Taimee */}
+            {details[measure] && (
+                <div className="eph-table-container">
+                <h2>EPHTable for {measure}</h2>
+                <EPHTable url={'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/858/2205/all/all/2/2016,2014,2012,2010,2008,2006,2004,2002,2000/0/0?AnalyteId=25&DemographicId=16&PercentileId=1'} />
+                </div>
+            )}
         </div>
     );
 }
