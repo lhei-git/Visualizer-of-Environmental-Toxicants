@@ -1,7 +1,11 @@
 import "./index.css";
 import EPHChart from "../EPHCharts";
+import NationalData from "../EPHData/national.js";
+import React, { useState } from 'react';
+
+import EPHThematicStateMap from "../EPHThematicStateMap";
+import PropTypes from "prop-types";
 const geocoder = require("../api/geocoder");
-const React = require("react");
 const vetapi = require("../api/vetapi");
 
 const {
@@ -21,6 +25,13 @@ const {
 
 function DataComp(){
     const testSize = {width: 600, height: 300};
+    const [currentMeasure, setMeasure] = useState(null);
+
+    /* Amrita - Timeline changes based on user's selection in drop-down */
+    const handleChange = (event) => {
+        setMeasure(event.target.value);
+    };
+  
     return(
         <div className="data-comp-container">
             <div className="content-group">
@@ -36,8 +47,9 @@ function DataComp(){
                         <EPHChart size = {testSize} className="tri-chart"/>
                     </div>
                     <div className="eph-data">
+                        {/* Amrita - Adding drop-down menu for public health measures */}
                         <h2>Public Health Data</h2>
-                        <select>
+                        <select onChange={handleChange} value={currentMeasure}>
                             <option>Choose a public health measure</option>
                             <option>Arsenic in water</option>
                             <option>Asthma in Adults</option>
@@ -64,7 +76,15 @@ function DataComp(){
                             <option>TCE in Water</option>
                             <option>Uranium in Water</option>
                         </select>
-                        <EPHChart size = {testSize} className="eph-chart"/>
+
+                        {/* Amrita - Calls timeline from NationalData to display timeline for Public Health Data section */}
+                        {currentMeasure === "Lead in Blood" && (<NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/>)}
+                        {currentMeasure === "Metals in Urine" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
+                        {currentMeasure === "Phthalate Metabolites in Urine" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
+                        {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
+                        {currentMeasure === "PFAS in Blood" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
+                        {currentMeasure === "Pesticides in Urine" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
+
                     </div>
                 </div> {/*data reps*/}
             </div>
