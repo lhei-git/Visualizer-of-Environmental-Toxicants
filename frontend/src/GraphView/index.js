@@ -170,6 +170,7 @@ class CustomTimelineLegend extends Legend {
       top: 0,
       right: 0,
       lineHeight: "24px",
+      fontSize: "15px",
     },
     formatter: customLegendFormatter,
   };

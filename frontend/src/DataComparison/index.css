@@ -47,3 +47,7 @@
   .data-comp-container .eph-data{
     justify-content: center;
   }
+
+  .data-comp-container select {
+    margin-bottom: 10px;
+  }

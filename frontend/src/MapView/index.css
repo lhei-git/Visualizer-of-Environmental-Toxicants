@@ -56,14 +56,23 @@
   height: 100%;
 }
 
+/* Amrita - Changed sizing of summary table */
 .map-view .summary {
-  min-width: 1000px;
-  max-width: 50vw;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-left: 5em;
+  width: 85%;
 }
 
 .map-view .summary-container {
-  margin-top: 80px;
+  margin-top: 7em;
+  display: flex;  /* Amrita - Puts thematic map and summary table next to each other */
+}
+
+/* Amrita - Formats the national state-by-state map on the TRI Summary page */
+.map-view .national-state-map {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .pubchem-wrapper {
