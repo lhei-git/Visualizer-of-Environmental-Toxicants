@@ -95,8 +95,40 @@
   transform-origin: 60% 50%;
 }
 
-.graph-container .top-ten {
-  position: relative;
+/* Amrita - Formatted timeline graphs so timeline-total is on first row & rest are 2 per row */
+.graph-container .timeline-total {
+  position: absolute;
+  width: 120%;
+  max-width: 120em;
+  left: 25%;
+}
+
+.graph-container .timeline-top-fac {
+  position: absolute;
+  width: 80%;
+  top: 80%;
+}
+
+.graph-container .timeline-top-parents {
+  position: absolute;
+  padding-left: 4em;
+  width: 80%;
+  top: 80%;
+  left: 50%;
+}
+
+.graph-container .timeline-top-chem {
+  position: absolute;
+  width: 80%;
+  top: 140%;
+}
+
+.graph-container .timeline-top-pbts {
+  position: absolute;
+  padding-left: 4em;
+  width: 80%;
+  top: 140%;
+  left: 50%;
 }
 
 .graph-container .filter-container .control-container {

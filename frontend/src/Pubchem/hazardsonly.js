@@ -111,7 +111,9 @@ function Content(props) {
       )}
       <div className={`Hazards ${loaded ? "" : "loading"}`}>
         {props.chemName !== "" && (
-          <div className="name">
+          <div className="hazards-chem-name">
+            {/* Amrita - Adding chemical name on the top inside popup */}
+            <h1>{props.chemName}</h1>
           </div>
         )}
         {props.cid && (
@@ -176,8 +178,8 @@ function Hazards(props) {
         chemName={formatChemical(props.chemName)}
       />
     ) : (
-      <div className="oops">
-        Pubchem data for {this.props.chemName} could not be found.
+      <div className="chemical-not-found">
+        Pubchem data for {props.chemName} could not be found.
       </div>
     ))
   }

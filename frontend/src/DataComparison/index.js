@@ -1,6 +1,6 @@
 import "./index.css";
 import EPHChart from "../EPHCharts";
-import NationalData from "../EPHData/national.js";
+import NationalEPHCompare from "./nationalEPHCompare.js";
 import React, { useState } from 'react';
 
 import EPHThematicStateMap from "../EPHThematicStateMap";
@@ -77,13 +77,13 @@ function DataComp(){
                             <option>Uranium in Water</option>
                         </select>
 
-                        {/* Amrita - Calls timeline from NationalData to display timeline for Public Health Data section */}
-                        {currentMeasure === "Lead in Blood" && (<NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/>)}
-                        {currentMeasure === "Metals in Urine" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
-                        {currentMeasure === "Phthalate Metabolites in Urine" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
-                        {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
-                        {currentMeasure === "PFAS in Blood" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
-                        {currentMeasure === "Pesticides in Urine" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
+                        {/* Amrita - Calls timeline from NationalEPHCompare to display timeline for Public Health Data section */}
+                        {currentMeasure === "Lead in Blood" && (<NationalEPHCompare measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/>)}
+                        {currentMeasure === "Metals in Urine" && ( <NationalEPHCompare measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
+                        {currentMeasure === "Phthalate Metabolites in Urine" && ( <NationalEPHCompare measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
+                        {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalEPHCompare measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
+                        {currentMeasure === "PFAS in Blood" && (<NationalEPHCompare measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
+                        {currentMeasure === "Pesticides in Urine" && (<NationalEPHCompare measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
 
                     </div>
                 </div> {/*data reps*/}

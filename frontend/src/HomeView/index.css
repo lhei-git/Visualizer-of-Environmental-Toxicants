@@ -119,7 +119,7 @@
 }
 
 .home-container .suggestion-item.active {
-  background-color: #fafafa;
+  background-color: #E5E4E2;  /* Amrita - Changed color to improve user visibility */
 }
 
 .home-container .dropdown-footer {
