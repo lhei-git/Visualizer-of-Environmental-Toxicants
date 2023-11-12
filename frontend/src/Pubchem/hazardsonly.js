@@ -1,5 +1,5 @@
 /* Amrita - Exclusively the hazard pictogram portion of index.js */
-
+import "./hazardsonly.css";
 import React, { useState, useEffect } from 'react';
 import LoadingSpinner from "../LoadingSpinner";
 import PropTypes from "prop-types";
@@ -67,7 +67,7 @@ function HazardStatements(props) {
 
   return (
     pubchemData !== null && (
-      <div className="hazards">
+      <div className="hazardsonly">
 
         <div className="pictograms">
           {pubchemData.pictograms.map((v, i) => {

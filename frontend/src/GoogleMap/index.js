@@ -239,8 +239,8 @@ class GoogleMap extends Component {
     return markers;
   }
 
+  /* Amrita - When user clicks on the 'x' button on the marker InfoWindow, the window and the PubChem sidebar will go away */
   handleInfoWindowCloseButton() {
-    /* When user clicks on the 'x' button on the marker InfoWindow, the window and the PubChem sidebar will go away */
     const newState = {};
     this.setState(newState, () => {
       this.props.onRefresh();
@@ -286,7 +286,7 @@ class GoogleMap extends Component {
             <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
-              onClose={() => this.handleInfoWindowCloseButton()}  // Close button's actions
+              onClose={() => this.handleInfoWindowCloseButton()}  // Amrita - Close button's actions
             >
               <div className="info-window">
                 {this.state.activeMarker !== null && (

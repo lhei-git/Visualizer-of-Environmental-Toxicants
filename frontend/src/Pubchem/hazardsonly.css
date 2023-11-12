@@ -1,0 +1,19 @@
+/* Amrita - Added to adjust look of content inside toxicant hover popup window */
+
+.hazardsonly .pictogram {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+
+}
+
+.hazardsonly img {
+  padding-left: 10px;
+}
+  
+.hazardsonly .description {
+  padding-left: 5px;
+  padding-right: 10px;
+  font-size: 15px;
+}
+  

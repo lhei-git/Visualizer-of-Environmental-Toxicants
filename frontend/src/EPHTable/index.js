@@ -1,3 +1,5 @@
+/* DELETE FILE POSSIBLY */ 
+
 import "./index.css";
 import React, { useEffect, useState } from "react";
 import Filters from "../Filters";
