@@ -68,6 +68,11 @@ function HazardStatements(props) {
   return (
     pubchemData !== null && (
       <div className="hazardsonly">
+        
+        {/* Amrita - Adding chemical name on the top inside popup */}
+        <div className="hazards-chem-name">
+          <h1>{props.chemName}</h1>
+        </div>
 
         <div className="pictograms">
           {pubchemData.pictograms.map((v, i) => {
@@ -111,9 +116,7 @@ function Content(props) {
       )}
       <div className={`Hazards ${loaded ? "" : "loading"}`}>
         {props.chemName !== "" && (
-          <div className="hazards-chem-name">
-            {/* Amrita - Adding chemical name on the top inside popup */}
-            <h1>{props.chemName}</h1>
+          <div className="hazards-chem-name-placeholder">
           </div>
         )}
         {props.cid && (
@@ -121,6 +124,7 @@ function Content(props) {
             <HazardStatements
               cid={props.cid}
               onLoad={increment}
+              chemName={props.chemName} /* Amrita - Passing chemName so name shows in pop-up only if Hazards exist */
             />
           </div>
         )}
@@ -179,7 +183,7 @@ function Hazards(props) {
       />
     ) : (
       <div className="chemical-not-found">
-        Pubchem data for {props.chemName} could not be found.
+        Pubchem data for <p>{props.chemName}</p> could not be found.
       </div>
     ))
   }

@@ -20,4 +20,17 @@
   font-size: 15px;
   margin: 10px;
 }
-  
+
+/* Amrita - Formats the name of the chemical inside pop-up box when PubChem data could not be found */
+.chemical-not-found p {
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Amrita - Formats the chemical name inside the pop-up box */
+.hazards-chem-name h1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 5px 10px 5px;
+  border-bottom: 1px solid #000;
+}
