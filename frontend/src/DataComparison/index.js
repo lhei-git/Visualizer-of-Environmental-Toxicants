@@ -1,12 +1,17 @@
 import "./index.css";
 import EPHChart from "../EPHCharts";
 import NationalData from "../EPHData/national.js";
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import Title from "../Title";
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import PropTypes from "prop-types";
+import Filters from "../Filters/index.js";
 const geocoder = require("../api/geocoder");
 const vetapi = require("../api/vetapi");
+
+const { formatChemical, getLocationString } = require("../helpers");
+const { years } = require("../contants");
+//created by Katherine O'Donnell
 
 const {
     BarChart,
@@ -21,16 +26,79 @@ const {
     ResponsiveContainer,
   } = require("recharts");
 
-//created by Katherine O'Donnell
 
-function DataComp(){
+
+
+function DataComp(props){
     const testSize = {width: 600, height: 300};
     const [currentMeasure, setMeasure] = useState(null);
+    const [chemicals, setChemicals] = React.useState([]);
+/* farzana */
+    React.useEffect(() => {
+      async function fetchChemicalList(map) {
+        const params = {
+          city: map.city,
+          county: map.county,
+          state: map.state,
+          year: props.filters.year,
+          release_type: props.filters.releaseType,
+          pbt: props.filters.pbt,
+          carcinogen: props.filters.carcinogen || null,
+        };
+        try {
+          const res = await vetapi.get("/chemicals", { params });
+          const tmp = [...new Set(res.data.map((d) => formatChemical(d)).sort())];
+          setChemicals(tmp);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+  
+      if (props.map) fetchChemicalList(props.map);
+    }, [props.filters, props.map]);
+
+    function onFilterChange(event) {
+      const target = event.target;
+      const filters = Object.assign({}, props.filters);
+      const value = target.type === "checkbox" ? target.checked : target.value;
+      if (target.name === "year") filters[target.name] = parseInt(value);
+      filters[target.name] = value;
+      if (["carcinogen", "pbt"].includes(target.name) && target.checked) {
+        filters["chemical"] = "all";
+      } else if (target.name === "chemical") {
+        filters["carcinogen"] = false;
+        filters["pbt"] = false;
+      }
+      props.onFilterChange(filters);
+    }
 
     /* Amrita - Timeline changes based on user's selection in drop-down */
     const handleChange = (event) => {
-        setMeasure(event.target.value);
-    };
+      setMeasure(event.target.value);
+  };
+
+  const handleChemicalChange = (event) => {
+    //setChemicals(event.target.value);
+  }
+/* farzana */
+  function getChemicals() {
+    let options = [];
+    options.push(
+      <option defaultValue={true} key="all" value="all">
+        All chemicals
+      </option>
+    );
+    if (chemicals.length === 0) return options;
+  
+    for (var chemical of chemicals) {
+      options.push(
+        <option key={chemical} value={chemical}>
+          {chemical}
+        </option>
+      );
+    }
+    return options;
+  }
   
     return(
         <div className="data-comp-container">
@@ -41,9 +109,16 @@ function DataComp(){
                 <div className="data-reps">
                     <div className="tri-data">
                         <h2>Toxicant Release</h2>
-                        <select>
-                            <option>Choose a chemical</option>
+                        {/* farzana */}
+                        <select
+                          name="chemical"
+                          value={props.filters.chemical}
+                          onChange={onFilterChange}
+                          id=""
+                        >
+                          {getChemicals()}
                         </select>
+    
                         <EPHChart size = {testSize} className="tri-chart"/>
                     </div>
                     <div className="eph-data">
@@ -92,5 +167,6 @@ function DataComp(){
     )
 
 }
+
 
 export default DataComp;
