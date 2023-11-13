@@ -1,3 +1,6 @@
+//==========================================
+// Author: Farzana Israt
+//==========================================
 import React from 'react';
 import {
     ComposableMap,
@@ -144,6 +147,15 @@ const RadiumWater = ({ map }) => {
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
     <span>5+</span>
+  </div>
+</div>
+<div className='mapDescription'>
+  <h2></h2>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+    The National Environmental Public Health Tracking Network (Tracking Network) brings together health data and environmental data from national, state, and city sources and provides supporting information to make the data easier to understand. The Tracking Network has data and information on environments and hazards, health effects, and population health.
   </div>
 </div>
     {/*

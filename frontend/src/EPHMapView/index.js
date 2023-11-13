@@ -8,19 +8,12 @@ import {
   ComposableMap,
   Geographies,
   Geography,
-  ZoomableGroup
 } from 'react-simple-maps';
-import { getLocationString } from '../helpers';
 import "./index.css"
 import ReactTooltip from 'react-tooltip';
 
 
-
-
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
-
-
-
 
 function getColorScale(dataValue) {
   return dataValue == null
@@ -34,22 +27,18 @@ function getColorScale(dataValue) {
     : '#1ab3eb';
 }
 
-
-
-
 const SimpleMap = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  //const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
+  const [selectedGenderId, setSelectedGenderId] = useState([]);
+  
 
-
-
-  // Fetch data for each year
-  const dataForEachYear = (year) => {
+  const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`, )
+    axios
+      .get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/4/all/all/1/${year}/0/0?GenderId=${genderId}`)
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -58,18 +47,16 @@ const SimpleMap = ({ map }) => {
       });
   };
 
-
-
-
   useEffect(() => {
     if (selectedYear) {
-      dataForEachYear(selectedYear);
+      dataForEachYear(selectedYear, selectedGenderId);
     }
-  }, [selectedYear]);
+  }, [selectedYear, selectedGenderId]);
 
-
-
-
+  const handleGenderChange = (event) => {
+    setSelectedGenderId(event.target.value);
+  };
+  
   return (
     <div className='mapView'>
      <div className='container'>
@@ -80,7 +67,7 @@ const SimpleMap = ({ map }) => {
         <label> Year: </label>
         <select
           value={selectedYear}
-          onChange={(e) => dataForEachYear(e.target.value)}
+          onChange={(e) => setSelectedYear(e.target.value)}
         >
           <option value=""> Select Year </option>
           <option value="2020">2020</option>
@@ -94,6 +81,14 @@ const SimpleMap = ({ map }) => {
           <option value="2012">2012</option>
           <option value="2011">2011</option>
         </select>
+      </div>
+      <div className='dropdown'>
+      <label htmlFor="gender">Select Gender:</label>
+      <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
+        <option value="">Select a Gender</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
       </div>
 
 
@@ -130,6 +125,7 @@ const SimpleMap = ({ map }) => {
   </Geographies>
 </ComposableMap>
 
+
       <ReactTooltip />
   <div className="legend">
   <h3>Percent Concentration</h3>
@@ -154,6 +150,16 @@ const SimpleMap = ({ map }) => {
     <span>14+</span>
   </div>
 </div>
+
+<div className='mapDescription'>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+  Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.
+  </div>
+</div>
+
 
 {/*
       {selectedState && (

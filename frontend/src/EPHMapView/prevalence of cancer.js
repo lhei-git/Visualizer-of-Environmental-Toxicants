@@ -1,3 +1,6 @@
+//==========================================
+// Author: Farzana Israt
+//==========================================
 import React from 'react';
 import {
     ComposableMap,
@@ -123,6 +126,16 @@ const PrevalenceCancer = ({ map }) => {
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
     <span>14+</span>
+  </div>
+</div>
+
+<div className='mapDescription'>
+  <h2></h2>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+  Data are from the Population Level Analysis and Community Estimates (PLACES) Project (https://www.cdc.gov/places/index.html), which is an expansion of the original 500 Cities Project. The original project was launched by the Centers for Disease Control and Prevention (CDC) in partnerships with the Robert Wood Johnson Foundation (RWJF) and CDC Foundation.
   </div>
 </div>
     {/*

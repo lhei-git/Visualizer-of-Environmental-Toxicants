@@ -1,3 +1,6 @@
+//==========================================
+// Author: Farzana Israt
+//==========================================
 import React, { useState, useEffect, memo } from 'react';
 import axios from 'axios';
 
@@ -8,13 +11,11 @@ import {
     ZoomableGroup
 } from 'react-simple-maps'
 import ReactTooltip from 'react-tooltip';
+import FadeInSection from '../FadeInSection';
+import "./index.css"
 
-const EPHReusableMap = (props) => {
+const EPHMap = (props) => {
     const [position, setPosition] = useState({coordinates: [-96, 38], zoom: 1});
-
-
-    
-
 
     function textColorScale(color) {
         var r = parseInt(color.toString().substr(1, 2), 16);
@@ -162,7 +163,7 @@ if(props.mapType === "states")
       return (
         <>
         <div className='mapView'>
-            <ComposableMap data-tip="" projection="geoAlbers">
+            <ComposableMap projection="geoAlbers">
                 <Geographies geography={props.geoURL}>
                     {({ geographies }) =>
                      geographies.map((geo) => {
@@ -175,7 +176,7 @@ if(props.mapType === "states")
                             <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
-                                data-tip={geo.properties.NAME}
+                                data-tip={`${geo.properties.NAME}: ${stateData && stateData.displayValue}`}
                                 style={{
                                     default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                     hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -193,7 +194,7 @@ if(props.mapType === "states")
                                 <Geography
                                     key={geo.rsmKey}
                                     geography={geo}
-                                    data-tip={geo.properties.NAME}
+                                    data-tip={`${geo.properties.NAME}: ${stateData && stateData.displayValue}`}
                                     style={{
                                         stroke: "#000",
                                     }}
@@ -268,34 +269,48 @@ else if(props.mapType === "counties")
                         <Geographies geography={props.geoUrl}>
                             {({ geographies }) => 
                                 geographies.map((geo) => {
-                                    const countyData = props.data.find((d) =>  d.geo === geo.properties.NAME);
+                                    const countyData = props.data.find((d) =>  d.geoId === geo.properties.GEOID);
                                     const fillColor = countyData ? getColorScale(countyData.dataValue) : '#D6D6DA';
+                                    
                                     if (countyData != undefined) {
                                         return (
                                             <Geography
                                             key={geo.rsmKey}
                                             geography={geo}
-                                            data-tip={geo.properties.NAME}
+                                            
+                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2): "No Data"}`}
                                             style={{
-                                                default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
-                                                hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
-                                                pressed: { outline: "none" }
+                                              default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+                                              hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                                              pressed: { outline: "none" }
                                             }}
-
                                             onMouseEnter={() => {
                                                 ReactTooltip.rebuild();
 
                                             }}
 
                                             />
+
+                                            
                                         )
+
+
+
+
+
+                                        
+                                        
                                     } else {
                                         return (
                                             <Geography
                                                 key={geo.rsmKey}
                                                 geography={geo}
                                                 data-tip={geo.properties.NAME}
-                                                style={{default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" }}}
+                                                style={{
+                                                  default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+                                                  hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                                                  pressed: { outline: "none" }
+                                                }}
                                                 onMouseEnter={() => {
                                                     ReactTooltip.rebuild();
                                                 }}
@@ -309,12 +324,38 @@ else if(props.mapType === "counties")
                         </Geographies>
                     </ComposableMap>
                     <ReactTooltip />
-                    
-            </div>
+
+
+<div className="legend">
+  <h3>Percent Concentration</h3>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+    <span>Null Data</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
+    <span>0-9</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
+    <span>9-12</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
+    <span>12-14</span>
+  </div>
+  <div className="legend-item">
+    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
+    <span>14+</span>
+  </div>
+</div>
+</div>
+             
+
             </>
         );
     }  
 
 };
 
-export default EPHReusableMap;
+export default EPHMap;

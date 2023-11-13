@@ -1,10 +1,10 @@
 import "./index.css";
-
 import NationalData from "./national";
 import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
+import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
 import PropTypes from "prop-types";
 import PFASWater from "../EPHMapView/pfas in water";
 import PCEWater from "../EPHMapView/pce in water";
@@ -28,7 +28,7 @@ const React = require("react");
 
 
 
-function EPHHome(map) {
+function EPHHome({ map }) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
@@ -90,6 +90,7 @@ const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const [state, dispatch] = useReducer(reducer, initialState);
+const [visible, setVisible] = useState(false);
 
   return (
     <div className="health-outcomes-container">
@@ -105,21 +106,133 @@ const [state, dispatch] = useReducer(reducer, initialState);
         
         {/* county measures */}
         
-        {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
-        {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
-        {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
-        {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
-        {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
-        {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
-        {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
-        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
-        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
-        {currentTab === "16" && ( <Prematurity map={state.map}/> )}
-        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
-        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
-        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
-        {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
-        {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
+        {currentTab === "0" && ( 
+          
+        <EPHThematicWaterStateMap 
+                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
+                measure={"Arsenic in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "1" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[2020, 2019, 2018]}
+                measure={"Asthma Among Adults"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+
+        {currentTab === "3" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[2020, 2019, 2018]}
+                measure={"Prevalence of Cancer"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "5" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                measure={"Fertility Rate"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "6" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                gender={[1, 2]}
+                measure={"Heart Attack"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "7" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004]}
+                measure={"Infant Mortality"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "9" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                gender={[1, 2]}
+                measure={"Low Birthweight"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "11" && ( 
+        <EPHThematicWaterStateMap 
+                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
+                measure={"PCE in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "14" && ( 
+        <EPHThematicWaterStateMap 
+                yearRange={[2015]}
+                contaminant={[1, 2, 3, 4, 5, 6]}
+                measure={"PFAS in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "16" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                gender={[1, 2]}
+                measure={"Prematurity"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+        {currentTab === "17" && ( 
+        <EPHThematicWaterStateMap 
+                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
+                measure={"Radium in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "18" && ( 
+        <EPHThematicWaterStateMap 
+                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
+                measure={"TCE in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "19" && ( 
+        <EPHThematicWaterStateMap 
+                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
+                measure={"Uranium in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap> )}
+        {currentTab === "20" && ( 
+          /*farzana -- making state maps for each measure*/
+        <EPHThematicStateMap 
+                yearRange={[2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]}
+                measure={"Hospitalizations from Asthma"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicStateMap> )}
+       
+        {currentTab === "21" && (
+        <EPHThematicWaterStateMap 
+                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
+                measure={"DEPH in Community Water"}
+                stateName={map.state}
+                stateLongName={map.stateLong}>
+        </EPHThematicWaterStateMap>)}
+
 
         {/* state measures */}
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
@@ -129,7 +242,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
       <div className="health-outcomes-sidebar">
       {containerColumnLeftClose && (
         <div className="container-column">
-          
+         
           <h2>Select a Health Issue</h2>
           <ul>
             <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
@@ -157,6 +270,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in water</a></li> {/* 18 */}
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
           </ul>
+          
         </div>
       )}
             </div>

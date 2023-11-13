@@ -1,4 +1,8 @@
-import React from 'react';
+
+//==========================================
+// Author: Farzana Israt
+//==========================================
+/*import React from 'react';
 import {
     ComposableMap,
     Geographies,
@@ -51,7 +55,8 @@ const DEPHWater = ({ map }) => {
       return (
         <div className='mapView'>
          <div className='container'>
-          {/*return data for asthma in children for the typed in location*/}
+          {/*return data for asthma in children for the typed in location*/
+          {/*}
           <h2>DEPH in Community Water Systems near {" "} {getLocationString(map, true)}</h2>
           </div>
           <div className="dropdown">
@@ -94,6 +99,7 @@ const DEPHWater = ({ map }) => {
         scale: 1000
       }}
     >
+    
 
       <ZoomableGroup center={[map.center.lng, map.center.lat]} zoom={3}>
       <Geographies geography={GEOJSON_URL}>
@@ -146,6 +152,16 @@ const DEPHWater = ({ map }) => {
     <span>20+</span>
   </div>
 </div>
+
+<div className='mapDescription'>
+  <h2></h2>
+  <div className='measureDescription'>
+  </div>
+  <span className='questionMark'>ⓘ</span>
+  <div className='tooltip'>
+  Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water.
+  </div>
+</div>
     {/*
           {selectedState && (
             <div className="tooltip">
@@ -153,7 +169,9 @@ const DEPHWater = ({ map }) => {
             </div>
           )}
           */}
+          {/*}
         </div>
       );
     }
     export default DEPHWater;
+  */}
