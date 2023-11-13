@@ -110,6 +110,7 @@ const [visible, setVisible] = useState(false);
           
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
                 measure={"Arsenic in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -143,6 +144,7 @@ const [visible, setVisible] = useState(false);
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
                 yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                gender={[1, 2]}
                 measure={"Heart Attack"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -159,6 +161,7 @@ const [visible, setVisible] = useState(false);
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
                 yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                gender={[1, 2]}
                 measure={"Low Birthweight"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -166,6 +169,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "11" && ( 
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
                 measure={"PCE in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -173,6 +177,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "14" && ( 
         <EPHThematicWaterStateMap 
                 yearRange={[2015]}
+                contaminant={[1, 2, 3, 4, 5, 6]}
                 measure={"PFAS in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -181,6 +186,7 @@ const [visible, setVisible] = useState(false);
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
                 yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                gender={[1, 2]}
                 measure={"Prematurity"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -188,6 +194,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "17" && ( 
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
                 measure={"Radium in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -195,6 +202,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "18" && ( 
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
                 measure={"TCE in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -202,6 +210,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "19" && ( 
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
                 measure={"Uranium in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>
@@ -218,6 +227,7 @@ const [visible, setVisible] = useState(false);
         {currentTab === "21" && (
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                level={[1, 2, 3]}
                 measure={"DEPH in Community Water"}
                 stateName={map.state}
                 stateLongName={map.stateLong}>

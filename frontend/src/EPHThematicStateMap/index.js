@@ -25,6 +25,7 @@ class EPHThematicStateMap extends Component {
       prevStateName: "",
       countyData: null,
       measure: "",
+      gender: "all",
       scale: null,
       lat: null,
       lon: null,
@@ -135,6 +136,8 @@ class EPHThematicStateMap extends Component {
   getApiURL() {
     
     const selectedYear = this.state.selectedYear;
+    const selectedGender = this.state.gender;
+
     if(this.props.measure === "Asthma Among Adults") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/${selectedYear}/0/0`
     }
@@ -150,16 +153,16 @@ class EPHThematicStateMap extends Component {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/${selectedYear}/0/0`
     }
     else if (this.props.measure === "Heart Attack") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/${selectedYear}/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
     }
     else if (this.props.measure === "Infant Mortality") { //not sure if this is the right one 
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/${selectedYear}/1/0`
     }
     else if (this.props.measure === "Low Birthweight") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/${selectedYear}/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/36/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
     }
     else if (this.props.measure === "Prematurity") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/${selectedYear}/1/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
     }
     
     /*
@@ -206,23 +209,25 @@ class EPHThematicStateMap extends Component {
   
   handleYearChange = (event) => {
     this.setState({ selectedYear: event.target.value }, () => {
-      this.getCountyData(); // Fetch data with the updated year
+      this.getCountyData(); 
     });
   };
   
-  handleMeasureChange = (event) => {
-    this.setState({ measure: event.target.value }, () => {
-      this.getCountyData(); // Fetch data with the updated measure
+  handleGenderChange = (event) => {
+    this.setState({ gender: event.target.value }, () => {
+      this.getCountyData(); 
     });
   };
+  
     
+  
   render() {
     const selectedYear = this.state.selectedYear;
     const yearOptions = this.props.yearRange;
 
     return (
-      <div className="thematic-view-container">
-        <div className="flex-item">
+      <div className="thematic-state-container">
+        <div className="flex">
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <div className="centered-year">
         <select
@@ -230,14 +235,30 @@ class EPHThematicStateMap extends Component {
           onChange={this.handleYearChange}
           style={{ fontSize: '18px', marginBottom: '50px' }}
         >
+          
           {yearOptions.map((year) => (
+            
             <option key={year} value={year}>
               {year}
             </option>
           ))}
         </select>
         </div>
-
+        
+        {["Heart Attack", "Low Birthweight", "Prematurity"].includes(this.props.measure) && (
+          <div className="centered-gender">
+            <select
+              value={this.state.gender}
+              onChange={this.handleGenderChange}
+              style={{ fontSize: '18px', marginBottom: '50px' }}
+            >
+              <option>Select a Gender</option>
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+            </select>
+          </div>
+        )}
+        
           {this.state.countyData ? (
             
               <EPHMap

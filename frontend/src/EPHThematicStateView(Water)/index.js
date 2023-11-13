@@ -26,6 +26,8 @@ class EPHThematicWaterStateMap extends Component {
       prevStateName: "",
       countyData: null,
       measure: "",
+      level: "",
+      contaminant: "",
       scale: null,
       lat: null,
       lon: null,
@@ -105,29 +107,33 @@ class EPHThematicWaterStateMap extends Component {
   */
   getApiURL() {
     const selectedYear = this.state.selectedYear;
+    const selectedLevel = this.state.level;
+    const selectedContaminant = this.state.contaminant;
 
     if(this.props.measure === "Arsenic in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${selectedYear}/0/0?PMDisplayId=2`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`
     }
     else if (this.props.measure === "DEPH in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/802/102/all/all/1/${selectedYear}/0/0?PMDisplayId=2`    
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/802/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`    
     }
     
     else if (this.props.measure === "PCE in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/807/102/all/all/1/${selectedYear}/0/0?PMDisplayId=2`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/807/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`
     }
 
     else if (this.props.measure === "PFAS in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/734/184/all/all/2/${selectedYear}/0/0?ContaminantId=1`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/734/184/all/all/2/${selectedYear}/0/0?ContaminantId=${selectedContaminant}`
     }
     else if (this.props.measure === "Radium in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/817/102/all/all/1/${selectedYear}/0/0?PMDisplayId=2`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/817/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`
     }
     else if (this.props.measure === "TCE in Community Water") { //not sure if this is the right one 
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/812/102/all/all/1/${selectedYear}/0/0?PMDisplayId=2`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/812/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}
+      `
     }
     else if (this.props.measure === "Uranium in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/822/102/all/all/1/${selectedYear}/0/0?PMDisplayId=2`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/822/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}
+      `
     }
     
 
@@ -178,6 +184,17 @@ class EPHThematicWaterStateMap extends Component {
     });
   };
   
+  handleLevelChange = (event) => {
+    this.setState({ level: event.target.value }, () => {
+      this.getCountyData(); 
+    });
+  };
+
+  handleContaminantChange = (event) => {
+    this.setState({ contaminant: event.target.value }, () => {
+      this.getCountyData(); 
+    });
+  };
   
   
     
@@ -205,6 +222,40 @@ class EPHThematicWaterStateMap extends Component {
 
           </div>
 
+
+          {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
+          <div className="centered-gender">
+            <select
+              value={this.state.level}
+              onChange={this.handleLevelChange}
+              style={{ fontSize: '18px', marginBottom: '50px' }}
+            >
+              <option>Select a Level</option>
+              <option value="1">Maximum contaminant level: Greater than MCL</option>
+              <option value="2">Maximum contaminant level: Less Than or Equal to MCL</option>
+              <option value="3">Maximum contaminant level: Not Detected</option>
+
+            </select>
+          </div>
+        )}
+
+        {["PFAS in Community Water"].includes(this.props.measure) && (
+          <div className="centered-gender">
+            <select
+              value={this.state.contaminant}
+              onChange={this.handleContaminantChange}
+              style={{ fontSize: '18px', marginBottom: '50px' }}
+            >
+              <option>Select a Contaminant</option>
+              <option value="1">PFOS</option>
+              <option value="2">PFOA</option>
+              <option value="3">PFNA</option>
+              <option value="4">PFHxS</option>
+              <option value="5">PFHpA</option>
+              <option value="6">PFBS</option>
+            </select>
+          </div>
+        )}
           
           {this.state.countyData ? (
             
