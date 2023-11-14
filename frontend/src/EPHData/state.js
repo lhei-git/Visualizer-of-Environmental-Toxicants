@@ -9,7 +9,7 @@ const React = require("react");
 
 
 //calling StateData on the eph page will generate a data layout for any measure selected
-const StateData = ({measureID, units}) => {
+const StateData = ({measure, measureID, units}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -36,24 +36,8 @@ const StateData = ({measureID, units}) => {
     //.jsx layout
     return(
         <div className="state-container">
-            <h1>measure</h1>
-            <div className="filter-container">
-                <div className="percentile-filter">
-                    <p>Select a percentile estimate:</p>
-                    <select value={selectedPercentile} onChange={(e) => chooseFilters(parseInt(e.target.value), selectedDemographic)}>
-                        {/*in API endpoints, percentileID=1 for 50th, 2 for 95th. 'value' passed as percentile id */}
-                        <option value={1}>50th percentile</option>
-                        <option value={2}>95th percentile</option>
-                    </select>
-                </div>
-                <div className="demographic-filter">
-                    <p>Select a demographic group:</p>
-                    <select value={selectedDemographic} onChange={(e) => chooseFilters(selectedPercentile, parseInt(e.target.value))}>
-                        {/*value number passed as demographic id */}
-                        
-                    </select>
-                </div>
-            </div>
+            <h1>{measure}</h1>
+            
             {/*code below changes data representation based on filter changes*/}
             <div className = "time-series">
                 {selectedPercentile === 1 && (
@@ -88,6 +72,7 @@ const StateData = ({measureID, units}) => {
 
 StateData.propTypes = {
     measure: PropTypes.string.isRequired,       //measure selected on eph page
+    measureID: PropTypes.number.isRequired,       //ID of measure selected on eph page
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
 };
 
