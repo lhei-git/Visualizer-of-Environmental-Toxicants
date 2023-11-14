@@ -32,7 +32,25 @@ const {
 
   const timelineAspectRatio = 17 / 9;
   const maxLabelLength = 20;
+  const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
 
+  const CustomXAxisTick = (props) => {
+    const { x, y, payload } = props;
+    let { value } = payload;
+    if (value.length > maxLabelLength + 5) {
+      value = value.slice(0, maxLabelLength + 5) + "...";
+    }
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text fontSize="12" transform="rotate(-35)" x={0} y={0} dx={-10}>
+          <tspan textAnchor="end" x="0" dy="0">
+            {value}
+          </tspan>
+        </text>
+      </g>
+    );
+  };
+  
   class CustomTooltip extends Tooltip {
     static defaultProps = {
       ...Tooltip.defaultProps,
@@ -78,24 +96,9 @@ const {
       tick: CustomXAxisTick,
     };
   }
-  const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
+  
 
-  const CustomXAxisTick = (props) => {
-    const { x, y, payload } = props;
-    let { value } = payload;
-    if (value.length > maxLabelLength + 5) {
-      value = value.slice(0, maxLabelLength + 5) + "...";
-    }
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text fontSize="12" transform="rotate(-35)" x={0} y={0} dx={-10}>
-          <tspan textAnchor="end" x="0" dy="0">
-            {value}
-          </tspan>
-        </text>
-      </g>
-    );
-  };
+  
 
 /* convert properties of graph to query params for the VET api */
 const createParams = ({ map, filters }, customParams) => {
