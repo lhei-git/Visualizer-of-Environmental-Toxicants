@@ -4,8 +4,9 @@ import { useEffect, useState, useReducer } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
 import "./index.css";
-const { getLocationParents} = require("../helpers");
+import { getStateID } from '../EPHFilters/stateID';
 
+const {getLocationParents, getYearString} = require("../helpers");
 
 
 //written by Katherine O'Donnell
@@ -87,17 +88,49 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
       }
     };
   const [state] = useReducer(reducer, initialState);
-  //use helper function to get the name of the searched state from the stored location search
-  //get ID of the state from the stateIDs variable, convert to string to use in endpoint
-  const stateID = String(stateIDs[getLocationParents(state.map, "stateLong")]);
+  //end of storage retrieval
 
-//below code gets data from API and stores it as 'data' object to be accessed by time series function
+  
+  
+   //use helper function to get the name of the searched state from the stored location search
+  //get ID of the state from the stateIDs variable, convert to string to use in endpoint
+  //const stateID = String(stateIDs[getLocationParents(state.map, "stateLong")]);
+
+  // get stateID to pass to endpoint
+  const [stateID, setStateID] = useState('');
+  useEffect(() => {
+    const fetchStateID = async () => {
+      try {
+        const id = await getStateID(getLocationParents(state.map, 'stateLong'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/1/0`);
+        setStateID(id);
+      } catch (error) {
+        console.error('Error fetching state ID:', error);
+      }
+    };
+    fetchStateID();
+  }, [measureID, state.map]);
+
+  //get years available for selected measure to pass to api endpoint
+  const [years, setYears] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`);
+        const yearData = response.data.map(item => item.temporal);//extract years 
+        setYears(yearData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  //convert array of years to string
+  const yearString = getYearString(years);
+
+  //below code gets data from API and stores it as 'data' object to be accessed by time series function
   const [data, setData] = useState([]);
-  //const apiURL = 'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/1/26/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0';
-  //console.log('measureID:', measureID);
-  //console.log('stateID:', stateID);
-  const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0`;
-  //const apiURL = 'https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0';
+  const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/${yearString}/0/0`;
   useEffect(() => {
     axios.get(apiURL)
       .then((response) => {
@@ -113,12 +146,13 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
       });
   }, [apiURL]);
 
+  
+
   return (
-    <div className="TimeSeries" style={{width: size.width, height: size.height }}>
-      <p>{measureID}</p>
-      <p>{stateID}</p>
-      <p>old url: https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/1/26/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0</p>
-      <p>new url: {apiURL}</p>
+    <div className="TimeSeries" style={{width: size.width, height: size.height }}>     
+      <h1>{getLocationParents(state.map, 'stateLong')}</h1>
+      <p>state id {stateID}</p>
+      <p>measure id {measureID}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );

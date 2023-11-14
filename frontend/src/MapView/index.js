@@ -7,6 +7,7 @@ import FilterView from "../Filters";
 import MapLegend from "../MapLegend";
 import Hazards from "../Pubchem/hazardsonly";
 import ThematicStateMap from "../ThematicStateMap/index.js";
+import ThematicMapView from "../ThematicMapView/index.js";
 import { formatChemical, formatAmount } from "../helpers";
 import vetapi from "../api/vetapi";
 import "./index.css";
@@ -18,6 +19,8 @@ const initialState = {
   showPubchemInfo: false,
   chemicals: [],
   currentChemical: "",
+  errorMessage: "",
+
 };
 
 const reducer = (state, action) => {
@@ -38,11 +41,14 @@ const reducer = (state, action) => {
       };
     case "setCurrentChemical":
       return { ...state, currentChemical: action.payload };
+      case "setErrorMessage":
+      return { ...state, errorMessage: action.payload };
     default:
       throw new Error();
   }
 };
 
+const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const refresh = () => ({ type: "refresh" });
 const showPubchemInfo = () => ({ type: "showPubchemInfo" });
 const setChemicals = (payload) => ({ type: "setChemicals", payload });
@@ -134,6 +140,14 @@ ChemicalList.propTypes = {
 function MapView({ map, filters, onFilterChange }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
+  /* Amrita - Adding error for ThematicMapView */
+  function toggleError() {
+    dispatch(setErrorMessage("Server request failed, please try again later."));
+    setTimeout(() => {
+      dispatch(setErrorMessage(""));
+    }, 10000);
+  }
+
   return (
     <div className="map-view">
       <div className="flex-container top">
@@ -200,11 +214,10 @@ function MapView({ map, filters, onFilterChange }) {
         </div>
       </div>
       {/* Summary table and state thematic map. Only show if a search has been completed */}
+      {/* Amrita - Switched order so thematic map appears on left side and table on the right */}
       {map && (
+        <div className="maps-tables">
         <div className="summary-container">
-          <div>
-            <GraphSummary map={map} filters={filters}></GraphSummary>
-          </div>
           {!["US", "DC"].includes(map.state) && (
             <div>
               <ThematicStateMap
@@ -214,6 +227,21 @@ function MapView({ map, filters, onFilterChange }) {
               ></ThematicStateMap>
             </div>
           )}
+
+          <div className="national-state-map">
+            {/* Amrita - Added national map to TRI page */}
+            <ThematicMapView
+              map={map}
+              filters={filters}
+              onApiError={toggleError}
+              onFilterChange={onFilterChange}
+            ></ThematicMapView>
+          </div>
+        </div>
+
+          <div>
+            <GraphSummary map={map} filters={filters}></GraphSummary>
+          </div>
         </div>
       )}
     </div>

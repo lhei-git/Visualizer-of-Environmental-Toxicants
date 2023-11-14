@@ -20,12 +20,12 @@ import "./index.css";
 import history from "./history";
 import Home from "./HomeView";
 import GraphView from "./GraphView";
+import DataComp from "./DataComparison/index";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
 
 import EPHData from "./EPHData/index";
-import DataComp from "./DataComparison/index"
 
 import React, { useImperativeHandle, useReducer } from "react";
 import MapView from "./MapView";
@@ -107,6 +107,9 @@ const Navbar = (props) => {
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
               <Link to="/ephdata">Health Outcomes</Link>
+            </li>
+            <li className={location.pathname === "/datacomp" ? "active" : ""}>
+              <Link to="/datacomp">Data Comparison</Link>
             </li>
             {/* Remove national insights page
             <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
@@ -268,6 +271,12 @@ const App = (props) => {
             {/*farzana israt*/}
             <EPHHome map={state.map}/>
           </Route>
+
+          {/* Amrita - Adding back in the Data Comparison page */}
+          <Route path="/datacomp">
+            <DataComp map={state.map} filters={state.filters}/>
+          </Route>
+
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
             {/* home page */}
@@ -282,5 +291,3 @@ const App = (props) => {
 
 
 export default withRouter(App);
-
-

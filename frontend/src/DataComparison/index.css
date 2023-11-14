@@ -47,3 +47,12 @@
   .data-comp-container .eph-data{
     justify-content: center;
   }
+
+  /* Amrita - Formats the drop-down boxes */
+  .data-comp-container select {
+    margin-bottom: 10px;
+    height: 30px;
+    max-width: 400px;
+    font-size: 15px;
+    text-align: center;
+  }
