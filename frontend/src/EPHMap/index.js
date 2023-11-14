@@ -11,7 +11,6 @@ import {
     ZoomableGroup
 } from 'react-simple-maps'
 import ReactTooltip from 'react-tooltip';
-import FadeInSection from '../FadeInSection';
 import "./index.css"
 
 const EPHMap = (props) => {

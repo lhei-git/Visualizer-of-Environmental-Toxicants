@@ -29,6 +29,18 @@
 }
 
 
+
+.legend {
+  position: absolute;
+  bottom: 100px;
+  left: 1150px;
+  margin-bottom: 166px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
  
   .graph-container .filter-container .control-container {
     display: block;
@@ -37,7 +49,7 @@
 .mapView .legend {
   position: absolute;
   bottom: 100px;
-  left: 500px;
+  left: 1150px;
   margin-bottom: 166px;
   background: white;
   border: 1px solid #ccc;
@@ -50,6 +62,8 @@
   font-size: 16px;
   text-align: center;
 }
+
+/*Responsiveness of map legend and items creaated by Al-Taimee*/
 
 .legend-item {
   display: flex;
@@ -67,6 +81,33 @@
 
 .legend-item span {
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  
+  .mapView {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .legend {
+    left: 10px; 
+    right: 10px; 
+  }
+
+  .legend h3 {
+    font-size: 14px; 
+  }
+
+  .legend-item {
+    margin: 3px 0; 
+  }
+
+  .legend-color {
+    width: 16px; 
+    height: 16px; 
+    margin-right: 8px; 
+  }
 }
 
 .mapDescription {

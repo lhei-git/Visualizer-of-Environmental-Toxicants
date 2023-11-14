@@ -119,3 +119,42 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+/*Search bar styles created by Al-Taimee*/
+.health-outcomes-sidebar input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.health-outcomes-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.health-outcomes-sidebar li {
+  text-align: left;
+  text-indent: 1px;
+  padding-bottom: 10px;
+}
+
+.health-outcomes-sidebar a {
+  text-decoration: none;
+  color: #333;
+}
+
+.health-outcomes-sidebar a:hover {
+  color: #007bff;
+}
+
+.health-outcomes-sidebar li.active {
+  font-weight: bold;
+}
+
+/*List headings created by Al-Taimee*/
+.boldHeadings {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+

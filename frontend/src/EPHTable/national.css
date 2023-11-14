@@ -1,0 +1,59 @@
+/*Add these style to CSS file in App.css file later*/
+/*Styles for table representation created by Al-Taimee*/
+.eph-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #dcdcdc;
+
+  }
+  
+  .eph-table th,
+  .eph-table td {
+    border: 2px solid #dcdcdc;
+    padding: 8px;
+    padding-left: 50px;
+    text-align: center;
+  }
+  
+  .eph-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .eph-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .eph-table tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .percentile-50 {
+    font-weight: bold;
+  }
+  
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
+    margin-left: 100px;
+    float: right;
+  }
+  
+/*Responsive styles for tables*/
+  @media (max-width: 469px) {
+    .eph-table th,
+    .eph-table td {
+      padding: 5px;
+      padding-left: 20px;
+    }
+  
+    .eph-table th {
+      font-size: 14px; 
+    }
+  
+    .eph-table tr:nth-child(even),
+    .eph-table tr:nth-child(odd) {
+      padding: 5px;
+    }
+  }

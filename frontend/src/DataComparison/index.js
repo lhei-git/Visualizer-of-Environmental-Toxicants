@@ -30,20 +30,16 @@ const {
 
 
 function DataComp(props){
-    const testSize = {width: 600, height: 300};
     const [currentMeasure, setMeasure] = useState(null);
     const [chemicals, setChemicals] = React.useState([]);
-/* farzana */
+
+    /* farzana */
     React.useEffect(() => {
       async function fetchChemicalList(map) {
         const params = {
           city: map.city,
           county: map.county,
           state: map.state,
-          year: props.filters.year,
-          release_type: props.filters.releaseType,
-          pbt: props.filters.pbt,
-          carcinogen: props.filters.carcinogen || null,
         };
         try {
           const res = await vetapi.get("/chemicals", { params });
@@ -60,9 +56,7 @@ function DataComp(props){
     function onFilterChange(event) {
       const target = event.target;
       const filters = Object.assign({}, props.filters);
-      const value = target.value;
-      if (target.name === "year") filters[target.name] = parseInt(value);
-      filters[target.name] = value;
+      filters[target.name] = target;
       props.onFilterChange(filters);
     }
 
@@ -70,7 +64,6 @@ function DataComp(props){
     const handleChange = (event) => {
       setMeasure(event.target.value);
   };
-
 
 /* farzana */
   function getChemicals() {
