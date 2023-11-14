@@ -76,6 +76,20 @@ module.exports.getLocationString = (map, long) => {
 };
 
 //written by Katherine O'Donnell
+//convert list of available years for a given measure to a string to pass to API endpoint
+module.exports.getYearString = (yearData) => {
+  //check that yearData is an array
+  if (!Array.isArray(yearData)) {
+    throw new Error('Input must be an array of years.');
+  }
+  //reverse array to get years in descending order - correct format to pass to endpoint
+  //const reversedYears = yearData.reverse();
+  //join years with commas - correct format to pass to endpoint
+  const yearString = yearData.join(',');
+  return yearString;
+};
+
+//written by Katherine O'Donnell
 //gets 'parents' of location searched
 module.exports.getLocationParents = (map, parentType) => {
   //returns state abbreviation
@@ -118,8 +132,6 @@ const { getLocationParents, (etc) } = require("../helpers");
         case "setFilters":
           const newFilters = Object.assign({}, action.payload);
           return { ...state, filters: newFilters };
-    
-    
         case "setErrorMessage":
           return { ...state, errorMessage: action.payload };
         default:
