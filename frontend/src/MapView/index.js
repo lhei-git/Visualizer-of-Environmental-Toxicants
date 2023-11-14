@@ -227,10 +227,6 @@ function MapView({ map, filters, onFilterChange }) {
               ></ThematicStateMap>
             </div>
           )}
-          <div>
-            <GraphSummary map={map} filters={filters}></GraphSummary>
-          </div>
-        </div>
 
           <div className="national-state-map">
             {/* Amrita - Added national map to TRI page */}
@@ -241,7 +237,11 @@ function MapView({ map, filters, onFilterChange }) {
               onFilterChange={onFilterChange}
             ></ThematicMapView>
           </div>
-          
+        </div>
+
+          <div>
+            <GraphSummary map={map} filters={filters}></GraphSummary>
+          </div>
         </div>
       )}
     </div>
