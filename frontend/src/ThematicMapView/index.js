@@ -10,7 +10,7 @@ const Component = React.Component;
 
 // state and county map topographical data, used to create svg map
 const stateGeoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/us-albers.json";
+  "https://raw.githubusercontent.com/missisrat/topology/main/us-albers.json";
 const countyGeoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/us-albers-counties.json";
 
@@ -138,6 +138,7 @@ class ThematicMapView extends Component {
             )}
           </div>
 
+          {/* Amrita - Commenting out for now because map is not functional at the moment
           <div className="flex-item">
             <div className="graph-header">
               <Title
@@ -163,7 +164,7 @@ class ThematicMapView extends Component {
             ) : (
               <LoadSpinner />
             )}
-          </div>
+            </div> */}
         </div>
       </div>
     );

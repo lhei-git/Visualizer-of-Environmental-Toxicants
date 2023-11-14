@@ -60,6 +60,7 @@ function About() {
         </div>
         <br />
         <div>
+          <h2>Creators of VET</h2>
           VET was developed for the Lab for Health and Environmental Information
           (LHEI) at Wayne State University by Evan de Jesus, Adwait Wadekar,
           Richard Moore, and Calvin Brooks as part of their Senior Capstone

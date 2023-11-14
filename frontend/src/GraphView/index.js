@@ -170,6 +170,7 @@ class CustomTimelineLegend extends Legend {
       top: 0,
       right: 0,
       lineHeight: "24px",
+      fontSize: "15px",
     },
     formatter: customLegendFormatter,
   };
@@ -1031,11 +1032,13 @@ function GraphView({ map, filters, onFilterChange }) {
             </div>
           )}
           {/* Timeline View */}
+          {/* Amrita - Added classnames to each timeline on TRI Timelines page for formatting purposes */}
           {currentTab === 2 && (
             <div
               className="timelines"
               style={{ display: currentTab === 2 ? "block" : "none" }}
             >
+              <div className = "timeline-total">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1049,6 +1052,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "timeline-top-fac">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1062,6 +1068,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+              
+              <div className = "timeline-top-parents">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1076,6 +1085,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "timeline-top-chem">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1090,6 +1102,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "timeline-top-pbts">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1104,6 +1119,7 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
             </div>
           )}
           {/* Appendix View */}
