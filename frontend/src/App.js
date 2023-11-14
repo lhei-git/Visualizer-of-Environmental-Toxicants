@@ -239,7 +239,7 @@ const App = (props) => {
 
           {/* Amrita - Adding back in the Data Comparison page */}
           <Route path="/datacomp">
-            <DataComp/>
+            <DataComp map={state.map} filters={state.filters}/>
           </Route>
 
           <Route path="/about" component={AboutPage}></Route>
@@ -256,5 +256,4 @@ const App = (props) => {
 
 
 export default withRouter(App);
-
 

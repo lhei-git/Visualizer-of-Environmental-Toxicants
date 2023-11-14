@@ -60,15 +60,9 @@ function DataComp(props){
     function onFilterChange(event) {
       const target = event.target;
       const filters = Object.assign({}, props.filters);
-      const value = target.type === "checkbox" ? target.checked : target.value;
+      const value = target.value;
       if (target.name === "year") filters[target.name] = parseInt(value);
       filters[target.name] = value;
-      if (["carcinogen", "pbt"].includes(target.name) && target.checked) {
-        filters["chemical"] = "all";
-      } else if (target.name === "chemical") {
-        filters["carcinogen"] = false;
-        filters["pbt"] = false;
-      }
       props.onFilterChange(filters);
     }
 
@@ -77,9 +71,7 @@ function DataComp(props){
       setMeasure(event.target.value);
   };
 
-  const handleChemicalChange = (event) => {
-    //setChemicals(event.target.value);
-  }
+
 /* farzana */
   function getChemicals() {
     let options = [];
@@ -119,7 +111,7 @@ function DataComp(props){
                           {getChemicals()}
                         </select>
     
-                        <EPHChart size = {testSize} className="tri-chart"/>
+                        
                     </div>
                     <div className="eph-data">
                         {/* Amrita - Adding drop-down menu for public health measures */}
