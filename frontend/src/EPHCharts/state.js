@@ -96,9 +96,8 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
   //get ID of the state from the stateIDs variable, convert to string to use in endpoint
   //const stateID = String(stateIDs[getLocationParents(state.map, "stateLong")]);
 
-  // Get state ID using the getStateID function
+  // get stateID to pass to endpoint
   const [stateID, setStateID] = useState('');
-
   useEffect(() => {
     const fetchStateID = async () => {
       try {
@@ -108,7 +107,6 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
         console.error('Error fetching state ID:', error);
       }
     };
-
     fetchStateID();
   }, [measureID, state.map]);
 
@@ -151,9 +149,10 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
   
 
   return (
-    <div className="TimeSeries" style={{width: size.width, height: size.height }}>
-      <p>{stateID}</p>
-     
+    <div className="TimeSeries" style={{width: size.width, height: size.height }}>     
+      <h1>{getLocationParents(state.map, 'stateLong')}</h1>
+      <p>state id {stateID}</p>
+      <p>measure id {measureID}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
