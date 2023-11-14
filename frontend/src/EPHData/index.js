@@ -103,6 +103,16 @@ function EPHHome(map) {
     setCurrentTab(i);
   }
 
+  // Scroll to the bottom of the page
+    const scrollToBottom = () => {
+      window.scrollTo(0, document.body.scrollHeight);
+    };
+
+    // Scroll to the top of the page
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
     chooseTab("0"); //default bisphenol, change to arsenic ASAP
@@ -148,8 +158,20 @@ const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const [state, dispatch] = useReducer(reducer, initialState);
 
+
+
   return (
+    
     <div className="health-outcomes-container">
+      {/*Buttons to scroll up and down on page*/}
+      <div className="scroll-btn-container">
+      <button className="scroll-btn" onClick={scrollToBottom}>
+        Scroll to Bottom
+      </button>
+      <button className="scroll-btn" onClick={scrollToTop}>
+        Scroll to Top
+      </button>
+      </div>
       {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
       <div className="eph-national-container">
         {/*national measures*/}

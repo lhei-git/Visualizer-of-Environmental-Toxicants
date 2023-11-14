@@ -138,15 +138,7 @@ function Footer() {
   );
 }
 
-// Scroll to the bottom of the page
-const scrollToBottom = () => {
-  window.scrollTo(0, document.body.scrollHeight);
-};
 
-// Scroll to the top of the page
-const scrollToTop = () => {
-  window.scrollTo(0, 0);
-};
 
 
 const App = (props) => {
@@ -208,15 +200,7 @@ const App = (props) => {
       )}
       
       <div className="app-container">
-      {/*Buttons to scroll up and down on page*/}
-      <div className="scroll-btn-container">
-      <button className="scroll-btn" onClick={scrollToBottom}>
-        Scroll to Bottom
-      </button>
-      <button className="scroll-btn" onClick={scrollToTop}>
-        Scroll to Top
-      </button>
-      </div>
+      
         <Switch>
           <Route exact path="/map">
             {/* Map, summary, and state thematic map */}
