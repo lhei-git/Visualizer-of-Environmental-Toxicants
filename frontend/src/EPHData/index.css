@@ -181,3 +181,9 @@
 .scroll-btn:hover {
   background-color: #7d3a8b;
 }
+
+.extraLink {
+  color: blue;
+  font-size: 10px;
+  text-transform: lowercase;
+}

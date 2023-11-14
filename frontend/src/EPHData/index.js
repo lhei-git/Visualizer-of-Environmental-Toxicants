@@ -254,7 +254,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
             
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
-            <li><a href="https://ephtracking.cdc.gov/">Click here for full list of meeasures by CDC's EPH Tracking program</a></li>
+            <li className="extraLink"><a href="https://ephtracking.cdc.gov/">Click here for full list of meeasures by CDC's EPH Tracking program</a></li>
           </ul>
         </div>
       </div>

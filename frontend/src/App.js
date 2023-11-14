@@ -33,6 +33,8 @@ import PropTypes from "prop-types";
 import SimpleMap from "./EPHMapView/index";
 import EPHHome from "./EPHData/index";
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+
 
 
 
@@ -88,9 +90,10 @@ const Navbar = (props) => {
 
   /* Only shows other paths when a search has been initiated */
   return (
-    <div
+    <div id="vethosNav"
       className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
     >
+      
       <ul>
         <li className={location.pathname === "/" ? "active" : ""}>
         <Link to="/">Search</Link>
@@ -115,10 +118,18 @@ const Navbar = (props) => {
                 <li className={location.pathname === "/about" ? "active" : ""}>
           <Link to="/about">About</Link>
         </li>
+
+        
       </ul>
+
       <div className="logo">
         <Link to="/">VETHOS.</Link>
       </div>
+
+      <a href="javascript:void(0);" class="hamburger" onclick={hamburgerNav}>
+        <i class="fa fa-bars"></i>
+      </a>
+      
       
     </div>
   );
@@ -137,6 +148,19 @@ function Footer() {
     </div>
   );
 }
+
+
+function hamburgerNav() {
+  var x = document.getElementById("vethosNav");
+  if (x.className.indexOf("responsiveNav") === -1) {
+    x.className += " responsiveNav";
+  } else {
+    x.className = x.className.replace("responsiveNav", "");
+  }
+}
+
+
+
 
 
 

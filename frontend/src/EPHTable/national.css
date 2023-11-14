@@ -56,4 +56,8 @@
     .eph-table tr:nth-child(odd) {
       padding: 5px;
     }
+
+    .sticky-header {
+      margin-left: 0;
+    }
   }
