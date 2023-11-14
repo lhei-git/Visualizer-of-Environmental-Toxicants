@@ -30,20 +30,16 @@ const {
 
 
 function DataComp(props){
-    const testSize = {width: 600, height: 300};
     const [currentMeasure, setMeasure] = useState(null);
     const [chemicals, setChemicals] = React.useState([]);
-/* farzana */
+
+    /* farzana */
     React.useEffect(() => {
       async function fetchChemicalList(map) {
         const params = {
           city: map.city,
           county: map.county,
           state: map.state,
-          year: props.filters.year,
-          release_type: props.filters.releaseType,
-          pbt: props.filters.pbt,
-          carcinogen: props.filters.carcinogen || null,
         };
         try {
           const res = await vetapi.get("/chemicals", { params });
@@ -60,15 +56,7 @@ function DataComp(props){
     function onFilterChange(event) {
       const target = event.target;
       const filters = Object.assign({}, props.filters);
-      const value = target.type === "checkbox" ? target.checked : target.value;
-      if (target.name === "year") filters[target.name] = parseInt(value);
-      filters[target.name] = value;
-      if (["carcinogen", "pbt"].includes(target.name) && target.checked) {
-        filters["chemical"] = "all";
-      } else if (target.name === "chemical") {
-        filters["carcinogen"] = false;
-        filters["pbt"] = false;
-      }
+      filters[target.name] = target;
       props.onFilterChange(filters);
     }
 
@@ -77,32 +65,6 @@ function DataComp(props){
       setMeasure(event.target.value);
   };
 
-  const handleChemicalChange = (event) => {
-    //setChemicals(event.target.value);
-  }
-/* farzana */
-  function getChemicals() {
-    let options = [];
-    options.push(
-      <option defaultValue={true} key="all" value="all">
-        All chemicals
-      </option>
-    );
-    if (chemicals.length === 0) return options;
-  
-    for (var chemical of chemicals) {
-      options.push(
-        <option key={chemical} value={chemical}>
-          {chemical}
-        </option>
-      );
-    }
-    return options;
-  }
-  
-  const handleChemicalChange = (event) => {
-    //setChemicals(event.target.value);
-  }
 /* farzana */
   function getChemicals() {
     let options = [];
@@ -142,7 +104,7 @@ function DataComp(props){
                           {getChemicals()}
                         </select>
     
-                        <EPHChart size = {testSize} className="tri-chart"/>
+                        
                     </div>
                     <div className="eph-data">
                         {/* Amrita - Adding drop-down menu for public health measures */}

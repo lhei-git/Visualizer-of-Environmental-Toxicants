@@ -9,7 +9,6 @@ import data from "../data/stateLocationData.json";
 import Title from "../Title/index.js";
 import axios from "axios";
 import EPHMap from "../EPHMap/index";
-import FadeInSection from "../FadeInSection.js";
 import "./index.css";
 const React = require("react");
 const Component = React.Component;
