@@ -83,9 +83,9 @@ module.exports.getYearString = (yearData) => {
     throw new Error('Input must be an array of years.');
   }
   //reverse array to get years in descending order - correct format to pass to endpoint
-  //const reversedYears = yearData.reverse();
+  const reversedYears = yearData.reverse();
   //join years with commas - correct format to pass to endpoint
-  const yearString = yearData.join(',');
+  const yearString = reversedYears.join(',');
   return yearString;
 };
 

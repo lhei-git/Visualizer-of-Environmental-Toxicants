@@ -1,16 +1,12 @@
-import "./national.css";
+import "./national.css";//change
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
-const { getLocationParents } = require("../helpers");
+import { getStateID } from '../EPHFilters/stateID';
+const {getLocationParents, getYearString} = require("../helpers");
 
-var stateIDs = {
-    Michigan: "26",
-  //!!!add other IDs or get from json
-  }
   
 function StateTable({ measureID}) {
-  const [data, setData] = useState([]);
-
+ 
   //below code pulls searched location from app session storage/
     // Initial state of app 
     const initialState = {
@@ -46,28 +42,42 @@ function StateTable({ measureID}) {
     const [state] = useReducer(reducer, initialState);
     //end of storage retrieval code
 
-    //get state ID from location string stored in session
-    const stateID = String(stateIDs[getLocationParents(state.map, "stateLong")]);
+  //use api call geographicItems to obtain the state ID of the state searched by the user
+  //helper getLocationParents returns name of the searched state from session storage
+  const [stateID, setStateID] = useState('');
+  useEffect(() => {
+    const fetchStateID = async () => {
+      try {
+        const id = await getStateID(getLocationParents(state.map, 'stateLong'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/1/0`);
+        setStateID(id);
+      } catch (error) {
+        console.error('Error fetching state ID:', error);
+      }
+    };
+    fetchStateID();
+  }, [measureID, state.map]);
+
+  //get years available for selected measure to pass to api endpoint
+  const [years, setYears] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`);
+        const yearData = response.data.map(item => item.temporal);//extract years 
+        setYears(yearData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+  //convert array of years to string
+  const yearString = getYearString(years);
 
 
-  //get API URL based on measure
-  function getApiURL(id){
-    if (id == 587){
-        //child asthma
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/1/${stateID}/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0`;
-    }
-    else if (id == 67){
-        //brain and central nervous system cancer among children
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/1/1/${stateID}/1/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001/0/0`;
-    }
-    else if (id == 71){
-        //leukemia among children
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/1/1/${stateID}/1/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001/0/0`;
-    }
-    else {/*error handling*/}
-  }
-
-  const url = getApiURL(measureID);
+  //pass api url to get measure data
+  const [data, setData] = useState([]);
+  const url = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/${yearString}/0/0`;
   useEffect(() => {
     axios
       .get(url)
