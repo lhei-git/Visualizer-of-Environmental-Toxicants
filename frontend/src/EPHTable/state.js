@@ -2,6 +2,9 @@ import "./state.css"
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { getStateID } from '../EPHFilters/stateID';
+const {getLocationParents, getYearString} = require("../helpers");
+
+
 function StateTable({ measureID}) {
  
   //below code pulls searched location from app session storage/
