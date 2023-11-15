@@ -148,22 +148,13 @@ function DataComp(props){
       /* do something here */
     }
 
-    const [selectedChemical, setSelectedChemical] = useState("all");
-
-  // useEffect to handle filter changes
-  useEffect(() => {
-    // Call the function to update the timeline or perform other actions
-    TimelineTotal({ map: props.map, filters: props.filters });
-  }, [props.filters, props.map]);
-
-  // Function to handle filter changes
-  function onFilterChange(event) {
-    const target = event.target;
-    const filters = { ...props.filters, [target.name]: target.value };
-    props.onFilterChange(filters);
-    setSelectedChemical(target.value);
-  }
-  
+    function onFilterChange(event) {
+      const target = event.target;
+      const filters = { ...props.filters, [target.name]: target.value };
+      props.onFilterChange(filters);
+ 
+      TimelineTotal({ map: props.map, filters });
+    }
     
 
     /* Amrita - Timeline changes based on user's selection in drop-down */
@@ -190,8 +181,6 @@ function DataComp(props){
     }
     return options;
   }
-
-
   async function TimelineTotal({ map, filters }) {
     try {
       const res = await vetapi.get(
