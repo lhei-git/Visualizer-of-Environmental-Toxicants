@@ -375,8 +375,9 @@ const scrollToTop = () => {
             <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
 
-            <li className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
-
+            <div className="extraLink">
+            <li><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
+            </div>  
           </ul>
         </div>
       </div>
