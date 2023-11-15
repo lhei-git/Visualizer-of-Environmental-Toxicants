@@ -31,7 +31,7 @@
     font-weight: bold;
   }
   
-  .sticky-header {
+  .eph-table .sticky-header {
     position: sticky;
     top: 0;
     background-color: #f2f2f2;
