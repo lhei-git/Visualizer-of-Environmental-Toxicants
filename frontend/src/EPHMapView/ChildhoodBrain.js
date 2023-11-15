@@ -41,15 +41,16 @@ const ChildhoodBrain = ({ map }) => {
   const [selectedYear, setSelectedYear] = useState([]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
+  const [selectedGenderId, setSelectedGenderId] = useState([]);
   //const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
 
 
 
   // Fetch data for each year
-  const dataForEachYear = (year) => {
+  const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/1/all/all/1/${year}/0/0`, )
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/4/all/all/1/${year}/0/0?GenderId=${genderId}`, )
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -63,15 +64,18 @@ const ChildhoodBrain = ({ map }) => {
 
   useEffect(() => {
     if (selectedYear) {
-      dataForEachYear(selectedYear);
+      dataForEachYear(selectedYear, selectedGenderId);
     }
-  }, [selectedYear]);
+  }, [selectedYear, selectedGenderId]);
 
+  const handleGenderChange = (event) => {
+    setSelectedGenderId(event.target.value);
+  };
 
 
 
   return (
-    <div className='mapView'>
+    <div className='nation-mapView'>
      <div className='container'>
       {/*return data for asthma in children for the typed in location*/}
       <h2>Childhood Cancer Brain & Central Nervous System</h2>
@@ -80,7 +84,7 @@ const ChildhoodBrain = ({ map }) => {
         <label> Year: </label>
         <select
           value={selectedYear}
-          onChange={(e) => dataForEachYear(e.target.value)}
+          onChange={(e) => setSelectedYear(e.target.value)}
         >
           <option value=""> Select Year </option>
           <option value="2019">2019</option>
@@ -104,6 +108,15 @@ const ChildhoodBrain = ({ map }) => {
           <option value="2001">2001</option>
           
         </select>
+      </div>
+
+      <div className='dropdown'>
+      <label htmlFor="gender">Select Gender:</label>
+      <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
+        <option value=""> Select a Gender </option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
       </div>
 
 

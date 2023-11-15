@@ -182,6 +182,36 @@ class EPHThematicStateMap extends Component {
     */
   }
 
+  getUnits(endUnits) {
+    if(this.props.measure === "Asthma Among Adults") {
+      return endUnits = "(Percent)"; 
+    }
+    else if (this.props.measure === "Hospitalizations from Asthma") {
+      return endUnits = "(Counts)"    
+    }
+    
+    else if (this.props.measure === "Prevalence of Cancer") {
+      return endUnits = "(Percent)"  
+    }
+
+    else if (this.props.measure === "Fertility Rate") {
+      return endUnits = "(Rate)" 
+    }
+    else if (this.props.measure === "Heart Attack") {
+      return endUnits = "(Rate)" 
+    }
+    else if (this.props.measure === "Infant Mortality") { //not sure if this is the right one 
+      return endUnits = "(Rate)" 
+    }
+    else if (this.props.measure === "Low Birthweight") {
+      return endUnits = "(Percent)" 
+    }
+    else if (this.props.measure === "Prematurity") {
+      return endUnits = "(Percent)" 
+    }
+
+  }
+
   async getCountyData() {
     const apiUrl = this.getApiURL();
 
@@ -222,12 +252,14 @@ class EPHThematicStateMap extends Component {
     
   
   render() {
+    
     const selectedYear = this.state.selectedYear;
     const yearOptions = this.props.yearRange;
 
     return (
       <div className="thematic-state-container">
         <div className="flex">
+          
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <div className="centered-year">
         <select
@@ -268,6 +300,8 @@ class EPHThematicStateMap extends Component {
                 lon={this.state.lon}
                 lat={this.state.lat}
                 scale={this.state.scale}
+                units={this.getUnits()}
+                
                />
             
           ) : (

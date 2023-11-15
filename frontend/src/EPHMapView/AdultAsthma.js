@@ -33,6 +33,7 @@ function getColorScale(dataValue) {
 const AdultAsthma = ({ map }) => {
     const [data, setData] = useState([]);
     const [selectedYear, setSelectedYear] = useState([]);
+    
 
     const dataForEachYear = (year) => {
         setSelectedYear(year);

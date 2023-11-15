@@ -33,10 +33,13 @@ function getColorScale(dataValue) {
 const ArsenicWater = ({ map }) => {
     const [data, setData] = useState([]);
     const [selectedYear, setSelectedYear] = useState([]);
+    const [selectedLevel, setSelectedLevel] = useState([]);
+    const [countyAverages, setCountyAverages] = useState({});
 
-    const dataForEachYear = (year) => {
+
+    const dataForEachYear = (year, level) => {
         setSelectedYear(year);
-            axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${year}/0/0?PMDisplayId=1,2,3`)
+            axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${year}/0/0?PMDisplayId=${level}`)
             .then((response) => {
                 setData(response.data.cwsTableResult);
             })
@@ -47,9 +50,38 @@ const ArsenicWater = ({ map }) => {
 
     useEffect(() => {
         if (selectedYear) {
-          dataForEachYear(selectedYear);
+          dataForEachYear(selectedYear, selectedLevel);
         }
-      }, [selectedYear]);
+      }, [selectedYear, selectedLevel]);
+
+      
+  useEffect(() => {
+    // Calculate county averages
+    const countyAverages = {};
+    data.forEach((entry) => {
+      const countyName = entry.geoId;
+      const dataValue = parseFloat(entry.dataValue);
+      if (!isNaN(dataValue)) {
+        if (countyAverages[countyName]) {
+          countyAverages[countyName].push(dataValue);
+        } else {
+          countyAverages[countyName] = [dataValue];
+        }
+      }
+    });
+
+    for (const county in countyAverages) {
+      const values = countyAverages[county];
+      const average = values.reduce((sum, value) => sum + value, 0) / values.length;
+      countyAverages[county] = average;
+    }
+
+    setCountyAverages(countyAverages);
+  }, [data]);
+
+      const handleLevelChange = (event) => {
+        setSelectedLevel(event.target.value);
+      };
 
       return (
         <div className='mapView'>
@@ -91,6 +123,16 @@ const ArsenicWater = ({ map }) => {
               <option value="1999">1999</option>
             </select>
           </div>
+
+          <div className='dropdown'>
+          <label htmlFor="gender">Select Level:</label>
+          <select id="gender" value={selectedLevel} onChange={handleLevelChange}>
+            <option value=""> Select a Level </option>
+            <option value="1">Greater than MCL</option>
+            <option value="2">Less than or Equal to MCL</option>
+            <option value="3">Not Detected</option>
+          </select>
+          </div>
     
     <ComposableMap
       projection="geoAlbers"
@@ -103,13 +145,16 @@ const ArsenicWater = ({ map }) => {
       <Geographies geography={GEOJSON_URL}>
         {({ geographies }) =>
           geographies.map((geo) => {
-            const stateData = data.find((d) => d.geo === geo.properties.name);
-            const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+            //const stateData = data.find((d) => d.geoId === geo.id);
+            //const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+            const countyName = geo.properties.name;
+                const averageValue = countyAverages[countyName] || null;
+                const fillColor = getColorScale(averageValue);
             return (
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
+                data-tip={`${countyName}: ${averageValue != null ? averageValue.toFixed(2) : 'N/A'}`}
                 style={{
                   default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                   hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -129,7 +174,7 @@ const ArsenicWater = ({ map }) => {
     <ReactTooltip />
 
    
-    <div className="legend">
+ <div className="legend">
   <h3>Percent Concentration</h3>
   <div className="legend-item">
     <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
