@@ -1,11 +1,13 @@
-import "./state.css"
+import "./county.css"
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { getStateID } from '../EPHFilters/stateID';
+import { getCountyID } from "../EPHFilters/countyID";
+
 const {getLocationParents, getYearString} = require("../helpers");
 
-
-function StateTable({ measureID}) {
+  
+function CountyTable({ measureID}) {
  
   //below code pulls searched location from app session storage/
     // Initial state of app 
@@ -44,17 +46,17 @@ function StateTable({ measureID}) {
 
   //use api call geographicItems to obtain the state ID of the state searched by the user
   //helper getLocationParents returns name of the searched state from session storage
-  const [stateID, setStateID] = useState('');
+  const [countyID, setCountyID] = useState('');
   useEffect(() => {
-    const fetchStateID = async () => {
+    const fetchCountyID = async () => {
       try {
-        const id = await getStateID(getLocationParents(state.map, 'stateLong'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/1/0`);
-        setStateID(id);
+        const id = await getCountyID(getLocationParents(state.map, 'stateLong'), getLocationParents(state.map, 'county'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/2/0`);
+        setCountyID(id);
       } catch (error) {
-        console.error('Error fetching state ID:', error);
+        console.error('Error fetching county ID:', error);
       }
     };
-    fetchStateID();
+    fetchCountyID();
   }, [measureID, state.map]);
 
   //get years available for selected measure to pass to api endpoint
@@ -62,7 +64,7 @@ function StateTable({ measureID}) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`);
+        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/2/all/all`);
         const yearData = response.data.map(item => item.temporal);//extract years 
         setYears(yearData);
       } catch (error) {
@@ -74,36 +76,30 @@ function StateTable({ measureID}) {
   //convert array of years to string
   const yearString = getYearString(years);
 
-
   //pass api url to get measure data
   const [data, setData] = useState([]);
-  const url = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/${yearString}/0/0`;
+  const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2/2/${countyID}/1/${yearString}/0/0`;
   useEffect(() => {
-    axios
-      .get(url)
+    axios.get(apiURL)
       .then((response) => {
-        const APIdata = response.data.tableResult.map((item) => ({
+        const newData = response.data.tableResult.map((item) => ({
+          year: item.year,
           dataValue: item.dataValue,
-          sampleSize: item.sampleSize,
-          concentration: item.Concentration,
-          year: item.year
+          //add error handling if dataValue is null?????
         }));
-        setData(APIdata);
+        setData(newData);
       })
       .catch((error) => {
-        console.error("Error trying to retrieve data from EPH API: ", error);
+        console.error(error);
       });
-  }, [url]);
+  }, [apiURL]);
 
   return (
     <table className="eph-table">
       <thead>
         <tr> 
-          
           <th className="sticky-header">Year</th>
           <th className="sticky-header">Concentration</th>
-          <th className="sticky-header">Sample Size</th>
-          
         </tr>
       </thead>
       <tbody>
@@ -121,4 +117,4 @@ function StateTable({ measureID}) {
 }
 
 
-export default StateTable;
+export default CountyTable;

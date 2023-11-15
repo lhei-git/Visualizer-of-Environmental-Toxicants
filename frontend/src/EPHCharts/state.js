@@ -5,7 +5,6 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'rec
 import axios from 'axios';
 import "./index.css";
 import { getStateID } from '../EPHFilters/stateID';
-
 const {getLocationParents, getYearString} = require("../helpers");
 
 
@@ -13,9 +12,9 @@ const {getLocationParents, getYearString} = require("../helpers");
 
 /* NOTES: */
 /*
-
 - asthma among children
   - measureID 587
+  - measure: PREVALENCE OF ASTHMA AMONG CHILDREN | CRUDE PREVALENCE OF CHILDREN <=17 YEARS OF AGE EVER DIAGNOSED 
   - displayValue: "Data Not Collected", when dataValue: null
   - 2011-2020
   - endpoint w/ no filters: https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0
@@ -26,6 +25,7 @@ const {getLocationParents, getYearString} = require("../helpers");
 
 - incidence of brain and central nervous system cancer among children
   - measureID 67
+  - measure: INCIDENCE OF LEUKEMIA | ANNUAL NUMBER OF LEUKEMIA AMONG CHILDREN <20 YEARS OF AGE 
   - displayValue: "Suppressed" when dataValue: null
     - some states not hoverable? nebraska not hoverable but returns valid data
   - 2001 - 2019
@@ -33,8 +33,6 @@ const {getLocationParents, getYearString} = require("../helpers");
   - possible filters:
     - gender
     - race/ethnicity: Asian/Pacific Islander (includes Hispanic), Black (includes Hispanic), Hispanic (all races), American Indian/Alaskan Native (includes Hispanic), White (includes Hispanic)
-
-
 
 - incidence of leukemia among children
   - measureID 71
@@ -44,13 +42,7 @@ const {getLocationParents, getYearString} = require("../helpers");
    - possible filters:
     - gender
     - race/ethnicity: Asian/Pacific Islander (includes Hispanic), Black (includes Hispanic), Hispanic (all races), American Indian/Alaskan Native (includes Hispanic), White (includes Hispanic)
- 
 */
-
-var stateIDs = {
-  Michigan: "26",
-//!!!add other IDs or get from json
-}
 
 const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
   //below code pulls searched location from app session storage 
@@ -90,13 +82,8 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
   const [state] = useReducer(reducer, initialState);
   //end of storage retrieval
 
-  
-  
-   //use helper function to get the name of the searched state from the stored location search
-  //get ID of the state from the stateIDs variable, convert to string to use in endpoint
-  //const stateID = String(stateIDs[getLocationParents(state.map, "stateLong")]);
-
-  // get stateID to pass to endpoint
+  //use api call geographicItems to obtain the state ID of the state searched by the user
+  //helper getLocationParents returns name of the searched state from session storage
   const [stateID, setStateID] = useState('');
   useEffect(() => {
     const fetchStateID = async () => {
@@ -110,7 +97,7 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
     fetchStateID();
   }, [measureID, state.map]);
 
-  //get years available for selected measure to pass to api endpoint
+  //get years available for selected measure to paass to api endpoint
   const [years, setYears] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -124,11 +111,10 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
     };
     fetchData();
   }, []);
-
   //convert array of years to string
   const yearString = getYearString(years);
 
-  //below code gets data from API and stores it as 'data' object to be accessed by time series function
+  //get measure data from API and stores it as 'data' object to be accessed by time series function
   const [data, setData] = useState([]);
   const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/${yearString}/0/0`;
   useEffect(() => {
@@ -149,10 +135,12 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
   
 
   return (
-    <div className="TimeSeries" style={{width: size.width, height: size.height }}>     
-      <h1>{getLocationParents(state.map, 'stateLong')}</h1>
+    <div className="TimeSeries" style={{width: size.width, height: size.height }}>  
+      {/*
+       <h1>{getLocationParents(state.map, 'stateLong')}</h1>
       <p>state id {stateID}</p>
       <p>measure id {measureID}</p>
+      */}   
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
