@@ -104,15 +104,6 @@ function EPHHome({map}) {
     setCurrentTab(i);
   }
 
-  // Scroll to the bottom of the page
-    const scrollToBottom = () => {
-      window.scrollTo(0, document.body.scrollHeight);
-    };
-
-    // Scroll to the top of the page
-    const scrollToTop = () => {
-      window.scrollTo(0, 0);
-    };
 
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
@@ -384,7 +375,7 @@ const scrollToTop = () => {
             <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
 
-            <li id="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
+            <li className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
 
           </ul>
         </div>
