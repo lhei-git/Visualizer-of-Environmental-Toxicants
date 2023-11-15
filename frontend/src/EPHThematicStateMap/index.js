@@ -260,7 +260,7 @@ class EPHThematicStateMap extends Component {
       <div className="thematic-state-container">
         <div className="flex">
           
-        <h1>{this.props.measure} in {this.props.stateName}</h1>
+        <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <div className="centered-year">
         <select
           value={selectedYear}

@@ -25,17 +25,7 @@ const EPHMap = (props) => {
       }
     
 
-    function getColorScale(dataValue) {
-        return dataValue == null
-          ? '#D6D6DA'
-          : dataValue < 9
-          ? '#bbe9fa'
-          : dataValue < 12
-          ? '#8bdefc'
-          : dataValue < 14
-          ? '#62cdf5'
-          : '#1ab3eb';
-      }
+
 
       function handleMoveEnd(position) {
         setPosition(position);
@@ -123,6 +113,61 @@ const EPHMap = (props) => {
             return [scaleAll[valIndex]];
         }
       }
+      const [minValue, setMinValue] = useState(null);
+      const [maxValue, setMaxValue] = useState(null);
+      useEffect(() => {
+        // Calculate minValue and maxValue when data changes
+        const dataValues = props.data.map((d) => d.dataValue);
+        setMinValue(Math.min(...dataValues));
+        setMaxValue(Math.max(...dataValues));
+      }, [props.data]);
+
+      function generateColor(value, minValue, maxValue) {
+        const percentage = (value - minValue) / (maxValue - minValue);
+        const hue = 200; // Blue hue
+        const saturation = 80; // Adjust as needed
+        const lightness = 30 + 50 * percentage; // Vary lightness from 30% to 80%
+      
+        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+      }
+      
+      
+      
+      
+      function getColorScale(dataValue, minValue, maxValue) {
+        return dataValue === null ? '#D6D6DA' : generateColor(dataValue, minValue, maxValue);
+      }
+
+      function generateLegendItems(data) {
+        const minValue = Math.min(...data.map((d) => d.dataValue));
+        const maxValue = Math.max(...data.map((d) => d.dataValue));
+      
+        
+        const numIntervals = 5; 
+      
+        const intervalSize = (maxValue - minValue) / numIntervals;
+      
+        const legendItems = Array.from({ length: numIntervals }, (_, index) => {
+          const startInterval = minValue + index * intervalSize;
+          const endInterval = startInterval + intervalSize;
+      
+          const legendColor = getColorScale(startInterval, minValue, maxValue);
+      
+          return (
+            <div key={index} className="legend-item">
+              <div className="legend-color" style={{ backgroundColor: legendColor }}></div>
+              <span>
+                {endInterval !== undefined
+                  ? `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`
+                  : `${startInterval.toFixed(2)}+`}
+              </span>
+            </div>
+          );
+        });
+      
+        return legendItems;
+      }
+      
 
    /* 
     const [selectedYear, setSelectedYear] = useState([]);
@@ -223,7 +268,7 @@ else if(props.mapType === "counties")
                         {({ geographies }) => 
                             geographies.map((geo) => {
                                 const countyData = props.data.find((d) =>  d.geo === geo.properties.NAME);
-                                const fillColor = countyData ? getColorScale(countyData.dataValue) : '#D6D6DA';
+                                const fillColor = countyData ? getColorScale(countyData.dataValue, minValue, maxValue) : '#D6D6DA';
 
                                 return (
                                     <Geography
@@ -269,7 +314,7 @@ else if(props.mapType === "counties")
                             {({ geographies }) => 
                                 geographies.map((geo) => {
                                     const countyData = props.data.find((d) =>  d.geoId === geo.properties.GEOID);
-                                    const fillColor = countyData ? getColorScale(countyData.dataValue) : '#D6D6DA';
+                                    const fillColor = countyData ? getColorScale(countyData.dataValue, minValue, maxValue) : '#D6D6DA';
                                     
                                     if (countyData != undefined) {
                                         return (
@@ -327,29 +372,14 @@ else if(props.mapType === "counties")
 
 
 <div className="legend">
-  <h3>Percent Concentration</h3>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-    <span>Null Data</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-9</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>9-12</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>12-14</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>14+</span>
-  </div>
-</div>
-</div>
+          <h3>Percent Concentration</h3>
+          <div className="legend-item">
+            <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+            <span>Null Data</span>
+          </div>
+          {generateLegendItems(props.data)}
+        </div>
+      </div>
              
 
             </>
