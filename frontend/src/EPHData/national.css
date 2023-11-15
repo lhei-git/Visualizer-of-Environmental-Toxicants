@@ -37,6 +37,11 @@ margin-bottom: 20px;
 
 
 
+/* Amrita - Centering table title */
+.eph-table-container h2 {
+  text-align: center;
+}
+
   @media (min-width: 469px) {
     .national-container {
       height: auto;

@@ -98,7 +98,9 @@ const StateData = ({measure, measureID, units}) => {
                     />
                 )}
             </div>
-            <p>add description for data here</p>
+            <div className = "desc-container">
+                <p>add description for data here</p>
+            </div>
             <div className = "map-container">
                 {measureID === 587 && (<SimpleMap map={state.map}/>)} {/*asthma == 587*/}
                 {measureID === 67 && (<ChildhoodBrain map={state.map}/> )} {/*67 == brain/nerv cancer */}
@@ -107,6 +109,8 @@ const StateData = ({measure, measureID, units}) => {
             <div className="eph-table-container">
                 <StateTable measureID={measureID} />
             </div>
+            <p className="citation">Data obtained from https://ephtracking.cdc.gov/DataExplorer on {formattedDate}.</p>
+
         </div>
     );
 }

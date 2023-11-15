@@ -155,21 +155,6 @@ function Footer() {
 }
 
 
-function hamburgerNav() {
-  var x = document.getElementById("vethosNav");
-  if (x.className.indexOf("responsiveNav") === -1) {
-    x.className += " responsiveNav";
-  } else {
-    x.className = x.className.replace("responsiveNav", "");
-  }
-}
-
-
-
-
-
-
-
 const App = (props) => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -229,7 +214,6 @@ const App = (props) => {
       )}
       
       <div className="app-container">
-      
         <Switch>
           <Route exact path="/map">
             {/* Map, summary, and state thematic map */}
@@ -276,7 +260,7 @@ const App = (props) => {
 
           {/* Amrita - Adding back in the Data Comparison page */}
           <Route path="/datacomp">
-            <DataComp map={state.map} filters={state.filters}/>
+            <DataComp map={state.map} filters={state.filters} onFilterChange={(filters => dispatch(setFilters(filters)))} />
           </Route>
 
           <Route path="/about" component={AboutPage}></Route>

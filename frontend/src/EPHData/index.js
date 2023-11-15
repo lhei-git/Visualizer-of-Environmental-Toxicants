@@ -32,7 +32,7 @@ const React = require("react");
 
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome(map) {
+function EPHHome({map}) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
@@ -158,21 +158,32 @@ const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const [state, dispatch] = useReducer(reducer, initialState);
+const [visible, setVisible] = useState(false);
 
+// Taimee - Scroll to the bottom of the page
+const scrollToBottom = () => {
+  window.scrollTo(0, document.body.scrollHeight);
+};
 
+// Taimee - Scroll to the top of the page
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
 
   return (
     
     <div className="health-outcomes-container">
-      {/*Buttons to scroll up and down on page*/}
-      <div className="scroll-btn-container">
-      <button className="scroll-btn" onClick={scrollToBottom}>
-        Scroll to Bottom
-      </button>
-      <button className="scroll-btn" onClick={scrollToTop}>
-        Scroll to Top
-      </button>
+        {/* Taimee - Buttons to scroll up and down on page 
+            Amrita - Moved button to be on EPH page only */}
+        <div className="scroll-btn-container">
+        <button className="scroll-btn-top" onClick={scrollToTop}>
+          Scroll to Top
+        </button>
+        <button className="scroll-btn-bottom" onClick={scrollToBottom}>
+          Scroll to Bottom
+        </button>
       </div>
+      
       {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
       <div className="eph-national-container">
         {/*national measures*/}
@@ -339,6 +350,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
             
             <li className="boldHeadings">Drinking Water contamination</li>
             <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in Water</a></li> {/* 0 */}
+            <li onClick={() => chooseTab("21")} className={currentTab === "21" ? "active" : ""}><a href="#">DEPH in Water</a></li> 
             <li onClick={() => chooseTab("17")} className={currentTab === "17" ? "active" : ""}><a href="#">Radium in Water</a></li> {/* 17 */}
             <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in Water</a></li> {/* 18 */}
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in Water</a></li> {/* 19 */}
@@ -363,7 +375,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility rate</a></li> {/* 5 */}
 
             <li className="boldHeadings">National population exposure</li>
-            <li onClick={() => chooseTab("21")} className={currentTab === "21" ? "active" : ""}><a href="#">DEPH in Water</a></li>
+            
             <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in blood</a></li> {/* 8 */}
             <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in urine</a></li> {/* 10 */}
             <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in urine</a></li> {/* 12 */}
@@ -372,7 +384,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
             <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
 
-            <li id="extraLink"><a href="https://ephtracking.cdc.gov/">Detailed information on the CDC's Environmental Public Health Tracking Network</a></li>
+            <li id="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
 
           </ul>
         </div>

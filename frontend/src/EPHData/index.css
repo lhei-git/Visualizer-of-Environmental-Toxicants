@@ -156,6 +156,9 @@
 .boldHeadings {
   text-transform: uppercase;
   font-weight: bold;
+  /* Amrita - To better differentiate sidebar headings vs. items under headings*/
+  color: purple;
+  font-size: 18px;
 }
 
 /*Al-Taimee buttton to scroll on page */

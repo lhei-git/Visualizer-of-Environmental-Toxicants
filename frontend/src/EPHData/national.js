@@ -90,6 +90,10 @@ const NationalData = ({measure, units, measureID}) => {
             )}
             
             </div>
+            <div className = "desc-container">
+                <p>add description for data here</p>
+            </div>
+
             {/*
              <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
             <div className="about-data">
@@ -124,9 +128,9 @@ const NationalData = ({measure, units, measureID}) => {
             <div className="eph-table-container">
                 <h2>Table for {measure}</h2>
                 <NationalTable measure={measure} />
-                
             </div>
-            
+            <p className="citation">Data obtained from https://ephtracking.cdc.gov/DataExplorer on {formattedDate}.</p>
+
 
         </div>
     );

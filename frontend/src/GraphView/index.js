@@ -160,7 +160,8 @@ class CustomLine extends Line {
 class CustomTimelineLegend extends Legend {
   static defaultProps = {
     ...Legend.defaultProps,
-    width: 120,
+    // Amrita - Adjusted width, fontSize, and adding paddingLeft to better fit new layout
+    width: 80,
     height: 140,
     layout: "vertical",
     verticalAlign: "middle",
@@ -170,7 +171,8 @@ class CustomTimelineLegend extends Legend {
       top: 0,
       right: 0,
       lineHeight: "24px",
-      fontSize: "15px",
+      fontSize: "12px",
+      paddingLeft: "15px"
     },
     formatter: customLegendFormatter,
   };
