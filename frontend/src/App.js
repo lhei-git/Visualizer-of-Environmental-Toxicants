@@ -266,8 +266,7 @@ const App = (props) => {
 
           {/* Amrita - Adding back in the Data Comparison page */}
           <Route path="/datacomp">
-            <DataComp map={state.map} filters={state.filters}/>
-            <DataComp map={state.map} filters={state.filters}/>
+            <DataComp map={state.map} filters={state.filters} onFilterChange={(filters => dispatch(setFilters(filters)))} />
           </Route>
 
           <Route path="/about" component={AboutPage}></Route>
