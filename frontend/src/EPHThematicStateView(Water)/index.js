@@ -58,7 +58,9 @@ class EPHThematicWaterStateMap extends Component {
     //sets scaling and positioning for the map projection
     if (this.state.prevStateName !== this.props.stateName) {
       this.setState({ prevStateName: this.props.stateName });
+
       const found = data.find((e) => e.state === this.props.stateName);
+      console.log("found", found);
       
       
       if(found) {
@@ -173,6 +175,34 @@ class EPHThematicWaterStateMap extends Component {
     }
   }
   
+  getUnits(endUnits) {
+    if(this.props.measure === "Arsenic in Community Water") {
+      return endUnits = "(Annual Mean)"
+    }
+    else if (this.props.measure === "DEPH in Community Water") {
+      return endUnits = "(Annual Mean)"
+    }
+    
+    else if (this.props.measure === "PCE in Community Water") {
+      return endUnits = "(Annual Mean)"
+    }
+
+    else if (this.props.measure === "PFAS in Community Water") {
+      return endUnits = "(Concentration)"
+    }
+    else if (this.props.measure === "Radium in Community Water") {
+      return endUnits = "(Annual Mean)"
+    }
+    else if (this.props.measure === "TCE in Community Water") { //not sure if this is the right one 
+      return endUnits = "(Annual Mean)"
+      
+    }
+    else if (this.props.measure === "Uranium in Community Water") {
+      return endUnits = "(Annual Mean)"
+      
+    }
+
+  }
   
   
   
