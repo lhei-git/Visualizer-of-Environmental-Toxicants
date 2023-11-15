@@ -136,7 +136,7 @@ const ChildhoodBrain = ({ map }) => {
           <Geography
             key={geo.rsmKey}
             geography={geo}
-            data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
+            data-tip={`${geo.properties.name} (Counts): ${stateData && stateData.displayValue }`}
             style={{
               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },

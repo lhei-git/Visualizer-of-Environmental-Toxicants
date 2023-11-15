@@ -11,6 +11,7 @@ import {
 } from 'react-simple-maps';
 import "./index.css"
 import ReactTooltip from 'react-tooltip';
+import LoadingSpinner from '../LoadingSpinner';
 
 
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
@@ -33,7 +34,7 @@ const SimpleMap = ({ map }) => {
   const [selectedState, setSelectedState] = useState([]);
   const [selectedGenderId, setSelectedGenderId] = useState([]);
   
-
+  
   const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
@@ -104,11 +105,15 @@ const SimpleMap = ({ map }) => {
       geographies.map((geo) => {
         const stateData = data.find((d) => d.geo === geo.properties.name);
         const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+        
+        
+
         return (
+          
           <Geography
             key={geo.rsmKey}
             geography={geo}
-            data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
+            data-tip={`${geo.properties.name} (Percent): ${stateData && stateData.displayValue }`}
             style={{
               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -120,6 +125,7 @@ const SimpleMap = ({ map }) => {
             }}
           />
         );
+          
       })
     }
   </Geographies>
@@ -172,6 +178,22 @@ const SimpleMap = ({ map }) => {
   );
 }
 
+
+function LoadSpinner() {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <LoadingSpinner></LoadingSpinner>
+    </div>
+  );
+}
 
 
 
