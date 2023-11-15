@@ -141,16 +141,6 @@ function Footer() {
   );
 }
 
-// Scroll to the bottom of the page
-const scrollToBottom = () => {
-  window.scrollTo(0, document.body.scrollHeight);
-};
-
-// Scroll to the top of the page
-const scrollToTop = () => {
-  window.scrollTo(0, 0);
-};
-
 
 const App = (props) => {
   /* Use reducer method to update state */
@@ -211,15 +201,6 @@ const App = (props) => {
       )}
       
       <div className="app-container">
-      {/*Buttons to scroll up and down on page*/}
-      <div className="scroll-btn-container">
-      <button className="scroll-btn" onClick={scrollToBottom}>
-        Scroll to Bottom
-      </button>
-      <button className="scroll-btn" onClick={scrollToTop}>
-        Scroll to Top
-      </button>
-      </div>
         <Switch>
           <Route exact path="/map">
             {/* Map, summary, and state thematic map */}
@@ -266,7 +247,7 @@ const App = (props) => {
 
           {/* Amrita - Adding back in the Data Comparison page */}
           <Route path="/datacomp">
-            <DataComp map={state.map} filters={state.filters}/>
+            <DataComp map={state.map} filters={state.filters} onFilterChange={(filters => dispatch(setFilters(filters)))} />
           </Route>
 
           <Route path="/about" component={AboutPage}></Route>

@@ -21,26 +21,26 @@
     border-radius: 5px;
   }
   
-  .legend h3 {
+  .mapView .legend h3 {
     margin: 0;
     font-size: 16px;
     text-align: center;
   }
   
-  .legend-item {
+  .mapView .legend-item {
     display: flex;
     align-items: center;
     margin: 5px 0;
   }
   
   
-  .legend-color {
+  .mapView .legend-color {
     width: 20px;
     height: 20px;
     display: inline-block;
     margin-right: 10px;
   }
   
-  .legend-item span {
+  .mapView .legend-item span {
     margin: 0;
   }

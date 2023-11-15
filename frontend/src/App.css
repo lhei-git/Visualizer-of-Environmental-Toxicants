@@ -108,24 +108,30 @@
   z-index: 1000;
 }
 
-.scroll-btn {
+/* Amrita - Edited Taimee's scroll-btn code by separating buttons & adding max-width so they're the same size */
+.scroll-btn-top {
   background-color: #7d3a8b;
   color: #fff;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   margin: 5px;
+  max-width: 100%;
+}
+
+.scroll-btn-bottom {
+  background-color: #7d3a8b;
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  margin: 5px;
+  max-width: 100%;
 }
 
 .scroll-btn:hover {
   background-color: #7d3a8b;
 }
-
-
-
-
-
-
 
 /* Responsive styles written by Al-Taimee */
 /* Styles for screens wider than 200px */

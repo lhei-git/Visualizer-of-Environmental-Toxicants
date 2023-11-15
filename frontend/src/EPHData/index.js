@@ -32,7 +32,7 @@ const React = require("react");
 
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome(map) {
+function EPHHome({map}) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
@@ -148,9 +148,31 @@ const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const [state, dispatch] = useReducer(reducer, initialState);
+const [visible, setVisible] = useState(false);
+
+// Taimee - Scroll to the bottom of the page
+const scrollToBottom = () => {
+  window.scrollTo(0, document.body.scrollHeight);
+};
+
+// Taimee - Scroll to the top of the page
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
 
   return (
     <div className="health-outcomes-container">
+        {/* Taimee - Buttons to scroll up and down on page 
+            Amrita - Moved button to be on EPH page only */}
+        <div className="scroll-btn-container">
+        <button className="scroll-btn-top" onClick={scrollToTop}>
+          Scroll to Top
+        </button>
+        <button className="scroll-btn-bottom" onClick={scrollToBottom}>
+          Scroll to Bottom
+        </button>
+      </div>
+      
       {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
       <div className="eph-national-container">
         {/*national measures*/}
@@ -303,8 +325,11 @@ const [state, dispatch] = useReducer(reducer, initialState);
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
+<<<<<<< HEAD
         
         */}
+=======
+>>>>>>> 76f523d36fedaeff56fd62f92d6105bd32f0b581
       </div>
      
       <div className="health-outcomes-sidebar">
@@ -316,12 +341,21 @@ const [state, dispatch] = useReducer(reducer, initialState);
           <ul>
             
             <li className="boldHeadings">Drinking Water contamination</li>
+<<<<<<< HEAD
             <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in Water</a></li> {/* 0 */}
             <li onClick={() => chooseTab("17")} className={currentTab === "17" ? "active" : ""}><a href="#">Radium in Water</a></li> {/* 17 */}
             <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in Water</a></li> {/* 18 */}
             <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in Water</a></li> {/* 19 */}
             <li onClick={() => chooseTab("11")} className={currentTab === "11" ? "active" : ""}><a href="#">PCE in Water</a></li> {/* 11 */}
             <li onClick={() => chooseTab("14")} className={currentTab === "14" ? "active" : ""}><a href="#">PFAS in Water</a></li> {/* 14 */}
+=======
+            <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
+            <li onClick={() => chooseTab("17")} className={currentTab === "17" ? "active" : ""}><a href="#">Radium in water</a></li> {/* 17 */}
+            <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in water</a></li> {/* 18 */}
+            <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
+            <li onClick={() => chooseTab("11")} className={currentTab === "11" ? "active" : ""}><a href="#">PCE in water</a></li> {/* 11 */}
+            <li onClick={() => chooseTab("14")} className={currentTab === "14" ? "active" : ""}><a href="#">PFAS in water</a></li> {/* 14 */}
+>>>>>>> 76f523d36fedaeff56fd62f92d6105bd32f0b581
             {/*List headings created by Al-Taimee*/}
             <li className="boldHeadings">Asthma</li>
             <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma among Adults</a></li> {/* 1 */}
