@@ -53,6 +53,8 @@ const initialState = {
 };
 
 
+
+
 /* handler for updating state */
 const reducer = (state, action) => {
   switch (action.type) {
@@ -129,7 +131,7 @@ const Navbar = (props) => {
         <Link to="/">VETHOS.</Link>
       </div>
 
-      <a href="javascript:void(0);" class="hamburger" onclick={hamburgerNav}>
+      <a href="javascript:void(0);" className="hamburger" onClick={hamburgerNav}>
         <i class="fa fa-bars"></i>
       </a>
       

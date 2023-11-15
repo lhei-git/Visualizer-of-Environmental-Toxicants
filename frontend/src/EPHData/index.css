@@ -41,14 +41,14 @@
 }
 
 .chart{
-    height: 60vh; /* Adjust the height as needed */
+    height: 60vh; 
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 100px;
     z-index: 0;
 }
-/*left column styles*/
+
 .health-outcomes-container h2 {
   padding-top: 50px;
   
@@ -186,4 +186,23 @@
   color: blue;
   font-size: 10px;
   text-transform: lowercase;
+}
+
+/* Responsive Styles created by Al-Taimee*/
+@media screen and (max-width: 800px) {
+  .eph-national-container {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+  }
+
+  .container-column {
+    
+    width: 95%;
+    padding-bottom: 100px;
+  }
+
+  .health-outcomes-sidebar {
+    margin-right: 0;
+  }
 }
