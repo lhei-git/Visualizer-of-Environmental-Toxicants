@@ -1,5 +1,5 @@
 /*File written by Farzana Israt*/
-.mapView {
+.nation-mapView {
   /*
   width: 600px; 
   height: 300px; 
@@ -24,10 +24,22 @@
 
 
 
-.mapView h2 {
+.nation-mapView h2 {
   margin-bottom: 20px; 
 }
 
+
+
+.legend {
+  position: absolute;
+  bottom: 100px;
+  left: 1150px;
+  margin-bottom: 166px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
 
 
 .legend {
@@ -46,7 +58,7 @@
     display: block;
   }
 
-.mapView .legend {
+.nation-mapView .legend {
   position: absolute;
   bottom: 100px;
   left: 1150px;

@@ -44,3 +44,8 @@
   .legend-item span {
     margin: 0;
   }
+
+  .bold-text {
+    font-weight: bold;
+  }
+  

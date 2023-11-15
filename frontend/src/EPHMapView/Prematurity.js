@@ -33,10 +33,11 @@ function getColorScale(dataValue) {
 const Prematurity = ({ map }) => {
     const [data, setData] = useState([]);
     const [selectedYear, setSelectedYear] = useState([]);
+    const [selectedGenderId, setSelectedGenderId] = useState([]);
 
-    const dataForEachYear = (year) => {
+    const dataForEachYear = (year, genderId) => {
         setSelectedYear(year);
-            axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/${year}/0/0`)
+            axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/10/all/all/1/${year}/1/0?GenderId=${genderId}`)
             .then((response) => {
                 setData(response.data.tableResult);
             })
@@ -47,9 +48,13 @@ const Prematurity = ({ map }) => {
 
     useEffect(() => {
         if (selectedYear) {
-          dataForEachYear(selectedYear);
+          dataForEachYear(selectedYear, selectedGenderId);
         }
-      }, [selectedYear]);
+      }, [selectedYear, selectedGenderId]);
+
+      const handleGenderChange = (event) => {
+        setSelectedGenderId(event.target.value);
+      };
 
       return (
         <div className='mapView'>
@@ -61,7 +66,7 @@ const Prematurity = ({ map }) => {
             <label> Year: </label>
             <select
               value={selectedYear}
-              onChange={(e) => dataForEachYear(e.target.value)}
+              onChange={(e) => setSelectedYear(e.target.value)}
             >
               <option value=""> Select Year </option>
               <option value="2020">2020</option>
@@ -86,6 +91,15 @@ const Prematurity = ({ map }) => {
               <option value="2001">2001</option>
               <option value="2000">2000</option>
             </select>
+          </div>
+
+          <div className='dropdown'>
+          <label htmlFor="gender">Select Gender:</label>
+          <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
+            <option value=""> Select a Gender </option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
           </div>
     
     <ComposableMap

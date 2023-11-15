@@ -253,7 +253,7 @@ class EPHThematicWaterStateMap extends Component {
 
 
           {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
-          <div className="centered-gender">
+          <div className="centered-level">
             <select
               value={this.state.level}
               onChange={this.handleLevelChange}
@@ -269,7 +269,7 @@ class EPHThematicWaterStateMap extends Component {
         )}
 
         {["PFAS in Community Water"].includes(this.props.measure) && (
-          <div className="centered-gender">
+          <div className="centered-contaminant">
             <select
               value={this.state.contaminant}
               onChange={this.handleContaminantChange}
@@ -295,6 +295,7 @@ class EPHThematicWaterStateMap extends Component {
                 lon={this.state.lon}
                 lat={this.state.lat}
                 scale={this.state.scale}
+                units={this.getUnits()}
                />
             
           ) : (

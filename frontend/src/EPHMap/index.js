@@ -277,7 +277,7 @@ else if(props.mapType === "counties")
                                             key={geo.rsmKey}
                                             geography={geo}
                                             
-                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2): "No Data"}`}
+                                            data-tip={`${geo.properties.NAME} ${props.units}: ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"}`}
                                             style={{
                                               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -301,6 +301,7 @@ else if(props.mapType === "counties")
                                         
                                     } else {
                                         return (
+                                          
                                             <Geography
                                                 key={geo.rsmKey}
                                                 geography={geo}
