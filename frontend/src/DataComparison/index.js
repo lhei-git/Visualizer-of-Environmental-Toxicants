@@ -250,7 +250,7 @@ function DataComp(props){
                             <option>Asthma in Adults</option>
                             <option>Asthma in Children</option>
                             <option>Asthma Hospitalizations</option>
-                            <option>Bisphenol and Paraben in Urine</option>
+                            <option>Bisphenol and Paraben in Urine - National</option>
                             <option>Prevalence of Cancer</option>
                             <option>Childhood Cancer Brain & Central Nervous System</option>
                             <option>Childhood Cancer Leukemia</option>
@@ -258,28 +258,29 @@ function DataComp(props){
                             <option>Fertility Rate</option>
                             <option>Heart Attack</option>
                             <option>Infant Mortality</option>
-                            <option>Lead in Blood</option>
+                            <option>Lead in Blood - National</option>
                             <option>Low Birthweight</option>
-                            <option>Metals in Urine</option>
+                            <option>Metals in Urine - National</option>
                             <option>PCE in Water</option>
-                            <option>Pesticides in Urine</option>
-                            <option>PFAS in Blood</option>
+                            <option>Pesticides in Urine - National</option>
+                            <option>PFAS in Blood - National</option>
                             <option>PFAS in Water</option>
-                            <option>Phthalates in Urine</option>
+                            <option>Phthalates in Urine - National</option>
                             <option>Premature Birth</option>
                             <option>Radium in Water</option>
                             <option>TCE in Water</option>
                             <option>Uranium in Water</option>
                         </select>
 
+                      <div className="ephcomp-timelines">
                         {/* Amrita - Calls timeline from NationalEPHCompare to display timeline for Public Health Data section */}
-                        {currentMeasure === "Lead in Blood" && (<NationalEPHCompare measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/>)}
-                        {currentMeasure === "Metals in Urine" && ( <NationalEPHCompare measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
-                        {currentMeasure === "Phthalate Metabolites in Urine" && ( <NationalEPHCompare measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
-                        {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalEPHCompare measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
-                        {currentMeasure === "PFAS in Blood" && (<NationalEPHCompare measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
-                        {currentMeasure === "Pesticides in Urine" && (<NationalEPHCompare measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
-
+                        {currentMeasure === "Lead in Blood - National" && (<NationalEPHCompare measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}  measureID={858}/>)}
+                        {currentMeasure === "Metals in Urine - National" && ( <NationalEPHCompare measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856}/>)}
+                        {currentMeasure === "Phthalates in Urine - National" && ( <NationalEPHCompare measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863}/> )}
+                        {currentMeasure === "Bisphenol and Paraben in Urine - National" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859}/>)}
+                        {currentMeasure === "PFAS in Blood - National" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
+                        {currentMeasure === "Pesticides in Urine - National" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
+                      </div>
                     </div>
                 </div> {/*data reps*/}
             </div>

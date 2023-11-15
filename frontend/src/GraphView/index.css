@@ -3,14 +3,15 @@
 }
 
 .graph-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 30px;
+  padding-left: 30px;
 }
 
 .graph-header h1,
 .graph-header h2 {
   margin: 0;
-  font-size: 28px;
+  font-size: 23px;  /* Amrita - Changing from 28px so it's not too big compared to the graphs */
 }
 
 .graph-header h2 {
@@ -203,6 +204,11 @@
 .summary td:nth-child(1),
 .summary th:nth-child(1) {
   text-align: left;
+}
+
+/* Amrita - Center only the summary table's header */
+.summary-table-header {
+  text-align: center;
 }
 
 .all-facilities-chart {

@@ -97,7 +97,7 @@ function GraphSummary({ map, filters }) {
     body !== null && (
       <div className="graph-standalone summary">
         <div className="graph-header">
-          <h1>
+          <h1 className="summary-table-header">
             Summary statistics of total releases for{" "}
             {getLocationString(map, true)} and U.S. in {filters.year}
           </h1>

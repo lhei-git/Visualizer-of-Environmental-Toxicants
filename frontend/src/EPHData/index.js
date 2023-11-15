@@ -31,7 +31,7 @@ const React = require("react");
 
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome(map) {
+function EPHHome({map}) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
