@@ -84,13 +84,8 @@ const CountyTimeSeries = ({size, measureID, units, percentile, demographic}) => 
   const yearString = getYearString(years);
 
   //get measure data from API and stores it as 'data' object to be accessed by time series function
-  //CHANGE API CALL TO COUNTY
   const [data, setData] = useState([]);
-  //ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureId}/{stratificationLevelId}/{geographicTypeIdFilter}/{{geographicItemsFilter}}/{temporal}/{isSmoothed}/{getFullCoreHolder}[?stratificationLevelLocalIds]
-    //https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1120/2/all/all/1/2020,2019,2018/0/0https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/585/1/all/all/1/2020,2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0
-   // const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/${yearString}/0/0`;
-
-   const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2/2/${countyID}/1/${yearString}/0/0`;
+  const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2/2/${countyID}/1/${yearString}/0/0`;
   useEffect(() => {
     axios.get(apiURL)
       .then((response) => {
@@ -110,13 +105,6 @@ const CountyTimeSeries = ({size, measureID, units, percentile, demographic}) => 
 
   return (
     <div className="TimeSeries" style={{width: size.width, height: size.height }}>  
-      {/*
-       <h1>{getLocationParents(state.map, 'stateLong')}</h1>
-      <p>state id {stateID}</p>
-      <p>measure id {measureID}</p>
-      */}   
-      <p>county id {countyID}</p>
-      <p>api url {apiURL}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );

@@ -141,7 +141,6 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
       <p>state id {stateID}</p>
       <p>measure id {measureID}</p>
       */}   
-      <p>state id {stateID}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
