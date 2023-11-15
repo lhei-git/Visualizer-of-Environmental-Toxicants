@@ -320,13 +320,13 @@ const scrollToTop = () => {
         {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
         {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
-
-        {/*
+        
+        
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
         
-        */}
+        
       </div>
      
       <div className="health-outcomes-sidebar">

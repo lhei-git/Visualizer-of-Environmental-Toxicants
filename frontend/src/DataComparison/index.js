@@ -2,6 +2,7 @@ import "./index.css";
 import EPHChart from "../EPHCharts";
 import NationalEPHCompare from "./nationalEPHCompare.js";
 import React, { useState, useEffect } from 'react';
+import StateEPHCompare from "./stateEPHCompare.js"
 import Title from "../Title";
 import GraphContainer from "../GraphView/index.js"; 
 
@@ -120,6 +121,7 @@ const createParams = ({ map, filters }, customParams) => {
 function DataComp(props){
     const [currentMeasure, setMeasure] = useState(null);
     const [chemicals, setChemicals] = React.useState([]);
+        const testSize = {width: 600, height: 300};
 
     /* farzana */
     React.useEffect(() => {
@@ -238,6 +240,8 @@ function DataComp(props){
                         >
                           {getChemicals()}
                         </select>
+
+                        <EPHChart size = {testSize} className="tri-chart"/>
     
 
                     </div>
@@ -248,12 +252,12 @@ function DataComp(props){
                             <option>Choose a public health measure</option>
                             <option>Arsenic in water</option>
                             <option>Asthma in Adults</option>
-                            <option>Asthma in Children</option>
+                            <option>Asthma in Children - State</option>
                             <option>Asthma Hospitalizations</option>
                             <option>Bisphenol and Paraben in Urine - National</option>
                             <option>Prevalence of Cancer</option>
-                            <option>Childhood Cancer Brain & Central Nervous System</option>
-                            <option>Childhood Cancer Leukemia</option>
+                            <option>Childhood Cancer Brain & Central Nervous System - State</option>
+                            <option>Childhood Cancer Leukemia - State</option>
                             <option>DEPH in Water</option>
                             <option>Fertility Rate</option>
                             <option>Heart Attack</option>
@@ -280,6 +284,10 @@ function DataComp(props){
                         {currentMeasure === "Bisphenol and Paraben in Urine - National" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859}/>)}
                         {currentMeasure === "PFAS in Blood - National" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
                         {currentMeasure === "Pesticides in Urine - National" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
+
+                        {currentMeasure === "Asthma in Children - State" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
+                        {currentMeasure === "Childhood Cancer Brain & Central Nervous System - State" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
+                        {currentMeasure === "Childhood Cancer Leukemia - State" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}  
                       </div>
                     </div>
                 </div> {/*data reps*/}
