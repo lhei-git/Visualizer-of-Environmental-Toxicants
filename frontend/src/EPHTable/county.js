@@ -2,10 +2,11 @@ import "./national.css";//change
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { getStateID } from '../EPHFilters/stateID';
+//getcountyID
 const {getLocationParents, getYearString} = require("../helpers");
 
   
-function StateTable({ measureID}) {
+function CountyTable({ measureID}) {
  
   //below code pulls searched location from app session storage/
     // Initial state of app 
@@ -44,6 +45,8 @@ function StateTable({ measureID}) {
 
   //use api call geographicItems to obtain the state ID of the state searched by the user
   //helper getLocationParents returns name of the searched state from session storage
+
+  //ADD COUNTY ID CODE
   const [stateID, setStateID] = useState('');
   useEffect(() => {
     const fetchStateID = async () => {
@@ -73,7 +76,6 @@ function StateTable({ measureID}) {
   }, []);
   //convert array of years to string
   const yearString = getYearString(years);
-
 
   //pass api url to get measure data
   const [data, setData] = useState([]);
@@ -121,4 +123,4 @@ function StateTable({ measureID}) {
 }
 
 
-export default StateTable;
+export default CountyTable;

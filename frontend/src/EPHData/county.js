@@ -1,14 +1,21 @@
-//blueprint to display county data
-//created by Katherine O'Donnell, added map code from Farzana Israt
+//blueprint to display state data
+//created by Katherine O'Donnell, added map code from Farzana Israt & table code from Taimee Hassan
 import "./index.css";
+import "./county.css"
 import CountyTimeSeries from "../EPHCharts/county";
-import {useEffect, useState} from 'react';
+import CountyTable from "../EPHTable/county";
+import {useEffect, useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
+import SimpleMap from "../EPHMapView";
+import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
+import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
 const React = require("react");
+const {getLocationParents, getYearString} = require("../helpers");
 
 
-//calling CountyData on the eph page will generate a data layout for any measure selected
-const CountyData = ({measureID, units}) => {
+
+//calling County Data on the eph page will generate a data layout for any measure selected
+const CountyData = ({measure, measureID, units}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -16,44 +23,62 @@ const CountyData = ({measureID, units}) => {
     const [selectedDemographic, setSelectedDemographic] = React.useState(
         16 // Set an initial value for demographic filter
       );
-      
     function chooseFilters(percentile, demographic) {
         sessionStorage.setItem("selectedPercentile", percentile);
         setSelectedDemographic(demographic);
         setSelectedPercentile(percentile);
     }
-
     useEffect(() => {
         chooseFilters(1, 16); //default 50th percentile, us population
       }, []); // empty dependency array so effect runs only once
-//end of filter code
+    //below code pulls searched location from app session storage/
+    // Initial state of app 
+    const initialState = {
+        map: JSON.parse(sessionStorage.getItem("map")),
+        filters: {
+        chemical: "all",
+        pbt: false,
+        carcinogen: false,
+        releaseType: "all",
+        //sets initial state to latest year/
+        year: 2022,
+        },
+        errorMessage: "",
+    };
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case "setMap":
+            // Store latest searched location in session /
+            sessionStorage.setItem("map", JSON.stringify(action.payload));
+            return {
+                ...state,
+                map: action.payload,
+            };
+            case "setFilters":
+            const newFilters = Object.assign({}, action.payload);
+            return { ...state, filters: newFilters };
+            case "setErrorMessage":
+            return { ...state, errorMessage: action.payload };
+            default:
+            throw new Error();
+        }
+        };
+    const [state] = useReducer(reducer, initialState);
+    //end of storage retrieval code
 
-//create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
+    //get name of searched state from session storage
+    const stateAbbr = getLocationParents(state.map, "state");
+    const countyName = getLocationParents(state.map, "county") + " County";
+
+    //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
     //.jsx layout
     return(
         <div className="county-container">
-            <h1>measure</h1>
-            <div className="filter-container">
-                <div className="percentile-filter">
-                    <p>Select a percentile estimate:</p>
-                    <select value={selectedPercentile} onChange={(e) => chooseFilters(parseInt(e.target.value), selectedDemographic)}>
-                        {/*in API endpoints, percentileID=1 for 50th, 2 for 95th. 'value' passed as percentile id */}
-                        <option value={1}>50th percentile</option>
-                        <option value={2}>95th percentile</option>
-                    </select>
-                </div>
-                <div className="demographic-filter">
-                    <p>Select a demographic group:</p>
-                    <select value={selectedDemographic} onChange={(e) => chooseFilters(selectedPercentile, parseInt(e.target.value))}>
-                        {/*value number passed as demographic id */}
-                        
-                    </select>
-                </div>
-            </div>
-            {/*code below changes data representation based on filter changes*/}
+            <h1>{measure} in {countyName}, {stateAbbr}</h1>
+            {/*change time series info based on filter changes*/}
             <div className = "time-series">
                 {selectedPercentile === 1 && (
                     <CountyTimeSeries
@@ -74,15 +99,22 @@ const CountyData = ({measureID, units}) => {
                     />
                 )}
             </div>
-
-            {/*ADD COUNTY TABLES HERE*/}
-
+            <p>add description for data here</p>
+            <div className = "map-container">
+                {measureID === 587 && (<SimpleMap map={state.map}/>)} {/*asthma == 587*/}
+                {measureID === 67 && (<ChildhoodBrain map={state.map}/> )} {/*67 == brain/nerv cancer */}
+                {measureID === 71 && (<ChildhoodLeukemia map={state.map}/> )} {/*leukemia == 71*/}
+            </div>
+            <div className="eph-table-container">
+                <CountyTable measureID={measureID} />
+            </div>
         </div>
     );
 }
 
 CountyData.propTypes = {
     measure: PropTypes.string.isRequired,       //measure selected on eph page
+    measureID: PropTypes.number.isRequired,       //ID of measure selected on eph page
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
 };
 
