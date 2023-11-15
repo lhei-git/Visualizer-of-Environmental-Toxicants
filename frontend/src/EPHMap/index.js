@@ -375,7 +375,7 @@ else if(props.mapType === "counties")
           <h3>Percent Concentration</h3>
           <div className="legend-item">
             <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-            <span>Null Data</span>
+            <span>No Data Available</span>
           </div>
           {generateLegendItems(props.data)}
         </div>
