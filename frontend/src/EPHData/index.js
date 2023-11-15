@@ -205,8 +205,8 @@ const scrollToTop = () => {
         </EPHThematicStateMap> )}
 
         */}
-        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"units"} />)}
-
+        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+        
         {currentTab === "3" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
@@ -319,14 +319,10 @@ const scrollToTop = () => {
 
         {/* state measures */}
 
-        {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
+        {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"Percent of Children with Asthma"} />)} 
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
         {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
         
-        
-        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
-        {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
-        {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
         
         
       </div>
