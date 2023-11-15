@@ -104,6 +104,7 @@ function EPHHome({map}) {
     setCurrentTab(i);
   }
 
+
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
     chooseTab("0"); //default bisphenol, change to arsenic ASAP
@@ -161,6 +162,7 @@ const scrollToTop = () => {
 };
 
   return (
+    
     <div className="health-outcomes-container">
         {/* Taimee - Buttons to scroll up and down on page 
             Amrita - Moved button to be on EPH page only */}
@@ -320,13 +322,13 @@ const scrollToTop = () => {
         {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
         {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
-
-        {/*
+        
+        
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
         
-        */}
+        
       </div>
      
       <div className="health-outcomes-sidebar">
@@ -373,7 +375,7 @@ const scrollToTop = () => {
             <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
 
-            <li className ="external-link"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
+            <li className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
 
           </ul>
         </div>

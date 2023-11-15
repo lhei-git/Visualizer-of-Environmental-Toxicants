@@ -42,7 +42,7 @@
 }
 
 
-.legend {
+.nation-mapView.legend {
   position: absolute;
   bottom: 100px;
   left: 1150px;

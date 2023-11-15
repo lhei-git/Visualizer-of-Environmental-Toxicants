@@ -37,7 +37,7 @@ const NationalEPHCompare = ({measure, units, measureID}) => {
 
     //.jsx layout
     return(
-        <div className="national-container">
+        <div className="comp-national-container">
             <div className="filter-container">
                 <div className="percentile-filter">
                     <p>Select a percentile estimate:</p>
