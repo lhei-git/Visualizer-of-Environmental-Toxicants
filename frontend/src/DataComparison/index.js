@@ -3,6 +3,7 @@ import EPHChart from "../EPHCharts";
 import NationalEPHCompare from "./nationalEPHCompare.js";
 import React, { useState, useEffect } from 'react';
 import StateEPHCompare from "./stateEPHCompare.js"
+import CountyEPHCompare from "./countyEPHCompare";
 import Title from "../Title";
 import GraphContainer from "../GraphView/index.js"; 
 
@@ -250,8 +251,8 @@ function DataComp(props){
                         <h2>Public Health Data</h2>
                         <select onChange={handleChange} value={currentMeasure}>
                             <option>Choose a public health measure</option>
-                            <option>Arsenic in water</option>
-                            <option>Asthma in Adults</option>
+                            <option>Arsenic in Water</option>
+                            <option>Asthma in Adults - County</option>
                             <option>Asthma in Children - State</option>
                             <option>Asthma Hospitalizations</option>
                             <option>Bisphenol and Paraben in Urine - National</option>
@@ -284,10 +285,14 @@ function DataComp(props){
                         {currentMeasure === "Bisphenol and Paraben in Urine - National" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859}/>)}
                         {currentMeasure === "PFAS in Blood - National" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
                         {currentMeasure === "Pesticides in Urine - National" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
-
+                        
+                        {/* Amrita - Calls timeline from StateEPHCompare to display timeline for Public Health Data section */}
                         {currentMeasure === "Asthma in Children - State" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
                         {currentMeasure === "Childhood Cancer Brain & Central Nervous System - State" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
                         {currentMeasure === "Childhood Cancer Leukemia - State" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}  
+
+                        {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
+                        {currentMeasure === "Asthma in Adults - County" && (<CountyEPHCompare measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}  
                       </div>
                     </div>
                 </div> {/*data reps*/}
