@@ -185,10 +185,14 @@
   background-color: #7d3a8b;
 }
 
+/* Amrita - Edited Al-Taimee's formatting rules to make text bigger, italized, and adjust spacing  */
 .extraLink {
   color: gray;
-  font-size: 10px;
-  text-transform: lowercase;
+  font-size: 15px;
+  font-style: italic;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  text-align: left;
 }
 
 /* Responsive Styles created by Al-Taimee*/
