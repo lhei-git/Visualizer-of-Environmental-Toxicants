@@ -19,7 +19,7 @@
   margin: 0;
   padding: 0;
   top: 0;
-  color: #fff;
+  color: black;
   background: #7d3a8b;
   /* Amrita - Vertically centered navigation bar's elements */
   display: flex;
@@ -27,10 +27,11 @@
   align-items: center;
 }
 
+/*
 .navigation.transparent {
   background: transparent;
 }
-
+*/
 .navigation .logo {
   position: relative;
   float: right;
@@ -45,6 +46,7 @@
   text-decoration: none;
 
   color: rgba(255, 255, 255, 0.85);
+  
 }
 
 .navigation a:hover {
@@ -53,20 +55,24 @@
 
 .navigation li {
   box-sizing: border-box;
+  
 }
 
 .navigation li.active {
   font-weight: 600;
+  
 }
 
 .navigation .flex-item {
   flex: 1;
+  
 }
 
 .navigation ul {
   display: inline-block;
   margin: 0;
   padding: 0;
+  
 }
 
 .navigation li,
@@ -77,6 +83,7 @@
   font-size: 18px;
   box-sizing: border-box;
   cursor: pointer;
+  
 }
 
 .footer {
@@ -113,7 +120,7 @@
   background-color: #7d3a8b;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   margin: 5px;
   max-width: 100%;
@@ -133,8 +140,42 @@
   background-color: #7d3a8b;
 }
 
+.navigation .transparent {
+  background-color: #7d3a8b;
+}
+
+body {
+
+font-weight: normal;
+/*background: var(--surface-ground);*/
+color: var(--text-color);
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Add this CSS to your stylesheet */
+
+.mega-menu-container {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .mega-menu-container {
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+
 /* Responsive styles written by Al-Taimee */
 /* Styles for screens wider than 200px */
+/*
 @media (min-width: 200px) {
   .navigation {
     position: fixed;
@@ -159,6 +200,7 @@
   }
 }
 /* Styles for screens wider than 469px */
+/*
 @media (min-width: 469px) {
   .navigation {
     position: fixed;
@@ -184,6 +226,7 @@
 }
 
 /* Styles for screens 2880px and below */
+/*
 @media (max-width: 2880px) {
   .navigation {
     height: auto;
@@ -219,7 +262,7 @@
 .navigation.transparent {
   background: transparent;
 }
-
+*/
 .footer {
   position: fixed;
   text-align: center;
@@ -234,4 +277,7 @@
 .footer .copyright {
   padding: 0 20px;
   margin: 10px 0;
+}
+.p-megamenu .p-component .p-megamenu-horizontal .p-megamenu-mobile-active {
+  background-color: #7d3a8b;
 }
