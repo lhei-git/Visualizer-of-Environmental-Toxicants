@@ -125,8 +125,8 @@ const EPHMap = (props) => {
       function generateColor(value, minValue, maxValue) {
         const percentage = (value - minValue) / (maxValue - minValue);
         const hue = 200; // Blue hue
-        const saturation = 80; // Adjust as needed
-        const lightness = 30 + 50 * percentage; // Vary lightness from 30% to 80%
+        const saturation = 80; 
+        const lightness = 30 + 20 * percentage; // Vary lightness from 30% to 80%
       
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
       }
@@ -138,35 +138,105 @@ const EPHMap = (props) => {
         return dataValue === null ? '#D6D6DA' : generateColor(dataValue, minValue, maxValue);
       }
 
-      function generateLegendItems(data) {
-        const minValue = Math.min(...data.map((d) => d.dataValue));
-        const maxValue = Math.max(...data.map((d) => d.dataValue));
+
+
+
+function generateLegendItems(data) {
+  if (data.length === 0) {
+    // No data available
+    return (
+      <div className="legend-item">
+        <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
+        <span>No Data Available</span>
+      </div>
+    );
+  }
+
+  const minValue = Math.min(...data.map((d) => d.dataValue));
+  const maxValue = Math.max(...data.map((d) => d.dataValue));
+
+  const numIntervals = 5;
+  const intervalSize = (maxValue - minValue) / numIntervals;
+
+  const legendItems = Array.from({ length: numIntervals }, (_, index) => {
+    const startInterval = minValue + index * intervalSize;
+    const endInterval = startInterval + intervalSize;
+    const legendColor = getColorScale(startInterval, minValue, maxValue);
+
+    return {
+      index,
+      startInterval,
+      endInterval,
+      legendColor,
+    };
+  });
+
+  // Extract legend colors and reverse the array
+  const legendColors = legendItems.map(item => item.legendColor);
+  legendColors.reverse();
+
+  const reversedLegendItems = legendItems.map(({ index, startInterval, endInterval }, i) => (
+    <div key={index} className="legend-item">
+      <div className="legend-color" style={{ backgroundColor: legendColors[i] }}></div>
+      <span>
+        {endInterval !== undefined
+          ? `${startInterval.toFixed(2)}+`
+          : `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`}
+      </span>
+    </div>
+  ));
+
+  return reversedLegendItems;
+}
+
+function Legend({ data }) {
+  if (data.length === 0) {
+    // No data available, hide the legend
+    return null;
+  }
+
+  const minValue = Math.min(...data.map((d) => d.dataValue));
+  const maxValue = Math.max(...data.map((d) => d.dataValue));
+
+  const numIntervals = 5;
+  const intervalSize = (maxValue - minValue) / numIntervals;
+
+  const legendItems = Array.from({ length: numIntervals }, (_, index) => {
+    const startInterval = minValue + index * intervalSize;
+    const endInterval = startInterval + intervalSize;
+    const legendColor = getColorScale(startInterval, minValue, maxValue);
+
+    return {
+      index,
+      startInterval,
+      endInterval,
+      legendColor,
+    };
+  });
+
+  // Extract legend colors and reverse the array
+  const legendColors = legendItems.map(item => item.legendColor);
+  legendColors.reverse();
+
+  const reversedLegendItems = legendItems.map(({ index, startInterval, endInterval }, i) => (
+    <div key={index} className="legend-item">
+      <div className="legend-color" style={{ backgroundColor: legendColors[i] }}></div>
+      <span>
+        {endInterval !== undefined
+          ? `${startInterval.toFixed(2)}+`
+          : `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`}
+      </span>
+    </div>
+  ));
+
+  return (
+    <div className="legend-container">
+      {reversedLegendItems}
+    </div>
+  );
+}
       
-        
-        const numIntervals = 5; 
       
-        const intervalSize = (maxValue - minValue) / numIntervals;
-      
-        const legendItems = Array.from({ length: numIntervals }, (_, index) => {
-          const startInterval = minValue + index * intervalSize;
-          const endInterval = startInterval + intervalSize;
-      
-          const legendColor = getColorScale(startInterval, minValue, maxValue);
-      
-          return (
-            <div key={index} className="legend-item">
-              <div className="legend-color" style={{ backgroundColor: legendColor }}></div>
-              <span>
-                {endInterval !== undefined
-                  ? `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`
-                  : `${startInterval.toFixed(2)}+`}
-              </span>
-            </div>
-          );
-        });
-      
-        return legendItems;
-      }
       
 
    /* 
@@ -372,12 +442,12 @@ else if(props.mapType === "counties")
 
 
 <div className="legend">
-          <h3>Percent Concentration</h3>
+<h3>{props.units.replace(/[()]/g, '')}</h3>
           <div className="legend-item">
             <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
             <span>No Data Available</span>
           </div>
-          {generateLegendItems(props.data)}
+          <Legend data={props.data} />
         </div>
       </div>
              
