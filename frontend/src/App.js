@@ -106,7 +106,7 @@ const Navbar = (props) => {
               <Link to="/ephdata">Health Outcomes</Link>
             </li>
             <li className={location.pathname === "/datacomp" ? "active" : ""}>
-              <Link to="/datacomp">Data Comparison</Link>
+              <Link to="/datacomp">Comparison</Link>
             </li>
             {/* Remove national insights page
             <li className={location.pathname === "/thematicmaps" ? "active" : ""}>

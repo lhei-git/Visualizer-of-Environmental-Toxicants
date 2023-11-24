@@ -3,6 +3,7 @@ import NationalData from "./national";
 import StateData from "./state"
 import CountyData from "./county";
 import { useEffect, useState, useReducer } from "react";
+import history from "../history";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
@@ -32,7 +33,7 @@ const React = require("react");
 
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome({map}) {
+function EPHHome({map}) {  
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
@@ -112,7 +113,7 @@ function EPHHome({map}) {
 
   /* Initial state of app */
 const initialState = {
-  map: JSON.parse(sessionStorage.getItem("map")),
+  map: JSON.parse(sessionStorage.getItem("map")) || {state: null},
   filters: {
     chemical: "all",
     pbt: false,
@@ -160,6 +161,13 @@ const scrollToBottom = () => {
 const scrollToTop = () => {
   window.scrollTo(0, 0);
 };
+
+/* Amrita - Page reverts to main page if user opens it in a new tab (instead of giving an error)*/
+if (!state.map.state) {
+  // Redirect to your desired page (change '/your-page' to the actual path)
+  history.push("/");
+  return null; // or you can render a loading spinner or message here
+}
 
   return (
     

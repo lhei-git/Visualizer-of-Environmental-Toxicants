@@ -227,7 +227,7 @@ function DataComp(props){
         <div className="data-comp-container">
             <div className="content-group">
                 <div className="comp-header">
-                    <h1>Data Comparison</h1>
+                    <h1>Comparison of Toxic Releases & Health Outcomes</h1>
                 </div>
                 <div className="data-reps">
                     <div className="tri-data">
