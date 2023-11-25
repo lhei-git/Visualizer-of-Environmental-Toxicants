@@ -1,6 +1,7 @@
 //blueprint to display national data
 //created by Katherine O'Donnell
 // Amrita - Removed description and table to show only graph in Data Comparison page's Public Health Data section
+
 import "./index.css";
 import NationalTimeSeries from "../EPHCharts/national";
 import {useEffect, useState} from 'react';

@@ -1,5 +1,7 @@
 //blueprint to display state data
 //created by Katherine O'Donnell, added map code from Farzana Israt & table code from Taimee Hassan
+// Amrita - Removed description and table to show only graph in Data Comparison page's Public Health Data section
+
 import "./index.css";
 import StateTimeSeries from "../EPHCharts/state";
 import StateTable from "../EPHTable/state";

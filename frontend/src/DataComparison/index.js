@@ -1,11 +1,12 @@
 import "./index.css";
 import EPHChart from "../EPHCharts";
 import NationalEPHCompare from "./nationalEPHCompare.js";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useReducer } from 'react';
 import StateEPHCompare from "./stateEPHCompare.js"
 import CountyEPHCompare from "./countyEPHCompare";
+import TRITimeline from "./TRItimeline";
 import Title from "../Title";
-import GraphContainer from "../GraphView/index.js"; 
+import GraphContainer from "../GraphView/index.js";
 
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import PropTypes from "prop-types";
@@ -20,87 +21,127 @@ const { amountAsLabel, formatAmount } = require("../helpers");
 //created by Katherine O'Donnell
 
 const {
-    BarChart,
-    CartesianGrid,
-    XAxis,
-    YAxis,
-    Tooltip,
-    Legend,
-    Bar,
-    LineChart,
-    Line,
-    ResponsiveContainer,
-  } = require("recharts");
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Bar,
+  LineChart,
+  Line,
+  ResponsiveContainer,
+} = require("recharts");
 
-  const timelineAspectRatio = 17 / 9;
-  const maxLabelLength = 20;
-  const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
+/* Amrita - Taken from App.js to define initialState, reducer, setFilters, and setErrorMessage
+/* Initial state of app */
+const initialState = {
+  map: JSON.parse(sessionStorage.getItem("map")),
+  filters: {
+    chemical: "all",
+    pbt: false,
+    carcinogen: false,
+    releaseType: "all",
+    /*sets initial state to latest year*/
+    year: 2022,
+  },
+  errorMessage: "",
+};
 
-  const CustomXAxisTick = (props) => {
-    const { x, y, payload } = props;
-    let { value } = payload;
-    if (value.length > maxLabelLength + 5) {
-      value = value.slice(0, maxLabelLength + 5) + "...";
-    }
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text fontSize="12" transform="rotate(-35)" x={0} y={0} dx={-10}>
-          <tspan textAnchor="end" x="0" dy="0">
-            {value}
-          </tspan>
-        </text>
-      </g>
-    );
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setMap":
+      /* Store latest searched location in session */
+      sessionStorage.setItem("map", JSON.stringify(action.payload));
+      return {
+        ...state,
+        map: action.payload,
+      };
+    case "setFilters":
+      const newFilters = Object.assign({}, action.payload);
+      return { ...state, filters: newFilters };
+
+
+    case "setErrorMessage":
+      return { ...state, errorMessage: action.payload };
+    default:
+      throw new Error();
+  }
+};
+
+/* individual state setters */
+const setFilters = (payload) => ({ type: "setFilters", payload });
+const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
+
+const timelineAspectRatio = 17 / 9;
+const maxLabelLength = 20;
+const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
+
+const CustomXAxisTick = (props) => {
+  const { x, y, payload } = props;
+  let { value } = payload;
+  if (value.length > maxLabelLength + 5) {
+    value = value.slice(0, maxLabelLength + 5) + "...";
+  }
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text fontSize="12" transform="rotate(-35)" x={0} y={0} dx={-10}>
+        <tspan textAnchor="end" x="0" dy="0">
+          {value}
+        </tspan>
+      </text>
+    </g>
+  );
+};
+
+class CustomTooltip extends Tooltip {
+  static defaultProps = {
+    ...Tooltip.defaultProps,
+    contentStyle: {
+      color: "#FFF",
+      background: "rgba(0,0,0,0.8)",
+      border: "none",
+    },
+    itemStyle: { color: "#FFF" },
+    labelStyle: { fontSize: "24px", fontWeight: "bold" },
+    isAnimationActive: false,
+    formatter: (value) => formatAmount(value),
+    itemSorter: (a) => -a.value,
   };
-  
-  class CustomTooltip extends Tooltip {
-    static defaultProps = {
-      ...Tooltip.defaultProps,
-      contentStyle: {
-        color: "#FFF",
-        background: "rgba(0,0,0,0.8)",
-        border: "none",
-      },
-      itemStyle: { color: "#FFF" },
-      labelStyle: { fontSize: "24px", fontWeight: "bold" },
-      isAnimationActive: false,
-      formatter: (value) => formatAmount(value),
-      itemSorter: (a) => -a.value,
-    };
-  }
+}
 
-  class CustomLine extends Line {
-    static defaultProps = {
-      ...Line.defaultProps,
-      type: "monotone",
-      strokeWidth: 3,
-      dot: false,
-      activeDot: { r: 8 },
-    };
-  }
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
 
-  class CustomYAxis extends YAxis {
-    static defaultProps = {
-      ...YAxis.defaultProps,
-      type: "number",
-      unit: "lbs",
-      width: 100,
-      tickFormatter: customYAxisTickFormatter,
-    };
-  }
+class CustomYAxis extends YAxis {
+  static defaultProps = {
+    ...YAxis.defaultProps,
+    type: "number",
+    unit: "lbs",
+    width: 100,
+    tickFormatter: customYAxisTickFormatter,
+  };
+}
 
-  class CustomXAxis extends XAxis {
-    static defaultProps = {
-      ...XAxis.defaultProps,
-      dataKey: "name",
-      type: "category",
-      interval: 0,
-      tick: CustomXAxisTick,
-    };
-  }
-  
+class CustomXAxis extends XAxis {
+  static defaultProps = {
+    ...XAxis.defaultProps,
+    dataKey: "name",
+    type: "category",
+    interval: 0,
+    tick: CustomXAxisTick,
+  };
+}
 
-  
+
+
 
 /* convert properties of graph to query params for the VET api */
 const createParams = ({ map, filters }, customParams) => {
@@ -119,51 +160,59 @@ const createParams = ({ map, filters }, customParams) => {
 };
 
 
-function DataComp(props){
-    const [currentMeasure, setMeasure] = useState(null);
-    const [chemicals, setChemicals] = React.useState([]);
-        const testSize = {width: 600, height: 300};
+function DataComp(props) {
+  const [currentMeasure, setMeasure] = useState(null);
+  const [chemicals, setChemicals] = React.useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-    /* farzana */
-    React.useEffect(() => {
-      async function fetchChemicalList(map) {
-        const params = {
-          city: map.city,
-          county: map.county,
-          state: map.state,
-        };
-        try {
-          const res = await vetapi.get("/chemicals", { params });
-          const tmp = [...new Set(res.data.map((d) => formatChemical(d)).sort())];
-          setChemicals(tmp);
-        } catch (err) {
-          console.log(err);
-        }
+  /* farzana */
+  React.useEffect(() => {
+    async function fetchChemicalList(map) {
+      const params = {
+        city: map.city,
+        county: map.county,
+        state: map.state,
+      };
+      try {
+        const res = await vetapi.get("/chemicals", { params });
+        const tmp = [...new Set(res.data.map((d) => formatChemical(d)).sort())];
+        setChemicals(tmp);
+      } catch (err) {
+        console.log(err);
       }
-  
-      if (props.map) fetchChemicalList(props.map);
-    }, [props.filters, props.map]);
-
-    function handleError(err) {
-      console.error(err);
-      /* do something here */
     }
 
-    function onFilterChange(event) {
-      const target = event.target;
-      const filters = { ...props.filters, [target.name]: target.value };
-      props.onFilterChange(filters);
- 
-      TimelineTotal({ map: props.map, filters });
-    }
-    
+    if (props.map) fetchChemicalList(props.map);
+  }, [props.filters, props.map]);
 
-    /* Amrita - Timeline changes based on user's selection in drop-down */
-    const handleChange = (event) => {
-      setMeasure(event.target.value);
+  function handleError(err) {
+    console.error(err);
+    /* do something here */
+  }
+
+  function onFilterChange(event) {
+    const target = event.target;
+    const filters = { ...props.filters, [target.name]: target.value };
+    props.onFilterChange(filters);
+
+    TimelineTotal({ map: props.map, filters });
+  }
+
+
+  /* Amrita - Timeline changes based on user's selection in drop-down */
+  const handleChange = (event) => {
+    setMeasure(event.target.value);
   };
 
-/* farzana */
+  /* Amrita - Error message for TRI timeline when API isn't working */
+  function toggleError() {
+    dispatch(setErrorMessage("Request failed, please try again later."));
+    setTimeout(() => {
+      dispatch(setErrorMessage("Request failed, please try again later."));
+    }, 10000);
+  }
+
+  /* farzana */
   function getChemicals() {
     let options = [];
     options.push(
@@ -172,7 +221,7 @@ function DataComp(props){
       </option>
     );
     if (chemicals.length === 0) return options;
-  
+
     for (var chemical of chemicals) {
       options.push(
         <option key={chemical} value={chemical}>
@@ -222,17 +271,25 @@ function DataComp(props){
       return null;
     }
   }
-  
-    return(
-        <div className="data-comp-container">
-            <div className="content-group">
-                <div className="comp-header">
-                    <h1>Comparison of Toxic Releases & Health Outcomes</h1>
-                </div>
-                <div className="data-reps">
-                    <div className="tri-data">
-                        <h2>Toxicant Release</h2>
-                        {/* farzana */}
+
+  return (
+    <div className="data-comp-container">
+      <div className="content-group">
+        <div className="comp-header">
+          <h1>Comparison of Toxic Releases & Health Outcomes</h1>
+        </div>
+        <div className="data-reps">
+          <div className="tri-data">
+            {/* Amrita - Adding TRI page's total releases timeline to comparison page */}
+            <h2>Toxicant Release</h2>
+            <TRITimeline
+              map={state.map}
+              filters={state.filters}
+              onApiError={toggleError}
+              onFilterChange={(filters) => dispatch(setFilters(filters))}
+            ></TRITimeline>
+
+            {/* farzana
                         <select
                           name="chemical"
                           value={props.filters.chemical}
@@ -240,65 +297,62 @@ function DataComp(props){
                           id=""
                         >
                           {getChemicals()}
-                        </select>
+                        </select>*/}
+          </div>
 
-                        <EPHChart size = {testSize} className="tri-chart"/>
-    
+          <div className="eph-data">
+            {/* Amrita - Adding drop-down menu for public health measures */}
+            <h2>Public Health Data</h2>
+            <select onChange={handleChange} value={currentMeasure}>
+              <option>Choose a public health measure</option>
+              <option>Arsenic in Water</option>
+              <option>Asthma in Adults - County</option>
+              <option>Asthma in Children - State</option>
+              <option>Asthma Hospitalizations</option>
+              <option>Bisphenol and Paraben in Urine - National</option>
+              <option>Prevalence of Cancer</option>
+              <option>Childhood Cancer Brain & Central Nervous System - State</option>
+              <option>Childhood Cancer Leukemia - State</option>
+              <option>DEPH in Water</option>
+              <option>Fertility Rate</option>
+              <option>Heart Attack</option>
+              <option>Infant Mortality</option>
+              <option>Lead in Blood - National</option>
+              <option>Low Birthweight</option>
+              <option>Metals in Urine - National</option>
+              <option>PCE in Water</option>
+              <option>Pesticides in Urine - National</option>
+              <option>PFAS in Blood - National</option>
+              <option>PFAS in Water</option>
+              <option>Phthalates in Urine - National</option>
+              <option>Premature Birth</option>
+              <option>Radium in Water</option>
+              <option>TCE in Water</option>
+              <option>Uranium in Water</option>
+            </select>
 
-                    </div>
-                    <div className="eph-data">
-                        {/* Amrita - Adding drop-down menu for public health measures */}
-                        <h2>Public Health Data</h2>
-                        <select onChange={handleChange} value={currentMeasure}>
-                            <option>Choose a public health measure</option>
-                            <option>Arsenic in Water</option>
-                            <option>Asthma in Adults - County</option>
-                            <option>Asthma in Children - State</option>
-                            <option>Asthma Hospitalizations</option>
-                            <option>Bisphenol and Paraben in Urine - National</option>
-                            <option>Prevalence of Cancer</option>
-                            <option>Childhood Cancer Brain & Central Nervous System - State</option>
-                            <option>Childhood Cancer Leukemia - State</option>
-                            <option>DEPH in Water</option>
-                            <option>Fertility Rate</option>
-                            <option>Heart Attack</option>
-                            <option>Infant Mortality</option>
-                            <option>Lead in Blood - National</option>
-                            <option>Low Birthweight</option>
-                            <option>Metals in Urine - National</option>
-                            <option>PCE in Water</option>
-                            <option>Pesticides in Urine - National</option>
-                            <option>PFAS in Blood - National</option>
-                            <option>PFAS in Water</option>
-                            <option>Phthalates in Urine - National</option>
-                            <option>Premature Birth</option>
-                            <option>Radium in Water</option>
-                            <option>TCE in Water</option>
-                            <option>Uranium in Water</option>
-                        </select>
+            <div className="ephcomp-timelines">
+              {/* Amrita - Calls timeline from NationalEPHCompare to display timeline for Public Health Data section */}
+              {currentMeasure === "Lead in Blood - National" && (<NationalEPHCompare measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"} measureID={858} />)}
+              {currentMeasure === "Metals in Urine - National" && (<NationalEPHCompare measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856} />)}
+              {currentMeasure === "Phthalates in Urine - National" && (<NationalEPHCompare measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863} />)}
+              {currentMeasure === "Bisphenol and Paraben in Urine - National" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859} />)}
+              {currentMeasure === "PFAS in Blood - National" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826} />)}
+              {currentMeasure === "Pesticides in Urine - National" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861} />)}
 
-                      <div className="ephcomp-timelines">
-                        {/* Amrita - Calls timeline from NationalEPHCompare to display timeline for Public Health Data section */}
-                        {currentMeasure === "Lead in Blood - National" && (<NationalEPHCompare measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}  measureID={858}/>)}
-                        {currentMeasure === "Metals in Urine - National" && ( <NationalEPHCompare measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856}/>)}
-                        {currentMeasure === "Phthalates in Urine - National" && ( <NationalEPHCompare measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863}/> )}
-                        {currentMeasure === "Bisphenol and Paraben in Urine - National" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859}/>)}
-                        {currentMeasure === "PFAS in Blood - National" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
-                        {currentMeasure === "Pesticides in Urine - National" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
-                        
-                        {/* Amrita - Calls timeline from StateEPHCompare to display timeline for Public Health Data section */}
-                        {currentMeasure === "Asthma in Children - State" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
-                        {currentMeasure === "Childhood Cancer Brain & Central Nervous System - State" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
-                        {currentMeasure === "Childhood Cancer Leukemia - State" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}  
+              {/* Amrita - Calls timeline from StateEPHCompare to display timeline for Public Health Data section */}
+              {currentMeasure === "Asthma in Children - State" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)}
+              {currentMeasure === "Childhood Cancer Brain & Central Nervous System - State" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)}
+              {currentMeasure === "Childhood Cancer Leukemia - State" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}
 
-                        {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
-                        {currentMeasure === "Asthma in Adults - County" && (<CountyEPHCompare measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}  
-                      </div>
-                    </div>
-                </div> {/*data reps*/}
+              {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
+              {currentMeasure === "Asthma in Adults - County" && (<CountyEPHCompare measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
             </div>
-        </div> //datacomp
-    )
+          </div>
+        </div> {/*data reps*/}
+      </div>
+    </div> //datacomp
+  )
 
 }
 

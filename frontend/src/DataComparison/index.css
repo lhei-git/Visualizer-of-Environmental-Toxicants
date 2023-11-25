@@ -25,6 +25,7 @@
 
   .data-comp-container .data-reps{
     display: flex;
+    flex-direction: column; /* Amrita - Timelines are vertically aligned */
     width: 100%;
     justify-content: center;
     color: #222;
