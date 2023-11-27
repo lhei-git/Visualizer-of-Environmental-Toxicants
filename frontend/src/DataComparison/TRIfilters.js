@@ -1,4 +1,4 @@
-// Amrita - Taking only the All Chemicals portion of Filters index.js
+// Amrita - Taking only the All Chemicals portion of Filters index.js and adjusting a few things
 
 import "./index.css";
 import vetapi from "../api/vetapi";
@@ -71,10 +71,7 @@ function TRIFilters(props) {
   }
 
   return (
-    <div style={{ display: "flex" }}>
-      <div className="tricomp-control-header">
-        {props.map && <h1>{getLocationString(props.map, true)}</h1>}
-      </div>
+    <div className="tricomp-container">
       <div className="tricomp-control-container">
         <div className="tricomp-content">
           <select
@@ -86,6 +83,9 @@ function TRIFilters(props) {
             {getChemicals()}
           </select>
         </div>
+      </div>
+      <div className="tricomp-control-header">
+        {props.map && <h1>{getLocationString(props.map, true)}</h1>}
       </div>
     </div>
   );

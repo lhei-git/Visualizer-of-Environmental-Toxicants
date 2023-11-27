@@ -187,7 +187,7 @@ function DataComp(props) {
 
   function handleError(err) {
     console.error(err);
-    /* do something here */
+    console.log("Error with loading content. Please try again later") // Amrita - Adding error message
   }
 
   function onFilterChange(event) {
@@ -301,52 +301,60 @@ function DataComp(props) {
           </div>
 
           <div className="eph-data">
-            {/* Amrita - Adding drop-down menu for public health measures */}
+            {/* Amrita - Adding categorized drop-down menu for public health measures */}
             <h2>Public Health Data</h2>
             <select onChange={handleChange} value={currentMeasure}>
               <option>Choose a public health measure</option>
-              <option>Arsenic in Water</option>
-              <option>Asthma in Adults - County</option>
-              <option>Asthma in Children - State</option>
-              <option>Asthma Hospitalizations</option>
-              <option>Bisphenol and Paraben in Urine - National</option>
-              <option>Prevalence of Cancer</option>
-              <option>Childhood Cancer Brain & Central Nervous System - State</option>
-              <option>Childhood Cancer Leukemia - State</option>
-              <option>DEPH in Water</option>
-              <option>Fertility Rate</option>
-              <option>Heart Attack</option>
-              <option>Infant Mortality</option>
-              <option>Lead in Blood - National</option>
-              <option>Low Birthweight</option>
-              <option>Metals in Urine - National</option>
-              <option>PCE in Water</option>
-              <option>Pesticides in Urine - National</option>
-              <option>PFAS in Blood - National</option>
-              <option>PFAS in Water</option>
-              <option>Phthalates in Urine - National</option>
-              <option>Premature Birth</option>
-              <option>Radium in Water</option>
-              <option>TCE in Water</option>
-              <option>Uranium in Water</option>
+              <optgroup label="County-Level Data">
+                <option>Arsenic in Water</option>
+                <option>Asthma in Adults</option>
+                <option>Asthma Hospitalizations</option>
+                <option>Prevalence of Cancer</option>
+                <option>DEPH in Water</option>
+                <option>Fertility Rate</option>
+                <option>Heart Attack</option>
+                <option>Infant Mortality</option>
+                <option>Low Birthweight</option>
+                <option>PCE in Water</option>
+                <option>PFAS in Water</option>
+                <option>Premature Birth</option>
+                <option>Radium in Water</option>
+                <option>TCE in Water</option>
+                <option>Uranium in Water</option>
+              </optgroup>
+
+              <optgroup label="State-Level Data">
+                <option>Asthma in Children</option>
+                <option>Childhood Cancer Brain & Central Nervous System</option>
+                <option>Childhood Cancer Leukemia</option>
+              </optgroup>
+
+              <optgroup label="National-Level Data">
+                <option>Bisphenol and Paraben in Urine</option>
+                <option>Lead in Blood</option>
+                <option>Metals in Urine</option>
+                <option>Pesticides in Urine</option>
+                <option>PFAS in Blood</option>
+                <option>Phthalates in Urine</option>
+              </optgroup>
             </select>
 
             <div className="ephcomp-timelines">
               {/* Amrita - Calls timeline from NationalEPHCompare to display timeline for Public Health Data section */}
-              {currentMeasure === "Lead in Blood - National" && (<NationalEPHCompare measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"} measureID={858} />)}
-              {currentMeasure === "Metals in Urine - National" && (<NationalEPHCompare measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856} />)}
-              {currentMeasure === "Phthalates in Urine - National" && (<NationalEPHCompare measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863} />)}
-              {currentMeasure === "Bisphenol and Paraben in Urine - National" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859} />)}
-              {currentMeasure === "PFAS in Blood - National" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826} />)}
-              {currentMeasure === "Pesticides in Urine - National" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861} />)}
+              {currentMeasure === "Lead in Blood" && (<NationalEPHCompare measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"} measureID={858} />)}
+              {currentMeasure === "Metals in Urine" && (<NationalEPHCompare measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856} />)}
+              {currentMeasure === "Phthalates in Urine" && (<NationalEPHCompare measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863} />)}
+              {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859} />)}
+              {currentMeasure === "PFAS in Blood" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826} />)}
+              {currentMeasure === "Pesticides in Urine" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861} />)}
 
               {/* Amrita - Calls timeline from StateEPHCompare to display timeline for Public Health Data section */}
-              {currentMeasure === "Asthma in Children - State" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)}
-              {currentMeasure === "Childhood Cancer Brain & Central Nervous System - State" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)}
-              {currentMeasure === "Childhood Cancer Leukemia - State" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}
+              {currentMeasure === "Asthma in Children" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)}
+              {currentMeasure === "Childhood Cancer Brain & Central Nervous System" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)}
+              {currentMeasure === "Childhood Cancer Leukemia" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}
 
               {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
-              {currentMeasure === "Asthma in Adults - County" && (<CountyEPHCompare measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+              {currentMeasure === "Asthma in Adults" && (<CountyEPHCompare measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
             </div>
           </div>
         </div> {/*data reps*/}

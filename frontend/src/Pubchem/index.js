@@ -18,7 +18,7 @@ function Link(props) {
 }
 
 function handleError(err) {
-  /* do something here */
+  console.log("Error with PubChem") // Amrita - Adding error message
 }
 
 /* Pharmacology Component */

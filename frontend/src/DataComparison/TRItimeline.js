@@ -60,7 +60,7 @@ const {
   // Cut off labels and add parentheses
   const maxLabelLength = 20;
   
-  // Amrita - Copied from App.js file
+  // Amrita - Added from App.js file
   /* handler for updating state */
   const reducer = (state, action) => {
     switch (action.type) {
@@ -90,7 +90,7 @@ const {
   
   function handleError(err) {
     console.error(err);
-    /* do something here */
+    console.log("Error with loading content. Please try again later") // Amrita - Adding error message
   }
   
   /* compare function used for sorting timeline graphs */
@@ -197,7 +197,7 @@ const {
     );
   };
   
-  /* Add css styling to base X-Axis React Component */
+  /* Add css styling to base Y-Axis React Component */
   const CustomYAxisTick = (props) => {
     const { x, y, payload } = props;
     let { value } = payload;
@@ -339,19 +339,16 @@ function TRITimeline({ map, filters, onFilterChange }) {
   }
 
   return (
-    <div className="graph-container">
-
-      <div className="content">
+    <div className="comp-graph-container">
           <TRIFilters
             map={map}
             filters={filters}
             onFilterChange={onFilterChange}
           ></TRIFilters>
         
-        <div className="timeline-total">
+        <div className="comp-timeline-total">
             <TimelineTotal map={map} filters={filters} />
         </div>
-      </div>
     </div>
   );
 }

@@ -76,8 +76,9 @@ const StateEPHCompare = ({measure, measureID, units}) => {
 
     //.jsx layout
     return(
-        <div className="state-container">
-            <h1>{measure} in {stateName}</h1>
+        <div className="comp-state-container">
+            {/* Amrita - Adjusted header to only say stateName */}
+            <h1>{stateName}</h1>
             {/*change time series info based on filter changes*/}
             <div className = "time-series">
                 {selectedPercentile === 1 && (
