@@ -1,7 +1,7 @@
 //blueprint to display state data
 //created by Katherine O'Donnell, added map code from Farzana Israt & table code from Taimee Hassan
 import "./index.css";
-import "./state.css"
+import "./state.css";
 import StateTimeSeries from "../EPHCharts/state";
 import StateTable from "../EPHTable/state";
 import {useEffect, useReducer, useState} from 'react';

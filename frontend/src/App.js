@@ -26,8 +26,9 @@ import AboutPage from "./About/index";
 
 
 import EPHData from "./EPHData/index";
-
-import React, { useImperativeHandle, useReducer } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useImperativeHandle, useReducer, useState } from "react";
+/* eslint-enable no-unused-vars */
 import MapView from "./MapView";
 import PropTypes from "prop-types";
 import SimpleMap from "./EPHMapView/index";
@@ -84,29 +85,46 @@ const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const Navbar = (props) => {
   // webpage path
   const location = useLocation();
+  const [showMenu, setShowMenu] = useState(false);
+  // Al-Taimee - function to toggle hamburger menu on responsive screen
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
 
   /* Only shows other paths when a search has been initiated */
   return (
-    <div
-      className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
-    >
-      <ul>
+    /*Al-Taimee - show hamburger menu when clicked*/
+    <div className={`navigation ${showMenu ? "show-menu" : ""}`}>
+      <div className="menu-icon" onClick={toggleMenu}>
+        &#9776; 
+      </div>
+      
+
+      <div className={`menu-icon ${props.menuVisible ? "open" : ""}`} onClick={props.onMenuToggle}>
+        
+      </div>
+
+      <ul className={showMenu ? "show" : ""}>
         <li className={location.pathname === "/" ? "active" : ""}>
-        <Link to="/">Search</Link>
+          {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+        <Link to="/" onClick={() => setShowMenu(false)}>Search</Link>
         </li>
        
        
         {props.visible && (
           <>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
-              <Link to="/graphs">Toxic Releases</Link>
+              {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+              <Link to="/graphs" onClick={() => setShowMenu(false)}>Toxic Releases</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
-              <Link to="/ephdata">Health Outcomes</Link>
+              {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+              <Link to="/ephdata" onClick={() => setShowMenu(false)}>Health Outcomes</Link>
             </li>
             <li className={location.pathname === "/datacomp" ? "active" : ""}>
-              <Link to="/datacomp">Data Comparison</Link>
+              {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+              <Link to="/datacomp" onClick={() => setShowMenu(false)}>Data Comparison</Link>
             </li>
             {/* Remove national insights page
             <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
@@ -116,11 +134,13 @@ const Navbar = (props) => {
           </>
         )}
                 <li className={location.pathname === "/about" ? "active" : ""}>
-          <Link to="/about">About</Link>
+                  {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+          <Link to="/about" onClick={() => setShowMenu(false)}>About</Link>
         </li>
       </ul>
       <div className="logo">
-        <Link to="/">VETHOS.</Link>
+        {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+        <Link to="/" onClick={() => setShowMenu(false)}>VETHOS.</Link>
       </div>
       
     </div>
@@ -145,6 +165,8 @@ function Footer() {
 const App = (props) => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [menuVisible, setMenuVisible] = useState(false);
+  
 
 
   /* Error handler when API is down */
@@ -191,7 +213,9 @@ const App = (props) => {
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
     <Router history={history}>
-      <Navbar visible={!!state.map} />
+      {/*Al-Taimee - set menu on navbar*/}
+      <Navbar visible={!!state.map} onMenuToggle={() => setMenuVisible(!menuVisible)}
+        menuVisible={menuVisible}/>
 
       {state.errorMessage !== "" && (
         <div className="error" onClick={() => dispatch(setErrorMessage(""))}>

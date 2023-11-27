@@ -209,3 +209,24 @@
     margin-right: 0;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .health-outcomes-container {
+    width: 80%;
+  }
+  .eph-national-container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .health-outcomes-container {
+    width: 100%;
+  }
+  .eph-national-container {
+    width: 90%;
+  }
+  .scroll-btn-container {
+    width: 120%;
+  }
+}

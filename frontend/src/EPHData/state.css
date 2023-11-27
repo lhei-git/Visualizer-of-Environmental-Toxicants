@@ -52,6 +52,18 @@
       }
       
     }
+
+    @media (min-width: 469px) {
+      .state-container {
+        height: auto;
+        width: auto;
+        display: block;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      
+    }
   
   @media (max-width: 2880px) {
     .state-container {
