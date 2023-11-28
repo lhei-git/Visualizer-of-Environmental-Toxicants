@@ -189,11 +189,32 @@ const App = (props) => {
   }
 
   /*if no internet detected, display alert written by Al-Taimee*/
-  var checkIfOnline = navigator.onLine;
-    if (checkIfOnline == false) {
-        alert("Internet not detected, please reload once connection has been re-established"); 
-        setTimeout(5000)
-      }
+  document.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('online', updateOnlineOfflineStatus);
+    window.addEventListener('offline', updateOnlineOfflineStatus);
+
+    function updateOnlineOfflineStatus() {
+        var onLineOfflineAlert = document.getElementById('onLineOffline-alert');
+        //if online, online message
+        if (navigator.onLine) {
+            onLineOfflineAlert.style.backgroundColor = '#33cc33'; 
+            onLineOfflineAlert.innerHTML = '<p>Internet connection is restored!</p>';
+        } else {
+            //else offline message
+            onLineOfflineAlert.style.backgroundColor = '#ff3333'; 
+            onLineOfflineAlert.innerHTML = '<p>Please reconnect to the internet</p>';
+        } 
+
+        onLineOfflineAlert.style.display = 'block';
+
+        if (navigator.onLine) {
+          setTimeout(function () {
+            onLineOfflineAlert.style.display = 'none';
+        }, 3000); // if online, hide the alert after 3 seconds
+        }
+        
+    }
+});
 
       
 
@@ -216,6 +237,11 @@ const App = (props) => {
       {/*Al-Taimee - set menu on navbar*/}
       <Navbar visible={!!state.map} onMenuToggle={() => setMenuVisible(!menuVisible)}
         menuVisible={menuVisible}/>
+
+      <div id="onLineOffline-alert">
+        <span id="close-alert" onclick="document.getElementById('onLineOffline-alert').style.display='none'">&times;</span>
+        <p>Internet connection is restored!</p>
+      </div>
 
       {state.errorMessage !== "" && (
         <div className="error" onClick={() => dispatch(setErrorMessage(""))}>
