@@ -303,8 +303,8 @@ function DataComp(props) {
           <div className="eph-data">
             {/* Amrita - Adding categorized drop-down menu for public health measures */}
             <h2>Public Health Data</h2>
+            <p>Choose a public health measure:</p>
             <select onChange={handleChange} value={currentMeasure}>
-              <option>Choose a public health measure</option>
               <optgroup label="County-Level Data">
                 <option>Arsenic in Water</option>
                 <option>Asthma in Adults</option>

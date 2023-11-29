@@ -39,6 +39,7 @@ const NationalEPHCompare = ({measure, units, measureID}) => {
     //.jsx layout
     return(
         <div className="comp-national-container">
+            <h1>United States</h1>
             {/* Where filter container would go if needed */}
             {/*code below changes data representation based on filter changes*/}
             <div className = "time-series">

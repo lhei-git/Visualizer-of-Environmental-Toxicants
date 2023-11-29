@@ -3,8 +3,6 @@
 import "./index.css";
 import React, { useEffect, useState } from "react";
 import TRIFilters from "./TRIfilters";
-import Title from "../Title";
-import MapView from "../MapView";
 import PropTypes from "prop-types";
 
 const vetapi = require("../api/vetapi");
@@ -19,13 +17,10 @@ const initialState = {
 };
 
 const {
-    BarChart,
     CartesianGrid,
     XAxis,
     YAxis,
     Tooltip,
-    Legend,
-    Bar,
     LineChart,
     Line,
     ResponsiveContainer,
@@ -44,18 +39,6 @@ const {
     "#cab2d6",
     "#6a3d9a",
   ];
-  
-  /* The colors of the release types given to us by our client */
-  const barColors = {
-    onSite: "#f65858",
-    offSite: "#e9d700",
-    air: "#8d8d8d",
-    water: "#59954a",
-    land: "#844b11",
-  };
-  
-  /* Bar graph divs need to be taller than timeline graphs due to outrageous */
-  const barAspectRatio = 12 / 9;
   
   // Cut off labels and add parentheses
   const maxLabelLength = 20;
@@ -115,19 +98,6 @@ const {
   };
   
   const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
-  const customLegendFormatter = (value) =>
-    value.length > 35 ? value.slice(0, 35) + "..." : value;
-  
-  /* Custom bar chart */
-  class CustomBarChart extends BarChart {
-    static defaultProps = {
-      ...BarChart.defaultProps,
-      margin: {
-        left: 20,
-        bottom: 150,
-      },
-    };
-  }
   
   /* Custom tooltip */
   class CustomTooltip extends Tooltip {
@@ -154,28 +124,6 @@ const {
       strokeWidth: 3,
       dot: false,
       activeDot: { r: 8 },
-    };
-  }
-  
-  /* Custom legend for timeline graphs */
-  class CustomTimelineLegend extends Legend {
-    static defaultProps = {
-      ...Legend.defaultProps,
-      // Amrita - Adjusted width, fontSize, and adding paddingLeft to better fit new layout
-      width: 80,
-      height: 140,
-      layout: "vertical",
-      verticalAlign: "middle",
-      align: "right",
-      wrapperStyle: {
-        whiteSpace: "nowrap",
-        top: 0,
-        right: 0,
-        lineHeight: "24px",
-        fontSize: "12px",
-        paddingLeft: "15px"
-      },
-      formatter: customLegendFormatter,
     };
   }
   
@@ -307,15 +255,20 @@ const TimelineTotal = ({ map, filters }) => {
 
   return (
     <div>
-      <ResponsiveContainer width="100%" aspect={timelineAspectRatio}>
-        <LineChart data={data} margin={{ right: 150 }}>
-          <CartesianGrid vertical={false} />
-          <XAxis dataKey="year" />
-          <YAxis type="number" unit="lbs" />
-          <Tooltip />
-          <CustomLine name="total (lbs)" dataKey="total" stroke="#9c27b0" />
-        </LineChart>
-      </ResponsiveContainer>
+      {/* Returns formatted timeline (tooltip, y-axis, etc.) */}
+        <ResponsiveContainer width="100%" aspect={timelineAspectRatio}>
+          <LineChart data={data} margin={{ right: 150 }}>
+            <CartesianGrid vertical={false} />
+            <XAxis dataKey="year" />
+            <CustomYAxis></CustomYAxis>
+            <CustomTooltip></CustomTooltip>
+            <CustomLine
+              name="total (lbs)"
+              dataKey="total"
+              stroke="#9c27b0"
+            ></CustomLine>
+          </LineChart>
+        </ResponsiveContainer>
     </div>
   );
 };
@@ -328,8 +281,6 @@ TimelineTotal.propTypes = {
 function TRITimeline({ map, filters, onFilterChange }) {
     const [state, dispatch] = React.useReducer(reducer, initialState);
   const [currentTab, setCurrentTab] = React.useState(
-    /* Stores which tab user was last on. Might be worth taking out */
-    parseInt(sessionStorage.getItem("currentTab")) || 0
   );
 
   /* Setter for current tab */
@@ -340,6 +291,7 @@ function TRITimeline({ map, filters, onFilterChange }) {
 
   return (
     <div className="comp-graph-container">
+        <p>Choose a specific chemical:</p>
           <TRIFilters
             map={map}
             filters={filters}
@@ -390,5 +342,6 @@ TRITimeline.propTypes = {
       }),
       onFilterChange: PropTypes.func.isRequired,
 };
+
 
 export default TRITimeline;
