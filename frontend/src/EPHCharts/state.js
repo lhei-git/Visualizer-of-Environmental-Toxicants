@@ -82,21 +82,26 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
   const [state] = useReducer(reducer, initialState);
   //end of storage retrieval
 
+  {/*
   //use api call geographicItems to obtain the state ID of the state searched by the user
   //helper getLocationParents returns name of the searched state from session storage
   const [stateID, setStateID] = useState('');
   useEffect(() => {
+    let isMounted = true;
     const fetchStateID = async () => {
       try {
         const id = await getStateID(getLocationParents(state.map, 'stateLong'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/1/0`);
-        setStateID(id);
-      } catch (error) {
-        console.error('Error fetching state ID:', error);
-      }
+            setStateID(id);
+          } catch (error) {
+          console.error('Error fetching state ID:', error);
+        }
     };
-    fetchStateID();
-  }, [measureID, state.map]);
-
+      fetchStateID();
+      return () => {
+        isMounted = false;
+      };
+    }, [measureID, state.map]);
+    
   //get years available for selected measure to paass to api endpoint
   const [years, setYears] = useState([]);
   useEffect(() => {
@@ -130,9 +135,68 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
       .catch((error) => {
         console.error(error);
       });
-  }, [apiURL]);
+  }, [apiURL]);*/}
+  const [stateID, setStateID] = useState('');
+  const [years, setYears] = useState([]);
+  const [data, setData] = useState([]);
 
-  
+
+
+  useEffect(() => {
+    let isMounted = true;
+    /*
+    const fetchStateID = async () => {
+      try {
+        console.log("fetxhing state id...")
+        const id = await getStateID(getLocationParents(state.map, 'stateLong'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/1/0`);
+        if (isMounted) {
+          setStateID(id);
+        }
+      } catch (error) {
+        console.error('Error fetching state ID:', error);
+      }
+    };
+
+    const fetchYears = async () => {
+      try {
+        console.log("fetching available years from API...")
+        console.log('api url for years: ' + `https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`);
+        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`);
+        const yearData = response.data.map(item => item.temporal);
+        setYears(yearData);
+      } catch (error) {
+        console.error('Error fetching years:', error);
+      }
+    };*/
+
+    
+    const fetchMeasureData = async () => {
+      const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/26/1/2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0`;
+      try {
+        console.log("fetching measure data from API...")
+        console.log('api url for data: ' + `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/26/1/2019,2018,2017,2016,2015,2014,2013,2012,2011/0/0`);
+        const response = await axios.get(apiURL);
+        const newData = response.data.tableResult.map(item => ({
+          year: item.year,
+          dataValue: item.dataValue,
+        }));
+        if (isMounted) {
+          setData(newData);
+        }
+      } catch (error) {
+        console.error('Error fetching measure data:', error);
+      }
+    };
+
+    //fetchStateID();
+    //fetchYears();
+    fetchMeasureData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [measureID, state.map, state.currentTab]);
+
 
   return (
     <div className="TimeSeries" style={{width: size.width, height: size.height }}>  
@@ -141,6 +205,9 @@ const StateTimeSeries = ({size, measureID, units, percentile, demographic}) => {
       <p>state id {stateID}</p>
       <p>measure id {measureID}</p>
       */}   
+      <p>{stateID}</p>
+      <p>current tab {state.currentTab}</p>
+      <p>{`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/1/1/${stateID}/1/${getYearString(years)}/0/0`}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );

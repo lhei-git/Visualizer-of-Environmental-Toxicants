@@ -99,12 +99,13 @@ const CountyTimeSeries = ({size, measureID, units, percentile, demographic}) => 
       .catch((error) => {
         console.error(error);
       });
-  }, [apiURL]);
+  }, [apiURL, measureID]);
 
   
 
   return (
     <div className="TimeSeries" style={{width: size.width, height: size.height }}>  
+      <p>{countyID}</p>
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
