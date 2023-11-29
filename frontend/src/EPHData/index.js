@@ -29,10 +29,15 @@ import EPHTable from "../EPHTable";
 
 
 const React = require("react");
-
+const measuresInfo = [
+  { name: "Asthma among Children", measureID: 587, units: "Percent of Children with Asthma" },
+  { name: "Brain and Central Nervous System Cancer among Children", measureID: 67, units: "units" },
+  { name: "Leukemia among Children", measureID: 71, units: "units" },
+  // Add more measures as needed
+];
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome({map}) {
+function EPHHome({ map }) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
