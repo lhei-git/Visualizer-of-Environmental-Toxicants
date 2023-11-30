@@ -163,7 +163,7 @@ const CountyData = ({measure, measureID, units}) => {
                     />
                 )}
             </div>
-            <p>aData are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.</p>
+            
             <div className = "map-container">
             {measureID === 1120 && (
                     <EPHThematicStateMap 
