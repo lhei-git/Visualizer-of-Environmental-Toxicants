@@ -60,7 +60,7 @@ class EPHThematicWaterStateMap extends Component {
       this.setState({ prevStateName: this.props.stateName });
 
       const found = data.find((e) => e.state === this.props.stateName);
-      console.log("found", found);
+
       
       
       if(found) {
@@ -177,33 +177,62 @@ class EPHThematicWaterStateMap extends Component {
   
   getUnits(endUnits) {
     if(this.props.measure === "Arsenic in Community Water") {
-      return endUnits = "(Annual Mean)"
+      return endUnits = "(µg/L)"
     }
     else if (this.props.measure === "DEPH in Community Water") {
-      return endUnits = "(Annual Mean)"
+      return endUnits = "(µg/L)"
     }
     
     else if (this.props.measure === "PCE in Community Water") {
-      return endUnits = "(Annual Mean)"
+      return endUnits = "(µg/L)"
     }
 
     else if (this.props.measure === "PFAS in Community Water") {
       return endUnits = "(Concentration)"
     }
     else if (this.props.measure === "Radium in Community Water") {
-      return endUnits = "(Annual Mean)"
+      return endUnits = "(pCi/L)"
     }
-    else if (this.props.measure === "TCE in Community Water") { //not sure if this is the right one 
-      return endUnits = "(Annual Mean)"
+    else if (this.props.measure === "TCE in Community Water") { 
+      return endUnits = "(µg/L)"
       
     }
     else if (this.props.measure === "Uranium in Community Water") {
-      return endUnits = "(Annual Mean)"
+      return endUnits = "(µg/L)"
       
     }
 
   }
+
   
+  getSubtitle(subtitle) {
+    if(this.props.measure === "Arsenic in Community Water") {
+      return subtitle = "Annual Mean Concentration of Arsenic (µg/L)"
+    }
+    else if (this.props.measure === "DEPH in Community Water") {
+      return subtitle = "Annual Mean Concentration of DEHP (µg/L)"
+    }
+    
+    else if (this.props.measure === "PCE in Community Water") {
+      return subtitle = "Annual Mean Concentration of PCE (µg/L)"
+    }
+
+    else if (this.props.measure === "PFAS in Community Water") {
+      return subtitle = "CWS with Detections of PFAS Chemicals (PFOS, PFOA, PFNA, PFBS, PFHxS, PFHpA)"
+    }
+    else if (this.props.measure === "Radium in Community Water") {
+      return subtitle = "Annual Mean Concentration of Radium (pCi/L)"
+    }
+    else if (this.props.measure === "TCE in Community Water") { 
+      return subtitle = "Annual Mean Concentration of TCE (µg/L)"
+      
+    }
+    else if (this.props.measure === "Uranium in Community Water") {
+      return subtitle = "Annual Mean Concentration of Uranium (µg/L)"
+      
+    }
+
+  }  
   
   
   
@@ -236,7 +265,9 @@ class EPHThematicWaterStateMap extends Component {
         <div className="flex-item">
           
           <h1>{this.props.measure} in {this.props.stateLongName}</h1>
+          <h3>{this.getSubtitle()}</h3>
           <div className="centered-year">
+            <p>Select a Year of Interest: </p>
           <select
             value={selectedYear}
             onChange={this.handleYearChange}
@@ -254,6 +285,7 @@ class EPHThematicWaterStateMap extends Component {
 
           {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
           <div className="centered-level">
+            <p>Select an MCL Level: </p>
             <select
               value={this.state.level}
               onChange={this.handleLevelChange}
@@ -270,6 +302,7 @@ class EPHThematicWaterStateMap extends Component {
 
         {["PFAS in Community Water"].includes(this.props.measure) && (
           <div className="centered-contaminant">
+            <p>Select a Contaminant: </p>
             <select
               value={this.state.contaminant}
               onChange={this.handleContaminantChange}
