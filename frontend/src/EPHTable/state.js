@@ -87,7 +87,7 @@ function StateTable({ measureID}) {
           sampleSize: item.sampleSize,
           concentration: item.Concentration,
           year: item.year
-        }));
+        })); 
         setData(APIdata);
       })
       .catch((error) => {

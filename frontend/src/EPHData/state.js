@@ -123,7 +123,6 @@ const currentAccordionMeasure = accordionMeasure.find(
     <div className="state-container" ref={containerRef}>
       <h1>{measure} in {stateName}</h1>
       <div className={`time-series`}>
-        
           <StateTimeSeries
             size={{ width: 800, height: 400 }}
             measureID={measureID}

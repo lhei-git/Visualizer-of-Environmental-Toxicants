@@ -1,6 +1,6 @@
-.mapView {
+.mapView-individual {
     position: relative;
-    width: 80%;
+    width: 700px;
     margin: 0 auto;
     margin-bottom: 80px;
     min-height: 500px;
@@ -10,38 +10,38 @@
     margin-bottom: 120px;
     font-size: 18px;
   }
-  .mapView .legend {
+  .mapView-individual .legend {
     position: absolute;
     bottom: 0px;
-    left: 800px;
-    margin-bottom: 60px;
+    left: 600px;
+    margin-bottom: 200px;
     background: white;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
   }
   
-  .mapView .legend h3 {
+  .mapView-individual .legend h3 {
     margin: 0;
     font-size: 16px;
     text-align: center;
   }
   
-  .mapView .legend-item {
+  .mapView-individual .legend-item {
     display: flex;
     align-items: center;
     margin: 5px 0;
   }
   
   
-  .mapView .legend-color {
+  .mapView-individual .legend-color {
     width: 20px;
     height: 20px;
     display: inline-block;
     margin-right: 10px;
   }
   
-  .mapView .legend-item span {
+  .mapView-individual .legend-item span {
     margin: 0;
   }
 

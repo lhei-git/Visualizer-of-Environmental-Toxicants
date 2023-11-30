@@ -25,8 +25,8 @@ class EPHThematicWaterStateMap extends Component {
       prevStateName: "",
       countyData: null,
       measure: "",
-      level: "",
-      contaminant: "",
+      level: "2",
+      contaminant: "1",
       scale: null,
       lat: null,
       lon: null,
@@ -106,6 +106,8 @@ class EPHThematicWaterStateMap extends Component {
     "uranium in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
 
   */
+
+    /*get url from eph site*/
   getApiURL() {
     const selectedYear = this.state.selectedYear;
     const selectedLevel = this.state.level;
@@ -140,6 +142,7 @@ class EPHThematicWaterStateMap extends Component {
 
   }
 
+  /*get data or each county that is not a drinking water measure*/
   async getCountyData() {
     const apiUrl = this.getApiURL();
   
@@ -175,6 +178,8 @@ class EPHThematicWaterStateMap extends Component {
     }
   }
   
+
+  /*get units for tooltip*/
   getUnits(endUnits) {
     if(this.props.measure === "Arsenic in Community Water") {
       return endUnits = "(µg/L)"
@@ -204,7 +209,7 @@ class EPHThematicWaterStateMap extends Component {
 
   }
 
-  
+/*more descriptive title under the main title for each measure*/  
   getSubtitle(subtitle) {
     if(this.props.measure === "Arsenic in Community Water") {
       return subtitle = "Annual Mean Concentration of Arsenic (µg/L)"
@@ -235,19 +240,21 @@ class EPHThematicWaterStateMap extends Component {
   }  
   
   
-  
+  /*year dropdown configuration*/
   handleYearChange = (event) => {
     this.setState({ selectedYear: event.target.value }, () => {
       this.getCountyData(); // Fetch data with the updated year
     });
   };
   
+  /*level change configuration*/
   handleLevelChange = (event) => {
     this.setState({ level: event.target.value }, () => {
       this.getCountyData(); 
     });
   };
 
+  /*contaminant level configuration*/
   handleContaminantChange = (event) => {
     this.setState({ contaminant: event.target.value }, () => {
       this.getCountyData(); 
@@ -284,21 +291,19 @@ class EPHThematicWaterStateMap extends Component {
 
 
           {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
-          <div className="centered-level">
-            <p>Select an MCL Level: </p>
-            <select
-              value={this.state.level}
-              onChange={this.handleLevelChange}
-              style={{ fontSize: '18px', marginBottom: '50px' }}
-            >
-              <option>Select a Level</option>
-              <option value="1">Maximum contaminant level: Greater than MCL</option>
-              <option value="2">Maximum contaminant level: Less Than or Equal to MCL</option>
-              <option value="3">Maximum contaminant level: Not Detected</option>
-
-            </select>
-          </div>
-        )}
+  <div className="centered-level">
+    <p>Select an MCL Level: </p>
+    <select
+      value={this.state.level}
+      onChange={this.handleLevelChange}
+      style={{ fontSize: '18px', marginBottom: '50px' }}
+    >
+      <option value="1">Maximum contaminant level: Greater than MCL</option>
+      <option value="2">Maximum contaminant level: Less Than or Equal to MCL</option>
+      <option value="3">Maximum contaminant level: Not Detected</option>
+    </select>
+  </div>
+)}
 
         {["PFAS in Community Water"].includes(this.props.measure) && (
           <div className="centered-contaminant">

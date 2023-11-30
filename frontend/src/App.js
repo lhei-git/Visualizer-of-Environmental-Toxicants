@@ -81,7 +81,7 @@ const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
 
-/*
+
 const Navbar = (props) => {
   // webpage path
   const location = useLocation();
@@ -127,79 +127,10 @@ const Navbar = (props) => {
 Navbar.propTypes = {
   visible: PropTypes.bool,
 };
-*/
 
 
-/* Navbar component */
-const Navbar = (props) => {
-  const location = useLocation();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const showMegaMenu = windowWidth < 960;
-
-  const items = [
-    {
-      label: 'Search',
-      command: () => {
-        window.location = '/';
-      },
-      className: location.pathname === '/' ? 'active' : '',
-    },
-    {
-      label: 'Toxic Releases',
-      command: () => {
-        window.location = '/graphs';
-      },
-      className: location.pathname === '/graphs' ? 'active' : '',
-      visible: showMegaMenu,
-    },
-    {
-      label: 'Health Outcomes',
-      command: () => {
-        window.location = '/ephdata';
-      },
-      className: location.pathname === '/ephdata' ? 'active' : '',
-      visible: showMegaMenu,
-    },
-    {
-      label: 'Data Comparison',
-      command: () => {
-        window.location = '/datacomp';
-      },
-      className: location.pathname === '/datacomp' ? 'active' : '',
-      visible: showMegaMenu,
-    },
-    {
-      label: 'About',
-      command: () => {
-        window.location = '/about';
-      },
-      className: location.pathname === '/about' ? 'active' : '',
-    },
-  ];
-
-  return (
-    <div className={`navigation ${location.pathname === '/' ? 'transparent' : ''}`}>
-      <MegaMenu model={items} breakpoint="960px" visible={showMegaMenu} />
-    </div>
-  );
-};
-
-Navbar.propTypes = {
-  visible: PropTypes.bool,
-};
 
 
 /* Footer component */

@@ -8,3 +8,20 @@
 .centered-contaminant {
     text-align: center;
 }
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    padding: 0;
+  }
+
+
+  .thematic-view-container .flex-item {
+
+
+  }
+  
+.thematic-view-container .flex-item h3 {
+    text-align: center;
+    color: grey;
+}

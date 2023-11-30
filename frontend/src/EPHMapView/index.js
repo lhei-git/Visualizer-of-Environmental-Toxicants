@@ -29,10 +29,10 @@ function getColorScale(dataValue) {
 }
 
 const SimpleMap = ({ map }) => {
-  const [selectedYear, setSelectedYear] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(['2020']);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  const [selectedGenderId, setSelectedGenderId] = useState([]);
+  const [selectedGenderId, setSelectedGenderId] = useState(['1']);
   
   
   const dataForEachYear = (year, genderId) => {
@@ -86,7 +86,7 @@ const SimpleMap = ({ map }) => {
       <div className='dropdown'>
       <label htmlFor="gender">Select Gender:</label>
       <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
-        <option value="">Select a Gender</option>
+        
         <option value="1">Male</option>
         <option value="2">Female</option>
       </select>
@@ -133,47 +133,7 @@ const SimpleMap = ({ map }) => {
 
 
       <ReactTooltip />
-  <div className="legend">
-  <h3>Percent Concentration</h3>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-    <span>Null Data</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-9</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>9-12</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>12-14</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>14+</span>
-  </div>
-</div>
-
-<div className='mapDescription'>
-  <div className='measureDescription'>
-  </div>
-  <span className='questionMark'>ⓘ</span>
-  <div className='tooltip'>
-  Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.
-  </div>
-</div>
-
-
-{/*
-      {selectedState && (
-        <div className="tooltip">
-          <p>Percent Concentration: {selectedState.displayValue}</p>
-        </div>
-      )}
-      */}
+ 
     </div>
   );
 }

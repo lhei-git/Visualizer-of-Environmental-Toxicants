@@ -21,7 +21,7 @@ class EPHThematicStateMap extends Component {
       prevStateName: "",
       countyData: null,
       measure: "",
-      gender: "all",
+      gender: "1",
       scale: null,
       lat: null,
       lon: null,
@@ -129,6 +129,8 @@ class EPHThematicStateMap extends Component {
   }
 
 */
+
+/*get url from eph site*/
   getApiURL() {
     
     const selectedYear = this.state.selectedYear;
@@ -178,6 +180,7 @@ class EPHThematicStateMap extends Component {
     */
   }
 
+  /*get units for tooltip*/
   getUnits(endUnits) {
     if(this.props.measure === "Asthma Among Adults") {
       return endUnits = "(Percent)"; 
@@ -208,6 +211,8 @@ class EPHThematicStateMap extends Component {
 
   }
 
+
+  /*more descriptive title under the main title for each measure*/
   getSubtitle(subtitle) {
     if(this.props.measure === "Asthma Among Adults") {
       return subtitle = "Crude Prevalence of Current Asthma among Adults >= 18 Years of Age"; 
@@ -238,6 +243,8 @@ class EPHThematicStateMap extends Component {
 
   }
 
+
+  /*get data or each county that is not a drinking water measure*/
   async getCountyData() {
     const apiUrl = this.getApiURL();
 
@@ -263,12 +270,14 @@ class EPHThematicStateMap extends Component {
     
   }
   
+  /*year dropdown configuration*/
   handleYearChange = (event) => {
     this.setState({ selectedYear: event.target.value }, () => {
       this.getCountyData(); 
     });
   };
   
+  /*gender dropdown configuration*/
   handleGenderChange = (event) => {
     this.setState({ gender: event.target.value }, () => {
       this.getCountyData(); 
@@ -330,7 +339,6 @@ class EPHThematicStateMap extends Component {
                 lat={this.state.lat}
                 scale={this.state.scale}
                 units={this.getUnits()}
-                
                />
             
           ) : (
