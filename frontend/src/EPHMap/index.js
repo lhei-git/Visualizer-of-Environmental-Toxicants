@@ -392,7 +392,7 @@ else if(props.mapType === "counties")
                                             key={geo.rsmKey}
                                             geography={geo}
                                             
-                                            data-tip={`${geo.properties.NAME} ${props.units}: ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"}`}
+                                            data-tip={`${geo.properties.NAME} ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"} ${props.units}`}
                                             style={{
                                               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -442,7 +442,6 @@ else if(props.mapType === "counties")
 
 
 <div className="legend">
-<h3>{props.units.replace(/[()]/g, '')}</h3>
           <div className="legend-item">
             <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
             <span>No Data Available</span>
