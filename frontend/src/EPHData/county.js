@@ -11,6 +11,7 @@ import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import Accordion from "../Accordion/Accordion";
+import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
 
@@ -18,7 +19,7 @@ const {getLocationParents, getYearString} = require("../helpers");
 
 
 //calling County Data on the eph page will generate a data layout for any measure selected
-const CountyData = ({measure, measureID, units}) => {
+const CountyData = ({measure, measureID, units, currentMap}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -143,6 +144,7 @@ const CountyData = ({measure, measureID, units}) => {
         <div className="county-container">
             <h1>{measure} in {countyName}, {stateAbbr}</h1>
             {/*change time series info based on filter changes*/}
+            <p>{measureID}</p>
             <div className = "time-series">
                 <CountyTimeSeries
                 size={{ width: 800, height: 400 }}
@@ -154,13 +156,161 @@ const CountyData = ({measure, measureID, units}) => {
             </div>
             
             <div className = "map-container">
-            {measureID === 1120 && (
+                {measureID === 769 && (
+                    <EPHThematicWaterStateMap 
+                    yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                    level={[1, 2, 3]}
+                    measure={"Arsenic in Community Water"}
+                    stateName={stateAbbr}
+                    stateLongName={stateLong}>
+                    </EPHThematicWaterStateMap> )}
+
+                    {/*asthma*/}
+                {measureID === 1120 && (
                     <EPHThematicStateMap 
                     yearRange={[2020, 2019, 2018]}
                     measure={"Asthma Among Adults"}
                     stateName={stateAbbr}
                     stateLongName={stateLong}>
                     </EPHThematicStateMap> )}
+
+                 {/*cancer*/}
+                 {measureID === 1095 && (
+                    <EPHThematicStateMap 
+                    yearRange={[2020, 2019, 2018]}
+                    measure={"Prevalence of Cancer"}
+                    stateName={stateAbbr}
+                    stateLongName={stateLong}>
+                    </EPHThematicStateMap> )}
+
+                 {/*fertility*/}
+                 {measureID === 45 && (
+                    <EPHThematicStateMap 
+                    yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                    measure={"Fertility Rate"}
+                    stateName={stateAbbr}
+                    stateLongName={stateLong}>
+                    </EPHThematicStateMap> )}
+
+                 {/*heart*/}
+                 {measureID === 553 && (
+                    <EPHThematicStateMap 
+                        yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                        gender={[1, 2]}
+                        measure={"Heart Attack"}
+                        stateName={stateAbbr}
+                        stateLongName={stateLong}>
+                    </EPHThematicStateMap> )}
+
+                 {/*infant mort*/}
+                 {measureID === 279 && (
+                    <EPHThematicStateMap 
+                        yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004]}
+                        measure={"Infant Mortality"}
+                        stateName={stateAbbr}
+                    stateLongName={stateLong}>
+                    </EPHThematicStateMap> )}
+
+                 {/*low birth*/}
+                 {measureID === 36 && (
+                    <EPHThematicStateMap 
+                        yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                        gender={[1, 2]}
+                        measure={"Low Birthweight"}
+                        stateName={stateAbbr}
+                        stateLongName={stateLong}>
+                    </EPHThematicStateMap> )}
+
+                 {/*pce*/}
+                 {measureID === 807 && (
+                    <EPHThematicWaterStateMap 
+                        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                        level={[1, 2, 3]}
+                        measure={"PCE in Community Water"}
+                        stateName={stateAbbr}
+                    stateLongName={stateLong}>
+                    </EPHThematicWaterStateMap> )}
+                    
+                 {/*pfas*/}
+                 {measureID === 734 && (
+                    <EPHThematicWaterStateMap 
+                        yearRange={[2015]}
+                        contaminant={[1, 2, 3, 4, 5, 6]}
+                        measure={"PFAS in Community Water"}
+                        stateName={stateAbbr}
+                        stateLongName={stateLong}>
+                    </EPHThematicWaterStateMap> )}
+
+               
+
+                {/*
+                
+         {/*
+
+{currentTab === "7" && ( 
+  /*farzana -- making state maps for each measure
+
+{currentTab === "9" && ( 
+  /*farzana -- making state maps for each measure
+
+{currentTab === "11" && ( 
+
+{currentTab === "14" && ( 
+
+{currentTab === "16" && ( 
+  /*farzana -- making state maps for each measure
+<EPHThematicStateMap 
+        yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+        gender={[1, 2]}
+        measure={"Prematurity"}
+        stateName={map.state}
+        stateLongName={map.stateLong}>
+</EPHThematicStateMap> )}
+{currentTab === "17" && ( 
+<EPHThematicWaterStateMap 
+        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+        level={[1, 2, 3]}
+        measure={"Radium in Community Water"}
+        stateName={map.state}
+        stateLongName={map.stateLong}>
+</EPHThematicWaterStateMap> )}
+{currentTab === "18" && ( 
+<EPHThematicWaterStateMap 
+        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+        level={[1, 2, 3]}
+        measure={"TCE in Community Water"}
+        stateName={map.state}
+        stateLongName={map.stateLong}>
+</EPHThematicWaterStateMap> )}
+{currentTab === "19" && ( 
+<EPHThematicWaterStateMap 
+        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+        level={[1, 2, 3]}
+        measure={"Uranium in Community Water"}
+        stateName={map.state}
+        stateLongName={map.stateLong}>
+</EPHThematicWaterStateMap> )}
+{currentTab === "20" && ( 
+<EPHThematicStateMap 
+        yearRange={[2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]}
+        measure={"Hospitalizations from Asthma"}
+        stateName={map.state}
+        stateLongName={map.stateLong}>
+</EPHThematicStateMap> )}
+
+{currentTab === "21" && (
+<EPHThematicWaterStateMap 
+        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+        level={[1, 2, 3]}
+        measure={"DEPH in Community Water"}
+        stateName={map.state}
+        stateLongName={map.stateLong}>
+</EPHThematicWaterStateMap>)}
+
+                    */
+
+
+                }
             </div>
             <div className="eph-table-container">
                 <CountyTable measureID={measureID} />

@@ -63,14 +63,14 @@ const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => 
   }
 
   return (
-    <div className="TimeSeries" style={{width: size.width, height: size.height }}>
+    <div className="TimeSeries">
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
 }
 
 NationalTimeSeries.propTypes = {
-  size: PropTypes.shape({                     //size of chart to be displayed
+  size: PropTypes.shape({
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
   }).isRequired,
@@ -81,35 +81,6 @@ NationalTimeSeries.propTypes = {
   demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
 
 };
-
-/*
-//creates time series graph -- might move to own file for reusability
-function TimeSeries({ data, size, units }) {
-  return (
-    <LineChart width={size.width} height={size.height} data={data}>
-      <CartesianGrid />
-      <XAxis dataKey="year" />
-      <YAxis>
-        <Label 
-          style={{textAnchor: "middle"}}
-          angle={270} 
-          position='insideLeft'
-          value={units}
-          margin={200}/>
-      </YAxis>
-      <Tooltip />
-      <Line name="Concentration" type="monotone" dataKey="dataValue" stroke="purple" />
-    </LineChart>
-  );
-}
-
-TimeSeries.propTypes = {
-  size: PropTypes.shape({                     //same size prop as chart
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }).isRequired,
-  units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
-};*/
 
 
 export default NationalTimeSeries;
