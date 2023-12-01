@@ -25,6 +25,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navigation.transparent {
@@ -37,7 +38,7 @@
   cursor: pointer;
   height: 100%;
   margin: 0 20px;
-  font-size: 38px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -139,95 +140,66 @@
 
 
 /* Responsive styles written by Al-Taimee */
-/* Styles for screens wider than 200px */
-
-@media (min-width: 200px) {
-  .navigation {
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    height: 80px;
-    line-height: 80px;
-    margin: 0;
-    padding: 0;
-    top: 0;
-    color: #fff;
-    background: #7d3a8b;
-  }
-
-  .navigation .logo {
-    margin: 0 20px;
-    font-size: 38px;
-  }
-
-  .navigation a {
-    color: rgba(255, 255, 255, 0.85);
-  }
-}
-/* Styles for screens wider than 469px */
-
-@media (min-width: 469px) {
-  .navigation {
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    height: 80px;
-    line-height: 80px;
-    margin: 0;
-    padding: 0;
-    top: 0;
-    color: #fff;
-    background: #7d3a8b;
-  }
-
-  .navigation .logo {
-    margin: 0 20px;
-    font-size: 38px;
-  }
-
-  .navigation a {
-    color: rgba(255, 255, 255, 0.85);
-  }
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+  margin-right: 20px;
 }
 
-/* Styles for screens 2880px and below */
-
-@media (max-width: 2880px) {
-  .navigation {
-    height: auto;
-    line-height: 1.5;
+@media (max-width: 768px) {
+  .navigation ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px; 
+    left: 0;
+    width: 100%;
     background: #7d3a8b;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   }
 
-  .navigation .logo {
-    font-size: 24px;
-    margin: 10px;
-  }
-
-  .navigation a {
-    display: block;
-    padding: 10px 20px;
-    color: #fff;
+  .navigation ul.show {
+    display: flex;
   }
 
   .navigation li,
   .go-home {
-    padding: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
+  .navigation .logo,
+  .navigation .menu-icon,
   .navigation ul {
+    padding: 10px;
+  }
+
+  .navigation .logo {
+    margin: 0;
     text-align: center;
   }
 
-  .navigation li.active {
-    font-weight: bold;
+  .menu-icon {
+    display: block;
   }
+
+  .navigation .menu-icon {
+    display: block;
+    cursor: pointer;
+  }
+
+  .navigation .logo,
+  .navigation .menu-icon,
+  .navigation ul {
+    padding: 10px;
+  } 
 }
 
-.navigation.transparent {
-  background: transparent;
-}
-*/
+
 .footer {
   position: fixed;
   text-align: center;
@@ -242,4 +214,32 @@
 .footer .copyright {
   padding: 0 20px;
   margin: 10px 0;
+}
+
+
+
+/*offline, online style*/
+#onLineOffline-alert {
+  display: none;
+  position: fixed;
+  top: 77%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #ff3333;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+#onLineOffline-alert p {
+  margin: 0;
+}
+
+#close-alert {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }

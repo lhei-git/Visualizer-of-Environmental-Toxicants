@@ -1,7 +1,7 @@
 //blueprint to display state data
 //created by Katherine O'Donnell, added map code from Farzana Israt & table code from Taimee Hassan
 import "./index.css";
-import "./county.css"
+import "./county.css";
 import CountyTimeSeries from "../EPHCharts/county";
 import CountyTable from "../EPHTable/county";
 import {useEffect, useReducer, useState} from 'react';
@@ -146,16 +146,16 @@ const CountyData = ({measure, measureID, units}) => {
             <div className = "time-series">
                 {selectedPercentile === 1 && (
                     <CountyTimeSeries
-                    size={{ width: 800, height: 400 }}
+                    size={{ width: '100%', height: '400px' }}
                     measureID={measureID}
                     units={units}
-                    percentile={1}
+                    percentile={1} 
                     demographic={selectedDemographic}
                     />
                 )}
                 {selectedPercentile === 2 && (
                     <CountyTimeSeries
-                    size={{ width: 800, height: 400 }}
+                    size={{ width: '100%', height: '400px' }}
                     measureID={measureID}
                     units={units}
                     percentile={2}
