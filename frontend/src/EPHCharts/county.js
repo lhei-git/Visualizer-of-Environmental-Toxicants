@@ -1,154 +1,179 @@
-import React from 'react'
+import React, { Component, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect, useState, useReducer } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Label,
+} from 'recharts';
 import axios from 'axios';
-import "./index.css";
-import { getStateID } from '../EPHFilters/stateID';
 import { getCountyID } from '../EPHFilters/countyID';
-const {getLocationParents, getYearString} = require("../helpers");
+import { getLocationParents, getYearString } from '../helpers';
+import LoadingSpinner from '../LoadingSpinner';
 
-
-//written by Katherine O'Donnell
-
-
-
-const CountyTimeSeries = ({size, measureID, units, percentile, demographic}) => {
-  //below code pulls searched location from app session storage 
-    // Initial state of app 
-    const initialState = {
-      map: JSON.parse(sessionStorage.getItem("map")),
+/*farzana -- created the class*/
+class CountyTimeSeries extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: JSON.parse(sessionStorage.getItem('map')),
       filters: {
-      chemical: "all",
-      pbt: false,
-      carcinogen: false,
-      releaseType: "all",
-      //sets initial state to latest year/
-      year: 2022,
+        chemical: 'all',
+        pbt: false,
+        carcinogen: false,
+        releaseType: 'all',
+        year: 2022,
       },
-      errorMessage: "",
-  };
-  const reducer = (state, action) => {
-      switch (action.type) {
-        case "setMap":
-          // Store latest searched location in session /
-          sessionStorage.setItem("map", JSON.stringify(action.payload));
-          return {
-            ...state,
-            map: action.payload,
-          };
-        case "setFilters":
-          const newFilters = Object.assign({}, action.payload);
-          return { ...state, filters: newFilters };
+      errorMessage: '', 
+      years: [],
+      data: [],
+    };
+  }
+
+  /*Katie fetched code from API*/
+  async fetchDataFromAPI() {
+    try {
+      const id = await getCountyID(
+        getLocationParents(this.state.map, 'stateLong'), getLocationParents(this.state.map, 'county'),
+        `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${this.props.measureID}/2/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744` //farzana added in apiToken
+      );
+      this.setState({ countyID: id });
+  
+      const response = await axios.get(
+        `https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${this.props.measureID}/2/all/all?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`//farzana added in apiToken
+      );
+      const yearData = response.data.map((item) => item.temporal);
+      this.setState({ years: yearData });
+  
+      const yearString = getYearString(yearData);
+      const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
+  
+      const apiResponse = await axios.get(apiURL);
+      console.log('API RESPONSE: ', apiResponse);
+      const responseData = apiResponse.data.tableResult.map((item) => ({
+        year: item.year,
+        dataValue: item.dataValue,
+        state: item.geo, 
+      }));
+  
+      // Update state and set loading to false
+      this.setState((prevState) => ({
+        ...prevState,
+        stateID: id,
+        years: yearData,
+        data: responseData,
+        errorMessage: '',
+      }));
+  
+      // Store data in session storage with a dynamic key based on measureID
+      //sessionStorage.setItem(`ephData_${this.props.measureID}`, JSON.stringify(responseData));
+    } catch (error) {
+      if (error.response) {
+        // The request was made, but the server responded with a status code outside the range of 2xx
+        console.error('HTTP error response status code:', error.response.status);
+        console.error('HTTP error response data:', error.response.data);
+      } else if (error.request) {
+        // The request was made, but no response was received
+        console.error('No response received from the server');
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Error during API call:', error.message);
+      }
     
+      // Log the full error object
+      console.log('Full error object:', error);
     
-        case "setErrorMessage":
-          return { ...state, errorMessage: action.payload };
-        default:
-          throw new Error();
-      }
-    };
-  const [state] = useReducer(reducer, initialState);
-  //end of storage retrieval
+      this.setState((prevState) => ({
+        ...prevState,
+        errorMessage: 'Error retrieving data from EPH API',
+      }));
+    }}
 
-  //use api call geographicItems to obtain the state ID of the state searched by the user
-  //helper getLocationParents returns name of the searched state from session storage
-  const [countyID, setCountyID] = useState('');
-  useEffect(() => {
-    const fetchCountyID = async () => {
-      try {
-        const id = await getCountyID(getLocationParents(state.map, 'stateLong'), getLocationParents(state.map, 'county'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/2/0`);
-        setCountyID(id);
-      } catch (error) {
-        console.error('Error fetching county ID:', error);
-      }
-    };
-    fetchCountyID();
-  }, [measureID, state.map]);
+  componentDidUpdate(prevProps) {
+    if (this.props.measureID !== prevProps.measureID) {
+      this.fetchDataFromAPI();
+    }
+  }
 
-  //get years available for selected measure to paass to api endpoint
-  const [years, setYears] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/2/all/all`);
-        const yearData = response.data.map(item => item.temporal);//extract years 
-        setYears(yearData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
-  //convert array of years to string
-  const yearString = getYearString(years);
-
-  //get measure data from API and stores it as 'data' object to be accessed by time series function
-  const [data, setData] = useState([]);
-  const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2/2/${countyID}/1/${yearString}/0/0`;
-  useEffect(() => {
-    axios.get(apiURL)
-      .then((response) => {
-        const newData = response.data.tableResult.map((item) => ({
-          year: item.year,
-          dataValue: item.dataValue,
-          //add error handling if dataValue is null?????
-        }));
-        setData(newData);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [apiURL, measureID]);
-
+  componentDidMount() {
+      this.fetchDataFromAPI();
+  }
   
 
+  componentWillUnmount() {
+    this.setState({ data: [] });
+  }
+
+  render() {
+    // Your component rendering logic using this.state and this.props
+  
+    const { errorMessage, loading } = this.state;
+
+    if (errorMessage) {
+      return <div>Error: {errorMessage}</div>;
+    }
+
+    if (loading) {
+      /*load spinner from previous group*/
+      return <LoadSpinner />;
+    }
+
+    return (
+      <div>
+       {/* {this.props.stateData ? ( */}
+          <div className="TimeSeries" style={{ width: this.props.size.width, height: this.props.size.height }}>
+            <LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
+              <CartesianGrid />
+              <XAxis dataKey="year" />
+              <YAxis>
+                <Label
+                  style={{ textAnchor: 'middle' }}
+                  angle={270}
+                  position="insideLeft"
+                  value={this.props.units}
+                  margin={200}
+                />
+              </YAxis>
+              <Tooltip />
+              <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
+            </LineChart>
+          </div>
+      {/*  ) : (
+          <LoadSpinner />
+      )} */}
+      </div>
+    );
+  }
+}
+
+CountyTimeSeries.propTypes = {
+  size: PropTypes.shape({
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
+  measureID: PropTypes.number.isRequired,
+  units: PropTypes.string.isRequired,
+  percentile: PropTypes.number.isRequired,
+  demographic: PropTypes.number.isRequired,
+};
+
+function LoadSpinner() {
   return (
-    <div className="TimeSeries" style={{width: size.width, height: size.height }}>  
-      <p>{countyID}</p>
-      <TimeSeries data={data} size={size} units={units}/>
+    <div
+      style={{
+        width: '100%',
+        height: '100',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <LoadingSpinner></LoadingSpinner>
     </div>
   );
 }
-  
-CountyTimeSeries.propTypes = {
-  size: PropTypes.shape({                     //size of chart to be displayed
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }).isRequired,
-  measureID: PropTypes.number.isRequired,       //measure selected on eph page
-  units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
-  //lineName: PropTypes.string.isRequired,      //type of measure (e.g. concentration) selected on eph page
-  percentile: PropTypes.number.isRequired,         //1=50th, 2=95th
-  demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
-};
-
-function TimeSeries({ data, size, units }) {
-  
-  return (
-    <LineChart width={size.width} height={size.height} data={data}>
-      <CartesianGrid />
-      <XAxis dataKey="year" />
-      <YAxis>
-        <Label 
-          style={{textAnchor: "middle"}}
-          angle={270} 
-          position='insideLeft'
-          value={units}
-          margin={200}/>
-      </YAxis>
-      <Tooltip />
-      <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
-    </LineChart>
-  );
-}
-
-TimeSeries.propTypes = {
-  size: PropTypes.shape({                     //same size prop as chart
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }).isRequired,
-  units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
-};
 
 export default CountyTimeSeries;

@@ -38,10 +38,10 @@ function getColorScale(dataValue) {
 
 
 const ChildhoodLeukemia = ({ map }) => {
-  const [selectedYear, setSelectedYear] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(["2019"]);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  const [selectedGenderId, setSelectedGenderId] = useState([]);
+  const [selectedGenderId, setSelectedGenderId] = useState(["1"]);
 
   //const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
 
@@ -51,7 +51,7 @@ const ChildhoodLeukemia = ({ map }) => {
   const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${year}/0/0?GenderId=${genderId}`, )
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${year}/0/0?GenderId=${genderId}` )
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -78,7 +78,7 @@ const ChildhoodLeukemia = ({ map }) => {
   return (
     <div className='nation-mapView'>
      <div className='container'>
-      {/*return data for asthma in children for the typed in location*/}
+      {/*return data for childhood cancer for the typed in location*/}
       <h2>Childhood Cancer Leukemia</h2>
       </div>
       <div className="dropdown">
@@ -87,8 +87,6 @@ const ChildhoodLeukemia = ({ map }) => {
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
         >
-          <option value=""> Select Year </option>
-          <option value="2020">2020</option>
           <option value="2019">2019</option>
           <option value="2018">2018</option>
           <option value="2017">2017</option>
@@ -115,7 +113,6 @@ const ChildhoodLeukemia = ({ map }) => {
       <div className='dropdown'>
       <label htmlFor="gender">Select Gender:</label>
       <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
-        <option value=""> Select a Gender </option>
         <option value="1">Male</option>
         <option value="2">Female</option>
       </select>
@@ -137,7 +134,7 @@ const ChildhoodLeukemia = ({ map }) => {
           <Geography
             key={geo.rsmKey}
             geography={geo}
-            data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
+            data-tip={`${geo.properties.name} (Counts): ${stateData && stateData.displayValue }`}
             style={{
               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -155,39 +152,9 @@ const ChildhoodLeukemia = ({ map }) => {
 </ComposableMap>
 
       <ReactTooltip />
-  <div className="legend">
-  <h3>Percent Concentration</h3>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-    <span>Null Data</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-20</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>20-50</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>50-100</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>100+</span>
-  </div>
-</div>
+  
 
-<div className='mapDescription'>
-  <h2></h2>
-  <div className='measureDescription'>
-  </div>
-  <span className='questionMark'>ⓘ</span>
-  <div className='tooltip'>
-  U.S. Cancer Statistics data are provided by CDC's National Program of Cancer RegistriePs as submitted to CDC and NCI in the most recent data submission.
-  </div>
-</div>
+
 {/*
       {selectedState && (
         <div className="tooltip">

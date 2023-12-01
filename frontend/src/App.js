@@ -27,7 +27,7 @@ import AboutPage from "./About/index";
 
 import EPHData from "./EPHData/index";
 
-import React, { useImperativeHandle, useReducer } from "react";
+import React, { useImperativeHandle, useReducer, useState, useEffect } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
 import SimpleMap from "./EPHMapView/index";
@@ -80,13 +80,13 @@ const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
 
-/* Navbar component */
+
 const Navbar = (props) => {
   // webpage path
   const location = useLocation();
 
 
-  /* Only shows other paths when a search has been initiated */
+ 
   return (
     <div
       className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
@@ -108,10 +108,7 @@ const Navbar = (props) => {
             <li className={location.pathname === "/datacomp" ? "active" : ""}>
               <Link to="/datacomp">Comparison</Link>
             </li>
-            {/* Remove national insights page
-            <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
-              <Link to="/thematicmaps">National Insights</Link>
-            </li>*/}
+            
             
           </>
         )}
@@ -129,6 +126,10 @@ const Navbar = (props) => {
 Navbar.propTypes = {
   visible: PropTypes.bool,
 };
+
+
+
+
 
 
 /* Footer component */

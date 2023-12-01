@@ -10,8 +10,10 @@ import SimpleMap from "../EPHMapView";
 import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
 import EPHThematicStateMap from "../EPHThematicStateMap";
+import Accordion from "../Accordion/Accordion";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
+
 
 
 
@@ -76,6 +78,66 @@ const CountyData = ({measure, measureID, units}) => {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
+    const accordionMeasure = [
+
+        {
+            measureID: 1120,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Asthma',
+            },
+    
+            {
+                title: 'Where did we get this data?',
+                content: 'Where we got this data for Asthma',
+            },
+
+            {
+                title: 'How is this data measured',
+                content: 'How the  for Asthma',
+            },
+
+        ]
+    
+        }, 
+        {
+            measureID: 67, 
+            sections: [
+            
+            {
+                title: 'What does this data mean?',
+                content: 'Details about what data means for Childhood Brain Cancer',
+            },
+    
+            {
+                title: 'Where did we get this data?',
+                content: 'Where we got this data for Brain Cancer',
+            }
+        ]
+        
+        }, 
+        {
+            measureID: 71,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Childhood Leukemia',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Childhood Leukemia"
+            }
+        ]
+        }, 
+    
+    
+    
+    ]
+    const currentAccordionMeasure = accordionMeasure.find(
+        section => section.measureID === measureID
+      );
+
     //.jsx layout
     return(
         <div className="county-container">
@@ -101,7 +163,7 @@ const CountyData = ({measure, measureID, units}) => {
                     />
                 )}
             </div>
-            <p>Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.</p>
+            
             <div className = "map-container">
             {measureID === 1120 && (
                     <EPHThematicStateMap 
@@ -114,6 +176,11 @@ const CountyData = ({measure, measureID, units}) => {
             <div className="eph-table-container">
                 <CountyTable measureID={measureID} />
             </div>
+            {currentAccordionMeasure &&
+        currentAccordionMeasure.sections.map(section => (
+          <Accordion key={section.title} title={section.title} content={section.content} />
+        ))}
+    
         </div>
     );
 }

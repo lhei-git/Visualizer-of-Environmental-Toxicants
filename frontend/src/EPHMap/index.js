@@ -16,13 +16,7 @@ import "./index.css"
 const EPHMap = (props) => {
     const [position, setPosition] = useState({coordinates: [-96, 38], zoom: 1});
 
-    function textColorScale(color) {
-        var r = parseInt(color.toString().substr(1, 2), 16);
-        var g = parseInt(color.toString().substr(3, 2), 16);
-        var b = parseInt(color.toString().substr(5, 2), 16);
     
-        return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? "black" : "white";
-      }
     
 
 
@@ -30,89 +24,7 @@ const EPHMap = (props) => {
       function handleMoveEnd(position) {
         setPosition(position);
       }
-      function colorScale(val, releaseType, mapType) {
-        //color scales for each release type (on-site and total have the same color scale)
-        const scaleAll = [
-          "#FCDBC6",
-          "#FBCBCA",
-          "#F2A598",
-          "#F65858",
-          "#E00E0E",
-          "#A60A0A",
-        ];
-        const scaleAir = [
-          "#DEDEDE",
-          "#DDDDDD",
-          "#AEAEAE",
-          "#8D8D8D",
-          "#6D6D6D",
-          "#353535",
-        ];
-        const scaleWater = [
-          "#C5E0B4",
-          "#97C14B",
-          "#80B145",
-          "#59954A",
-          "#447741",
-          "#316033",
-        ];
-        const scaleLand = [
-          "#F8CBAD",
-          "#C48647",
-          "#A3672B",
-          "#844B11",
-          "#733A00",
-          "#502F0C",
-        ];
-        const scaleOffsite = [
-          "#FFFFCA",
-          "#FFF9AE",
-          "#F8ED62",
-          "#E9D700",
-          "#DAB600",
-          "#A98600",
-        ];
-    
-        //numerical values to adjust the bucket size, values in each bucket are LESS THAN the numerical value
-        const stateBuckets = [1000000, 10000000, 25000000, 50000000, 100000000];
-        const countyBuckets = [1000, 10000, 100000, 1000000, 5000000];
-    
-        var valIndex = 0;
-    
-        //states and counties use a different scale to keep results presentable
-        switch (mapType) {
-          case "states":
-            if (val < stateBuckets[0]) valIndex = 0;
-            else if (val < stateBuckets[1]) valIndex = 1;
-            else if (val < stateBuckets[2]) valIndex = 2;
-            else if (val < stateBuckets[3]) valIndex = 3;
-            else if (val < stateBuckets[4]) valIndex = 4;
-            else valIndex = 5;
-            break;
-          default:
-            if (val < countyBuckets[0]) valIndex = 0;
-            else if (val < countyBuckets[1]) valIndex = 1;
-            else if (val < countyBuckets[2]) valIndex = 2;
-            else if (val < countyBuckets[3]) valIndex = 3;
-            else if (val < countyBuckets[4]) valIndex = 4;
-            else valIndex = 5;
-            break;
-        }
-    
-        //return the color for the visual element
-        switch (releaseType) {
-          case "air":
-            return [scaleAir[valIndex]];
-          case "water":
-            return [scaleWater[valIndex]];
-          case "land":
-            return [scaleLand[valIndex]];
-          case "off_site":
-            return [scaleOffsite[valIndex]];
-          default:
-            return [scaleAll[valIndex]];
-        }
-      }
+      
       const [minValue, setMinValue] = useState(null);
       const [maxValue, setMaxValue] = useState(null);
       useEffect(() => {
@@ -125,8 +37,8 @@ const EPHMap = (props) => {
       function generateColor(value, minValue, maxValue) {
         const percentage = (value - minValue) / (maxValue - minValue);
         const hue = 200; // Blue hue
-        const saturation = 80; // Adjust as needed
-        const lightness = 30 + 50 * percentage; // Vary lightness from 30% to 80%
+        const saturation = 80; 
+        const lightness = 30 + 20 * percentage; // Vary lightness from 30% to 80%
       
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
       }
@@ -138,75 +50,63 @@ const EPHMap = (props) => {
         return dataValue === null ? '#D6D6DA' : generateColor(dataValue, minValue, maxValue);
       }
 
-      function generateLegendItems(data) {
-        const minValue = Math.min(...data.map((d) => d.dataValue));
-        const maxValue = Math.max(...data.map((d) => d.dataValue));
-      
-        
-        const numIntervals = 5; 
-      
-        const intervalSize = (maxValue - minValue) / numIntervals;
-      
-        const legendItems = Array.from({ length: numIntervals }, (_, index) => {
-          const startInterval = minValue + index * intervalSize;
-          const endInterval = startInterval + intervalSize;
-      
-          const legendColor = getColorScale(startInterval, minValue, maxValue);
-      
-          return (
-            <div key={index} className="legend-item">
-              <div className="legend-color" style={{ backgroundColor: legendColor }}></div>
-              <span>
-                {endInterval !== undefined
-                  ? `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`
-                  : `${startInterval.toFixed(2)}+`}
-              </span>
-            </div>
-          );
-        });
-      
-        return legendItems;
-      }
-      
 
-   /* 
-    const [selectedYear, setSelectedYear] = useState([]);
-    const apiURL = getApiURL(measure);
 
-    useEffect(() => {
-        axios.get(apiURL)
-        .then((response) => {
-            setData(response.data.tableResult);
-        })
-        .catch((error) => {
-            console.error("error: ", error);
-        })
-    }, [apiURL]);
 
-    const getApiURL = (selectedMeasure, year) => {
-        setSelectedYear(year);
-        switch(selectedMeasure) {
-            case "asthma in children": 
-                return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/3/all/all/1/${year}/0/0?AgeBandId=1,2,3,4`;
-            case "childhood cancer: brain & central":
-                return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/4/all/all/1/${year}/0/0?GenderId=1,2`;
-            case "childhood cancer: leukemia":
-                return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${year}/0/0?GenderId=1,2`        
-        }
-    }
 
-    useEffect(() => {
-        if (selectedYear) {
-          getApiURL(measure, selectedYear);
-        }
-      }, [selectedYear]);
-      */
+
+function Legend({ data }) {
+  if (data.length === 0) {
+    // No data available, hide the legend
+    return null;
+  }
+
+  const minValue = Math.min(...data.map((d) => d.dataValue));
+  const maxValue = Math.max(...data.map((d) => d.dataValue));
+
+  const numIntervals = 5;
+  const intervalSize = (maxValue - minValue) / numIntervals;
+
+  const legendItems = Array.from({ length: numIntervals }, (_, index) => {
+    const startInterval = minValue + index * intervalSize;
+    const endInterval = startInterval + intervalSize;
+    const legendColor = getColorScale(startInterval, minValue, maxValue);
+
+    return {
+      index,
+      startInterval,
+      endInterval,
+      legendColor,
+    };
+  });
+
+  // Extract legend colors and reverse the array
+  const legendColors = legendItems.map(item => item.legendColor);
+  legendColors.reverse();
+
+  const reversedLegendItems = legendItems.map(({ index, startInterval, endInterval }, i) => (
+    <div key={index} className="legend-item">
+      <div className="legend-color" style={{ backgroundColor: legendColors[i] }}></div>
+      <span>
+        {endInterval !== undefined
+          ? `${startInterval.toFixed(2)}+`
+          : `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`}
+      </span>
+    </div>
+  ));
+
+  return (
+    <div className="legend-container">
+      {reversedLegendItems}
+    </div>
+  );
+}
 
 
 if(props.mapType === "states")
       return (
         <>
-        <div className='mapView'>
+        <div className='mapView-states'>
             <ComposableMap projection="geoAlbers">
                 <Geographies geography={props.geoURL}>
                     {({ geographies }) =>
@@ -261,7 +161,7 @@ if(props.mapType === "states")
 else if(props.mapType === "counties")
     return (
         <>
-        <div className='mapView'>
+        <div className='mapView-counties'>
             <ComposableMap data-tip="" projection="geoAlbers">
                 <ZoomableGroup zoom={position.zoom} center={position.coordinates} onMoveEnd={handleMoveEnd}>
                     <Geographies geography={props.geoURL}>
@@ -300,7 +200,7 @@ else if(props.mapType === "counties")
     else {
         return (
             <>
-            <div className="mapView">
+            <div className="mapView-individual">
                 <ComposableMap
                     data-tip=""
                     projection="geoMercator"
@@ -309,6 +209,7 @@ else if(props.mapType === "counties")
                         center: [props.lon, props.lat],
                         scale: props.scale,
                     }}
+                    
                     >
                         <Geographies geography={props.geoUrl}>
                             {({ geographies }) => 
@@ -322,7 +223,7 @@ else if(props.mapType === "counties")
                                             key={geo.rsmKey}
                                             geography={geo}
                                             
-                                            data-tip={`${geo.properties.NAME} ${props.units}: ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"}`}
+                                            data-tip={`${geo.properties.NAME} ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"} ${props.units}`}
                                             style={{
                                               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -337,12 +238,7 @@ else if(props.mapType === "counties")
 
                                             
                                         )
-
-
-
-
-
-                                        
+  
                                         
                                     } else {
                                         return (
@@ -372,16 +268,13 @@ else if(props.mapType === "counties")
 
 
 <div className="legend">
-          <h3>Percent Concentration</h3>
           <div className="legend-item">
             <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
             <span>No Data Available</span>
           </div>
-          {generateLegendItems(props.data)}
+          <Legend data={props.data} />
         </div>
       </div>
-             
-
             </>
         );
     }  

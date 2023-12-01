@@ -19,7 +19,7 @@
   margin: 0;
   padding: 0;
   top: 0;
-  color: #fff;
+  color: black;
   background: #7d3a8b;
   /* Amrita - Vertically centered navigation bar's elements */
   display: flex;
@@ -113,7 +113,7 @@
   background-color: #7d3a8b;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   margin: 5px;
   max-width: 100%;
@@ -133,8 +133,14 @@
   background-color: #7d3a8b;
 }
 
+
+
+
+
+
 /* Responsive styles written by Al-Taimee */
 /* Styles for screens wider than 200px */
+
 @media (min-width: 200px) {
   .navigation {
     position: fixed;
@@ -159,6 +165,7 @@
   }
 }
 /* Styles for screens wider than 469px */
+
 @media (min-width: 469px) {
   .navigation {
     position: fixed;
@@ -184,6 +191,7 @@
 }
 
 /* Styles for screens 2880px and below */
+
 @media (max-width: 2880px) {
   .navigation {
     height: auto;
@@ -219,7 +227,7 @@
 .navigation.transparent {
   background: transparent;
 }
-
+*/
 .footer {
   position: fixed;
   text-align: center;

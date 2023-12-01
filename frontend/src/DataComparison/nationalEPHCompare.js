@@ -45,7 +45,7 @@ const NationalEPHCompare = ({measure, units, measureID}) => {
             <div className = "time-series">
             {selectedPercentile === 1 && (
                 <NationalTimeSeries
-                        size={{ width: 800, height: 400 }}
+                        size={{ width: 600, height: 300 }}
                         measure={measure}
                         units={units}
                         percentile={1}
