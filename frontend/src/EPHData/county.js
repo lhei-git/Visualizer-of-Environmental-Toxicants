@@ -100,13 +100,13 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             
             {
-                title: 'What does this data mean?',
-                content: 'Details about what data means for Hospitalizations from Asthma',
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Hospitalizations for Asthma.',
             },
     
             {
-                title: 'Where did we get this data?',
-                content: 'Where we got this data for Hospitalizations from Asthma',
+                title: 'Where did CDC get this data from?',
+                content: 'The hospital data shown here are provided by state and/or local public health departments to the National Environmental Public Health Tracking Program. Data are based on the date of admission rather than the date of discharge.',
             },
 
         ]
@@ -116,12 +116,12 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 1095,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Prevalence of Cancer',
+                title: 'Where did we get this data?',
+                content: 'Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on 12/01/2023',
             },
             {
-                title: "Where is this data from?",
-                content: "Where we got this data from for Prevalence of Cancer"
+                title: 'Where did CDC get this data from?',
+                content: "Data are from the Population Level Analysis and Community Estimates (PLACES) Project (https://www.cdc.gov/places/index.html), which is an expansion of the original 500 Cities Project. The original project was launched by the Centers for Disease Control and Prevention (CDC) in partnerships with the Robert Wood Johnson Foundation (RWJF) and CDC Foundation."
             }
         ]
         }, 
@@ -130,12 +130,12 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 45,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Fertility Rate',
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
-                title: "Where is this data from?",
-                content: "Where we got this data from for Fertility Rate"
+                title: 'Where did CDC get this data from?',
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
             }
         ]
         }, 
@@ -144,12 +144,12 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 553,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Heart Attack',
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Mortality for Heart Attack.',
             },
             {
-                title: "Where is this data from?",
-                content: "Where we got this data from for Heart Attack"
+                title: 'Where did CDC get this data from?',
+                content: "Mortality data from the National Vital Statistics System from National Center for Health Statistics (NCHS). Website source http://www.cdc.gov/nchs/deaths.htm Population data from the National Center for Health Statistics; intercensal estimates were used for 2000-2009; Postcensal estimates were used for 2010 - forward. Website source: http://www.cdc.gov/nchs/nvss/bridged_race.htm"
             }
         ]
         }, 
@@ -158,24 +158,25 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 279,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Infant Mortality',
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
-                title: "Where is this data from?",
-                content: "Where we got this data from for Infant Mortality"
+                title: 'Where did CDC get this data from?',
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
             }
         ]
         }, 
+
         {
             measureID: 36,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Low Birthweight',
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for Low Birthweight"
             }
         ]
@@ -184,11 +185,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 30,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for Prematurity',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for Prematurity"
             }
         ]
@@ -198,11 +199,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 769,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for Arsenic in Water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for Arsenic in Water"
             }
         ]
@@ -212,11 +213,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 802,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for DEPH in water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for DEPH in water"
             }
         ]
@@ -225,11 +226,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 807,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for PCE in water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for PCE in water"
             }
         ]
@@ -238,11 +239,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 734,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for PFAS in water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for PFAS in water"
             }
         ]
@@ -251,11 +252,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 817,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for Radium in Water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for Radium in water"
             }
         ]
@@ -264,11 +265,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 812,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for TCE in water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for TCE in water"
             }
         ]
@@ -277,11 +278,11 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 822,
             sections: [
             {
-                title: 'What does this data mean',
+                title: 'Where did we get this data?',
                 content: 'Details about what data means for Uranium in Water',
             },
             {
-                title: "Where is this data from?",
+                title: 'Where did CDC get this data from?',
                 content: "Where we got this data from for Uranium in water"
             }
         ]
