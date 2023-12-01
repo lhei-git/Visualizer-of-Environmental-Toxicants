@@ -81,56 +81,211 @@ const CountyData = ({measure, measureID, units}) => {
     const accordionMeasure = [
 
         {
-            measureID: 1120,
+            measureID: 1038,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Asthma',
-            },
-    
-            {
                 title: 'Where did we get this data?',
-                content: 'Where we got this data for Asthma',
-            },
-
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children.',
+            },  
             {
-                title: 'How is this data measured',
-                content: 'How the  for Asthma',
+                title: 'Where did the CDC get this data?',
+                content: 'Data are from the Population Level Analysis and Community Estimates (PLACES) Project (https://www.cdc.gov/places/index.html), which is an expansion of the original 500 Cities Project. The original project was launched by the Centers for Disease Control and Prevention (CDC) in partnerships with the Robert Wood Johnson Foundation (RWJF) and CDC Foundation.',
             },
 
         ]
     
         }, 
         {
-            measureID: 67, 
+            measureID: 99, 
             sections: [
             
             {
                 title: 'What does this data mean?',
-                content: 'Details about what data means for Childhood Brain Cancer',
+                content: 'Details about what data means for Hospitalizations from Asthma',
             },
     
             {
                 title: 'Where did we get this data?',
-                content: 'Where we got this data for Brain Cancer',
-            }
+                content: 'Where we got this data for Hospitalizations from Asthma',
+            },
+
         ]
         
         }, 
         {
-            measureID: 71,
+            measureID: 1095,
             sections: [
             {
                 title: 'What does this data mean',
-                content: 'Details about what data means for Childhood Leukemia',
+                content: 'Details about what data means for Prevalence of Cancer',
             },
             {
                 title: "Where is this data from?",
-                content: "Where we got this data from for Childhood Leukemia"
+                content: "Where we got this data from for Prevalence of Cancer"
             }
         ]
         }, 
-    
+
+        {
+            measureID: 45,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Fertility Rate',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Fertility Rate"
+            }
+        ]
+        }, 
+
+        {
+            measureID: 553,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Heart Attack',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Heart Attack"
+            }
+        ]
+        }, 
+
+        {
+            measureID: 279,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Infant Mortality',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Infant Mortality"
+            }
+        ]
+        }, 
+        {
+            measureID: 36,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Low Birthweight',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Low Birthweight"
+            }
+        ]
+        }, 
+        {
+            measureID: 30,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Prematurity',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Prematurity"
+            }
+        ]
+        }, 
+
+        {
+            measureID: 769,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Arsenic in Water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Arsenic in Water"
+            }
+        ]
+        }, 
+
+        {
+            measureID: 802,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for DEPH in water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for DEPH in water"
+            }
+        ]
+        }, 
+        {
+            measureID: 807,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for PCE in water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for PCE in water"
+            }
+        ]
+        }, 
+        {
+            measureID: 734,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for PFAS in water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for PFAS in water"
+            }
+        ]
+        }, 
+        {
+            measureID: 817,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Radium in Water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Radium in water"
+            }
+        ]
+        },
+        {
+            measureID: 812,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for TCE in water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for TCE in water"
+            }
+        ]
+        },  
+        {
+            measureID: 822,
+            sections: [
+            {
+                title: 'What does this data mean',
+                content: 'Details about what data means for Uranium in Water',
+            },
+            {
+                title: "Where is this data from?",
+                content: "Where we got this data from for Uranium in water"
+            }
+        ]
+        }, 
     
     
     ]
@@ -154,13 +309,13 @@ const CountyData = ({measure, measureID, units}) => {
             </div>
             
             <div className = "map-container">
-            {measureID === 1120 && (
+            {measureID === 1038 && (
                     <EPHThematicStateMap 
                     yearRange={[2020, 2019, 2018]}
                     measure={"Asthma Among Adults"}
                     stateName={stateAbbr}
                     stateLongName={stateLong}>
-                    </EPHThematicStateMap> )}
+                    </EPHThematicStateMap> )}       
             </div>
             <div className="eph-table-container">
                 <CountyTable measureID={measureID} />

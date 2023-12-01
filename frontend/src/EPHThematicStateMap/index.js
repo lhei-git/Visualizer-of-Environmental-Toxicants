@@ -153,7 +153,7 @@ class EPHThematicStateMap extends Component {
     else if (this.props.measure === "Heart Attack") {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
     }
-    else if (this.props.measure === "Infant Mortality") { //not sure if this is the right one 
+    else if (this.props.measure === "Infant Mortality") { 
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/${selectedYear}/1/0`
     }
     else if (this.props.measure === "Low Birthweight") {
