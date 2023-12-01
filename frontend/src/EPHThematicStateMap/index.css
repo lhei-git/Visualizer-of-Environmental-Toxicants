@@ -1,9 +1,8 @@
-.centered-year {
-  text-align: center;
-}
-
-.centered-gender {
-  text-align: center;
+.centered-dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .thematic-eph-state-container .state-flex h1 {

@@ -1,19 +1,19 @@
-.centered-year {
-    text-align: center;
-}
-.centered-level {
-    text-align: center;
-}
 
-.centered-contaminant {
-    text-align: center;
-}
+
+.centered-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+  }
 
 .thematic-view-container .eph-flex-item h1 {
     text-align: center;
     margin-top: 50px;
     padding: 0;
-  }
+}
+
+
   
 .thematic-view-container .eph-flex-item h3 {
     text-align: center;
