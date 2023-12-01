@@ -1,6 +1,7 @@
 /* Amrita - Added to fix spacing between sidebar and EPH content */
 .eph-national-container {
   width: 80%;
+  height:80%;
   float: right;
   padding: 20px;
   margin-left: 100px;
@@ -46,7 +47,7 @@
     justify-content: center;
     align-items: center;
     padding-bottom: 100px;
-    z-index: 0;
+    /*z-index: 0;*/
 }
 
 .health-outcomes-container h2 {
@@ -60,7 +61,6 @@
 .health-outcomes-sidebar {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-right: 1em;
 }
 
@@ -74,6 +74,65 @@
     text-align: center;
     background-color: #E6E6FA;
 }
+/*
+.pi {
+  font-family: 'primeicons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.pi {
+  font-family: 'primeicons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.p-button {
+  color: #ffffff;
+  background: #6366F1;
+  border: 1px solid #6366F1;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+}
+.p-component {
+  font-family: var(--font-family);
+  font-feature-settings: var(--font-feature-settings, normal);
+  font-size: 1rem;
+  font-weight: normal;
+}
+.pi:before {
+  --webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.p-button {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+.p-sidebar {
+  background-color: #fff;
+}
+*/
 .container-column:first-child {
     flex: 0.5;
 }
@@ -110,15 +169,6 @@
   background: #ff3333;
 }
   
-
-.timeseries {
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 
 /*Search bar styles created by Al-Taimee*/
 .health-outcomes-sidebar input[type="text"] {
@@ -169,7 +219,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1000;
+  /*z-index: 1000;*/
 }
 
 .scroll-btn {
@@ -211,5 +261,26 @@
 
   .health-outcomes-sidebar {
     margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .health-outcomes-container {
+    width: 100%;
+  }
+  .eph-national-container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .health-outcomes-container {
+    width: 100%;
+  }
+  .eph-national-container {
+    width: 90%;
+  }
+  .scroll-btn-container {
+    width: 120%;
   }
 }

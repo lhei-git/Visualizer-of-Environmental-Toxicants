@@ -11,6 +11,7 @@ import {
 } from 'react-simple-maps';
 import "./index.css"
 import ReactTooltip from 'react-tooltip';
+import LoadingSpinner from '../LoadingSpinner';
 
 
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
@@ -28,12 +29,12 @@ function getColorScale(dataValue) {
 }
 
 const SimpleMap = ({ map }) => {
-  const [selectedYear, setSelectedYear] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(['2020']);
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  const [selectedGenderId, setSelectedGenderId] = useState([]);
+  const [selectedGenderId, setSelectedGenderId] = useState(['1']);
   
-
+  
   const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
@@ -85,7 +86,7 @@ const SimpleMap = ({ map }) => {
       <div className='dropdown'>
       <label htmlFor="gender">Select Gender:</label>
       <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
-        <option value="">Select a Gender</option>
+        
         <option value="1">Male</option>
         <option value="2">Female</option>
       </select>
@@ -104,11 +105,15 @@ const SimpleMap = ({ map }) => {
       geographies.map((geo) => {
         const stateData = data.find((d) => d.geo === geo.properties.name);
         const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+        
+        
+
         return (
+          
           <Geography
             key={geo.rsmKey}
             geography={geo}
-            data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
+            data-tip={`${geo.properties.name} (Percent): ${stateData && stateData.displayValue }`}
             style={{
               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -120,6 +125,7 @@ const SimpleMap = ({ map }) => {
             }}
           />
         );
+          
       })
     }
   </Geographies>
@@ -127,50 +133,12 @@ const SimpleMap = ({ map }) => {
 
 
       <ReactTooltip />
-  <div className="legend">
-  <h3>Percent Concentration</h3>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-    <span>Null Data</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-9</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>9-12</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>12-14</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>14+</span>
-  </div>
-</div>
-
-<div className='mapDescription'>
-  <div className='measureDescription'>
-  </div>
-  <span className='questionMark'>ⓘ</span>
-  <div className='tooltip'>
-  Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.
-  </div>
-</div>
-
-
-{/*
-      {selectedState && (
-        <div className="tooltip">
-          <p>Percent Concentration: {selectedState.displayValue}</p>
-        </div>
-      )}
-      */}
+ 
     </div>
   );
 }
+
+
 
 
 

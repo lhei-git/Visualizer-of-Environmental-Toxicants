@@ -30,21 +30,22 @@ import EPHTable from "../EPHTable";
 
 
 const React = require("react");
-
+const measuresInfo = [
+  { name: "Asthma among Children", measureID: 587, units: "Percent of Children with Asthma" },
+  { name: "Brain and Central Nervous System Cancer among Children", measureID: 67, units: "units" },
+  { name: "Leukemia among Children", measureID: 71, units: "units" },
+  // Add more measures as needed
+];
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome({map}) {  
+function EPHHome({ map }) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
     setLeftCloseButton(!containerColumnLeftClose);
   };
 
-  const [currentTab, setCurrentTab] = React.useState(
-    /* stores which tab user was last on*/
-    parseInt(sessionStorage.getItem("currentTab")) || "0"
-  );
-
+ 
 
   // Initial State to hold the search bar input created by Al-Taimee
   const [searchedValueInput, setSearchBarInput] = useState("");
@@ -99,16 +100,17 @@ function EPHHome({map}) {
   });
 
 
- 
+  const [currentTab, setCurrentTab] = React.useState("0");
+
   function chooseTab(i) {
-    sessionStorage.setItem("currentTab", i);
     setCurrentTab(i);
+    console.log("tab changed to " + currentTab)
   }
 
 
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
-    chooseTab("0"); //default bisphenol, change to arsenic ASAP
+    chooseTab("0"); //default arsenic
   }, []); // empty dependency array so effect runs only once
 
   /* Initial state of app */
@@ -193,7 +195,21 @@ if (!state.map.state) {
         {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
         {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
         
-        {/* county measures - change to call <CountyData> */}
+        {/* county measures - change to call <CountyData> 
+           
+        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"units"} map={map} />)}
+        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"units"} map={map} />)}
+        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"units"} map={map} />)}
+        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"units"} map={map} />)}
+        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"units"} map={map} />)}
+        {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"units"} map={map} />)}
+        {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"units"} map={map} />)}
+        {currentTab === "11" && (<CountyData measure={"PCE in Community Water"} measureID={807} units={"units"} map={map} />)}
+        {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"units"} map={map} />)}
+
+
+        
+        */}
         {currentTab === "0" && ( 
         <EPHThematicWaterStateMap 
                 yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
@@ -330,9 +346,12 @@ if (!state.map.state) {
         {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"Percent of Children with Asthma"} />)} 
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
         {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
-        
-        
-        
+
+        {/*
+        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
+        {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
+        {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
+        */}
       </div>
      
       <div className="health-outcomes-sidebar">
@@ -384,9 +403,7 @@ if (!state.map.state) {
           </ul>
         </div>
       </div>
-      
-  </div>
-  
+    </div>
 
   );
 }

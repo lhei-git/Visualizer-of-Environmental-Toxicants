@@ -1,13 +1,9 @@
 //==========================================
 // Author: Farzana Israt
 //==========================================
-import ReactTooltip from "react-tooltip";
-import SimpleMap from "../EPHMapView";
 import LoadingSpinner from "../LoadingSpinner";
-import vetapi from "../api/vetapi";
 import "./index.css";
 import data from "../data/stateLocationData.json";
-import Title from "../Title/index.js";
 import axios from "axios";
 import EPHMap from "../EPHMap/index";
 const React = require("react");
@@ -25,7 +21,7 @@ class EPHThematicStateMap extends Component {
       prevStateName: "",
       countyData: null,
       measure: "",
-      gender: "all",
+      gender: "1",
       scale: null,
       lat: null,
       lon: null,
@@ -133,6 +129,8 @@ class EPHThematicStateMap extends Component {
   }
 
 */
+
+/*get url from eph site*/
   getApiURL() {
     
     const selectedYear = this.state.selectedYear;
@@ -182,6 +180,7 @@ class EPHThematicStateMap extends Component {
     */
   }
 
+  /*get units for tooltip*/
   getUnits(endUnits) {
     if(this.props.measure === "Asthma Among Adults") {
       return endUnits = "(Percent)"; 
@@ -200,7 +199,7 @@ class EPHThematicStateMap extends Component {
     else if (this.props.measure === "Heart Attack") {
       return endUnits = "(Rate)" 
     }
-    else if (this.props.measure === "Infant Mortality") { //not sure if this is the right one 
+    else if (this.props.measure === "Infant Mortality") { 
       return endUnits = "(Rate)" 
     }
     else if (this.props.measure === "Low Birthweight") {
@@ -212,6 +211,40 @@ class EPHThematicStateMap extends Component {
 
   }
 
+
+  /*more descriptive title under the main title for each measure*/
+  getSubtitle(subtitle) {
+    if(this.props.measure === "Asthma Among Adults") {
+      return subtitle = "Crude Prevalence of Current Asthma among Adults >= 18 Years of Age"; 
+    }
+    else if (this.props.measure === "Hospitalizations from Asthma") {
+      return subtitle = "Annual Number of Hospitalizations for Asthma"    
+    }
+    
+    else if (this.props.measure === "Prevalence of Cancer") {
+      return subtitle = "Crude Prevalence of Cancer among Adults >= 18 Years of Age"  
+    }
+
+    else if (this.props.measure === "Fertility Rate") {
+      return subtitle = "Total Fertility Rate per 1000 women" 
+    }
+    else if (this.props.measure === "Heart Attack") {
+      return subtitle = "Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population" 
+    }
+    else if (this.props.measure === "Infant Mortality") { 
+      return subtitle = "Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period" 
+    }
+    else if (this.props.measure === "Low Birthweight") {
+      return subtitle = "Percent of Low Birthweight (<2500g) Live Singleton Births" 
+    }
+    else if (this.props.measure === "Prematurity") {
+      return subtitle = "Percent of Preterm (<37 Weeks Gestation) Live Singleton Births" 
+    }
+
+  }
+
+
+  /*get data or each county that is not a drinking water measure*/
   async getCountyData() {
     const apiUrl = this.getApiURL();
 
@@ -237,12 +270,14 @@ class EPHThematicStateMap extends Component {
     
   }
   
+  /*year dropdown configuration*/
   handleYearChange = (event) => {
     this.setState({ selectedYear: event.target.value }, () => {
       this.getCountyData(); 
     });
   };
   
+  /*gender dropdown configuration*/
   handleGenderChange = (event) => {
     this.setState({ gender: event.target.value }, () => {
       this.getCountyData(); 
@@ -257,11 +292,13 @@ class EPHThematicStateMap extends Component {
     const yearOptions = this.props.yearRange;
 
     return (
-      <div className="thematic-state-container">
-        <div className="flex">
+      <div className="thematic-eph-state-container">
+        <div className="state-flex">
           
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
+        <h3>{this.getSubtitle()}</h3>
         <div className="centered-year">
+          <p>Select a Year of Interest:</p>
         <select
           value={selectedYear}
           onChange={this.handleYearChange}
@@ -279,6 +316,7 @@ class EPHThematicStateMap extends Component {
         
         {["Heart Attack", "Low Birthweight", "Prematurity"].includes(this.props.measure) && (
           <div className="centered-gender">
+            <p>Select a Gender: </p>
             <select
               value={this.state.gender}
               onChange={this.handleGenderChange}
@@ -301,7 +339,6 @@ class EPHThematicStateMap extends Component {
                 lat={this.state.lat}
                 scale={this.state.scale}
                 units={this.getUnits()}
-                
                />
             
           ) : (
