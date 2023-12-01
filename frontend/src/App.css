@@ -1,6 +1,6 @@
 .graph-container .filter-container,
 .thematic-view-wrapper .filter-container {
-  z-index: 99;
+  z-index: 100;
   position: fixed;
   top: 80px;  /* Amrita - Adjusted to fix gap between nav bar and filter bar */
   width: 100%;

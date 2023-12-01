@@ -1130,6 +1130,8 @@ function GraphView({ map, filters, onFilterChange }) {
               className="indexes"
               style={{ display: currentTab === 3 ? "block" : "none" }}
             >
+
+              <div className = "appendix-fac-graph">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1142,6 +1144,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "appendix-fac-table">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1155,6 +1160,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "appendix-chem-graph">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1168,6 +1176,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "appendix-chem-table">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1182,6 +1193,7 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
             </div>
           )}
           {/* Top Tens View */}

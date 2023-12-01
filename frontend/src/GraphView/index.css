@@ -132,6 +132,33 @@
   left: 50%;
 }
 
+/* Amrita - Format appendix graphs/tables separately so layout doesn't change based on filtered data */
+.graph-container .appendix-fac-graph {
+  position: absolute;
+  width: 120%;
+}
+
+.graph-container .appendix-fac-table {
+  position: absolute;
+  padding-left: 4em;
+  width: 100%;
+  left: 50%;
+}
+
+.graph-container .appendix-chem-graph {
+  position: absolute;
+  width: 120%;
+  top: 90%;
+}
+
+.graph-container .appendix-chem-table {
+  position: absolute;
+  padding-left: 4em;
+  width: 100%;
+  top: 90%;
+  left: 50%;
+}
+
 .graph-container .filter-container .control-container {
   display: block;
 }
