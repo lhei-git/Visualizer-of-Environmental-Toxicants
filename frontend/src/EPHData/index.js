@@ -398,7 +398,7 @@ if (!state.map.state) {
             <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
             <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
 
-            <p className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - Click Here for Details</a></p>
+            <p className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - See More Data</a></p>
 
           </ul>
         </div>
