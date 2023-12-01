@@ -9,10 +9,11 @@ const React = require("react");
 const Component = React.Component;
 
 // state and county map topographical data, used to create svg map
+/*farzana changed national maps*/
 const stateGeoUrl =
   "https://raw.githubusercontent.com/missisrat/topology/main/us-albers.json";
 const countyGeoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-states/us-albers-counties.json";
+  "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 
 class ThematicMapView extends Component {
   constructor(props) {

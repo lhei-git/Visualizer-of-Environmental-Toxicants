@@ -3,6 +3,7 @@ import NationalData from "./national";
 import StateData from "./state"
 import CountyData from "./county";
 import { useEffect, useState, useReducer } from "react";
+import history from "../history";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
@@ -32,7 +33,7 @@ const React = require("react");
 
 
 //returns .jsx layout for the entire EPH data viewing page
-function EPHHome({map}) {
+function EPHHome({map}) {  
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
@@ -109,7 +110,7 @@ function EPHHome({map}) {
 
   /* Initial state of app */
 const initialState = {
-  map: JSON.parse(sessionStorage.getItem("map")),
+  map: JSON.parse(sessionStorage.getItem("map")) || {state: null},
   filters: {
     chemical: "all",
     pbt: false,
@@ -158,7 +159,15 @@ const scrollToTop = () => {
   window.scrollTo(0, 0);
 };
 
+/* Amrita - Page reverts to main page if user opens it in a new tab (instead of giving an error)*/
+if (!state.map.state) {
+  // Redirect to your desired page (change '/your-page' to the actual path)
+  history.push("/");
+  return null; // or you can render a loading spinner or message here
+}
+
   return (
+    
     <div className="health-outcomes-container">
         {/* Taimee - Buttons to scroll up and down on page 
             Amrita - Moved button to be on EPH page only */}
@@ -215,8 +224,8 @@ const scrollToTop = () => {
         </EPHThematicStateMap> )}
 
         */}
-        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"units"} />)}
-
+        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+        
         {currentTab === "3" && ( 
           /*farzana -- making state maps for each measure*/
         <EPHThematicStateMap 
@@ -327,24 +336,17 @@ const scrollToTop = () => {
         </EPHThematicWaterStateMap>)}
 
 
-        {/* state measures 
-            {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
-        {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
-        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}  
-        
-        */}
+        {/* state measures */}
 
-        {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"units"} />)} 
+        {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"Percent of Children with Asthma"} />)} 
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
-        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}  
-
+        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
 
         {/*
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
         
-        */}
       </div>
      
       <div className="health-outcomes-sidebar">
@@ -375,23 +377,23 @@ const scrollToTop = () => {
             <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood Cancer: Leukemia</a></li> {/* 4 */}
 
             <li className="boldHeadings">Heart Disease and Stroke</li>
-            <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart attack</a></li> {/* 6 */}
+            <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart Attack</a></li> {/* 6 */}
             <li className="boldHeadings">Reproductive and birth outcomes</li>
-            <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant mortality</a></li> {/* 7 */}
-            <li onClick={() => chooseTab("9")} className={currentTab === "9" ? "active" : ""}><a href="#">Low birthweight</a></li> {/* 9 */}
-            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility rate</a></li> {/* 5 */}
+            <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant Mortality</a></li> {/* 7 */}
+            <li onClick={() => chooseTab("9")} className={currentTab === "9" ? "active" : ""}><a href="#">Low Birthweight</a></li> {/* 9 */}
+            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility Rate</a></li> {/* 5 */}
 
             <li className="boldHeadings">National population exposure</li>
             
-            <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in blood</a></li> {/* 8 */}
-            <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in urine</a></li> {/* 10 */}
-            <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in urine</a></li> {/* 12 */}
-            <li onClick={() => chooseTab("13")} className={currentTab === "13" ? "active" : ""}><a href="#">PFAS in blood</a></li> {/* 13 */}
-            <li onClick={() => chooseTab("15")} className={currentTab === "15" ? "active" : ""}><a href="#">Phthalates in urine</a></li> {/* 15 */}
-            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
-            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
+            <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in Blood</a></li> {/* 8 */}
+            <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in Urine</a></li> {/* 10 */}
+            <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in Urine</a></li> {/* 12 */}
+            <li onClick={() => chooseTab("13")} className={currentTab === "13" ? "active" : ""}><a href="#">PFAS in Blood</a></li> {/* 13 */}
+            <li onClick={() => chooseTab("15")} className={currentTab === "15" ? "active" : ""}><a href="#">Phthalates in Urine</a></li> {/* 15 */}
+            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
+            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
 
-            <li className ="external-link"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - click here for details</a></li>
+            <p className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - Click Here for Details</a></p>
 
           </ul>
         </div>

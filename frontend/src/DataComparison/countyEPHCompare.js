@@ -1,21 +1,23 @@
 //blueprint to display state data
 //created by Katherine O'Donnell, added map code from Farzana Israt & table code from Taimee Hassan
+// Amrita - Removed description and table to show only graph in Data Comparison page's Public Health Data section
+
 import "./index.css";
-import "./state.css"
-import StateTimeSeries from "../EPHCharts/state";
-import StateTable from "../EPHTable/state";
+import CountyTimeSeries from "../EPHCharts/county";
+import CountyTable from "../EPHTable/county";
 import {useEffect, useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
 import SimpleMap from "../EPHMapView";
 import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
+import EPHThematicStateMap from "../EPHThematicStateMap";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
 
 
 
-//calling StateData on the eph page will generate a data layout for any measure selected
-const StateData = ({measure, measureID, units}) => {
+//calling County Data on the eph page will generate a data layout for any measure selected
+const CountyEPHCompare = ({measure, measureID, units}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -67,7 +69,9 @@ const StateData = ({measure, measureID, units}) => {
     //end of storage retrieval code
 
     //get name of searched state from session storage
-    const stateName = getLocationParents(state.map, "stateLong");
+    const stateAbbr = getLocationParents(state.map, "state");
+    const countyName = getLocationParents(state.map, "county") + " County";
+    const stateLong = getLocationParents(state.map, "stateLong");
 
     //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
@@ -75,12 +79,13 @@ const StateData = ({measure, measureID, units}) => {
 
     //.jsx layout
     return(
-        <div className="state-container">
-            <h1>{measure} in {stateName}</h1>
+        <div className="comp-county-container">
+            {/* Amrita - Adjusted header to only say stateName */}
+            <h1>{countyName}, {stateAbbr}</h1>
             {/*change time series info based on filter changes*/}
             <div className = "time-series">
                 {selectedPercentile === 1 && (
-                    <StateTimeSeries
+                    <CountyTimeSeries
                     size={{ width: 800, height: 400 }}
                     measureID={measureID}
                     units={units}
@@ -89,7 +94,7 @@ const StateData = ({measure, measureID, units}) => {
                     />
                 )}
                 {selectedPercentile === 2 && (
-                    <StateTimeSeries
+                    <CountyTimeSeries
                     size={{ width: 800, height: 400 }}
                     measureID={measureID}
                     units={units}
@@ -98,24 +103,11 @@ const StateData = ({measure, measureID, units}) => {
                     />
                 )}
             </div>
-            <div className = "desc-container">
-                <p>Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.</p>
-            </div>
-            <div className = "map-container">
-                {measureID === 587 && (<SimpleMap map={state.map}/>)} {/*asthma == 587*/}
-                {measureID === 67 && (<ChildhoodBrain map={state.map}/> )} {/*67 == brain/nerv cancer */}
-                {measureID === 71 && (<ChildhoodLeukemia map={state.map}/> )} {/*leukemia == 71*/}
-            </div>
-            <div className="eph-table-container">
-                <StateTable measureID={measureID} />
-            </div>
-            <p className="citation">Data obtained from https://ephtracking.cdc.gov/DataExplorer on {formattedDate}.</p>
-
         </div>
     );
 }
 
-StateData.propTypes = {
+CountyEPHCompare.propTypes = {
     measure: PropTypes.string.isRequired,       //measure selected on eph page
     measureID: PropTypes.number.isRequired,       //ID of measure selected on eph page
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
@@ -125,4 +117,4 @@ StateData.propTypes = {
 
 
 
-export default StateData;
+export default CountyEPHCompare;

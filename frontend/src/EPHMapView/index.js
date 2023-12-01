@@ -58,7 +58,7 @@ const SimpleMap = ({ map }) => {
   };
   
   return (
-    <div className='mapView'>
+    <div className='nation-mapView'>
      <div className='container'>
       {/*return data for asthma in children for the typed in location*/}
       <h2>Asthma in Children in U.S.</h2>

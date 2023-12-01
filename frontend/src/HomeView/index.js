@@ -58,8 +58,8 @@ function Home(props) {
 
   /* start geocoding process when location is selected or user hits enter (topmost location used) */
   function handleSelect(location, placeId, suggestion) {
-    /* Amrita - Error to prevent website from crashing if user types in United States */
-    if (location === "United States"){
+    /* Amrita - Error to prevent website from crashing if user searches for US as a whole */
+    if (location === "United States" || location === "USA" || location === "United States of America"){
       setErrorMessage(" Please select a specific city, county, or state.")
     }
     else {

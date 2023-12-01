@@ -1,6 +1,7 @@
 //blueprint to display national data
 //created by Katherine O'Donnell
-// Amrita - Removed description and table to show only graph in Data Comparison page's Public Health Data section
+// Amrita - Removed description, table, filters to show only graph in Data Comparison page's Public Health Data section
+
 import "./index.css";
 import NationalTimeSeries from "../EPHCharts/national";
 import {useEffect, useState} from 'react';
@@ -37,35 +38,9 @@ const NationalEPHCompare = ({measure, units, measureID}) => {
 
     //.jsx layout
     return(
-        <div className="national-container">
-            <div className="filter-container">
-                <div className="percentile-filter">
-                    <p>Select a percentile estimate:</p>
-                    <select value={selectedPercentile} onChange={(e) => chooseFilters(parseInt(e.target.value), selectedDemographic)}>
-                        {/*in API endpoints, percentileID=1 for 50th, 2 for 95th. 'value' passed as percentile id */}
-                        <option value={1}>50th percentile</option>
-                        <option value={2}>95th percentile</option>
-                    </select>
-                </div>
-                <div className="demographic-filter">
-                    <p>Select a demographic group:</p>
-                    <select value={selectedDemographic} onChange={(e) => chooseFilters(selectedPercentile, parseInt(e.target.value))}>
-                        {/*value number passed as demographic id */}
-                        <option value={16}>U.S. Population</option> {/*api endpoint demographic ID = 16 for U.S. pop*/}
-                        <option value={9}>Females</option> {/*api endpoint demographic ID = 9 for female data*/}
-                        <option value={10}>Males</option> {/*api endpoint demographic ID = 10 for male data*/}
-                        <option value={1}>1-5 Years</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={4}>6-11 Years</option> {/*api endpoint demographic ID = 1 for 6-11 y/o*/}
-                        <option value={5}>12-19 Years</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={7}>20+ Years</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={11}>All Hispanics</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={12}>Mexican Americans</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={13}>Non-Hispanic Asians</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={14}>Non-Hispanic Blacks</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                        <option value={15}>Non-Hispanic Whites</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
-                    </select>
-                </div>
-            </div>
+        <div className="comp-national-container">
+            <h1>United States</h1>
+            {/* Where filter container would go if needed */}
             {/*code below changes data representation based on filter changes*/}
             <div className = "time-series">
             {selectedPercentile === 1 && (

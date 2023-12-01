@@ -1,7 +1,8 @@
 //blueprint to display state data
 //created by Katherine O'Donnell, added map code from Farzana Israt & table code from Taimee Hassan
+// Amrita - Removed description and table to show only graph in Data Comparison page's Public Health Data section
+
 import "./index.css";
-import "./state.css"
 import StateTimeSeries from "../EPHCharts/state";
 import StateTable from "../EPHTable/state";
 import {useEffect, useReducer, useState} from 'react';
@@ -14,8 +15,8 @@ const {getLocationParents, getYearString} = require("../helpers");
 
 
 
-//calling StateData on the eph page will generate a data layout for any measure selected
-const StateData = ({measure, measureID, units}) => {
+//calling StateEPHCompare on the eph page will generate a data layout for any measure selected
+const StateEPHCompare = ({measure, measureID, units}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -75,8 +76,9 @@ const StateData = ({measure, measureID, units}) => {
 
     //.jsx layout
     return(
-        <div className="state-container">
-            <h1>{measure} in {stateName}</h1>
+        <div className="comp-state-container">
+            {/* Amrita - Adjusted header to only say stateName */}
+            <h1>{stateName}</h1>
             {/*change time series info based on filter changes*/}
             <div className = "time-series">
                 {selectedPercentile === 1 && (
@@ -98,24 +100,12 @@ const StateData = ({measure, measureID, units}) => {
                     />
                 )}
             </div>
-            <div className = "desc-container">
-                <p>Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.</p>
-            </div>
-            <div className = "map-container">
-                {measureID === 587 && (<SimpleMap map={state.map}/>)} {/*asthma == 587*/}
-                {measureID === 67 && (<ChildhoodBrain map={state.map}/> )} {/*67 == brain/nerv cancer */}
-                {measureID === 71 && (<ChildhoodLeukemia map={state.map}/> )} {/*leukemia == 71*/}
-            </div>
-            <div className="eph-table-container">
-                <StateTable measureID={measureID} />
-            </div>
-            <p className="citation">Data obtained from https://ephtracking.cdc.gov/DataExplorer on {formattedDate}.</p>
 
         </div>
     );
 }
 
-StateData.propTypes = {
+StateEPHCompare.propTypes = {
     measure: PropTypes.string.isRequired,       //measure selected on eph page
     measureID: PropTypes.number.isRequired,       //ID of measure selected on eph page
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
@@ -125,4 +115,4 @@ StateData.propTypes = {
 
 
 
-export default StateData;
+export default StateEPHCompare;

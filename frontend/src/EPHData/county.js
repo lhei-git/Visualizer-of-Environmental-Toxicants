@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import SimpleMap from "../EPHMapView";
 import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
+import EPHThematicStateMap from "../EPHThematicStateMap";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
 
@@ -69,6 +70,7 @@ const CountyData = ({measure, measureID, units}) => {
     //get name of searched state from session storage
     const stateAbbr = getLocationParents(state.map, "state");
     const countyName = getLocationParents(state.map, "county") + " County";
+    const stateLong = getLocationParents(state.map, "stateLong");
 
     //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
@@ -99,11 +101,15 @@ const CountyData = ({measure, measureID, units}) => {
                     />
                 )}
             </div>
-            <p>add description for data here</p>
+            <p>Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.</p>
             <div className = "map-container">
-                {measureID === 587 && (<SimpleMap map={state.map}/>)} {/*asthma == 587*/}
-                {measureID === 67 && (<ChildhoodBrain map={state.map}/> )} {/*67 == brain/nerv cancer */}
-                {measureID === 71 && (<ChildhoodLeukemia map={state.map}/> )} {/*leukemia == 71*/}
+            {measureID === 1120 && (
+                    <EPHThematicStateMap 
+                    yearRange={[2020, 2019, 2018]}
+                    measure={"Asthma Among Adults"}
+                    stateName={stateAbbr}
+                    stateLongName={stateLong}>
+                    </EPHThematicStateMap> )}
             </div>
             <div className="eph-table-container">
                 <CountyTable measureID={measureID} />

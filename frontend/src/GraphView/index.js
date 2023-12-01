@@ -89,7 +89,7 @@ const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
 function handleError(err) {
   console.error(err);
-  /* do something here */
+  console.log("Error with loading graph. Please try again later") // Amrita - Adding error message
 }
 
 /* compare function used for sorting timeline graphs */
