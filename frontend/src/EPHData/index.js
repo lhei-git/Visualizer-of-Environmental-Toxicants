@@ -346,7 +346,7 @@ if (!state.map.state) {
         {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
         {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
         {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
-        
+        */}
       </div>
      
       <div className="health-outcomes-sidebar">
@@ -398,9 +398,7 @@ if (!state.map.state) {
           </ul>
         </div>
       </div>
-      
-  </div>
-  
+    </div>
 
   );
 }
