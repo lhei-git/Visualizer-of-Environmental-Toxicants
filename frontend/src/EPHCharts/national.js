@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
 import "./index.css";
+import TimeSeries from './timeseries';
 
 /* NOTES:
 indicator for all ntnl measures: National report on human exposure to environmental chemicals
@@ -81,7 +82,7 @@ NationalTimeSeries.propTypes = {
 
 };
 
-
+/*
 //creates time series graph -- might move to own file for reusability
 function TimeSeries({ data, size, units }) {
   return (
@@ -108,7 +109,7 @@ TimeSeries.propTypes = {
     height: PropTypes.number.isRequired,
   }).isRequired,
   units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
-};
+};*/
 
 
 export default NationalTimeSeries;
