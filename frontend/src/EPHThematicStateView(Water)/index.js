@@ -273,8 +273,9 @@ class EPHThematicWaterStateMap extends Component {
           
           <h1>{this.props.measure} in {this.props.stateLongName}</h1>
           <h3>{this.getSubtitle()}</h3>
+          <div className="centered-dropdown">
           <div className="centered-year">
-            <p>Select a Year of Interest: </p>
+            <label>Select a Year of Interest:  </label>
           <select
             value={selectedYear}
             onChange={this.handleYearChange}
@@ -292,7 +293,7 @@ class EPHThematicWaterStateMap extends Component {
 
           {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
   <div className="centered-level">
-    <p>Select an MCL Level: </p>
+    <label>Select an MCL Level: </label>
     <select
       value={this.state.level}
       onChange={this.handleLevelChange}
@@ -307,7 +308,7 @@ class EPHThematicWaterStateMap extends Component {
 
         {["PFAS in Community Water"].includes(this.props.measure) && (
           <div className="centered-contaminant">
-            <p>Select a Contaminant: </p>
+            <label>Select a Contaminant: </label>
             <select
               value={this.state.contaminant}
               onChange={this.handleContaminantChange}
@@ -323,6 +324,7 @@ class EPHThematicWaterStateMap extends Component {
             </select>
           </div>
         )}
+        </div>
           
           {this.state.countyData ? (
             

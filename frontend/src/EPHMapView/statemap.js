@@ -8,7 +8,7 @@ import EPHMap from '../EPHMap/index';
 import LoadingSpinner from '../LoadingSpinner';
 import ReactTooltip from 'react-tooltip';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import "./index.css";
+import "./statemap.css";
 const stateGeoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 class StateMap extends Component {
@@ -98,8 +98,8 @@ async getStateData() {
       <div className='nation-mapView'>
         <div className='container'>
           <h1>{this.props.measure} in the U.S.</h1>
-        
-        <div className="centered-year">
+        <div className='centered-dropdown'>
+        <div className="dropdown-center-year">
           <label> Year: </label>
           <select
             value={selectedYear}
@@ -114,8 +114,8 @@ async getStateData() {
           </select>
         </div>
         
-          <div className="centered-gender">
-            <p>Select a Gender: </p>
+          <div className="dropdown-center-gender">
+            <label>Select a Gender: </label>
             <select
               value={this.state.gender}
               onChange={this.handleGenderChange}
@@ -125,6 +125,7 @@ async getStateData() {
               <option value="1">Male</option>
               <option value="2">Female</option>
             </select>
+          </div>
           </div>
         
         {this.state.stateData ? (

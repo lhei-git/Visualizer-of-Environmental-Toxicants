@@ -297,8 +297,9 @@ class EPHThematicStateMap extends Component {
           
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <h3>{this.getSubtitle()}</h3>
+        <div className="centered-dropdown">
         <div className="centered-year">
-          <p>Select a Year of Interest:</p>
+          <label>Select a Year of Interest:</label>
         <select
           value={selectedYear}
           onChange={this.handleYearChange}
@@ -316,7 +317,7 @@ class EPHThematicStateMap extends Component {
         
         {["Heart Attack", "Low Birthweight", "Prematurity"].includes(this.props.measure) && (
           <div className="centered-gender">
-            <p>Select a Gender: </p>
+            <label>Select a Gender: </label>
             <select
               value={this.state.gender}
               onChange={this.handleGenderChange}
@@ -328,6 +329,7 @@ class EPHThematicStateMap extends Component {
             </select>
           </div>
         )}
+        </div>
         
           {this.state.countyData ? (
             
