@@ -7,6 +7,7 @@ import StateTable from "../EPHTable/state";
 import React, {useEffect, useReducer, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import SimpleMap from '../EPHMapView';
+import StateMap from "../EPHMapView/statemap";
 import ChildhoodBrain from '../EPHMapView/ChildhoodBrain';
 import ChildhoodLeukemia from '../EPHMapView/ChildhoodCancerLeukemia';
 import { getLocationParents } from '../helpers';
@@ -140,9 +141,9 @@ const currentAccordionMeasure = accordionMeasure.find(
         <p></p>
       </div>
       <div className={`map-container`}>
-        {measureID === 587 && (<SimpleMap map={state.map} />)} {/* asthma == 587 */}
-        {measureID === 67 && (<ChildhoodBrain map={state.map} />)} {/* 67 == brain/nerv cancer */}
-        {measureID === 71 && (<ChildhoodLeukemia map={state.map} />)} {/* leukemia == 71 */}
+        {measureID === 587 && (<StateMap yearRange={[2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011]} measure={"Asthma in Children"}/>)} {/* asthma == 587 */}
+        {measureID === 67 && (<StateMap yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]} measure={"Childhood Brain and Nervous System Cancer"} />)} {/* 67 == brain/nerv cancer */}
+        {measureID === 71 && (<StateMap yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]} measure={"Childhood Cancer Leukemia"} />)} {/* leukemia == 71 */}
       </div>
       <div className={'eph-table-container'}>
         <StateTable measureID={measureID} />
