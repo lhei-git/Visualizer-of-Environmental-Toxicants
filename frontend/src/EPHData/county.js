@@ -144,24 +144,13 @@ const CountyData = ({measure, measureID, units}) => {
             <h1>{measure} in {countyName}, {stateAbbr}</h1>
             {/*change time series info based on filter changes*/}
             <div className = "time-series">
-                {selectedPercentile === 1 && (
-                    <CountyTimeSeries
-                    size={{ width: '100%', height: '400px' }}
-                    measureID={measureID}
-                    units={units}
-                    percentile={1} 
-                    demographic={selectedDemographic}
-                    />
-                )}
-                {selectedPercentile === 2 && (
-                    <CountyTimeSeries
-                    size={{ width: '100%', height: '400px' }}
-                    measureID={measureID}
-                    units={units}
-                    percentile={2}
-                    demographic={selectedDemographic}
-                    />
-                )}
+                <CountyTimeSeries
+                size={{ width: 800, height: 400 }}
+                measureID={measureID}
+                units={units}
+                percentile={1} 
+                demographic={selectedDemographic}
+                />
             </div>
             
             <div className = "map-container">
