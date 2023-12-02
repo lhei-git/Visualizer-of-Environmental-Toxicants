@@ -13,6 +13,19 @@ import axios from 'axios';
 import { getCountyID } from '../EPHFilters/countyID';
 import { getLocationParents, getYearString } from '../helpers';
 import LoadingSpinner from '../LoadingSpinner';
+import "./index.css";
+
+
+/* Amrita - Customize to matching TRI timelines */
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
 
 /*farzana -- created the class*/
 class CountyTimeSeries extends Component {
@@ -108,12 +121,12 @@ class CountyTimeSeries extends Component {
   }
 
   render() {
-    // Your component rendering logic using this.state and this.props
+    // Rendering component using this.state and this.props
   
     const { errorMessage, loading } = this.state;
 
     if (errorMessage) {
-      return <div>Error: {errorMessage}</div>;
+      return <div className="timeseries-error-message"><span className="error-icon">&#9888; </span>{errorMessage}</div>;
     }
 
     if (loading) {
@@ -138,7 +151,7 @@ class CountyTimeSeries extends Component {
                 />
               </YAxis>
               <Tooltip />
-              <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
+              <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
             </LineChart>
           </div>
       {/*  ) : (

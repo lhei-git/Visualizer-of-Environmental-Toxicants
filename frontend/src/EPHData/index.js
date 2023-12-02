@@ -166,9 +166,8 @@ const scrollToTop = () => {
 
 /* Amrita - Page reverts to main page if user opens it in a new tab (instead of giving an error)*/
 if (!state.map.state) {
-  // Redirect to your desired page (change '/your-page' to the actual path)
-  history.push("/");
-  return null; // or you can render a loading spinner or message here
+  history.push("/");  // redirect to the search page
+  return null;
 }
 
   return (
@@ -377,26 +376,26 @@ if (!state.map.state) {
             <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
             
             <li className="boldHeadings">Cancer</li>
-            <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
             <li onClick={() => chooseTab("23")} className={currentTab === "23" ? "active" : ""}><a href="#">Childhood Cancer: Brain & Central Nervous System</a></li>
             <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood Cancer: Leukemia</a></li> {/* 4 */}
+            <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
 
             <li className="boldHeadings">Heart Disease and Stroke</li>
             <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart Attack</a></li> {/* 6 */}
+
             <li className="boldHeadings">Reproductive and birth outcomes</li>
+            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility Rate</a></li> {/* 5 */}
             <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant Mortality</a></li> {/* 7 */}
             <li onClick={() => chooseTab("9")} className={currentTab === "9" ? "active" : ""}><a href="#">Low Birthweight</a></li> {/* 9 */}
-            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility Rate</a></li> {/* 5 */}
+            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
 
             <li className="boldHeadings">National population exposure</li>
-            
+            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
             <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in Blood</a></li> {/* 8 */}
             <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in Urine</a></li> {/* 10 */}
             <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in Urine</a></li> {/* 12 */}
             <li onClick={() => chooseTab("13")} className={currentTab === "13" ? "active" : ""}><a href="#">PFAS in Blood</a></li> {/* 13 */}
             <li onClick={() => chooseTab("15")} className={currentTab === "15" ? "active" : ""}><a href="#">Phthalates in Urine</a></li> {/* 15 */}
-            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
-            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
 
             <p className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - See More Data</a></p>
 

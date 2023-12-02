@@ -7,7 +7,7 @@ import CountyEPHCompare from "./countyEPHCompare";
 import TRITimeline from "./TRItimeline";
 import Title from "../Title";
 import GraphContainer from "../GraphView/index.js";
-
+import history from "../history";
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import PropTypes from "prop-types";
 import Filters from "../Filters/index.js";
@@ -16,6 +16,8 @@ const vetapi = require("../api/vetapi");
 
 
 const { formatChemical, getLocationString } = require("../helpers");
+const {getLocationParents, getYearString} = require("../helpers");
+
 const { years } = require("../contants");
 const { amountAsLabel, formatAmount } = require("../helpers");
 //created by Katherine O'Donnell
@@ -33,41 +35,7 @@ const {
   ResponsiveContainer,
 } = require("recharts");
 
-/* Amrita - Taken from App.js to define initialState, reducer, setFilters, and setErrorMessage
-/* Initial state of app */
-const initialState = {
-  map: JSON.parse(sessionStorage.getItem("map")),
-  filters: {
-    chemical: "all",
-    pbt: false,
-    carcinogen: false,
-    releaseType: "all",
-    /*sets initial state to latest year*/
-    year: 2022,
-  },
-  errorMessage: "",
-};
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "setMap":
-      /* Store latest searched location in session */
-      sessionStorage.setItem("map", JSON.stringify(action.payload));
-      return {
-        ...state,
-        map: action.payload,
-      };
-    case "setFilters":
-      const newFilters = Object.assign({}, action.payload);
-      return { ...state, filters: newFilters };
-
-
-    case "setErrorMessage":
-      return { ...state, errorMessage: action.payload };
-    default:
-      throw new Error();
-  }
-};
 
 /* individual state setters */
 const setFilters = (payload) => ({ type: "setFilters", payload });
@@ -161,11 +129,63 @@ const createParams = ({ map, filters }, customParams) => {
 
 
 function DataComp(props) {
-  const [currentMeasure, setMeasure] = useState(null);
+
+  /* Amrita - Taken from App.js to define initialState, reducer, setFilters, and setErrorMessage
+/* Initial state of app */
+const initialState = {
+  map: JSON.parse(sessionStorage.getItem("map")) || {state: null},
+    filters: {
+    chemical: "all",
+    pbt: false,
+    carcinogen: false,
+    releaseType: "all",
+    /*sets initial state to latest year*/
+    year: 2022,
+  },
+  errorMessage: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setMap":
+      /* Store latest searched location in session */
+      sessionStorage.setItem("map", JSON.stringify(action.payload));
+      return {
+        ...state,
+        map: action.payload,
+      };
+    case "setFilters":
+      const newFilters = Object.assign({}, action.payload);
+      return { ...state, filters: newFilters };
+
+
+    case "setErrorMessage":
+      return { ...state, errorMessage: action.payload };
+    default:
+      throw new Error();
+  }
+};
   const [chemicals, setChemicals] = React.useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  /* farzana */
+  // Amrita - Check if countyName is null (user searched for state) & change default measure timeline if null
+  const countyName = getLocationParents(state.map, "county");
+
+  if (countyName === null) {
+    var measureState = 'Asthma in Children';  // 1st State-Level Measure
+  } else {
+    var measureState = 'Asthma in Adults';  // 1st County-Level Measure
+  }
+
+  const [currentMeasure, setMeasure] = useState(measureState);
+  
+/* Amrita - Page reverts to main page if user opens it in a new tab (instead of giving an error)*/
+if (!state.map.state) {
+  history.push("/");  // redirect to the search page
+  return null;
+}
+
+  /* farzana
   React.useEffect(() => {
     async function fetchChemicalList(map) {
       const params = {
@@ -183,7 +203,7 @@ function DataComp(props) {
     }
 
     if (props.map) fetchChemicalList(props.map);
-  }, [props.filters, props.map]);
+  }, [props.filters, props.map]); */
 
   function handleError(err) {
     console.error(err);
@@ -275,9 +295,11 @@ function DataComp(props) {
   return (
     <div className="data-comp-container">
       <div className="content-group">
+
         <div className="comp-header">
           <h1>Comparison of Toxic Releases & Health Outcomes</h1>
         </div>
+
         <div className="data-reps">
           <div className="tri-data">
             {/* Amrita - Adding TRI page's total releases timeline to comparison page */}
@@ -304,7 +326,10 @@ function DataComp(props) {
             {/* Amrita - Adding categorized drop-down menu for public health measures */}
             <h2>Public Health Data</h2>
             <p>Choose a public health measure:</p>
+
             <select onChange={handleChange} value={currentMeasure}>
+            {/* Amrita - Don't show county measures in drop-down if user searched for a state */}
+            {countyName !== null && (
               <optgroup label="County-Level Data">
                 <option>Arsenic in Water</option>
                 <option>Asthma in Adults</option>
@@ -317,16 +342,17 @@ function DataComp(props) {
                 <option>Low Birthweight</option>
                 <option>PCE in Water</option>
                 <option>PFAS in Water</option>
-                <option>Premature Birth</option>
                 <option>Radium in Water</option>
                 <option>TCE in Water</option>
                 <option>Uranium in Water</option>
               </optgroup>
+            )}
 
               <optgroup label="State-Level Data">
                 <option>Asthma in Children</option>
                 <option>Childhood Cancer Brain & Central Nervous System</option>
                 <option>Childhood Cancer Leukemia</option>
+                <option>Premature Birth</option>
               </optgroup>
 
               <optgroup label="National-Level Data">
@@ -341,20 +367,36 @@ function DataComp(props) {
 
             <div className="ephcomp-timelines">
               {/* Amrita - Calls timeline from NationalEPHCompare to display timeline for Public Health Data section */}
+              {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859} />)}
               {currentMeasure === "Lead in Blood" && (<NationalEPHCompare measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"} measureID={858} />)}
               {currentMeasure === "Metals in Urine" && (<NationalEPHCompare measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856} />)}
               {currentMeasure === "Phthalates in Urine" && (<NationalEPHCompare measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863} />)}
-              {currentMeasure === "Bisphenol and Paraben in Urine" && (<NationalEPHCompare measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859} />)}
               {currentMeasure === "PFAS in Blood" && (<NationalEPHCompare measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826} />)}
               {currentMeasure === "Pesticides in Urine" && (<NationalEPHCompare measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861} />)}
 
               {/* Amrita - Calls timeline from StateEPHCompare to display timeline for Public Health Data section */}
-              {currentMeasure === "Asthma in Children" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"units"} />)}
-              {currentMeasure === "Childhood Cancer Brain & Central Nervous System" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)}
-              {currentMeasure === "Childhood Cancer Leukemia" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"units"} />)}
+              {currentMeasure === "Asthma in Children" && (<StateEPHCompare measure={"Asthma among Children"} measureID={587} units={"Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma (State)"} />)}
+              {currentMeasure === "Childhood Cancer Brain & Central Nervous System" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} 
+                                                                                                         units={"Age-adjusted Incidence Rate of Brain and Other Nervous System Cancer per 100,000 Population"} />)}
+              {currentMeasure === "Childhood Cancer Leukemia" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"Annual Number of Leukemia among Children <20 Years of Age"} />)}
+              {currentMeasure === "Premature Birth" && (<StateEPHCompare measure={"Premature Birth"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
 
               {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
-              {currentMeasure === "Asthma in Adults" && (<CountyEPHCompare measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+            {currentMeasure === "Arsenic in Water" && (<CountyEPHCompare measure={"Arsenic in Water"} measureID={769} units={"Annual Mean Concentration of Arsenic (µg/L)"} />)}
+              {currentMeasure === "Asthma in Adults" && (<CountyEPHCompare measure={"Asthma Among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+              {currentMeasure === "Asthma Hospitalizations" && (<CountyEPHCompare measure={"Asthma Hospitalizations"} measureID={103} units={"Counts of Asthma Hospitalization"} />)}
+            {currentMeasure === "DEPH in Water" && (<CountyEPHCompare measure={"DEPH in Water"} measureID={1120} units={"Annual Mean Concentration of DEHP (µg/L)"} />)}
+              {currentMeasure === "Fertility Rate" && (<CountyEPHCompare measure={"Fertility Rate"} measureID={45} units={"Total Fertility Rate per 1000 women"} />)}
+              {currentMeasure === "Heart Attack" && (<CountyEPHCompare measure={"Heart Attack"} measureID={553} units={"Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population"} />)}
+              {currentMeasure === "Infant Mortality" && (<CountyEPHCompare measure={"Infant Mortality"} measureID={279} units={"Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period"} />)}
+              {currentMeasure === "Low Birthweight" && (<CountyEPHCompare measure={"Low Birthweight"} measureID={36} units={"Percent of Low Birthweight (<2500g) Live Singleton Births"} />)}
+            {currentMeasure === "PCE in Water" && (<CountyEPHCompare measure={"PCE in Community Water"} measureID={807} units={"Annual Mean Concentration of PCE (µg/L)"} />)}
+            {currentMeasure === "PFAS in Water" && (<CountyEPHCompare measure={"PFAS in Community Water"} measureID={734} units={"CWS with Detections of PFAS Chemicals (PFOS, PFOA, PFNA, PFBS, PFHxS, PFHpA)"} />)}
+              {currentMeasure === "Prevalence of Cancer" && (<CountyEPHCompare measure={"Prevalence of Cancer"} measureID={1095} units={"Crude Prevalence of Cancer among Adults >= 18 Years of Age"} />)}
+            {currentMeasure === "Radium in Water" && (<CountyEPHCompare measure={"Radium in Water"} measureID={817} units={"Annual Mean Concentration of Radium (pCi/L)"} />)}
+            {currentMeasure === "TCE in Water" && (<CountyEPHCompare measure={"TCE in Water"} measureID={812} units={"Annual Mean Concentration of TCE (µg/L)"} />)}
+            {currentMeasure === "Uranium in Water" && (<CountyEPHCompare measure={"Uranium in Water"} measureID={822} units={"Annual Mean Concentration of Uranium (µg/L)"} />)}
+
             </div>
           </div>
         </div> {/*data reps*/}
