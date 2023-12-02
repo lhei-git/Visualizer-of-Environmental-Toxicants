@@ -1,120 +1,88 @@
-import "./county.css"
-import React, { useEffect, useState, useReducer } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { getCountyID } from '../EPHFilters/countyID';
 import { getStateID } from '../EPHFilters/stateID';
-import { getCountyID } from "../EPHFilters/countyID";
+import { getLocationParents, getYearString } from '../helpers';
 
-const {getLocationParents, getYearString} = require("../helpers");
-
-  
-function CountyTable({ measureID}) {
- 
-  //below code pulls searched location from app session storage/
-    // Initial state of app 
-    const initialState = {
-        map: JSON.parse(sessionStorage.getItem("map")),
-        filters: {
-        chemical: "all",
+class CountyTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: JSON.parse(sessionStorage.getItem('map')),
+      filters: {
+        chemical: 'all',
         pbt: false,
         carcinogen: false,
-        releaseType: "all",
-        //sets initial state to latest year/
+        releaseType: 'all',
         year: 2022,
-        },
-        errorMessage: "",
+      },
+      errorMessage: '',
+      countyID: '',
+      years: [],
+      data: [],
     };
-    const reducer = (state, action) => {
-        switch (action.type) {
-          case "setMap":
-            // Store latest searched location in session /
-            sessionStorage.setItem("map", JSON.stringify(action.payload));
-            return {
-              ...state,
-              map: action.payload,
-            };
-          case "setFilters":
-            const newFilters = Object.assign({}, action.payload);
-            return { ...state, filters: newFilters };
-          case "setErrorMessage":
-            return { ...state, errorMessage: action.payload };
-          default:
-            throw new Error();
-        }
-      };
-    const [state] = useReducer(reducer, initialState);
-    //end of storage retrieval code
+  }
 
-  //use api call geographicItems to obtain the state ID of the state searched by the user
-  //helper getLocationParents returns name of the searched state from session storage
-  const [countyID, setCountyID] = useState('');
-  useEffect(() => {
-    const fetchCountyID = async () => {
-      try {
-        const id = await getCountyID(getLocationParents(state.map, 'stateLong'), getLocationParents(state.map, 'county'), `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${measureID}/2/0`);
-        setCountyID(id);
-      } catch (error) {
-        console.error('Error fetching county ID:', error);
-      }
-    };
-    fetchCountyID();
-  }, [measureID, state.map]);
+  async componentDidMount() {
+    try {
+      const countyID = await getCountyID(
+        getLocationParents(this.state.map, 'stateLong'),
+        getLocationParents(this.state.map, 'county'),
+        `https://ephtracking.cdc.gov/apigateway/api/v1/geographicItems/${this.props.measureID}/2/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
+      );
+      this.setState({ countyID });
 
-  //get years available for selected measure to pass to api endpoint
-  const [years, setYears] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/2/all/all`);
-        const yearData = response.data.map(item => item.temporal);//extract years 
-        setYears(yearData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
-  //convert array of years to string
-  const yearString = getYearString(years);
+      const response = await axios.get(
+        `https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${this.props.measureID}/2/all/all?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
+      );
+      const yearData = response.data.map((item) => item.temporal);
+      this.setState({ years: yearData });
 
-  //pass api url to get measure data
-  const [data, setData] = useState([]);
-  const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${measureID}/2/2/${countyID}/1/${yearString}/0/0`;
-  useEffect(() => {
-    axios.get(apiURL)
-      .then((response) => {
-        const newData = response.data.tableResult.map((item) => ({
-          year: item.year,
-          dataValue: item.dataValue,
-          //add error handling if dataValue is null?????
-        }));
-        setData(newData);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [apiURL]);
+      const yearString = getYearString(yearData);
+      const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${countyID}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
 
-  return (
-    <table className="eph-table">
-      <thead>
-        <tr> 
-          <th className="sticky-header">Year</th>
-          <th className="sticky-header">Concentration</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            <td>{item.year}</td>
-            <td>{item.dataValue}</td>
-            <td>{item.sampleSize}</td>
-            
+      const apiResponse = await axios.get(apiURL);
+      const newData = apiResponse.data.tableResult.map((item) => ({
+        year: item.year,
+        dataValue: item.dataValue,
+      }));
+
+      this.setState({ data: newData });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      this.setState({ errorMessage: 'Error retrieving data from EPH API' });
+    }
+  }
+
+  render() {
+    const { data, errorMessage } = this.state;
+
+    return (
+      <table className="eph-table">
+        <thead>
+          <tr>
+            <th className="sticky-header">Year</th>
+            <th className="sticky-header">Concentration</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>{item.year}</td>
+              <td>{item.dataValue}</td>
+            </tr>
+          ))}
+          {errorMessage && (
+            <tr>
+              <td colSpan="2" style={{ color: 'red' }}>
+                {errorMessage}
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    );
+  }
 }
-
 
 export default CountyTable;
