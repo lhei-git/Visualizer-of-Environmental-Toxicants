@@ -135,7 +135,7 @@ if(props.mapType === "states")
                             <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
-                                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue} (counts)`}
+                                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue} ${props.units}`}
                                 style={{
                                     default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                     hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },

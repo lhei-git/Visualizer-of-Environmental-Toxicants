@@ -10,6 +10,11 @@
     gap: 20px;
   }
 
+  .nation-mapView .container h3 {
+    text-align: center;
+    color: grey;
+  }
+
 
   
   

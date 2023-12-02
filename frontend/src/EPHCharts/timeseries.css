@@ -1,8 +1,8 @@
 .time-series-container {
     width: 100%; /* Use the full width of the parent container */
     height: 100%; /* Use the full height of the parent container */
-    padding-left: 10%;
-    padding-right:20%;
+    padding-left: 0%;
+    padding-right: 20%;
   }
   
   /* Add media queries for responsiveness */
@@ -18,7 +18,7 @@
   @media screen and (min-width: 601px) and (max-width: 1200px) {
     /* Adjust styles for screens with a width between 601 and 1200 pixels */
     .time-series-container {
-      width: 300px;
+      width: 500px;
       height: 300px; /* Set a different fixed height for medium-sized screens */
     }
   }

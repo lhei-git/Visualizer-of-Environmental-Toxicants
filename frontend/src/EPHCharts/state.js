@@ -15,6 +15,17 @@ import { getLocationParents, getYearString } from '../helpers';
 import LoadingSpinner from '../LoadingSpinner';
 import TimeSeries from './timeseries';
 
+/* Amrita - Customize to matching TRI timelines */
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
+
 class StateTimeSeries extends Component {
   constructor(props) {
     super(props);
@@ -144,7 +155,7 @@ class StateTimeSeries extends Component {
                 />
               </YAxis>
               <Tooltip />
-              <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
+              <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
             </LineChart>
         */}
          

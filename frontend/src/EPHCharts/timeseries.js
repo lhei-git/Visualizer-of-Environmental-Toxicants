@@ -6,6 +6,17 @@ import "./timeseries.css";
 const TimeSeries = ({ data, size, units }) => {
     const chartContainer = useRef(null);        //get size of container
     const [sizeDynamic, setSize] = useState({ width: 0, height: 0 });
+
+    /* Amrita - Customize to matching TRI timelines */
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
     
     useEffect(() => {
         const updateDimensions = () => {
@@ -34,7 +45,7 @@ const TimeSeries = ({ data, size, units }) => {
 
     return (
     <div ref={chartContainer} className='time-series-container'>
-        <p>dynamic width: {sizeDynamic.width} dynamic height: {sizeDynamic.height}</p>
+       
       <LineChart width={sizeDynamic.width} height={sizeDynamic.height} data={data}>
         <CartesianGrid />
         <XAxis dataKey="year" />
@@ -47,7 +58,7 @@ const TimeSeries = ({ data, size, units }) => {
             margin={200}/>
         </YAxis>
         <Tooltip />
-        <Line name="Concentration" type="monotone" dataKey="dataValue" stroke="purple" />
+        <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
       </LineChart>
     </div>
     );

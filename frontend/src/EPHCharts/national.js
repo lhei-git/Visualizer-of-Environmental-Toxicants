@@ -13,6 +13,17 @@ Content area for all ntnl measures: Biomonitoring: Population exposure
 
 //written by Katherine O'Donnell
 
+/* Amrita - Customize to matching TRI timelines */
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
+
 //this function creates a time series graph for any measure with national level data
 const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => {
   const [data, setData] = useState([]);

@@ -75,15 +75,16 @@ const accordionMeasure = [
     {
         measureID: 587,
         sections: [
-        {
-            title: 'What does this data mean',
-            content: 'Details about what data means for Asthma',
-        },
+        
 
         {
             title: 'Where did we get this data?',
-            content: 'Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.',
-        }
+            content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children. ',
+        },
+        {
+          title: 'Where did CDC get this data?',
+          content: "Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.",
+      },
     ]
 
     }, 
@@ -91,14 +92,14 @@ const accordionMeasure = [
         measureID: 67, 
         sections: [
         
-        {
-            title: 'What does this data mean?',
-            content: 'Details about what data means for Childhood Brain Cancer',
-        },
 
         {
             title: 'Where did we get this data?',
-            content: "U.S. Cancer Statistics data are provided by CDC's National Program of Cancer Registries as submitted to CDC and NCI in the most recent data submission.",
+            content: "Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence.",
+        },
+        {
+          title: "Where did CDC get this data?",
+          content: " U.S. Cancer Statistics data are provided by CDC's National Program of Cancer Registries as submitted to CDC and NCI in the most recent data submission."
         }
     ]
     
@@ -107,12 +108,12 @@ const accordionMeasure = [
         measureID: 71,
         sections: [
         {
-            title: 'What does this data mean',
-            content: 'Details about what data means for Childhood Leukemia',
-        },
+            title: "Where did we get this data from?",
+            content: "Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence. "
+        }, 
         {
-            title: "Where is this data from?",
-            content: "U.S. Cancer Statistics data are provided by CDC's National Program of Cancer RegistriePs as submitted to CDC and NCI in the most recent data submission."
+          title: "Where did the CDC get this data from?",
+          content: "U.S. Cancer Statistics data are provided by CDC's National Program of Cancer RegistriePs as submitted to CDC and NCI in the most recent data submission."
         }
     ]
     }, 

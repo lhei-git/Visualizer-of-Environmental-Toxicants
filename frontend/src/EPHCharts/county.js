@@ -111,12 +111,12 @@ class CountyTimeSeries extends Component {
   }
 
   render() {
-    // Your component rendering logic using this.state and this.props
+    // Rendering component using this.state and this.props
   
     const { errorMessage, loading } = this.state;
 
     if (errorMessage) {
-      return <div>Error: {errorMessage}</div>;
+      return <div className="timeseries-error-message"><span className="error-icon">&#9888; </span>{errorMessage}</div>;
     }
 
     if (loading) {

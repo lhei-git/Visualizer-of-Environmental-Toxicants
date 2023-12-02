@@ -76,6 +76,30 @@ async getStateData() {
       console.error("Error fetching data:", error);
     }
   }
+
+  getUnits(endUnits) {
+    if (this.props.measure === "Asthma in Children") {
+      return endUnits = "(Percent)"
+    }
+    else if (this.props.measure === "Childhood Brain and Nervous System Cancer") {
+      return endUnits = "(Counts)"
+    }
+    else if (this.props.measure === "Childhood Cancer Leukemia") {
+      return endUnits = "(Counts)"
+    }
+  }
+
+  getSubtitle(subtitle) {
+    if(this.props.measure === "Asthma in Children") {
+      return subtitle = "Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma"
+    }
+    else if (this.props.measure === "Childhood Brain and Nervous System Cancer") {
+      return subtitle = "Annual Number of Cases of Brain and Central Nervous System Cancer among Children <20 Years of Age"
+    }
+    else if (this.props.measure === "Childhood Cancer Leukemia") {
+      return subtitle = "Annual Number of Leukemia among Children <20 Years of Age"
+    }
+  }
   
 
   handleGenderChange = (event) => {
@@ -98,6 +122,7 @@ async getStateData() {
       <div className='nation-mapView'>
         <div className='container'>
           <h1>{this.props.measure} in the U.S.</h1>
+          <h3>{this.getSubtitle()}</h3>
         <div className='centered-dropdown'>
         <div className="dropdown-center-year">
           <label> Year: </label>
@@ -135,6 +160,7 @@ async getStateData() {
             geoUrl={stateGeoUrl}
             data={this.state.stateData}
             mapType={"states"}
+            units={this.getUnits()}
            />
            
            

@@ -114,28 +114,28 @@ class EPHThematicWaterStateMap extends Component {
     const selectedContaminant = this.state.contaminant;
 
     if(this.props.measure === "Arsenic in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "DEPH in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/802/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`    
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/802/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`    
     }
     
     else if (this.props.measure === "PCE in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/807/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/807/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
 
     else if (this.props.measure === "PFAS in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/734/184/all/all/2/${selectedYear}/0/0?ContaminantId=${selectedContaminant}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/734/184/all/all/2/${selectedYear}/0/0?ContaminantId=${selectedContaminant}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "Radium in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/817/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/817/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "TCE in Community Water") { //not sure if this is the right one 
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/812/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/812/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
       `
     }
     else if (this.props.measure === "Uranium in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/822/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/822/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
       `
     }
     

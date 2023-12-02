@@ -39,12 +39,14 @@ const NationalEPHCompare = ({measure, units, measureID}) => {
     //.jsx layout
     return(
         <div className="comp-national-container">
+            {/* Amrita - Added US and 50th Percentile to show on top of timeline */}
             <h1>United States</h1>
+            <h2> Showing Data Based on 50th Percentile </h2>
             {/* Where filter container would go if needed */}
             {/*code below changes data representation based on filter changes*/}
             <div className = "time-series">
             {selectedPercentile === 1 && (
-                <NationalTimeSeries
+                <NationalTimeSeries className = "comp-time-series"
                         size={{ width: 800, height: 400 }}
                         measure={measure}
                         units={units}

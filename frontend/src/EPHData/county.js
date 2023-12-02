@@ -82,56 +82,212 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
     const accordionMeasure = [
 
         {
-            measureID: 1120,
+            measureID: 1038,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Asthma',
-            },
-    
-            {
                 title: 'Where did we get this data?',
-                content: 'Where we got this data for Asthma',
-            },
-
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children.',
+            },  
             {
-                title: 'How is this data measured',
-                content: 'How the  for Asthma',
+                title: 'Where did the CDC get this data?',
+                content: 'Data are from the Population Level Analysis and Community Estimates (PLACES) Project (https://www.cdc.gov/places/index.html), which is an expansion of the original 500 Cities Project. The original project was launched by the Centers for Disease Control and Prevention (CDC) in partnerships with the Robert Wood Johnson Foundation (RWJF) and CDC Foundation.',
             },
 
         ]
     
         }, 
         {
-            measureID: 67, 
+            measureID: 99, 
             sections: [
             
             {
-                title: 'What does this data mean?',
-                content: 'Details about what data means for Childhood Brain Cancer',
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Hospitalizations for Asthma.',
             },
     
             {
-                title: 'Where did we get this data?',
-                content: 'Where we got this data for Brain Cancer',
-            }
+                title: 'Where did CDC get this data from?',
+                content: 'The hospital data shown here are provided by state and/or local public health departments to the National Environmental Public Health Tracking Program. Data are based on the date of admission rather than the date of discharge.',
+            },
+
         ]
         
         }, 
         {
-            measureID: 71,
+            measureID: 1095,
             sections: [
             {
-                title: 'What does this data mean',
-                content: 'Details about what data means for Childhood Leukemia',
+                title: 'Where did we get this data?',
+                content: 'Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on 12/01/2023',
             },
             {
-                title: "Where is this data from?",
-                content: "Where we got this data from for Childhood Leukemia"
+                title: 'Where did CDC get this data from?',
+                content: "Data are from the Population Level Analysis and Community Estimates (PLACES) Project (https://www.cdc.gov/places/index.html), which is an expansion of the original 500 Cities Project. The original project was launched by the Centers for Disease Control and Prevention (CDC) in partnerships with the Robert Wood Johnson Foundation (RWJF) and CDC Foundation."
             }
         ]
         }, 
-    
+
+        {
+            measureID: 45,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
+            }
+        ]
+        }, 
+
+        {
+            measureID: 553,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Mortality for Heart Attack.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Mortality data from the National Vital Statistics System from National Center for Health Statistics (NCHS). Website source http://www.cdc.gov/nchs/deaths.htm Population data from the National Center for Health Statistics; intercensal estimates were used for 2000-2009; Postcensal estimates were used for 2010 - forward. Website source: http://www.cdc.gov/nchs/nvss/bridged_race.htm"
+            }
+        ]
+        }, 
+
+        {
+            measureID: 279,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
+            }
+        ]
+        }, 
+
+        {
+            measureID: 36,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
+            }
+        ]
+        }, 
+        {
+            measureID: 30,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
+            }
+        ]
+        }, 
+
+        {
+            measureID: 769,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Health Tracking Network. Arsenic in Community Water Systems.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
+            }
+        ]
+        }, 
+
+        {
+            measureID: 802,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
+            }
+        ]
+        }, 
+        {
+            measureID: 807,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
+            }
+        ]
+        }, 
+        {
+            measureID: 734,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on 12/01/2023',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data for PFAS concentrations in drinking water for selected community water systems (CWS) were obtained from EPA's National Contaminant Occurrence Database (https://www.epa.gov/dwstandardsregulations/national-contaminant-occurrence-database-ncod#unreg) for the third Unregulated Contaminant Monitoring Rule (UCMR 3). A summary of the UCMR 3 data and analytical results is available here: https://www.epa.gov/sites/production/files/2017-02/documents/ucmr3-data-summary-january-2017.pdf."
+            }
+        ]
+        }, 
+        {
+            measureID: 817,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
+            }
+        ]
+        },
+        {
+            measureID: 812,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
+            }
+        ]
+        },  
+        {
+            measureID: 822,
+            sections: [
+            {
+                title: 'Where did we get this data?',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+            },
+            {
+                title: 'Where did CDC get this data from?',
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
+            }
+        ]
+        }, 
     
     
     ]
@@ -146,7 +302,6 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
             {/*change time series info based on filter changes*/}
           
             <div className = "time-series">
-             
                 <CountyTimeSeries
                 size={{ width: 800, height: 400 }}
                 measureID={measureID}

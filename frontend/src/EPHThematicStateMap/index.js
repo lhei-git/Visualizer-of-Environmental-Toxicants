@@ -137,30 +137,30 @@ class EPHThematicStateMap extends Component {
     const selectedGender = this.state.gender;
 
     if(this.props.measure === "Asthma Among Adults") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/${selectedYear}/0/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/${selectedYear}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "Hospitalizations from Asthma") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/${selectedYear}/0/0`    
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/${selectedYear}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`    
     }
     
     else if (this.props.measure === "Prevalence of Cancer") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/${selectedYear}/0/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/${selectedYear}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
 
     else if (this.props.measure === "Fertility Rate") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/${selectedYear}/0/0`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/${selectedYear}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "Heart Attack") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
-    else if (this.props.measure === "Infant Mortality") { //not sure if this is the right one 
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/${selectedYear}/1/0`
+    else if (this.props.measure === "Infant Mortality") { 
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/${selectedYear}/1/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "Low Birthweight") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/36/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/36/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "Prematurity") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}`
+      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     
     /*
@@ -299,7 +299,7 @@ class EPHThematicStateMap extends Component {
         <h3>{this.getSubtitle()}</h3>
         <div className="centered-dropdown">
         <div className="centered-year">
-          <label>Select a Year of Interest:</label>
+          <label>Select a Year of Interest: </label>
         <select
           value={selectedYear}
           onChange={this.handleYearChange}
