@@ -177,7 +177,7 @@ const CountyData = ({measure, measureID, units}) => {
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for Low Birthweight"
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
             }
         ]
         }, 
@@ -186,11 +186,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for Prematurity',
+                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for Prematurity"
+                content: "Natality data and period linked birth-infant death data are provided by CDC's National Center for Health Statistics (NCHS) National Vital Statistics System. Population estimates are from the Vintage Bridged-Race Population Estimates as of July 1, 20XX (please check the latest updated population data)."
             }
         ]
         }, 
@@ -200,11 +200,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for Arsenic in Water',
+                content: 'Centers for Disease Control and Prevention. Environmental Health Tracking Network. Arsenic in Community Water Systems.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for Arsenic in Water"
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
             }
         ]
         }, 
@@ -214,11 +214,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for DEPH in water',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for DEPH in water"
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
             }
         ]
         }, 
@@ -227,11 +227,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for PCE in water',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for PCE in water"
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
             }
         ]
         }, 
@@ -240,11 +240,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for PFAS in water',
+                content: 'Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on 12/01/2023',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for PFAS in water"
+                content: "Data for PFAS concentrations in drinking water for selected community water systems (CWS) were obtained from EPA's National Contaminant Occurrence Database (https://www.epa.gov/dwstandardsregulations/national-contaminant-occurrence-database-ncod#unreg) for the third Unregulated Contaminant Monitoring Rule (UCMR 3). A summary of the UCMR 3 data and analytical results is available here: https://www.epa.gov/sites/production/files/2017-02/documents/ucmr3-data-summary-january-2017.pdf."
             }
         ]
         }, 
@@ -253,11 +253,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for Radium in Water',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for Radium in water"
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
             }
         ]
         },
@@ -266,11 +266,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for TCE in water',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for TCE in water"
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
             }
         ]
         },  
@@ -279,11 +279,11 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Details about what data means for Uranium in Water',
+                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
-                content: "Where we got this data from for Uranium in water"
+                content: "Data provided by state and local Environmental Health Tracking Programs. Data are derived from state databases associated with Safe Drinking Water Act. States without data shown here may have data available through their state databases for drinking water."
             }
         ]
         }, 
