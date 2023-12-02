@@ -243,3 +243,15 @@
   right: 10px;
   cursor: pointer;
 }
+
+
+/*Styled the space between the tri page filters and the tabs - Al-Taimee*/
+.app-container {
+  @media (max-width: 768px) {
+    padding-top: 80px; 
+
+    margin: 0; 
+  }
+
+}
+
