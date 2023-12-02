@@ -292,38 +292,38 @@ class EPHThematicWaterStateMap extends Component {
 
 
           {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
-  <div className="centered-level">
-    <label>Select an MCL Level: </label>
-    <select
-      value={this.state.level}
-      onChange={this.handleLevelChange}
-      style={{ fontSize: '18px', marginBottom: '50px' }}
-    >
-      <option value="1">Maximum contaminant level: Greater than MCL</option>
-      <option value="2">Maximum contaminant level: Less Than or Equal to MCL</option>
-      <option value="3">Maximum contaminant level: Not Detected</option>
-    </select>
-  </div>
-)}
+            <div className="centered-level">
+              <label>Select an MCL Level: </label>
+              <select
+                value={this.state.level}
+                onChange={this.handleLevelChange}
+                style={{ fontSize: '18px', marginBottom: '50px' }}
+              >
+                <option value="1">Maximum contaminant level: Greater than MCL</option>
+                <option value="2">Maximum contaminant level: Less Than or Equal to MCL</option>
+                <option value="3">Maximum contaminant level: Not Detected</option>
+              </select>
+            </div>
+          )}
 
-        {["PFAS in Community Water"].includes(this.props.measure) && (
-          <div className="centered-contaminant">
-            <label>Select a Contaminant: </label>
-            <select
-              value={this.state.contaminant}
-              onChange={this.handleContaminantChange}
-              style={{ fontSize: '18px', marginBottom: '50px' }}
-            >
-              <option>Select a Contaminant</option>
-              <option value="1">PFOS</option>
-              <option value="2">PFOA</option>
-              <option value="3">PFNA</option>
-              <option value="4">PFHxS</option>
-              <option value="5">PFHpA</option>
-              <option value="6">PFBS</option>
-            </select>
-          </div>
-        )}
+          {["PFAS in Community Water"].includes(this.props.measure) && (
+            <div className="centered-contaminant">
+              <label>Select a Contaminant: </label>
+              <select
+                value={this.state.contaminant}
+                onChange={this.handleContaminantChange}
+                style={{ fontSize: '18px', marginBottom: '50px' }}
+              >
+                <option>Select a Contaminant</option>
+                <option value="1">PFOS</option>
+                <option value="2">PFOA</option>
+                <option value="3">PFNA</option>
+                <option value="4">PFHxS</option>
+                <option value="5">PFHpA</option>
+                <option value="6">PFBS</option>
+              </select>
+            </div>
+          )}
         </div>
           
           {this.state.countyData ? (

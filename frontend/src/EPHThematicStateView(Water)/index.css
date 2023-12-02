@@ -13,7 +13,10 @@
     padding: 0;
 }
 
-
+.thematic-view-container{
+    justify-content: center;
+    padding-left: 800px;
+}
   
 .thematic-view-container .eph-flex-item h3 {
     text-align: center;
