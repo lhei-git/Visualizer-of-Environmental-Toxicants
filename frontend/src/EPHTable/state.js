@@ -62,7 +62,7 @@ function StateTable({ measureID}) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`);
+        const response = await axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${measureID}/1/all/all`); //add global variable for api url
         const yearData = response.data.map(item => item.temporal);//extract years 
         setYears(yearData);
       } catch (error) {
@@ -87,7 +87,7 @@ function StateTable({ measureID}) {
           sampleSize: item.sampleSize,
           concentration: item.Concentration,
           year: item.year
-        })); 
+        }));
         setData(APIdata);
       })
       .catch((error) => {

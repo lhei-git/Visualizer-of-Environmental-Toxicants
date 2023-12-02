@@ -144,8 +144,9 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
         <div className="county-container">
             <h1>{measure} in {countyName}, {stateAbbr}</h1>
             {/*change time series info based on filter changes*/}
-            <p>{measureID}</p>
+          
             <div className = "time-series">
+             
                 <CountyTimeSeries
                 size={{ width: 800, height: 400 }}
                 measureID={measureID}
