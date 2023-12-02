@@ -38,10 +38,10 @@ function getColorScale(dataValue) {
 
 
 const ChildhoodLeukemia = ({ map }) => {
-  const [selectedYear, setSelectedYear] = useState(["2019"]);
+  const [selectedYear, setSelectedYear] = useState('2019');
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  const [selectedGenderId, setSelectedGenderId] = useState(["1"]);
+  const [selectedGenderId, setSelectedGenderId] = useState('1');
 
   //const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
 
@@ -51,7 +51,7 @@ const ChildhoodLeukemia = ({ map }) => {
   const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${year}/0/0?GenderId=${genderId}` )
+    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${year}/0/0?GenderId=${genderId}?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744` )
       .then((response) => {
         setData(response.data.tableResult);
       })

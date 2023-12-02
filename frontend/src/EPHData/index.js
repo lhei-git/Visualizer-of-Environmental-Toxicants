@@ -204,10 +204,7 @@ if (!state.map.state) {
         {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"units"} map={map} />)}
         {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"units"} map={map} />)}
         {currentTab === "11" && (<CountyData measure={"PCE in Community Water"} measureID={807} units={"units"} map={map} />)}
-        {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"units"} map={map} />)}
-
-
-        
+        {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"units"} map={map} />)}        
         */}
         {currentTab === "0" && ( 
         <EPHThematicWaterStateMap 
@@ -228,7 +225,7 @@ if (!state.map.state) {
         </EPHThematicStateMap> )}
 
         */}
-        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1038} units={"Percent of Adults with Asthma"} />)}
         
         {currentTab === "3" && ( 
           /*farzana -- making state maps for each measure*/

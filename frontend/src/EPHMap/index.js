@@ -16,11 +16,6 @@ import "./index.css"
 const EPHMap = (props) => {
     const [position, setPosition] = useState({coordinates: [-96, 38], zoom: 1});
 
-    
-    
-
-
-
       function handleMoveEnd(position) {
         setPosition(position);
       }
@@ -29,9 +24,11 @@ const EPHMap = (props) => {
       const [maxValue, setMaxValue] = useState(null);
       useEffect(() => {
         // Calculate minValue and maxValue when data changes
+        
         const dataValues = props.data.map((d) => d.dataValue);
         setMinValue(Math.min(...dataValues));
         setMaxValue(Math.max(...dataValues));
+        
       }, [props.data]);
 
       function generateColor(value, minValue, maxValue) {
@@ -50,6 +47,17 @@ const EPHMap = (props) => {
         return dataValue === null ? '#D6D6DA' : generateColor(dataValue, minValue, maxValue);
       }
 
+      function getColorScaleState(dataValue) {
+        return dataValue == null
+        ? '#D6D6DA'
+        : dataValue < 20
+        ? '#bbe9fa'
+        : dataValue < 50
+        ? '#8bdefc'
+        : dataValue < 100
+        ? '#62cdf5'
+        : '#1ab3eb';
+      }
 
 
 
@@ -107,20 +115,27 @@ if(props.mapType === "states")
       return (
         <>
         <div className='mapView-states'>
-            <ComposableMap projection="geoAlbers">
-                <Geographies geography={props.geoURL}>
+            <ComposableMap 
+              data-tip=""
+             projection="geoAlbersUsa" 
+             projectionConfig=
+             {{ 
+                scale: 1000,
+              }}
+              >
+                <Geographies geography={props.geoUrl}>
                     {({ geographies }) =>
                      geographies.map((geo) => {
                         
-                        const stateData = props.data.find((d) => d.parentGeo === geo.properties.NAME);
-                        const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+                        const stateData = props.data.find((d) => d.geo === geo.properties.name);
+                        const fillColor = stateData ? getColorScaleState(stateData.dataValue) : '#D6D6DA';
                     
                     if(stateData != undefined) {
                         return (
                             <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
-                                data-tip={`${geo.properties.NAME}: ${stateData && stateData.displayValue}`}
+                                data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue} ${props.units}`}
                                 style={{
                                     default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                     hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -138,7 +153,7 @@ if(props.mapType === "states")
                                 <Geography
                                     key={geo.rsmKey}
                                     geography={geo}
-                                    data-tip={`${geo.properties.NAME}: ${stateData && stateData.displayValue}`}
+                                    data-tip={geo.properties.name}
                                     style={{
                                         stroke: "#000",
                                     }}

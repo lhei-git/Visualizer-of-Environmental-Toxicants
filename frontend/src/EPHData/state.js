@@ -7,6 +7,7 @@ import StateTable from "../EPHTable/state";
 import React, {useEffect, useReducer, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import SimpleMap from '../EPHMapView';
+import StateMap from "../EPHMapView/statemap";
 import ChildhoodBrain from '../EPHMapView/ChildhoodBrain';
 import ChildhoodLeukemia from '../EPHMapView/ChildhoodCancerLeukemia';
 import { getLocationParents } from '../helpers';
@@ -74,15 +75,16 @@ const accordionMeasure = [
     {
         measureID: 587,
         sections: [
-        {
-            title: 'What does this data mean',
-            content: 'Details about what data means for Asthma',
-        },
+        
 
         {
             title: 'Where did we get this data?',
-            content: 'Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.',
-        }
+            content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children. ',
+        },
+        {
+          title: 'Where did CDC get this data?',
+          content: "Data are from the Behavior Risk Factor Surveillance Survey (BRFSS), a state-based, random-digit-dial telephone survey of the non-institutionalized, civilian U.S. population 18 years of age and older. BRFSS data are self-reported.",
+      },
     ]
 
     }, 
@@ -90,14 +92,14 @@ const accordionMeasure = [
         measureID: 67, 
         sections: [
         
-        {
-            title: 'What does this data mean?',
-            content: 'Details about what data means for Childhood Brain Cancer',
-        },
 
         {
             title: 'Where did we get this data?',
-            content: "U.S. Cancer Statistics data are provided by CDC's National Program of Cancer Registries as submitted to CDC and NCI in the most recent data submission.",
+            content: "Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence.",
+        },
+        {
+          title: "Where did CDC get this data?",
+          content: " U.S. Cancer Statistics data are provided by CDC's National Program of Cancer Registries as submitted to CDC and NCI in the most recent data submission."
         }
     ]
     
@@ -106,12 +108,12 @@ const accordionMeasure = [
         measureID: 71,
         sections: [
         {
-            title: 'What does this data mean',
-            content: 'Details about what data means for Childhood Leukemia',
-        },
+            title: "Where did we get this data from?",
+            content: "Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence. "
+        }, 
         {
-            title: "Where is this data from?",
-            content: "U.S. Cancer Statistics data are provided by CDC's National Program of Cancer RegistriePs as submitted to CDC and NCI in the most recent data submission."
+          title: "Where did the CDC get this data from?",
+          content: "U.S. Cancer Statistics data are provided by CDC's National Program of Cancer RegistriePs as submitted to CDC and NCI in the most recent data submission."
         }
     ]
     }, 
@@ -140,9 +142,9 @@ const currentAccordionMeasure = accordionMeasure.find(
         <p></p>
       </div>
       <div className={`map-container`}>
-        {measureID === 587 && (<SimpleMap map={state.map} />)} {/* asthma == 587 */}
-        {measureID === 67 && (<ChildhoodBrain map={state.map} />)} {/* 67 == brain/nerv cancer */}
-        {measureID === 71 && (<ChildhoodLeukemia map={state.map} />)} {/* leukemia == 71 */}
+        {measureID === 587 && (<StateMap yearRange={[2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011]} measure={"Asthma in Children"}/>)} {/* asthma == 587 */}
+        {measureID === 67 && (<StateMap yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]} measure={"Childhood Brain and Nervous System Cancer"} />)} {/* 67 == brain/nerv cancer */}
+        {measureID === 71 && (<StateMap yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]} measure={"Childhood Cancer Leukemia"} />)} {/* leukemia == 71 */}
       </div>
       <div className={'eph-table-container'}>
         <StateTable measureID={measureID} />
