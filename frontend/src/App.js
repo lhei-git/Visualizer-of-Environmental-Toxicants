@@ -216,20 +216,6 @@ const App = (props) => {
     }
 });
 
-      
-
-      
-
-
-  /*function scrollBtnUp() {
-    return {
-      <div className="scollUp">
-        <a href="#" class="scroll-btn">
-          <i class="fas fa-arrow-up"></i>
-        </a>
-      </div>
-    };
-  }*/
   
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */

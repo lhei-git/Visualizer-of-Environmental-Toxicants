@@ -2,6 +2,7 @@
   --black: #3f3844;
 }
 
+
 .graph-header {
   text-align: left;
   margin-bottom: 30px;
@@ -61,11 +62,12 @@
   font-weight: 600;
 }
 
+/*fixed summary table sizing - Al-Taimee*/
 .graph-container > .content {
-  min-width: 1000px;
+  min-width: 100px;
   /* max-width: 50vw; */
-  overflow-x: visible;
-  margin: 0 auto;
+  overflow-x: hidden;
+  
 }
 
 .graph-container .graphs {
@@ -209,6 +211,7 @@
 /* Amrita - Center only the summary table's header */
 .summary-table-header {
   text-align: center;
+  padding: 10px;
 }
 
 .all-facilities-chart {
@@ -216,4 +219,12 @@
   /*height: 300px;*/
   overflow-y: auto;
   max-height: 500px;
+}
+
+/*Responsive style for summary table header sizing - Al-Taimee*/
+@media only screen and (max-width: 768px) {
+  .summary-table-header {
+    font-size: 14px; 
+    padding: 8px; 
+  }
 }
