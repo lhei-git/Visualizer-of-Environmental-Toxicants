@@ -13,6 +13,7 @@ import axios from 'axios';
 import { getStateID } from '../EPHFilters/stateID';
 import { getLocationParents, getYearString } from '../helpers';
 import LoadingSpinner from '../LoadingSpinner';
+import TimeSeries from './timeseries';
 
 /* Amrita - Customize to matching TRI timelines */
 class CustomLine extends Line {
@@ -138,7 +139,9 @@ class StateTimeSeries extends Component {
     return (
       <div>
        {/* {this.props.stateData ? ( */}
-          <div className="TimeSeries" style={{ width: this.props.size.width, height: this.props.size.height }}>
+       <div className="TimeSeries" >
+
+       {/*
             <LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
               <CartesianGrid />
               <XAxis dataKey="year" />
@@ -154,10 +157,12 @@ class StateTimeSeries extends Component {
               <Tooltip />
               <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
             </LineChart>
+        */}
+         
+            <TimeSeries data={this.state.data} size ={{width:this.props.size.width, height:this.props.size.height }} units={this.props.units}/>
+
           </div>
-      {/*  ) : (
-          <LoadSpinner />
-      )} */}
+    
       </div>
     );
   }

@@ -13,19 +13,7 @@ import axios from 'axios';
 import { getCountyID } from '../EPHFilters/countyID';
 import { getLocationParents, getYearString } from '../helpers';
 import LoadingSpinner from '../LoadingSpinner';
-import "./index.css";
-
-
-/* Amrita - Customize to matching TRI timelines */
-class CustomLine extends Line {
-  static defaultProps = {
-    ...Line.defaultProps,
-    type: "monotone",
-    strokeWidth: 3,
-    dot: false,
-    activeDot: { r: 8 },
-  };
-}
+import TimeSeries from './timeseries';
 
 /*farzana -- created the class*/
 class CountyTimeSeries extends Component {
@@ -62,10 +50,12 @@ class CountyTimeSeries extends Component {
       this.setState({ years: yearData });
   
       const yearString = getYearString(yearData);
+      
       const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
   
       const apiResponse = await axios.get(apiURL);
       console.log('API RESPONSE: ', apiResponse);
+      ///ADD CONDITIONAL CODE FOR WATER
       const responseData = apiResponse.data.tableResult.map((item) => ({
         year: item.year,
         dataValue: item.dataValue,
@@ -137,8 +127,8 @@ class CountyTimeSeries extends Component {
     return (
       <div>
        {/* {this.props.stateData ? ( */}
-          <div className="TimeSeries" style={{ width: this.props.size.width, height: this.props.size.height }}>
-            <LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
+          <div className="TimeSeries" >
+            {/*<LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
               <CartesianGrid />
               <XAxis dataKey="year" />
               <YAxis>
@@ -151,12 +141,12 @@ class CountyTimeSeries extends Component {
                 />
               </YAxis>
               <Tooltip />
-              <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
-            </LineChart>
+              <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
+            </LineChart> */}
+            <TimeSeries data={this.state.data} size ={{width:this.props.size.width, height:this.props.size.height }} units={this.props.units}/>
+
           </div>
-      {/*  ) : (
-          <LoadSpinner />
-      )} */}
+
       </div>
     );
   }

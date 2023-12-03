@@ -6,8 +6,12 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    
   }
+
+  .county-container .map-container{
+    justify-content: center;
+  }
+
   .county-container .filter-container{
   display: flex;
   width: 100%;

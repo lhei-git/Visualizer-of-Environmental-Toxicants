@@ -72,16 +72,16 @@ const NationalData = ({measure, units, measureID}) => {
             <div className = "time-series">
             {selectedPercentile === 1 && (
                 <NationalTimeSeries
-                        size={{ width: 800, height: 400 }}
-                        measure={measure}
-                        units={units}
-                        percentile={1}
-                        demographic={selectedDemographic} />
-                        
+                size ={{width:800, height:400 }}
+                measure={measure}
+                units={units}
+                percentile={1}
+                demographic={selectedDemographic} />
+                
             )}
             {selectedPercentile === 2 && (
                 <NationalTimeSeries
-                size={{ width: 800, height: 400 }}
+                size ={{width:800, height:400 }}
                 measure={measure}
                 units={units}
                 percentile={2}
@@ -91,7 +91,7 @@ const NationalData = ({measure, units, measureID}) => {
             
             </div>
             <div className = "desc-container">
-                <p>add description for data here</p>
+                <p>The data above is obtained from the CDC Environmental Public Health Tracking</p>
             </div>
 
             {/*

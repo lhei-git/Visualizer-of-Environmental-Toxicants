@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import axios from 'axios';
 import "./index.css";
+import TimeSeries from './timeseries';
 
 /* NOTES:
 indicator for all ntnl measures: National report on human exposure to environmental chemicals
@@ -73,14 +74,14 @@ const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => 
   }
 
   return (
-    <div className="TimeSeries" style={{width: size.width, height: size.height }}>
+    <div className="TimeSeries">
       <TimeSeries data={data} size={size} units={units}/>
     </div>
   );
 }
 
 NationalTimeSeries.propTypes = {
-  size: PropTypes.shape({                     //size of chart to be displayed
+  size: PropTypes.shape({
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
   }).isRequired,
@@ -90,35 +91,6 @@ NationalTimeSeries.propTypes = {
   percentile: PropTypes.number.isRequired,         //1=50th, 2=95th
   demographic: PropTypes.number.isRequired,         //16=US pop 10=male 
 
-};
-
-
-//creates time series graph -- might move to own file for reusability
-function TimeSeries({ data, size, units }) {
-  return (
-    <LineChart width={size.width} height={size.height} data={data}>
-      <CartesianGrid />
-      <XAxis dataKey="year" />
-      <YAxis>
-        <Label 
-          style={{textAnchor: "middle"}}
-          angle={270} 
-          position='insideLeft'
-          value={units}
-          margin={200}/>
-      </YAxis>
-      <Tooltip />
-      <CustomLine name="Concentration" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
-    </LineChart>
-  );
-}
-
-TimeSeries.propTypes = {
-  size: PropTypes.shape({                     //same size prop as chart
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }).isRequired,
-  units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
 };
 
 
