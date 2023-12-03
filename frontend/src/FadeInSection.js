@@ -1,6 +1,8 @@
 //Credit to: https://dev.to/selbekk/how-to-fade-in-content-as-it-scrolls-into-view-10j4
+import './FadeinSection.css'
+import React from 'react';
 
-function FadeInSection(props) {
+export default function FadeInSection(props) {
   const [isVisible, setVisible] = React.useState(true);
   const domRef = React.useRef();
   React.useEffect(() => {

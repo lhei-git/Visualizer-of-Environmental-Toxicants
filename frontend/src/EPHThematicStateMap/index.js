@@ -31,7 +31,6 @@ class EPHThematicStateMap extends Component {
 
     };
     
-    this.handleContentCountyState = this.handleContentCountyState.bind(this);
     this.handleYearChange = this.handleYearChange.bind(this);
   }
   
