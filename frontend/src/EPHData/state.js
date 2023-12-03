@@ -4,7 +4,7 @@ import StateTimeSeries from '../EPHCharts/state';
 import StateTable from '../EPHTable/state';
 import StateMap from '../EPHMapView/statemap';
 import Accordion from '../Accordion/Accordion';
-import  FadeInSection  from '../FadeInSection';
+import FadeInSection from '../FadeInSection';
 import { getLocationParents } from '../helpers';
 
 import './index.css';

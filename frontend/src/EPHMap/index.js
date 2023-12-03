@@ -35,17 +35,21 @@ const EPHMap = (props) => {
 //Genderate colors for the legend and map for county maps
 
 function generateColor(value, minValue, maxValue) {
-  const percentage = (value - minValue) / (maxValue - minValue);
   const numColors = 4; // Number of distinct colors
   const colorScale = [
-    '#B6D0E2', '#89CFF0', '#6495ED', '#3F00FF', '#0047AB', 
+    '#e4eef7', '#8fb8d9', '#4f93c9', '#023763'
   ];
 
-  // Calculate index based on the percentage
-  const colorIndex = Math.floor(percentage * numColors);
+  // Ensure value is within the range [minValue, maxValue]
+  const clampedValue = Math.max(minValue, Math.min(maxValue, value));
+
+  // Map clampedValue to the color scale
+  const colorIndex = Math.floor((clampedValue - minValue) / (maxValue - minValue) * numColors);
 
   return colorScale[colorIndex];
 }
+
+
 
       
       
@@ -75,41 +79,31 @@ function generateColor(value, minValue, maxValue) {
 
 //Create the legend
 function Legend({ data }) {
+  const legendColors = [
+    '#e4eef7', '#b7d5ed', '#70a7d4', '#023763'
+  ];
 
-  //Get min and max values for the legend colors to change dynamically
   const minValue = Math.min(...data.map((d) => d.dataValue));
   const maxValue = Math.max(...data.map((d) => d.dataValue));
 
-  //Number of colors to show up in legend
-  const numIntervals = 4;
+  const numIntervals = legendColors.length;
   const intervalSize = (maxValue - minValue) / numIntervals;
 
-  const legendComponents = Array.from({ length: numIntervals }, (_, index) => {
-    const startInterval = minValue + index * intervalSize;
-    const endInterval = startInterval + intervalSize;
-    const legendColor = getColorScale(startInterval, minValue, maxValue);
+  const legendItems = Array.from({ length: numIntervals }, (_, i) => {
+    const startInterval = minValue + i * intervalSize;
+    const endInterval = i === numIntervals - 1 ? maxValue : startInterval + intervalSize;
 
-    return {
-      index,
-      startInterval,
-      endInterval,
-      legendColor,
-    };
+    return (
+      <div key={i} className="legend-item">
+        <div className="legend-color" style={{ backgroundColor: legendColors[i] }}></div>
+        <span>
+          {endInterval !== undefined
+            ? `${startInterval.toFixed(2)} - ${endInterval.toFixed(2)}`
+            : `${startInterval.toFixed(2)}+`}
+        </span>
+      </div>
+    );
   });
-
-  
-  const legendColors = legendComponents.map(item => item.legendColor);
-
-  const legendItems = legendComponents.map(({ index, startInterval, endInterval }, i) => (
-    <div key={index} className="legend-item">
-      <div className="legend-color" style={{ backgroundColor: legendColors[i] }}></div>
-      <span>
-        {endInterval !== undefined
-          ? `${startInterval.toFixed(2)}+`
-          : `${startInterval.toFixed(2)}-${endInterval.toFixed(2)}`}
-      </span>
-    </div>
-  ));
 
   return (
     <div className="legend-container">
@@ -117,6 +111,9 @@ function Legend({ data }) {
     </div>
   );
 }
+
+
+
 
 //Creating United State Map with just states
 if(props.mapType === "states")

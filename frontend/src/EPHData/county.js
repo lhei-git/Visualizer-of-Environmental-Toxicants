@@ -10,6 +10,7 @@ import SimpleMap from "../EPHMapView";
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import Accordion from "../Accordion/Accordion";
 import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
+import FadeInSection from "../FadeInSection";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
 
@@ -80,7 +81,7 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
     const accordionMeasure = [
 
         {
-            measureID: 1038,
+            measureID: 1120,
             sections: [
             {
                 title: 'Where did we get this data?',
@@ -293,13 +294,18 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
         section => section.measureID === measureID
       );
 
+
     //.jsx layout
     return(
+        <FadeInSection>
         <div className="county-container">
+        <FadeInSection>
             <h1>{measure} in {countyName}, {stateAbbr}</h1>
+        </FadeInSection>
             {/*change time series info based on filter changes*/}
           
             <div className = "time-series">
+            <FadeInSection>
                 <CountyTimeSeries
                 size={{ width: 800, height: 400 }}
                 measureID={measureID}
@@ -307,8 +313,9 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
                 percentile={1} 
                 demographic={selectedDemographic}
                 />
+            </FadeInSection>
             </div>
-            
+            <FadeInSection>
             <div className = "map-container">
                 {measureID === 769 && (
                     <EPHThematicWaterStateMap 
@@ -456,15 +463,21 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
                 </EPHThematicWaterStateMap>)}
 
             </div>
+            </FadeInSection>
+            <FadeInSection>
             <div className="eph-table-container">
                 <CountyTable measureID={measureID} />
             </div>
+            </FadeInSection>
             {currentAccordionMeasure &&
         currentAccordionMeasure.sections.map(section => (
+            <FadeInSection key={section.title}>
           <Accordion key={section.title} title={section.title} content={section.content} />
+          </FadeInSection>
         ))}
     
         </div>
+        </FadeInSection>
     );
 }
 
