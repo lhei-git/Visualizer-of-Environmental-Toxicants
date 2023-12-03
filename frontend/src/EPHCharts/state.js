@@ -13,6 +13,18 @@ import axios from 'axios';
 import { getStateID } from '../EPHFilters/stateID';
 import { getLocationParents, getYearString } from '../helpers';
 import LoadingSpinner from '../LoadingSpinner';
+import TimeSeries from './timeseries';
+
+/* Amrita - Customize to matching TRI timelines */
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
 
 class StateTimeSeries extends Component {
   constructor(props) {
@@ -127,7 +139,9 @@ class StateTimeSeries extends Component {
     return (
       <div>
        {/* {this.props.stateData ? ( */}
-          <div className="TimeSeries" style={{ width: this.props.size.width, height: this.props.size.height }}>
+       <div className="TimeSeries" >
+
+       {/*
             <LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
               <CartesianGrid />
               <XAxis dataKey="year" />
@@ -141,12 +155,14 @@ class StateTimeSeries extends Component {
                 />
               </YAxis>
               <Tooltip />
-              <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
+              <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
             </LineChart>
+        */}
+         
+            <TimeSeries data={this.state.data} size ={{width:this.props.size.width, height:this.props.size.height }} units={this.props.units}/>
+
           </div>
-      {/*  ) : (
-          <LoadSpinner />
-      )} */}
+    
       </div>
     );
   }

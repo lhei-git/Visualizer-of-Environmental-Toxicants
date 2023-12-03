@@ -35,18 +35,18 @@
 .data-comp-container .tri-data {
   margin: 30px;
   flex-basis: 100%;
-  /*background-color: palegreen;*/
   justify-content: center;
 }
 
 .data-comp-container .eph-data {
   margin: 30px;
   flex-basis: 100%;
-  /*background-color: hotpink;*/
   justify-content: center;
+  padding-bottom: 30px;
 }
 
-.data-comp-container .eph-data {
+.time-series {
+  display: flex;
   justify-content: center;
 }
 
@@ -84,6 +84,22 @@
 }
 .comp-national-container h1 {
   font-size: 20px;
+  opacity: 0.7;
+  left: 10%;
+}
+
+.comp-state-container h2 {
+  font-size: 15px;
+  opacity: 0.7;
+  left: 10%;
+}
+.comp-county-container h2 {
+  font-size: 15px;
+  opacity: 0.7;
+  left: 10%;
+}
+.comp-national-container h2 {
+  font-size: 15px;
   opacity: 0.7;
   left: 10%;
 }

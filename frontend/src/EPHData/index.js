@@ -149,9 +149,8 @@ const scrollToTop = () => {
 
 /* Amrita - Page reverts to main page if user opens it in a new tab (instead of giving an error)*/
 if (!state.map.state) {
-  // Redirect to your desired page (change '/your-page' to the actual path)
-  history.push("/");
-  return null; // or you can render a loading spinner or message here
+  history.push("/");  // redirect to the search page
+  return null;
 }
 
   return (
@@ -178,147 +177,25 @@ if (!state.map.state) {
         {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
         {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
         
-        {/* county measures - change to call <CountyData> 
-           
-        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"units"} map={map} />)}
-        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"units"} map={map} />)}
-        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"units"} map={map} />)}
-        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"units"} map={map} />)}
-        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"units"} map={map} />)}
+        {/* county measures - change to call <CountyData> */}
+    
+
+        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"units"} />)}
+        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"units"} />)}
+        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"units"} />)}
+        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"units"} />)}
         {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"units"} map={map} />)}
         {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"units"} map={map} />)}
         {currentTab === "11" && (<CountyData measure={"PCE in Community Water"} measureID={807} units={"units"} map={map} />)}
         {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"units"} map={map} />)}        
-        */}
-        {currentTab === "0" && ( 
-        <EPHThematicWaterStateMap 
-                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
-                level={[1, 2, 3]}
-                measure={"Arsenic in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap> )}
+        {currentTab === "16" && (<CountyData measure={"Prematurity"} measureID={30} units={"units"} />)}
 
-         {/*
-        {currentTab === "1" && ( 
-        <EPHThematicStateMap 
-                yearRange={[2020, 2019, 2018]}
-                measure={"Asthma Among Adults"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-
-        */}
-        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1038} units={"Percent of Adults with Asthma"} />)}
-        
-        {currentTab === "3" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[2020, 2019, 2018]}
-                measure={"Prevalence of Cancer"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-        {currentTab === "5" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
-                measure={"Fertility Rate"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-        {currentTab === "6" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
-                gender={[1, 2]}
-                measure={"Heart Attack"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-        {currentTab === "7" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004]}
-                measure={"Infant Mortality"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-        {currentTab === "9" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
-                gender={[1, 2]}
-                measure={"Low Birthweight"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-        {currentTab === "11" && ( 
-        <EPHThematicWaterStateMap 
-                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
-                level={[1, 2, 3]}
-                measure={"PCE in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap> )}
-        {currentTab === "14" && ( 
-        <EPHThematicWaterStateMap 
-                yearRange={[2015]}
-                contaminant={[1, 2, 3, 4, 5, 6]}
-                measure={"PFAS in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap> )}
-        {currentTab === "16" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
-                gender={[1, 2]}
-                measure={"Prematurity"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-        {currentTab === "17" && ( 
-        <EPHThematicWaterStateMap 
-                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
-                level={[1, 2, 3]}
-                measure={"Radium in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap> )}
-        {currentTab === "18" && ( 
-        <EPHThematicWaterStateMap 
-                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
-                level={[1, 2, 3]}
-                measure={"TCE in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap> )}
-        {currentTab === "19" && ( 
-        <EPHThematicWaterStateMap 
-                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
-                level={[1, 2, 3]}
-                measure={"Uranium in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap> )}
-        {currentTab === "20" && ( 
-          /*farzana -- making state maps for each measure*/
-        <EPHThematicStateMap 
-                yearRange={[2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]}
-                measure={"Hospitalizations from Asthma"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicStateMap> )}
-       
-        {currentTab === "21" && (
-        <EPHThematicWaterStateMap 
-                yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
-                level={[1, 2, 3]}
-                measure={"DEPH in Community Water"}
-                stateName={map.state}
-                stateLongName={map.stateLong}>
-        </EPHThematicWaterStateMap>)}
+        {currentTab === "17" && (<CountyData measure={"Radium in Community Water"} measureID={817} units={"units"} />)}
+        {currentTab === "18" && (<CountyData measure={"TCE in Community Water"} measureID={812} units={"units"} />)}
+        {currentTab === "19" && (<CountyData measure={"Uranium in Community Water"} measureID={822} units={"units"} />)}
+        {currentTab === "20" && (<CountyData measure={"Hospitalizations from Asthma"} measureID={99} units={"units"} />)}
+        {currentTab === "21" && (<CountyData measure={"DEPH in Community Water"} measureID={802} units={"units"} />)}
 
 
         {/* state measures */}
@@ -327,11 +204,6 @@ if (!state.map.state) {
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
         {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
 
-        {/*
-        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
-        {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
-        {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
-        */}
       </div>
      
       <div className="health-outcomes-sidebar">
@@ -357,26 +229,26 @@ if (!state.map.state) {
             <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
             
             <li className="boldHeadings">Cancer</li>
-            <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
             <li onClick={() => chooseTab("23")} className={currentTab === "23" ? "active" : ""}><a href="#">Childhood Cancer: Brain & Central Nervous System</a></li>
             <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood Cancer: Leukemia</a></li> {/* 4 */}
+            <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
 
             <li className="boldHeadings">Heart Disease and Stroke</li>
             <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart Attack</a></li> {/* 6 */}
+
             <li className="boldHeadings">Reproductive and birth outcomes</li>
+            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility Rate</a></li> {/* 5 */}
             <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant Mortality</a></li> {/* 7 */}
             <li onClick={() => chooseTab("9")} className={currentTab === "9" ? "active" : ""}><a href="#">Low Birthweight</a></li> {/* 9 */}
-            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility Rate</a></li> {/* 5 */}
+            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
 
             <li className="boldHeadings">National population exposure</li>
-            
+            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
             <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in Blood</a></li> {/* 8 */}
             <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in Urine</a></li> {/* 10 */}
             <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in Urine</a></li> {/* 12 */}
             <li onClick={() => chooseTab("13")} className={currentTab === "13" ? "active" : ""}><a href="#">PFAS in Blood</a></li> {/* 13 */}
             <li onClick={() => chooseTab("15")} className={currentTab === "15" ? "active" : ""}><a href="#">Phthalates in Urine</a></li> {/* 15 */}
-            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
-            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
 
             <p className="extraLink"><a href="https://ephtracking.cdc.gov/">Data from the CDC Environmental Public Health Tracking Network - See More Data</a></p>
 

@@ -291,12 +291,14 @@ function TRITimeline({ map, filters, onFilterChange }) {
 
   return (
     <div className="comp-graph-container">
+      <div className="tri-filter-container">
         <p>Choose a specific chemical:</p>
           <TRIFilters
             map={map}
             filters={filters}
             onFilterChange={onFilterChange}
           ></TRIFilters>
+      </div>
         
         <div className="comp-timeline-total">
             <TimelineTotal map={map} filters={filters} />

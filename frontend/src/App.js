@@ -94,7 +94,7 @@ const Navbar = (props) => {
   /* Only shows other paths when a search has been initiated */
   return (
     /*Al-Taimee - show hamburger menu when clicked*/
-    <div className={`navigation ${showMenu ? "show-menu" : ""}`}>
+    <div className={`navigation ${showMenu ? "show-menu" : ""} ${location.pathname === "/" ? "transparent" : ""}`}>
       <div className="menu-icon" onClick={toggleMenu}>
         &#9776; 
       </div>
@@ -216,20 +216,6 @@ const App = (props) => {
     }
 });
 
-      
-
-      
-
-
-  /*function scrollBtnUp() {
-    return {
-      <div className="scollUp">
-        <a href="#" class="scroll-btn">
-          <i class="fas fa-arrow-up"></i>
-        </a>
-      </div>
-    };
-  }*/
   
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */

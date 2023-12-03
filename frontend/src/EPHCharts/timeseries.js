@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import "./timeseries.css";
 
-const TimeSeries = ({ data, units }) => {
+const TimeSeries = ({ data, size, units }) => {
     const chartContainer = useRef(null);        //get size of container
-    const [size, setSize] = useState({ width: 0, height: 0 });
+    const [sizeDynamic, setSize] = useState({ width: 0, height: 0 });
 
+    /* Amrita - Customize to matching TRI timelines */
+class CustomLine extends Line {
+  static defaultProps = {
+    ...Line.defaultProps,
+    type: "monotone",
+    strokeWidth: 3,
+    dot: false,
+    activeDot: { r: 8 },
+  };
+}
+    
     useEffect(() => {
         const updateDimensions = () => {
           if (chartContainer.current) {
             const containerWidth = chartContainer.current.clientWidth;
             const containerHeight = chartContainer.current.clientHeight;
             const padding = 20;
-            const calculatedWidth = containerWidth - padding;
+            const calculatedWidth = containerWidth - 200;
             const calculatedHeight = containerHeight - padding;
     
             // set size dynamically
@@ -34,7 +45,8 @@ const TimeSeries = ({ data, units }) => {
 
     return (
     <div ref={chartContainer} className='time-series-container'>
-      <LineChart width={size.width} height={size.height} data={data}>
+       
+      <LineChart width={sizeDynamic.width} height={sizeDynamic.height} data={data}>
         <CartesianGrid />
         <XAxis dataKey="year" />
         <YAxis>
@@ -46,13 +58,17 @@ const TimeSeries = ({ data, units }) => {
             margin={200}/>
         </YAxis>
         <Tooltip />
-        <Line name="Concentration" type="monotone" dataKey="dataValue" stroke="purple" />
+        <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
       </LineChart>
     </div>
     );
   }
   
   TimeSeries.propTypes = {
+    size: PropTypes.shape({                   
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+      }).isRequired,
     units: PropTypes.string.isRequired,         //y axis units of measure selected on eph page
   };
 
