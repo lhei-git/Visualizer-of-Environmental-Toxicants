@@ -33,12 +33,14 @@ const EPHMap = (props) => {
 
       function generateColor(value, minValue, maxValue) {
         const percentage = (value - minValue) / (maxValue - minValue);
-        const hue = 200; // Blue hue
-        const saturation = 80; 
-        const lightness = 30 + 20 * percentage; // Vary lightness from 30% to 80%
+        const hue = 200; // Blue hue (you can change this)
+        const saturation = 80; // Fixed saturation
+        const lightness = 100 - (100 * percentage); // Vary lightness from 100% to 30% (inverted)
       
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
       }
+      
+      
       
       
       
@@ -72,7 +74,7 @@ function Legend({ data }) {
   const minValue = Math.min(...data.map((d) => d.dataValue));
   const maxValue = Math.max(...data.map((d) => d.dataValue));
 
-  const numIntervals = 5;
+  const numIntervals = 4;
   const intervalSize = (maxValue - minValue) / numIntervals;
 
   const legendItems = Array.from({ length: numIntervals }, (_, index) => {
@@ -90,9 +92,8 @@ function Legend({ data }) {
 
   // Extract legend colors and reverse the array
   const legendColors = legendItems.map(item => item.legendColor);
-  legendColors.reverse();
 
-  const reversedLegendItems = legendItems.map(({ index, startInterval, endInterval }, i) => (
+  const LegendItems = legendItems.map(({ index, startInterval, endInterval }, i) => (
     <div key={index} className="legend-item">
       <div className="legend-color" style={{ backgroundColor: legendColors[i] }}></div>
       <span>
@@ -105,7 +106,7 @@ function Legend({ data }) {
 
   return (
     <div className="legend-container">
-      {reversedLegendItems}
+      {LegendItems}
     </div>
   );
 }
