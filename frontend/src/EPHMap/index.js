@@ -32,15 +32,21 @@ const EPHMap = (props) => {
         
       }, [props.data]);
 
-      //Genderate colors for the legend and map for county maps
-      function generateColor(value, minValue, maxValue) {
-        const percentage = (value - minValue) / (maxValue - minValue);
-        const hue = 200; // Blue hue 
-        const saturation = 80; // Fixed saturation
-        const lightness = 100 - (100 * percentage); 
-      
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-      }
+//Genderate colors for the legend and map for county maps
+
+function generateColor(value, minValue, maxValue) {
+  const percentage = (value - minValue) / (maxValue - minValue);
+  const numColors = 4; // Number of distinct colors
+  const colorScale = [
+    '#B6D0E2', '#89CFF0', '#6495ED', '#3F00FF', '#0047AB', 
+  ];
+
+  // Calculate index based on the percentage
+  const colorIndex = Math.floor(percentage * numColors);
+
+  return colorScale[colorIndex];
+}
+
       
       
       
@@ -75,7 +81,7 @@ function Legend({ data }) {
   const maxValue = Math.max(...data.map((d) => d.dataValue));
 
   //Number of colors to show up in legend
-  const numIntervals = 5;
+  const numIntervals = 4;
   const intervalSize = (maxValue - minValue) / numIntervals;
 
   const legendComponents = Array.from({ length: numIntervals }, (_, index) => {
