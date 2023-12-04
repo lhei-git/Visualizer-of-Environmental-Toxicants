@@ -145,6 +145,25 @@ class CustomTooltip extends Tooltip {
   };
 }
 
+/* Amrita - Smaller version of CustomTooltip for small timelines so they don't block timeline */
+class SmallCustomTooltip extends Tooltip {
+  static defaultProps = {
+    ...Tooltip.defaultProps,
+    contentStyle: {
+      color: "#FFF",
+      background: "rgba(0,0,0,0.8)",
+      border: "none",
+      position: "relative",
+      top: "-285px",
+    },
+    itemStyle: { color: "#FFF", fontSize: "14px"},
+    labelStyle: { fontSize: "20px", fontWeight: "bold" },
+    isAnimationActive: false,
+    formatter: (value) => formatAmount(value),
+    itemSorter: (a) => -a.value,
+  };
+}
+
 /* custom line */
 class CustomLine extends Line {
   static defaultProps = {
@@ -686,7 +705,7 @@ async function TimelineTopFacilities({ map, filters }) {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
             {lines}
           </LineChart>
@@ -718,7 +737,7 @@ async function TimelineTopParents({ map, filters }) {
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
 
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
 
             {lines}
@@ -750,7 +769,7 @@ async function TimelineTopChemicals({ map, filters }) {
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
 
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
 
             {lines}
@@ -780,7 +799,7 @@ async function TimelineTopPBTs({ map, filters }) {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
             {lines}
           </LineChart>

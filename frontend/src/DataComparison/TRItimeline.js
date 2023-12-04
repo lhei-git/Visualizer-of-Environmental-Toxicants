@@ -25,61 +25,15 @@ const {
     Line,
     ResponsiveContainer,
   } = require("recharts");
-  
-  /* A bunch of random colors I found on some color generator */
-  const timelineColors = [
-    "#a6cee3",
-    "#1f78b4",
-    "#b2df8a",
-    "#33a02c",
-    "#fb9a99",
-    "#e31a1c",
-    "#fdbf6f",
-    "#ff7f00",
-    "#cab2d6",
-    "#6a3d9a",
-  ];
-  
-  // Cut off labels and add parentheses
-  const maxLabelLength = 20;
+
   
   // Amrita - Added from App.js file
-  /* handler for updating state */
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "setMap":
-        /* Store latest searched location in session */
-        sessionStorage.setItem("map", JSON.stringify(action.payload));
-        return {
-          ...state,
-          map: action.payload,
-        };
-      case "setFilters":
-        const newFilters = Object.assign({}, action.payload);
-        return { ...state, filters: newFilters };
-  
-      case "setErrorMessage":
-        return { ...state, errorMessage: action.payload };
-      default:
-        throw new Error();
-    }
-  };
-  
-  /* individual state setters */
-  const setMap = (payload) => ({ type: "setMap", payload });
-  const setFilters = (payload) => ({ type: "setFilters", payload });
-  const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
-  
-  
+
   function handleError(err) {
     console.error(err);
     console.log("Error with loading content. Please try again later") // Amrita - Adding error message
   }
   
-  /* compare function used for sorting timeline graphs */
-  const compare = (a, b) => {
-    return a.year - b.year;
-  };
   
   /* convert properties of graph to query params for the VET api */
   const createParams = ({ map, filters }, customParams) => {
@@ -127,53 +81,6 @@ const {
     };
   }
   
-  /* Add css styling to base X-Axis React Component */
-  const CustomXAxisTick = (props) => {
-    const { x, y, payload } = props;
-    let { value } = payload;
-    if (value.length > maxLabelLength + 5) {
-      value = value.slice(0, maxLabelLength + 5) + "...";
-    }
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text fontSize="12" transform="rotate(-35)" x={0} y={0} dx={-10}>
-          <tspan textAnchor="end" x="0" dy="0">
-            {value}
-          </tspan>
-        </text>
-      </g>
-    );
-  };
-  
-  /* Add css styling to base Y-Axis React Component */
-  const CustomYAxisTick = (props) => {
-    const { x, y, payload } = props;
-    let { value } = payload;
-    if (value.length > maxLabelLength) {
-      value = value.slice(0, maxLabelLength) + "...";
-    }
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text fontSize="12" x={0} y={0} dx={10}>
-          <tspan textAnchor="start" x="0" dy="0">
-            {value}
-          </tspan>
-        </text>
-      </g>
-    );
-  };
-  
-  /* Custom X axis for top ten graphs */
-  class CustomXAxis extends XAxis {
-    static defaultProps = {
-      ...XAxis.defaultProps,
-      dataKey: "name",
-      type: "category",
-      interval: 0,
-      tick: CustomXAxisTick,
-    };
-  }
-  
   /* Custom X axis */
   class CustomYAxis extends YAxis {
     static defaultProps = {
@@ -184,28 +91,6 @@ const {
       tickFormatter: customYAxisTickFormatter,
     };
   }
-  
-  /* take parsed timeline data and create a list of Recharts components */
-  const generateLines = (data) => {
-    const timelineKeys = (data) => {
-      const correctIndex = [...data].sort(
-        (a, b) => Object.keys(b).length - Object.keys(a).length
-      )[0];
-      return Object.keys(correctIndex);
-    };
-  
-    if (data.length === 0) {
-      return <></>;
-    }
-  
-    const keys = timelineKeys(data);
-    const lines = keys
-      .filter((k) => k !== "year")
-      .map((k, i) => (
-        <CustomLine key={k} dataKey={k} stroke={timelineColors[i]}></CustomLine>
-      ));
-    return lines;
-  };
   
 
 
@@ -279,15 +164,6 @@ TimelineTotal.propTypes = {
 };
 
 function TRITimeline({ map, filters, onFilterChange }) {
-    const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [currentTab, setCurrentTab] = React.useState(
-  );
-
-  /* Setter for current tab */
-  function chooseTab(i) {
-    sessionStorage.setItem("currentTab", i);
-    setCurrentTab(i);
-  }
 
   return (
     <div className="comp-graph-container">

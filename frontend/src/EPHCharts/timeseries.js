@@ -7,7 +7,8 @@ const TimeSeries = ({ data, size, units }) => {
     const chartContainer = useRef(null);        //get size of container
     const [sizeDynamic, setSize] = useState({ width: 0, height: 0 });
 
-    /* Amrita - Customize to matching TRI timelines */
+    
+/* Amrita - Customize Line and Tooltip to matching TRI timelines */
 class CustomLine extends Line {
   static defaultProps = {
     ...Line.defaultProps,
@@ -15,6 +16,20 @@ class CustomLine extends Line {
     strokeWidth: 3,
     dot: false,
     activeDot: { r: 8 },
+  };
+}
+
+class CustomTooltip extends Tooltip {
+  static defaultProps = {
+    ...Tooltip.defaultProps,
+    contentStyle: {
+      color: "#FFF",
+      background: "rgba(0,0,0,0.8)",
+      border: "none",
+    },
+    itemStyle: { color: "#FFF" },
+    labelStyle: { fontSize: "24px", fontWeight: "bold" },
+    isAnimationActive: false,
   };
 }
     
@@ -47,7 +62,7 @@ class CustomLine extends Line {
     <div ref={chartContainer} className='time-series-container'>
        
       <LineChart width={sizeDynamic.width} height={sizeDynamic.height} data={data}>
-        <CartesianGrid />
+      <CartesianGrid vertical={false} />
         <XAxis dataKey="year" />
         <YAxis>
           <Label 
@@ -57,8 +72,8 @@ class CustomLine extends Line {
             value={units}
             margin={200}/>
         </YAxis>
-        <Tooltip />
-        <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
+        <CustomTooltip></CustomTooltip>
+        <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9c27b0" />
       </LineChart>
     </div>
     );

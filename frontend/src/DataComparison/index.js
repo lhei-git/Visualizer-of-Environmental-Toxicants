@@ -1,21 +1,13 @@
 import "./index.css";
-import EPHChart from "../EPHCharts";
 import NationalEPHCompare from "./nationalEPHCompare.js";
 import React, { useState, useReducer } from 'react';
 import StateEPHCompare from "./stateEPHCompare.js"
 import CountyEPHCompare from "./countyEPHCompare";
 import TRITimeline from "./TRItimeline";
-import Title from "../Title";
-import GraphContainer from "../GraphView/index.js";
 import history from "../history";
-import EPHThematicStateMap from "../EPHThematicStateMap";
-import PropTypes from "prop-types";
-import Filters from "../Filters/index.js";
-const geocoder = require("../api/geocoder");
 const vetapi = require("../api/vetapi");
 
 
-const { formatChemical, getLocationString } = require("../helpers");
 const {getLocationParents, getYearString} = require("../helpers");
 
 const { years } = require("../contants");
@@ -23,13 +15,10 @@ const { amountAsLabel, formatAmount } = require("../helpers");
 //created by Katherine O'Donnell
 
 const {
-  BarChart,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
-  Bar,
   LineChart,
   Line,
   ResponsiveContainer,
@@ -42,25 +31,8 @@ const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
 const timelineAspectRatio = 17 / 9;
-const maxLabelLength = 20;
 const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
 
-const CustomXAxisTick = (props) => {
-  const { x, y, payload } = props;
-  let { value } = payload;
-  if (value.length > maxLabelLength + 5) {
-    value = value.slice(0, maxLabelLength + 5) + "...";
-  }
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text fontSize="12" transform="rotate(-35)" x={0} y={0} dx={-10}>
-        <tspan textAnchor="end" x="0" dy="0">
-          {value}
-        </tspan>
-      </text>
-    </g>
-  );
-};
 
 class CustomTooltip extends Tooltip {
   static defaultProps = {
@@ -97,19 +69,6 @@ class CustomYAxis extends YAxis {
     tickFormatter: customYAxisTickFormatter,
   };
 }
-
-class CustomXAxis extends XAxis {
-  static defaultProps = {
-    ...XAxis.defaultProps,
-    dataKey: "name",
-    type: "category",
-    interval: 0,
-    tick: CustomXAxisTick,
-  };
-}
-
-
-
 
 /* convert properties of graph to query params for the VET api */
 const createParams = ({ map, filters }, customParams) => {
@@ -385,7 +344,7 @@ if (!state.map.state) {
             {currentMeasure === "Arsenic in Water" && (<CountyEPHCompare measure={"Arsenic in Water"} measureID={769} units={"Annual Mean Concentration of Arsenic (µg/L)"} />)}
               {currentMeasure === "Asthma in Adults" && (<CountyEPHCompare measure={"Asthma Among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
               {currentMeasure === "Asthma Hospitalizations" && (<CountyEPHCompare measure={"Asthma Hospitalizations"} measureID={103} units={"Counts of Asthma Hospitalization"} />)}
-            {currentMeasure === "DEPH in Water" && (<CountyEPHCompare measure={"DEPH in Water"} measureID={1120} units={"Annual Mean Concentration of DEHP (µg/L)"} />)}
+            {currentMeasure === "DEPH in Water" && (<CountyEPHCompare measure={"DEPH in Water"} measureID={""} units={"Annual Mean Concentration of DEHP (µg/L)"} />)}
               {currentMeasure === "Fertility Rate" && (<CountyEPHCompare measure={"Fertility Rate"} measureID={45} units={"Total Fertility Rate per 1000 women"} />)}
               {currentMeasure === "Heart Attack" && (<CountyEPHCompare measure={"Heart Attack"} measureID={553} units={"Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population"} />)}
               {currentMeasure === "Infant Mortality" && (<CountyEPHCompare measure={"Infant Mortality"} measureID={279} units={"Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period"} />)}
