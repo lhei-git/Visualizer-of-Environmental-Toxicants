@@ -130,6 +130,10 @@ const CountyData = ({measure, measureID, units}) => {
             measureID: 45,
             sections: [
             {
+                title: 'What does this data mean?',
+                content: 'The Total Fertility Rate (TFR) estimates the number of births that a hypothetical group of 1,000 women would have over their lifetimes, based on age-specific birth rates in a given year.',
+            },
+            {
                 title: 'Where did we get this data?',
                 content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },

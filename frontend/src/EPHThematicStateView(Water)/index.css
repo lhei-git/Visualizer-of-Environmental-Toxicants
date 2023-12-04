@@ -1,10 +1,8 @@
-
-
 .centered-dropdown {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 100px;
+    gap: 20px;
   }
 
 .thematic-view-container .eph-flex-item h1 {
@@ -18,4 +16,9 @@
 .thematic-view-container .eph-flex-item h3 {
     text-align: center;
     color: grey;
+}
+
+.thematic-view-container{
+    align-items: center;
+    padding-left: 150px;
 }
