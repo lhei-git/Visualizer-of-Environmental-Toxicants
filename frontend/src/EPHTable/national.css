@@ -4,7 +4,7 @@
   border-collapse: collapse;
   width: 80%; /* Amrita - Making table smaller */
   border: 1px solid #dcdcdc;
-
+  margin: 0 auto;
 }
 
 .eph-table th,
