@@ -170,9 +170,7 @@ class EPHThematicWaterStateMap extends Component {
         });
   
         this.setState({ countyData: averagedData });
-
-        console.log("map average data " + averagedData)
-        
+                
       } else {
         console.error("Unexpected error. Status code:", response.status);
       }

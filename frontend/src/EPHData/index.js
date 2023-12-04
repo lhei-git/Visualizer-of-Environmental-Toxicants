@@ -194,32 +194,30 @@ if (!state.map.state) {
         {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
         {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
         
-        {/* county measures - change to call <CountyData> */}
-    
-
-        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"units"} />)}
+        {/* county measures  */}
+        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"Annual Mean Concentration of Arsenic (µg/L)"} />)}
         {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
-        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"units"} />)}
-        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"units"} />)}
-        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"units"} />)}
-        {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"units"} map={map} />)}
-        {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"units"} map={map} />)}
-        {currentTab === "11" && (<CountyData measure={"PCE in Community Water"} measureID={807} units={"units"} map={map} />)}
-        {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"units"} map={map} />)}        
-        {currentTab === "16" && (<CountyData measure={"Prematurity"} measureID={30} units={"units"} />)}
-
-        {currentTab === "17" && (<CountyData measure={"Radium in Community Water"} measureID={817} units={"units"} />)}
-        {currentTab === "18" && (<CountyData measure={"TCE in Community Water"} measureID={812} units={"units"} />)}
-        {currentTab === "19" && (<CountyData measure={"Uranium in Community Water"} measureID={822} units={"units"} />)}
-        {currentTab === "20" && (<CountyData measure={"Hospitalizations from Asthma"} measureID={99} units={"units"} />)}
-        {currentTab === "21" && (<CountyData measure={"DEPH in Community Water"} measureID={802} units={"units"} />)}
+        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"Crude Prevalence of Cancer among Adults >= 18 Years of Age"} />)}
+        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"Total Fertility Rate per 1000 women"} />)}
+        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population"} />)}
+        {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period"} />)}
+        {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"Percent of Low Birthweight (<2500g) Live Singleton Births"}  />)}
+        {currentTab === "11" && (<CountyData measure={"PCE in Community Water"} measureID={807} units={"Annual Mean Concentration of PCE (µg/L)"} />)}
+        {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"CWS with Detections of PFAS Chemicals (PFOS, PFOA, PFNA, PFBS, PFHxS, PFHpA)"} />)}    
+        {/*PREMATURITY COULD BE WRONG */}    
+        {currentTab === "16" && (<CountyData measure={"Prematurity"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
+        {currentTab === "17" && (<CountyData measure={"Radium in Community Water"} measureID={817} units={"Annual Mean Concentration of Radium (pCi/L)"} />)}
+        {currentTab === "18" && (<CountyData measure={"TCE in Community Water"} measureID={812} units={"Annual Mean Concentration of TCE (µg/L)"} />)}
+        {currentTab === "19" && (<CountyData measure={"Uranium in Community Water"} measureID={822} units={"Annual Mean Concentration of Uranium (µg/L)"} />)}
+        {currentTab === "20" && (<CountyData measure={"Hospitalizations from Asthma"} measureID={99} units={"Counts of Asthma Hospitalization"} />)}
+        {currentTab === "21" && (<CountyData measure={"DEPH in Community Water"} measureID={802} units={"Annual Mean Concentration of DEHP (µg/L)"} />)}
 
 
         {/* state measures */}
 
         {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"Percent of Children with Asthma"} />)} 
-        {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"units"} />)} 
-        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"units"} />)}         
+        {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"Age-adjusted Incidence Rate of Brain and Other Nervous System Cancer per 100,000 Population"} />)} 
+        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"Annual Number of Leukemia among Children <20 Years of Age"} />)}         
 
       </div>
      
