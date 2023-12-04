@@ -66,7 +66,7 @@ const StateData = ({ measure, measureID, units }) => {
       sections: [
         {
           title: 'Where did we get this data?',
-          content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children.',
+          content: 'https://ephtracking.cdc.gov/DataExplorer/  Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children.',
         },
         {
           title: 'Where did CDC get this data?',
@@ -79,7 +79,7 @@ const StateData = ({ measure, measureID, units }) => {
       sections: [
         {
           title: 'Where did we get this data?',
-          content: "Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence.",
+          content: "https://ephtracking.cdc.gov/DataExplorer/   Citation: Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence.",
         },
         {
           title: "Where did CDC get this data?",
@@ -92,7 +92,7 @@ const StateData = ({ measure, measureID, units }) => {
       sections: [
         {
           title: "Where did we get this data from?",
-          content: "Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence. ",
+          content: "https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention, National Program of Cancer Registries and National Cancer Institute, Surveillance Epidemiology and End Results Program. Childhood Cancer Incidence. ",
         },
         {
           title: "Where did the CDC get this data from?",

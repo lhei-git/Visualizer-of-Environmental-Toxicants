@@ -5,15 +5,13 @@
 
 
 //Creating maps for each state for county-level that are drinking water measures
-import ReactTooltip from "react-tooltip";
-import SimpleMap from "../EPHMapView";
+
 import LoadingSpinner from "../LoadingSpinner";
-import vetapi from "../api/vetapi";
 import data from "../data/stateLocationData.json";
-import Title from "../Title/index.js";
 import axios from "axios";
 import EPHMap from "../EPHMap/index";
 import "./index.css";
+import FadeInSection from "../FadeInSection";
 const React = require("react");
 const Component = React.Component;
 
@@ -275,10 +273,14 @@ class EPHThematicWaterStateMap extends Component {
     return (
       <div className="thematic-view-container">
         <div className="eph-flex-item">
-          
+        <FadeInSection>
+        <FadeInSection>
           <h1>{this.props.measure} in {this.props.stateLongName}</h1>
           <h3>{this.getSubtitle()}</h3>
+          </FadeInSection>
+          
           <div className="centered-dropdown">
+          <FadeInSection>
           <div className="centered-year">
             {/* Year dropdown */}
             <label>Select a Year of Interest:  </label>
@@ -299,7 +301,7 @@ class EPHThematicWaterStateMap extends Component {
             {/* MCL dropdown */}
           {["Arsenic in Community Water", "DEPH in Community Water", "PCE in Community Water", "Radium in Community Water", "TCE in Community Water", "Uranium in Community Water"].includes(this.props.measure) && (
             <div className="centered-level">
-              <label>Select an MCL Level: </label>
+              <label>Select a MCL: </label>
               <select
                 value={this.state.level}
                 onChange={this.handleLevelChange}
@@ -331,8 +333,10 @@ class EPHThematicWaterStateMap extends Component {
             </select>
           </div>
         )}
+        </FadeInSection>
         </div>
           
+        <FadeInSection>
        {/* If data loads, create county-level state map. If not, load spinner */}
 
           {this.state.countyData ? (
@@ -351,7 +355,8 @@ class EPHThematicWaterStateMap extends Component {
             <LoadSpinner />
           )
           }
-          
+          </FadeInSection>
+          </FadeInSection>
         </div>
       </div>
     );

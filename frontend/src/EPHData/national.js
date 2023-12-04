@@ -7,6 +7,8 @@ import NationalTimeSeries from "../EPHCharts/national";
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import NationalTable from "../EPHTable/national";
+import FadeInSection from "../FadeInSection";
+import Accordion from "../Accordion/Accordion";
 const React = require("react");
 
 
@@ -36,11 +38,100 @@ const NationalData = ({measure, units, measureID}) => {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
+    const accordionMeasure = [
+        {
+          measureID: 858,
+          sections: [
+            {
+              title: 'Where did we get this data?',
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: 'Where did CDC get this data?',
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 856,
+          sections: [
+            {
+              title: 'Where did we get this data?',
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did CDC get this data?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 863,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 859,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 826,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 861,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+      ];
+    
+      const currentAccordionMeasure = accordionMeasure.find(
+        section => section.measureID === measureID
+      );
+
     //.jsx layout
     return(
         <div className="national-container">
+            <FadeInSection>
+            <FadeInSection>
             <h1>{measure +" (national data)"}</h1>
+            </FadeInSection>
             <div className="filter-container">
+                <FadeInSection>
                 <div className="percentile-filter">
                     <p>Select a percentile estimate:</p>
                     <select value={selectedPercentile} onChange={(e) => chooseFilters(parseInt(e.target.value), selectedDemographic)}>
@@ -49,6 +140,8 @@ const NationalData = ({measure, units, measureID}) => {
                         <option value={2}>95th percentile</option>
                     </select>
                 </div>
+                </FadeInSection>
+                <FadeInSection>
                 <div className="demographic-filter">
                     <p>Select a demographic group:</p>
                     <select value={selectedDemographic} onChange={(e) => chooseFilters(selectedPercentile, parseInt(e.target.value))}>
@@ -67,32 +160,38 @@ const NationalData = ({measure, units, measureID}) => {
                         <option value={15}>Non-Hispanic Whites</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
                     </select>
                 </div>
+                </FadeInSection>
             </div>
             {/*code below changes data representation based on filter changes*/}
-            <div className = "time-series">
-            {selectedPercentile === 1 && (
-                <NationalTimeSeries
-                size ={{width:800, height:400 }}
-                measure={measure}
-                units={units}
-                percentile={1}
-                demographic={selectedDemographic} />
-                
-            )}
-            {selectedPercentile === 2 && (
-                <NationalTimeSeries
-                size ={{width:800, height:400 }}
-                measure={measure}
-                units={units}
-                percentile={2}
-                demographic={selectedDemographic}
-                />
-            )}
             
+            
+            <div className="time-series">
+                <FadeInSection>
+                    {selectedPercentile === 1 && (
+                    <NationalTimeSeries
+                        size={{ width: 800, height: 400 }}
+                        measure={measure}
+                        units={units}
+                        percentile={1}
+                        demographic={selectedDemographic}
+                    />
+                    )}
+                </FadeInSection>
+
+                <FadeInSection>
+                    {selectedPercentile === 2 && (
+                    <NationalTimeSeries
+                        size={{ width: 800, height: 400 }}
+                        measure={measure}
+                        units={units}
+                        percentile={2}
+                        demographic={selectedDemographic}
+                    />
+                    )}
+                </FadeInSection>
             </div>
-            <div className = "desc-container">
-                <p>The data above is obtained from the CDC Environmental Public Health Tracking</p>
-            </div>
+            
+            
 
             {/*
              <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
@@ -125,13 +224,22 @@ const NationalData = ({measure, units, measureID}) => {
 
             
              */}
+             
             <div className="eph-table-container">
+            <FadeInSection>
                 <h2>Table for {measure}</h2>
                 <NationalTable measure={measure} />
+            </FadeInSection>
             </div>
-            <p className="citation">Data obtained from https://ephtracking.cdc.gov/DataExplorer on {formattedDate}.</p>
+            {currentAccordionMeasure &&
+          currentAccordionMeasure.sections.map(section => (
+            <FadeInSection key={section.title}>
+              <Accordion title={section.title} content={section.content} />
+            </FadeInSection>
+          ))}
 
-
+            
+            </FadeInSection>
         </div>
     );
 }
