@@ -4,11 +4,8 @@
 
 import "./index.css";
 import CountyTimeSeries from "../EPHCharts/county";
-import CountyTable from "../EPHTable/county";
 import {useEffect, useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
-import SimpleMap from "../EPHMapView";
-import EPHThematicStateMap from "../EPHThematicStateMap";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
 
@@ -69,11 +66,8 @@ const CountyEPHCompare = ({measure, measureID, units}) => {
     //get name of searched state from session storage
     const stateAbbr = getLocationParents(state.map, "state");
     const countyName = getLocationParents(state.map, "county") + " County";
-    const stateLong = getLocationParents(state.map, "stateLong");
 
-    //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
 
     //.jsx layout
     return(
@@ -83,7 +77,6 @@ const CountyEPHCompare = ({measure, measureID, units}) => {
             <h2> Showing Data Based on 50th Percentile </h2>
             {/*change time series info based on filter changes*/}
             <div className = "time-series">
-                {selectedPercentile === 1 && (
                     <CountyTimeSeries
                     size={{ width: 800, height: 400 }}
                     measureID={measureID}
@@ -91,16 +84,6 @@ const CountyEPHCompare = ({measure, measureID, units}) => {
                     percentile={1}
                     demographic={selectedDemographic}
                     />
-                )}
-                {selectedPercentile === 2 && (
-                    <CountyTimeSeries
-                    size={{ width: 800, height: 400 }}
-                    measureID={measureID}
-                    units={units}
-                    percentile={2}
-                    demographic={selectedDemographic}
-                    />
-                )}
             </div>
         </div>
     );

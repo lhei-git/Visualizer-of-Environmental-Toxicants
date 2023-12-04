@@ -81,7 +81,7 @@ const {
     };
   }
   
-  /* Custom X axis */
+  /* Custom Y axis */
   class CustomYAxis extends YAxis {
     static defaultProps = {
       ...YAxis.defaultProps,

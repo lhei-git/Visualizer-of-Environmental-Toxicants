@@ -5,6 +5,7 @@
     margin-bottom: 10px;
     overflow: hidden;
     margin-top: 20px;
+    max-width: 90%; /* Amrita - Adding max-width so the info box doesn't stretch farther than screen */
   }
   
   .accordion-header {
