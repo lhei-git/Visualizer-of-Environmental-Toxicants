@@ -28,4 +28,14 @@ https://docs.docker.com/compose/
 
 The [docker-compose.yml](docker-compose.yml) file includes services for the React.js frontend development server, the Django backend development server, a Postgres database, and an Nginx server hosting the static files created by a production build of the frontend (for presentations). 
 
-After installation of Docker and Docker-compose, the application can be run by calling `docker-compose up` at the root of the directory. 
+After installation of Docker and Docker-compose, the application can be run by calling `docker-compose up` at the root of the directory.
+
+### EPH API
+
+Beginning with the Fall 2023 Capstone group, this project obtains data from the CDC's Environmental Public Health Tracking API. If any more endpoints are added to they code, they should include our teams unique API token at the end of the endpoint as follows:
+
+[API endpoint]?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
+
+The user guide and more information on the API can be found at the link below:
+
+https://ephtracking.cdc.gov/apihelp

@@ -39,7 +39,7 @@ const NationalData = ({measure, units, measureID}) => {
     //.jsx layout
     return(
         <div className="national-container">
-            <h1>{measure +" (national data)"}</h1>
+            <h1>{measure +" (National Data)"}</h1>
             <div className="filter-container">
                 <div className="percentile-filter">
                     <p>Select a percentile estimate:</p>

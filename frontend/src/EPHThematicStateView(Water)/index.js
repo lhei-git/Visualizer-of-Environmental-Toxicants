@@ -274,7 +274,7 @@ class EPHThematicWaterStateMap extends Component {
     const yearOptions = this.props.yearRange;
 
     return (
-      <div className="thematic-view-container">
+      <div className="eph-thematic-view-container">
         <div className="eph-flex-item">
           
           <h1>{this.props.measure} in {this.props.stateLongName}</h1>

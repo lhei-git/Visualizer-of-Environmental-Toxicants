@@ -49,7 +49,7 @@ class CountyTimeSeriesWater extends Component {
 
       //construct API endpoint for selected measure in the county searched      
       const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
-      
+      console.log("api url: ", apiURL);
         const apiResponse = await axios.get(apiURL);
         console.log('API RESPONSE: ', apiResponse);
         if (apiResponse.status === 200) {
