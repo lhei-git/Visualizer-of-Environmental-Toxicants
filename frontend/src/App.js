@@ -30,7 +30,6 @@ import EPHData from "./EPHData/index";
 import React, { useImperativeHandle, useReducer, useState, useEffect } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
-import SimpleMap from "./EPHMapView/index";
 import EPHHome from "./EPHData/index";
 
 

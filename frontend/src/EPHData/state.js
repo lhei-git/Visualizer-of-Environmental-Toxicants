@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import StateTimeSeries from '../EPHCharts/state';
 import StateTable from '../EPHTable/state';
-import StateMap from '../EPHMapView/statemap';
+import StateMap from '../EPHMapView';
 import Accordion from '../Accordion/Accordion';
 import FadeInSection from '../FadeInSection';
 import { getLocationParents } from '../helpers';
