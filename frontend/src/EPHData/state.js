@@ -136,7 +136,7 @@ const StateData = ({ measure, measureID, units }) => {
 
         <FadeInSection>
           <div className={'eph-table-container'}>
-            <StateTable measureID={measureID} />
+            <StateTable measureID={measureID} units={units} />
           </div>
         </FadeInSection>
 

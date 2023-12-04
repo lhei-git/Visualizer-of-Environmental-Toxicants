@@ -50,7 +50,13 @@ class StateTable extends Component {
       this.setState({ data: APIdata });
     } catch (error) {
       console.error('Error fetching data:', error);
-      this.setState({ errorMessage: 'Error retrieving data from EPH API' });
+      var newErrorMessage = "Error retrieving data from EPH API";
+      //add a different error message if there is no county data
+      if (error == 'Error: Error fetching county ID'){
+        console.log("setting new error message!");
+        newErrorMessage = "No data available for selected health issue in " + getLocationParents(this.state.map, 'county') + " County";
+      }
+      this.setState({ errorMessage: newErrorMessage });
     }
   }
 
@@ -62,8 +68,8 @@ class StateTable extends Component {
         <thead>
           <tr>
             <th className="sticky-header">Year</th>
-            <th className="sticky-header">Concentration</th>
-            <th className="sticky-header">Sample Size</th>
+            <th className="sticky-header">{this.props.units}</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -71,7 +77,7 @@ class StateTable extends Component {
             <tr key={index}>
               <td>{item.year}</td>
               <td>{item.dataValue}</td>
-              <td>{item.sampleSize}</td>
+            
             </tr>
           ))}
           {errorMessage && (

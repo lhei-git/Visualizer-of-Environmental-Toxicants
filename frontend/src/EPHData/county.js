@@ -466,7 +466,7 @@ const CountyData = ({measure, measureID, units}) => {
             </FadeInSection>
             <FadeInSection>
             <div className="eph-table-container">
-                <CountyTable measureID={measureID} />
+                <CountyTable measureID={measureID} units={units} />
             </div>
             </FadeInSection>
             {currentAccordionMeasure &&
