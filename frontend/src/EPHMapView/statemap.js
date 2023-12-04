@@ -1,16 +1,20 @@
 //==========================================
 // Author: Farzana Israt
 //==========================================
+//Some of this code mimics the previous team's code in ThematicMapView
 
+//Creating national map for state-level data
 import React, { Component } from 'react';
 import axios from 'axios';
 import EPHMap from '../EPHMap/index';
 import LoadingSpinner from '../LoadingSpinner';
-import ReactTooltip from 'react-tooltip';
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import "./statemap.css";
+
+//geoUrl for creating the map of the whole United States
 const stateGeoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
+
+//Creating the class
 class StateMap extends Component {
   constructor(props) {
     super(props);
@@ -27,13 +31,14 @@ class StateMap extends Component {
   handleContentCountyState(content) {
     this.setState({ content: content });
   }
-
+  
+//When the component mounts, get the data from the EPH API
   componentDidMount() {
     this.getStateData();
   }
 
+
   componentDidUpdate(prevProps, prevState) {
-    console.log("GeoJSON Data on Mount:", this.props.data);
     if (prevProps.measure !== this.props.measure) {
         this.setState(
         {
@@ -45,12 +50,13 @@ class StateMap extends Component {
         )
     }
     
-    
-    
   }
 
+  //Get URL for each measure 
   getApiURL() {
+    //Filter by year
     const selectedYear = this.state.selectedYear;
+    //Filter by gender
     const selectedGender = this.state.gender;
 
     if (this.props.measure === "Asthma in Children") {
@@ -62,7 +68,7 @@ class StateMap extends Component {
     }
 }
 
-
+//Get the data from the API and store it in stateData
 async getStateData() {
     const apiUrl = this.getApiURL();
     try {
@@ -77,6 +83,7 @@ async getStateData() {
     }
   }
 
+  //Get units for each measure for the tooltip on the map
   getUnits(endUnits) {
     if (this.props.measure === "Asthma in Children") {
       return endUnits = "(Percent)"
@@ -89,6 +96,7 @@ async getStateData() {
     }
   }
 
+  //Get subtitle for each measure
   getSubtitle(subtitle) {
     if(this.props.measure === "Asthma in Children") {
       return subtitle = "Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma"
@@ -102,18 +110,21 @@ async getStateData() {
   }
   
 
+  //When gender input from user changes
   handleGenderChange = (event) => {
     this.setState({ gender: event.target.value }, () => {
       this.getStateData(); 
     });
   };
 
+  //When year input from user changes
   handleYearChange = (event) => {
     this.setState({ selectedYear: event.target.value }, () => {
       this.getStateData(); 
     });
   };
 
+  //Render the map
   render() {
     const selectedYear = this.state.selectedYear;
     const yearOptions = this.props.yearRange;
@@ -124,6 +135,7 @@ async getStateData() {
           <h1>{this.props.measure} in the U.S.</h1>
           <h3>{this.getSubtitle()}</h3>
         <div className='centered-dropdown'>
+          {/* Year dropdown */}
         <div className="dropdown-center-year">
           <label> Year: </label>
           <select
@@ -138,7 +150,9 @@ async getStateData() {
             ))}
           </select>
         </div>
-        
+
+
+        {/* Gender dropdown */}
           <div className="dropdown-center-gender">
             <label>Select a Gender: </label>
             <select
@@ -153,6 +167,7 @@ async getStateData() {
           </div>
           </div>
         
+        {/* If data loads, create the map. If not, loading symbol */}
         {this.state.stateData ? (
             
         <EPHMap

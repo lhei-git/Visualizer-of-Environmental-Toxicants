@@ -9,23 +9,6 @@ import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
 import PropTypes from "prop-types";
-import PFASWater from "../EPHMapView/pfas in water";
-import PCEWater from "../EPHMapView/pce in water";
-import DEPHWater from "../EPHMapView/deph in water";
-import RadiumWater from "../EPHMapView/radium in water";
-import TCEWater from "../EPHMapView/tce in water";
-import PrevalenceCancer from "../EPHMapView/prevalence of cancer";
-import AdultAsthma from "../EPHMapView/AdultAsthma";
-import UraniumWater from "../EPHMapView/uranium in water";
-import HospitalAsthma from "../EPHMapView/HospitalAsthma";
-import FertilityRate from "../EPHMapView/FertilityRate";
-import InfantMortality from "../EPHMapView/InfantMortality";
-import HeartAttack from "../EPHMapView/HeartAttack";
-import LowBirthweight from "../EPHMapView/LowBirthweight";
-import Prematurity from "../EPHMapView/Prematurity";
-import ArsenicWater from "../EPHMapView/ArsenicWater";
-import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
-import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
 import EPHTable from "../EPHTable";
 
 

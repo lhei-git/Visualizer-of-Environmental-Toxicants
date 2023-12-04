@@ -8,8 +8,6 @@ import StateTable from "../EPHTable/state";
 import {useEffect, useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
 import SimpleMap from "../EPHMapView";
-import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
-import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
 const React = require("react");
 const {getLocationParents, getYearString} = require("../helpers");
 
