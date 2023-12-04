@@ -17,7 +17,7 @@
     margin-bottom: 120px;
     font-size: 18px;
   }
-  .legend {
+  .mapView-individual .legend {
     position: absolute;
     left: 10px;
     right: 10px;
@@ -30,27 +30,27 @@
     border-radius: 5px;
   }
   
-  .legend h3 {
+  .mapView-individual .legend h3 {
     margin: 0;
     font-size: 16px;
     text-align: center;
   }
   
-  .legend-item {
+  .mapView-individual.legend-item {
     display: flex;
     align-items: center;
     margin: 5px 0;
   }
   
   
-  .legend-color {
+  .mapView-individual .legend-color {
     width: 20px;
     height: 20px;
     display: inline-block;
     margin-right: 10px;
   }
   
-  .legend-item span {
+  .mapView-individual .legend-item span {
     margin: 0;
   }
 
@@ -67,7 +67,7 @@
     right: 5px;
   }
 
-  .legend {
+  .mapView-individual .legend {
     font-size: 12px;
     
   }
@@ -83,15 +83,15 @@
     font-size: 14px;
   }
 
-  .legend h3 {
+  .mapView-individual .legend h3 {
     font-size: 12px;
   }
 
-  .legend-item {
+  .mapView-individual .legend-item {
     margin: 3px 0;
   }
 
-  .legend-color {
+  .mapView-individual .legend-color {
     width: 15px;
     height: 15px;
     margin-right: 8px;
