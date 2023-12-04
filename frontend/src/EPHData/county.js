@@ -3,12 +3,10 @@
 import "./index.css";
 import "./county.css";
 import CountyTimeSeries from "../EPHCharts/county";
+import CountyTimeSeriesWater from "../EPHCharts/countyWater";
 import CountyTable from "../EPHTable/county";
 import {useEffect, useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
-import SimpleMap from "../EPHMapView";
-import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
-import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import Accordion from "../Accordion/Accordion";
 import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
@@ -295,6 +293,24 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
         section => section.measureID === measureID
       );
 
+    //generate different county time series for water & non water measures  
+    //arsenic: 769 deph: 802 pce: 807 pfas:734 radium: 817 tce: 812 uranium: 822
+    const waterMeasureIDs = [769, 802, 807, 734, 817, 812, 822];
+    //adult asthma: 1120
+    const nonWaterMeasureIDs = [1120];
+
+    /*
+            {currentTab === "16" && (<CountyData measure={"Prematurity"} measureID={30} units={"units"} />)}
+        {currentTab === "20" && (<CountyData measure={"Hospitalizations from Asthma"} measureID={99} units={"units"} />)}
+
+        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"units"} />)}
+        
+        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"units"} />)}
+        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"units"} />)}
+        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"units"} />)}
+        {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"units"} map={map} />)}
+        {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"units"} map={map} />)}
+    */
     //.jsx layout
     return(
         <div className="county-container">
@@ -302,13 +318,24 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
             {/*change time series info based on filter changes*/}
           
             <div className = "time-series">
-                <CountyTimeSeries
-                size={{ width: 800, height: 400 }}
-                measureID={measureID}
-                units={units}
-                percentile={1} 
-                demographic={selectedDemographic}
-                />
+                {waterMeasureIDs.includes(measureID) && (
+                    <CountyTimeSeriesWater
+                    size={{ width: 800, height: 400 }}
+                    measureID={measureID}
+                    units={units}
+                    percentile={1} 
+                    demographic={selectedDemographic}
+                    />
+                )}
+                {nonWaterMeasureIDs.includes(measureID) && (
+                    <CountyTimeSeries
+                    size={{ width: 800, height: 400 }}
+                    measureID={measureID}
+                    units={units}
+                    percentile={1} 
+                    demographic={selectedDemographic}
+                    />
+                )}
             </div>
             
             <div className = "map-container">
