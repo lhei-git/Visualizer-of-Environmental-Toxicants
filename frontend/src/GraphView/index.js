@@ -89,7 +89,7 @@ const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
 function handleError(err) {
   console.error(err);
-  /* do something here */
+  console.log("Error with loading graph. Please try again later") // Amrita - Adding error message
 }
 
 /* compare function used for sorting timeline graphs */
@@ -145,6 +145,25 @@ class CustomTooltip extends Tooltip {
   };
 }
 
+/* Amrita - Smaller version of CustomTooltip for small timelines so they don't block timeline */
+class SmallCustomTooltip extends Tooltip {
+  static defaultProps = {
+    ...Tooltip.defaultProps,
+    contentStyle: {
+      color: "#FFF",
+      background: "rgba(0,0,0,0.8)",
+      border: "none",
+      position: "relative",
+      top: "-285px",
+    },
+    itemStyle: { color: "#FFF", fontSize: "14px"},
+    labelStyle: { fontSize: "20px", fontWeight: "bold" },
+    isAnimationActive: false,
+    formatter: (value) => formatAmount(value),
+    itemSorter: (a) => -a.value,
+  };
+}
+
 /* custom line */
 class CustomLine extends Line {
   static defaultProps = {
@@ -160,7 +179,8 @@ class CustomLine extends Line {
 class CustomTimelineLegend extends Legend {
   static defaultProps = {
     ...Legend.defaultProps,
-    width: 120,
+    // Amrita - Adjusted width, fontSize, and adding paddingLeft to better fit new layout
+    width: 80,
     height: 140,
     layout: "vertical",
     verticalAlign: "middle",
@@ -170,6 +190,8 @@ class CustomTimelineLegend extends Legend {
       top: 0,
       right: 0,
       lineHeight: "24px",
+      fontSize: "12px",
+      paddingLeft: "15px"
     },
     formatter: customLegendFormatter,
   };
@@ -683,7 +705,7 @@ async function TimelineTopFacilities({ map, filters }) {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
             {lines}
           </LineChart>
@@ -715,7 +737,7 @@ async function TimelineTopParents({ map, filters }) {
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
 
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
 
             {lines}
@@ -747,7 +769,7 @@ async function TimelineTopChemicals({ map, filters }) {
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
 
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
 
             {lines}
@@ -777,7 +799,7 @@ async function TimelineTopPBTs({ map, filters }) {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="year" />
             <CustomYAxis></CustomYAxis>
-            <CustomTooltip></CustomTooltip>
+            <SmallCustomTooltip></SmallCustomTooltip>
             <CustomTimelineLegend></CustomTimelineLegend>
             {lines}
           </LineChart>
@@ -1031,11 +1053,13 @@ function GraphView({ map, filters, onFilterChange }) {
             </div>
           )}
           {/* Timeline View */}
+          {/* Amrita - Added classnames to each timeline on TRI Timelines page for formatting purposes */}
           {currentTab === 2 && (
             <div
               className="timelines"
               style={{ display: currentTab === 2 ? "block" : "none" }}
             >
+              <div className = "timeline-total">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1049,6 +1073,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "timeline-top-fac">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1062,6 +1089,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+              
+              <div className = "timeline-top-parents">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1076,6 +1106,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "timeline-top-chem">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1090,6 +1123,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "timeline-top-pbts">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1104,6 +1140,7 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
             </div>
           )}
           {/* Appendix View */}
@@ -1112,6 +1149,8 @@ function GraphView({ map, filters, onFilterChange }) {
               className="indexes"
               style={{ display: currentTab === 3 ? "block" : "none" }}
             >
+
+              <div className = "appendix-fac-graph">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1124,6 +1163,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "appendix-fac-table">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1137,6 +1179,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "appendix-chem-graph">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1150,6 +1195,9 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
+
+              <div className = "appendix-chem-table">
               <GraphContainer
                 map={map}
                 filters={filters}
@@ -1164,6 +1212,7 @@ function GraphView({ map, filters, onFilterChange }) {
                   ></Title>
                 }
               ></GraphContainer>
+              </div>
             </div>
           )}
           {/* Top Tens View */}

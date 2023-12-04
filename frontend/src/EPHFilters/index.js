@@ -1,8 +1,5 @@
 import "./index.css";
-import EPHChart from "../EPHCharts/index.js"
-import AsthmaChart from "../EPHCharts/asthma";
-import CancerChart from "../EPHCharts/cancer";
-import {useState} from 'react';
+
 const React = require("react");
 
 function filters(){

@@ -1,0 +1,24 @@
+
+
+.accordion {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    max-width: 90%; /* Amrita - Adding max-width so the info box doesn't stretch farther than screen */
+    margin: 20px auto;
+  }
+  
+  .accordion-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accordion-content {
+    padding: 10px;
+  }
+  

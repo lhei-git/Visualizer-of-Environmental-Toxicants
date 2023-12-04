@@ -1,59 +1,104 @@
 import "./index.css";
-
 import NationalData from "./national";
+import StateData from "./state"
+import CountyData from "./county";
 import { useEffect, useState, useReducer } from "react";
+import history from "../history";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
 import SimpleMap from "../EPHMapView"
 import EPHThematicStateMap from "../EPHThematicStateMap";
+import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
 import PropTypes from "prop-types";
-import PFASWater from "../EPHMapView/pfas in water";
-import PCEWater from "../EPHMapView/pce in water";
-import DEPHWater from "../EPHMapView/deph in water";
-import RadiumWater from "../EPHMapView/radium in water";
-import TCEWater from "../EPHMapView/tce in water";
-import PrevalenceCancer from "../EPHMapView/prevalence of cancer";
-import AdultAsthma from "../EPHMapView/AdultAsthma";
-import UraniumWater from "../EPHMapView/uranium in water";
-import HospitalAsthma from "../EPHMapView/HospitalAsthma";
-import FertilityRate from "../EPHMapView/FertilityRate";
-import InfantMortality from "../EPHMapView/InfantMortality";
-import HeartAttack from "../EPHMapView/HeartAttack";
-import LowBirthweight from "../EPHMapView/LowBirthweight";
-import Prematurity from "../EPHMapView/Prematurity";
-import ArsenicWater from "../EPHMapView/ArsenicWater";
-import ChildhoodLeukemia from "../EPHMapView/ChildhoodCancerLeukemia";
-import ChildhoodBrain from "../EPHMapView/ChildhoodBrain";
+import EPHTable from "../EPHTable";
+
 
 const React = require("react");
+const measuresInfo = [
+  { name: "Asthma among Children", measureID: 587, units: "Percent of Children with Asthma" },
+  { name: "Brain and Central Nervous System Cancer among Children", measureID: 67, units: "units" },
+  { name: "Leukemia among Children", measureID: 71, units: "units" },
+  // Add more measures as needed
+];
 
-
-
-function EPHHome(map) {
+//returns .jsx layout for the entire EPH data viewing page
+function EPHHome({ map }) {
   /*created to make the close button on left column functional*/
   const [containerColumnLeftClose, setLeftCloseButton] = useState(true);
   const toggleLeftCloseButton = () => {
     setLeftCloseButton(!containerColumnLeftClose);
   };
 
-  const [currentTab, setCurrentTab] = React.useState(
-    /* stores which tab user was last on*/
-    parseInt(sessionStorage.getItem("currentTab")) || "0"
-  );
-
  
-  function chooseTab(i) {
-    sessionStorage.setItem("currentTab", i);
-    setCurrentTab(i);
+
+  // Initial State to hold the search bar input created by Al-Taimee
+  const [searchedValueInput, setSearchBarInput] = useState("");
+   
+  // Store the original list items for resetting created by Al-Taimee
+  const containerColumnList = Array.from(
+    document.querySelectorAll(".container-column ul li")
+  );
+  
+
+  // Function to handle the search bar input changes created by Al-Taimee
+  const handleSearchBar = (e) => {
+    const inputValue = e.target.value.toLowerCase();
+    setSearchBarInput(inputValue);
+    updateSearchBarResults(inputValue);
+  };
+
+  // Function to update the search results based on user input created by Al-Taimee
+  function updateSearchBarResults(inputValue) {
+    containerColumnList.forEach((item) => {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(inputValue)) {
+        item.style.display = "block"; // Show matching items
+      } else {
+        item.style.display = "none"; // Hide non-matching items
+      }
+    });
   }
+
+  // Listen for changes in the search input and reset the list if it's cleared created by Al-Taimee
+  useEffect(() => {
+    if (searchedValueInput === "") {
+      clearList();
+    }
+  }, [searchedValueInput]);
+
+  // Function to reset the list to its original state created by Al-Taimee
+  function clearList() {
+    containerColumnList.forEach((item) => {
+      item.style.display = "block"; // Show all items
+    });
+  }
+
+  // Add event listeners to the list items to handle item clicks created by Al-Taimee
+  containerColumnList.forEach((item) => {
+    item.addEventListener("click", () => {
+      // Handle item click here, for example:
+      const clickedItemText = item.textContent;
+      // Do something with the clicked item data
+      console.log(`Clicked on item: ${clickedItemText}`);
+    });
+  });
+
+
+  const [currentTab, setCurrentTab] = React.useState("0");
+
+  function chooseTab(i) {
+    setCurrentTab(i);
+    console.log("tab changed to " + currentTab)
+  }
+
 
   useEffect(() => {
     // Set the default measure when EPHHome is loaded
-    chooseTab("0"); //default bisphenol, change to arsenic ASAP
+    chooseTab("1"); //default arsenic
   }, []); // empty dependency array so effect runs only once
 
   /* Initial state of app */
 const initialState = {
-  map: JSON.parse(sessionStorage.getItem("map")),
+  map: JSON.parse(sessionStorage.getItem("map")) || {state: null},
   filters: {
     chemical: "all",
     pbt: false,
@@ -90,88 +135,126 @@ const setMap = (payload) => ({ type: "setMap", payload });
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const [state, dispatch] = useReducer(reducer, initialState);
+const [visible, setVisible] = useState(false);
+
+// Taimee - Scroll to the bottom of the page
+const scrollToBottom = () => {
+  window.scrollTo(0, document.body.scrollHeight);
+};
+
+// Taimee - Scroll to the top of the page
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
+
+/* Amrita - Page reverts to main page if user opens it in a new tab (instead of giving an error)*/
+if (!state.map.state) {
+  history.push("/");  // redirect to the search page
+  return null;
+}
 
   return (
+    
     <div className="health-outcomes-container">
+        {/* Taimee - Buttons to scroll up and down on page 
+            Amrita - Moved button to be on EPH page only */}
+        <div className="scroll-btn-container">
+        <button className="scroll-btn-top" onClick={scrollToTop}>
+          Scroll to Top
+        </button>
+        <button className="scroll-btn-bottom" onClick={scrollToBottom}>
+          Scroll to Bottom
+        </button>
+      </div>
+      
       {/* Amrita - Reordered so that EPH content stays on the right of the sidebar */}
       <div className="eph-national-container">
         {/*national measures*/}
-        {currentTab === "8" && ( <NationalData measure={"lead in blood"} units={"Concentration (micrograms/deciliter)"}/> )}
-        {currentTab === "10" && ( <NationalData measure={"metals in urine"} units={"Concentration (micrograms/gram)"}/> )}
-        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"}/> )}
-        {currentTab === "2" && (<NationalData measure={"Bisphenol and paraben in urine"} units={"Concentration (micrograms/gram)"}/>)}
-        {currentTab === "13" && (<NationalData measure={"PFAS in blood"} units={"Concentration (micrograms/liter)"}/>)}
-        {currentTab === "12" && (<NationalData measure={"Pesticides in urine"} units={"Concentration (micrograms/gram)"}/>)}
+        {currentTab === "8" && ( <NationalData measure={"Lead in Blood"} units={"Concentration (micrograms/deciliter)"}  measureID={858}/> )}        
+        {currentTab === "10" && ( <NationalData measure={"Metals in Urine"} units={"Concentration (micrograms/gram)"} measureID={856}/>)}
+        {currentTab === "15" && ( <NationalData measure={"Phthalate Metabolites in Urine (creatinine corrected)"} units={"Concentration (micrograms/gram)"} measureID={863}/>)}
+        {currentTab === "2" && (<NationalData measure={"Bisphenol and Paraben in Urine"} units={"Concentration (micrograms/gram)"} measureID={859}/>)}
+        {currentTab === "13" && (<NationalData measure={"PFAS in Blood"} units={"Concentration (micrograms/liter)"} measureID={826}/>)}
+        {currentTab === "12" && (<NationalData measure={"Pesticides in Urine"} units={"Concentration (micrograms/gram)"} measureID={861}/>)}
         
-        {/* county measures */}
-        
-        {currentTab === "0" && ( <ArsenicWater map={state.map}/> )}
-        {currentTab === "1" && ( <AdultAsthma map={state.map}/> )}
-        {currentTab === "3" && ( <PrevalenceCancer map={state.map}/> )}
-        {currentTab === "5" && ( <FertilityRate map={state.map}/> )}
-        {currentTab === "6" && ( <HeartAttack map={state.map}/> )}
-        {currentTab === "7" && ( <InfantMortality map={state.map}/> )}
-        {currentTab === "9" && ( <LowBirthweight map={state.map}/> )}
-        {currentTab === "11" && ( <PCEWater map={state.map}/> )}
-        {currentTab === "14" && ( <PFASWater map={state.map}/> )}
-        {currentTab === "16" && ( <Prematurity map={state.map}/> )}
-        {currentTab === "17" && ( <RadiumWater map={state.map}/> )}
-        {currentTab === "18" && ( <TCEWater map={state.map}/> )}
-        {currentTab === "19" && ( <UraniumWater map={state.map}/> )}
-        {currentTab === "20" && ( <HospitalAsthma map={state.map}/> )}
-        {currentTab === "21" && ( <DEPHWater map={state.map}/> )}
+        {/* county measures  */}
+        {currentTab === "0" && (<CountyData measure={"Arsenic in Community Water"} measureID={769} units={"Annual Mean Concentration of Arsenic (µg/L)"} />)}
+        {currentTab === "1" && (<CountyData measure={"Asthma among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
+        {currentTab === "3" && (<CountyData measure={"Prevalence of Cancer"} measureID={1095} units={"Crude Prevalence of Cancer among Adults >= 18 Years of Age"} />)}
+        {currentTab === "5" && (<CountyData measure={"Fertility Rate"} measureID={45} units={"Total Fertility Rate per 1000 women"} />)}
+        {currentTab === "6" && (<CountyData measure={"Heart Attack"} measureID={553} units={"Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population"} />)}
+        {currentTab === "7" && (<CountyData measure={"Infant Mortality"} measureID={279} units={"Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period"} />)}
+        {currentTab === "9" && (<CountyData measure={"Low Birthweight"} measureID={36} units={"Percent of Low Birthweight (<2500g) Live Singleton Births"}  />)}
+        {currentTab === "11" && (<CountyData measure={"PCE in Community Water"} measureID={807} units={"Annual Mean Concentration of PCE (µg/L)"} />)}
+        {currentTab === "14" && (<CountyData measure={"PFAS in Community Water"} measureID={734} units={"CWS with Detections of PFAS Chemicals (PFOS, PFOA, PFNA, PFBS, PFHxS, PFHpA)"} />)}    
+        {/*PREMATURITY COULD BE WRONG */}    
+        {currentTab === "16" && (<CountyData measure={"Prematurity"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
+        {currentTab === "17" && (<CountyData measure={"Radium in Community Water"} measureID={817} units={"Annual Mean Concentration of Radium (pCi/L)"} />)}
+        {currentTab === "18" && (<CountyData measure={"TCE in Community Water"} measureID={812} units={"Annual Mean Concentration of TCE (µg/L)"} />)}
+        {currentTab === "19" && (<CountyData measure={"Uranium in Community Water"} measureID={822} units={"Annual Mean Concentration of Uranium (µg/L)"} />)}
+        {currentTab === "20" && (<CountyData measure={"Hospitalizations from Asthma"} measureID={99} units={"Counts of Asthma Hospitalization"} />)}
+        {currentTab === "21" && (<CountyData measure={"DEPH in Community Water"} measureID={802} units={"Annual Mean Concentration of DEHP (µg/L)"} />)}
+
 
         {/* state measures */}
-        {currentTab === "22" && ( <SimpleMap map={state.map}/> )} 
-        {currentTab === "4" && ( <ChildhoodLeukemia map={state.map}/> )} 
-        {currentTab === "23" && ( <ChildhoodBrain map={state.map}/> )} 
+
+        {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"Percent of Children with Asthma"} />)} 
+        {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"Age-adjusted Incidence Rate of Brain and Other Nervous System Cancer per 100,000 Population"} />)} 
+        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"Annual Number of Leukemia among Children <20 Years of Age"} />)}         
+
       </div>
+     
       <div className="health-outcomes-sidebar">
-      {containerColumnLeftClose && (
         <div className="container-column">
-          
-          <h2>Select a Health Issue</h2>
+          {/*Updated sidebar title created by Al-Taimee*/}
+          <h2>Health Issues and Toxic Exposures</h2>
+          {/*Search bar input field behavior created by Al-Taimee*/}
+          <input type="text" placeholder="Search Health Issues" value={searchedValueInput} onChange={handleSearchBar}/>
           <ul>
-            <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in water</a></li> {/* 0 */}
-            <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma in Adults</a></li> {/* 1 */}
-            <li onClick={() => chooseTab("22")} className={currentTab === "22" ? "active" : ""}><a href="#">Asthma in Children</a></li>
+            
+            {/*List headings created by Al-Taimee*/}
+            <li className="boldHeadings">Asthma</li>
+            <li onClick={() => chooseTab("1")} className={currentTab === "1" ? "active" : ""}><a href="#">Asthma among Adults</a></li> {/* 1 */}
+            <li onClick={() => chooseTab("22")} className={currentTab === "22" ? "active" : ""}><a href="#">Asthma among Children</a></li>
             <li onClick={() => chooseTab("20")} className={currentTab === "20" ? "active" : ""}><a href="#">Asthma Hospitalizations</a></li>
-            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and paraben in urine</a></li> {/* 2 */}
+            
+            <li className="boldHeadings">Cancer</li>
+            <li onClick={() => chooseTab("23")} className={currentTab === "23" ? "active" : ""}><a href="#">Childhood Cancer: Brain & Central Nervous System</a></li>
+            <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood Cancer: Leukemia</a></li> {/* 4 */}
             <li onClick={() => chooseTab("3")} className={currentTab === "3" ? "active" : ""}><a href="#">Prevalence of Cancer</a></li> {/* 3 */}
-            <li onClick={() => chooseTab("23")} className={currentTab === "23" ? "active" : ""}><a href="#">Childhood Cancer Brain & Central Nervous System</a></li>
-            <li onClick={() => chooseTab("4")} className={currentTab === "4" ? "active" : ""}><a href="#">Childhood cancer Leukemia</a></li> {/* 4 */}
-            <li onClick={() => chooseTab("21")} className={currentTab === "21" ? "active" : ""}><a href="#">DEPH in Water</a></li>
-            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility rate</a></li> {/* 5 */}
-            <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart attack</a></li> {/* 6 */}
-            <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant mortality</a></li> {/* 7 */}
-            <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in blood</a></li> {/* 8 */}
-            <li onClick={() => chooseTab("9")} className={currentTab === "9" ? "active" : ""}><a href="#">Low birthweight</a></li> {/* 9 */}
-            <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in urine</a></li> {/* 10 */}
-            <li onClick={() => chooseTab("11")} className={currentTab === "11" ? "active" : ""}><a href="#">PCE in water</a></li> {/* 11 */}
-            <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in urine</a></li> {/* 12 */}
-            <li onClick={() => chooseTab("13")} className={currentTab === "13" ? "active" : ""}><a href="#">PFAS in blood</a></li> {/* 13 */}
-            <li onClick={() => chooseTab("14")} className={currentTab === "14" ? "active" : ""}><a href="#">PFAS in water</a></li> {/* 14 */}
-            <li onClick={() => chooseTab("15")} className={currentTab === "15" ? "active" : ""}><a href="#">Phthalates in urine</a></li> {/* 15 */}
-            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature birth</a></li> {/* 16 */}
-            <li onClick={() => chooseTab("17")} className={currentTab === "17" ? "active" : ""}><a href="#">Radium in water</a></li> {/* 17 */}
-            <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in water</a></li> {/* 18 */}
-            <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in water</a></li> {/* 19 */}
+
+            <li className="boldHeadings">Drinking Water contamination</li>
+            <li onClick={() => chooseTab("0")} className={currentTab === "0" ? "active" : ""}><a href="#">Arsenic in Water</a></li> {/* 0 */}
+            <li onClick={() => chooseTab("21")} className={currentTab === "21" ? "active" : ""}><a href="#">DEPH in Water</a></li> 
+            <li onClick={() => chooseTab("11")} className={currentTab === "11" ? "active" : ""}><a href="#">PCE in Water</a></li> {/* 11 */}
+            <li onClick={() => chooseTab("14")} className={currentTab === "14" ? "active" : ""}><a href="#">PFAS in Water</a></li> {/* 14 */}
+            <li onClick={() => chooseTab("17")} className={currentTab === "17" ? "active" : ""}><a href="#">Radium in Water</a></li> {/* 17 */}
+            <li onClick={() => chooseTab("18")} className={currentTab === "18" ? "active" : ""}><a href="#">TCE in Water</a></li> {/* 18 */}
+            <li onClick={() => chooseTab("19")} className={currentTab === "19" ? "active" : ""}><a href="#">Uranium in Water</a></li> {/* 19 */}
+
+            <li className="boldHeadings">Heart Disease and Stroke</li>
+            <li onClick={() => chooseTab("6")} className={currentTab === "6" ? "active" : ""}><a href="#">Heart Attack</a></li> {/* 6 */}
+
+            <li className="boldHeadings">National population exposure</li>
+            <li onClick={() => chooseTab("2")} className={currentTab === "2" ? "active" : ""}><a href="#">Bisphenol and Paraben in Urine</a></li> {/* 2 */}
+            <li onClick={() => chooseTab("8")} className={currentTab === "8" ? "active" : ""}><a href="#">Lead in Blood</a></li> {/* 8 */}
+            <li onClick={() => chooseTab("10")} className={currentTab === "10" ? "active" : ""}><a href="#">Metals in Urine</a></li> {/* 10 */}
+            <li onClick={() => chooseTab("12")} className={currentTab === "12" ? "active" : ""}><a href="#">Pesticides in Urine</a></li> {/* 12 */}
+            <li onClick={() => chooseTab("13")} className={currentTab === "13" ? "active" : ""}><a href="#">PFAS in Blood</a></li> {/* 13 */}
+            <li onClick={() => chooseTab("15")} className={currentTab === "15" ? "active" : ""}><a href="#">Phthalates in Urine</a></li> {/* 15 */}
+
+            <li className="boldHeadings">Reproductive and birth outcomes</li>
+            <li onClick={() => chooseTab("5")} className={currentTab === "5" ? "active" : ""}><a href="#">Fertility Rate</a></li> {/* 5 */}
+            <li onClick={() => chooseTab("7")} className={currentTab === "7" ? "active" : ""}><a href="#">Infant Mortality</a></li> {/* 7 */}
+            <li onClick={() => chooseTab("9")} className={currentTab === "9" ? "active" : ""}><a href="#">Low Birthweight</a></li> {/* 9 */}
+            <li onClick={() => chooseTab("16")} className={currentTab === "16" ? "active" : ""}><a href="#">Premature Birth</a></li> {/* 16 */}
+
+            <p className="extraLink"><a href="https://ephtracking.cdc.gov/">View other measures on the CDC Environmental Public Health Tracking Network</a></p>
+
           </ul>
         </div>
-      )}
-            </div>
-      {/*
-      {currentTab === "19" && ( 
-        map && (
-          !["US", "DC"].includes(map.state) && (
-      <EPHThematicStateMap 
-        stateName={map.state}
-        ></EPHThematicStateMap> )))}
-          */}
-        
-      
-  </div>
-  
+      </div>
+    </div>
 
   );
 }
@@ -179,4 +262,3 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
 
 export default EPHHome;
-

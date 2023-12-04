@@ -7,6 +7,8 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid rgba(32, 33, 36, 0.28);
+  max-width: 300px; 
+  /* width: 100%; */
 }
 
 .map-wrapper .legend .marker {
@@ -22,4 +24,40 @@
 .map-wrapper .legend ul {
   margin: 10px 0;
   padding: 0;
+  list-style: none; 
+}
+
+/*flex the map legend text values*/
+.map-wrapper .legend ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; 
+}
+
+/*flex the map legend markers*/
+.map-wrapper .legend ul li span.marker {
+  flex-shrink: 0; 
+}
+
+
+/*Responsive styles for map legend markers - Al-Taimee*/
+@media (max-width: 600px) {
+  .map-wrapper .legend {
+    max-width: 185px; 
+  }
+
+  /*.map-wrapper .legend ul li {
+    flex-direction: column; 
+  }
+
+  .map-wrapper .legend .marker {
+    margin-right: 0; 
+    margin-bottom: 5px; 
+  }*/
+}
+
+@media (max-width: 380px) {
+  .map-wrapper .legend {
+    max-width: 100px; 
+  }
 }

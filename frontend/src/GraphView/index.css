@@ -2,15 +2,17 @@
   --black: #3f3844;
 }
 
+
 .graph-header {
   text-align: left;
-  width: 100%;
   margin-bottom: 30px;
+  padding-left: 30px;
 }
 
 .graph-header h1,
 .graph-header h2 {
   margin: 0;
+  font-size: 23px;  /* Amrita - Changing from 28px so it's not too big compared to the graphs */
 }
 
 .graph-header h2 {
@@ -26,7 +28,7 @@
   background: #fff;
   min-height: 100vh;
   padding: 0;
-  margin-top: 200px;
+  margin-top: 220px;  /* Amrita - Adjusts space between filter bar and tab bar on TRI page */
 }
 
 .graph-container .selector {
@@ -60,11 +62,12 @@
   font-weight: 600;
 }
 
+/*fixed summary table sizing - Al-Taimee*/
 .graph-container > .content {
-  min-width: 1000px;
-  max-width: 50vw;
-  overflow-x: visible;
-  margin: 0 auto;
+  min-width: 100px;
+  /* max-width: 50vw; */
+  overflow-x: hidden;
+  
 }
 
 .graph-container .graphs {
@@ -74,10 +77,13 @@
 .graph-container .graph {
   position: relative;
   justify-content: center;
-  padding-top: 75px;
-  padding-bottom: 40px;
-  width: 100%;
-  border-radius: 25px;
+  max-height: 30em;
+  padding-top: 100px;
+  padding-right: 80px;
+  margin-left: 20px;
+  padding-bottom: 100px;
+  width: 42%;
+  float: left;  /* Amrita - Makes graphs/charts on TRI page next to each other */
 }
 
 .graph-container .dropdown-icon {
@@ -92,8 +98,67 @@
   transform-origin: 60% 50%;
 }
 
-.graph-container .top-ten {
-  position: relative;
+/* Amrita - Formatted timeline graphs so timeline-total is on first row & rest are 2 per row */
+.graph-container .timeline-total {
+  position: absolute;
+  width: 120%;
+  max-width: 120em;
+  left: 25%;
+}
+
+.graph-container .timeline-top-fac {
+  position: absolute;
+  width: 80%;
+  top: 80%;
+}
+
+.graph-container .timeline-top-parents {
+  position: absolute;
+  padding-left: 4em;
+  width: 80%;
+  top: 80%;
+  left: 50%;
+}
+
+.graph-container .timeline-top-chem {
+  position: absolute;
+  width: 80%;
+  top: 140%;
+}
+
+.graph-container .timeline-top-pbts {
+  position: absolute;
+  padding-left: 4em;
+  width: 80%;
+  top: 140%;
+  left: 50%;
+}
+
+/* Amrita - Format appendix graphs/tables separately so layout doesn't change based on filtered data */
+.graph-container .appendix-fac-graph {
+  position: absolute;
+  width: 120%;
+}
+
+.graph-container .appendix-fac-table {
+  position: absolute;
+  padding-left: 4em;
+  width: 100%;
+  left: 50%;
+}
+
+.graph-container .appendix-chem-graph {
+  position: absolute;
+  width: 120%;
+  top: 90%;
+}
+
+.graph-container .appendix-chem-table {
+  position: absolute;
+  padding-left: 4em;
+  width: 100%;
+  top: 90%;
+  left: 50%;
 }
 
 .graph-container .filter-container .control-container {
@@ -152,10 +217,12 @@
   border-bottom: 1px solid var(--black);
 }
 
+/* Amrita - Adjusted so table properly fits in with layout and has enough space around it */
 .summary table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  margin-bottom: 5em;
 }
 
 .summary td,
@@ -168,9 +235,23 @@
   text-align: left;
 }
 
+/* Amrita - Center only the summary table's header */
+.summary-table-header {
+  text-align: center;
+  padding: 10px;
+}
+
 .all-facilities-chart {
   width: 100%;
   /*height: 300px;*/
   overflow-y: auto;
   max-height: 500px;
+}
+
+/*Responsive style for summary table header sizing - Al-Taimee*/
+@media only screen and (max-width: 768px) {
+  .summary-table-header {
+    font-size: 14px; 
+    padding: 8px; 
+  }
 }

@@ -20,14 +20,14 @@ import "./index.css";
 import history from "./history";
 import Home from "./HomeView";
 import GraphView from "./GraphView";
+import DataComp from "./DataComparison/index";
 import ThematicMapView from "./ThematicMapView/index.js";
 import AboutPage from "./About/index";
 
 
 import EPHData from "./EPHData/index";
-import DataComp from "./DataComparison/index"
 
-import React, { useImperativeHandle, useReducer } from "react";
+import React, { useImperativeHandle, useReducer, useState, useEffect } from "react";
 import MapView from "./MapView";
 import PropTypes from "prop-types";
 import SimpleMap from "./EPHMapView/index";
@@ -80,51 +80,75 @@ const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 
 
-/* Navbar component */
+
 const Navbar = (props) => {
   // webpage path
   const location = useLocation();
+  const [showMenu, setShowMenu] = useState(false);
+  // Al-Taimee - function to toggle hamburger menu on responsive screen
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
 
   /* Only shows other paths when a search has been initiated */
   return (
-    <div
-      className={`navigation ${location.pathname === "/" ? "transparent" : ""}`}
-    >
-      <ul>
+    /*Al-Taimee - show hamburger menu when clicked*/
+    <div className={`navigation ${showMenu ? "show-menu" : ""} ${location.pathname === "/" ? "transparent" : ""}`}>
+      <div className="menu-icon" onClick={toggleMenu}>
+        &#9776; 
+      </div>
+      
+
+      <div className={`menu-icon ${props.menuVisible ? "open" : ""}`} onClick={props.onMenuToggle}>
+        
+      </div>
+
+      <ul className={showMenu ? "show" : ""}>
         <li className={location.pathname === "/" ? "active" : ""}>
-        <Link to="/">Search</Link>
+          {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+        <Link to="/" onClick={() => setShowMenu(false)}>Search</Link>
         </li>
        
        
         {props.visible && (
           <>
             <li className={location.pathname === "/graphs" ? "active" : ""}>
-              <Link to="/graphs">Toxic Releases</Link>
+              {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+              <Link to="/graphs" onClick={() => setShowMenu(false)}>Toxic Releases</Link>
             </li>
             <li className={location.pathname === "/ephdata" ? "active" : ""}>
-              <Link to="/ephdata">Health Outcomes</Link>
+              {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+              <Link to="/ephdata" onClick={() => setShowMenu(false)}>Health Outcomes</Link>
             </li>
-            {/* Remove national insights page
-            <li className={location.pathname === "/thematicmaps" ? "active" : ""}>
-              <Link to="/thematicmaps">National Insights</Link>
-            </li>*/}
+            <li className={location.pathname === "/datacomp" ? "active" : ""}>
+              {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+              <Link to="/datacomp" onClick={() => setShowMenu(false)}>Comparisons</Link>
+            </li>
+            
             
           </>
         )}
                 <li className={location.pathname === "/about" ? "active" : ""}>
-          <Link to="/about">About</Link>
+                  {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+          <Link to="/about" onClick={() => setShowMenu(false)}>About</Link>
         </li>
       </ul>
       <div className="logo">
-        <Link to="/">VETHOS.</Link>
+        {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
+        <Link to="/" onClick={() => setShowMenu(false)}>VETHOS.</Link>
       </div>
+      
     </div>
   );
 };
 Navbar.propTypes = {
   visible: PropTypes.bool,
 };
+
+
+
+
 
 
 /* Footer component */
@@ -141,6 +165,8 @@ function Footer() {
 const App = (props) => {
   /* Use reducer method to update state */
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [menuVisible, setMenuVisible] = useState(false);
+  
 
 
   /* Error handler when API is down */
@@ -163,32 +189,53 @@ const App = (props) => {
   }
 
   /*if no internet detected, display alert written by Al-Taimee*/
-  var checkIfOnline = navigator.onLine;
-    if (checkIfOnline == false) {
-        alert("Internet not detected, please reload once connection has been re-established"); 
-        setTimeout(5000)
-      }
+  document.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('online', updateOnlineOfflineStatus);
+    window.addEventListener('offline', updateOnlineOfflineStatus);
 
-  /*function scrollBtnUp() {
-    return {
-      <div className="scollUp">
-        <a href="#" class="scroll-btn">
-          <i class="fas fa-arrow-up"></i>
-        </a>
-      </div>
-    };
-  }*/
+    function updateOnlineOfflineStatus() {
+        var onLineOfflineAlert = document.getElementById('onLineOffline-alert');
+        //if online, online message
+        if (navigator.onLine) {
+            onLineOfflineAlert.style.backgroundColor = '#33cc33'; 
+            onLineOfflineAlert.innerHTML = '<p>Internet connection is restored!</p>';
+        } else {
+            //else offline message
+            onLineOfflineAlert.style.backgroundColor = '#ff3333'; 
+            onLineOfflineAlert.innerHTML = '<p>Please reconnect to the internet</p>';
+        } 
 
+        onLineOfflineAlert.style.display = 'block';
+
+        if (navigator.onLine) {
+          setTimeout(function () {
+            onLineOfflineAlert.style.display = 'none';
+        }, 3000); // if online, hide the alert after 3 seconds
+        }
+        
+    }
+});
+
+  
   return (
     /* Entire app is wrapped by router object. Router handles requests to other pages */
     <Router history={history}>
-      <Navbar visible={!!state.map} />
+      {/*Al-Taimee - set menu on navbar*/}
+      <Navbar visible={!!state.map} onMenuToggle={() => setMenuVisible(!menuVisible)}
+        menuVisible={menuVisible}/>
+
+      <div id="onLineOffline-alert">
+        <span id="close-alert" onclick="document.getElementById('onLineOffline-alert').style.display='none'">&times;</span>
+        <p>Internet connection is restored!</p>
+      </div>
+
       {state.errorMessage !== "" && (
         <div className="error" onClick={() => dispatch(setErrorMessage(""))}>
           {state.errorMessage}
           <div>x</div>
         </div>
       )}
+      
       <div className="app-container">
         <Switch>
           <Route exact path="/map">
@@ -233,6 +280,12 @@ const App = (props) => {
             {/*farzana israt*/}
             <EPHHome map={state.map}/>
           </Route>
+
+          {/* Amrita - Adding back in the Data Comparison page */}
+          <Route path="/datacomp">
+            <DataComp map={state.map} filters={state.filters} onFilterChange={(filters => dispatch(setFilters(filters)))} />
+          </Route>
+
           <Route path="/about" component={AboutPage}></Route>
           <Route path="/">
             {/* home page */}
@@ -247,5 +300,3 @@ const App = (props) => {
 
 
 export default withRouter(App);
-
-

@@ -103,6 +103,9 @@ function Filters(props) {
       </div>
       <div className="control-container">
         <div className="content">
+        {/* Amrita - Add headings for drop-downs */}
+        <p>Filter search results:</p>
+        
           {/* Search Bar Content*/}
           <select
             name="year"

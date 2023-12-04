@@ -8,19 +8,13 @@ import {
   ComposableMap,
   Geographies,
   Geography,
-  ZoomableGroup
 } from 'react-simple-maps';
-import { getLocationString } from '../helpers';
 import "./index.css"
 import ReactTooltip from 'react-tooltip';
-
-
+import LoadingSpinner from '../LoadingSpinner';
 
 
 const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
-
-
-
 
 function getColorScale(dataValue) {
   return dataValue == null
@@ -34,22 +28,18 @@ function getColorScale(dataValue) {
     : '#1ab3eb';
 }
 
-
-
-
 const SimpleMap = ({ map }) => {
-  const [selectedYear, setSelectedYear] = useState([]);
+  const [selectedYear, setSelectedYear] = useState('2020');
   const [data, setData] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
-  //const EPH_API_KEY = "BDB5CA62-FE5C-4608-A621-D4B198DF7744";
-
-
-
-  // Fetch data for each year
-  const dataForEachYear = (year) => {
+  const [selectedGenderId, setSelectedGenderId] = useState(['1']);
+  
+  
+  const dataForEachYear = (year, genderId) => {
     setSelectedYear(year);
 
-    axios.get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/1/all/all/1/${year}/0/0`, )
+    axios
+      .get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/4/all/all/1/${year}/0/0?GenderId=${genderId}?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`)
       .then((response) => {
         setData(response.data.tableResult);
       })
@@ -58,20 +48,18 @@ const SimpleMap = ({ map }) => {
       });
   };
 
-
-
-
   useEffect(() => {
     if (selectedYear) {
-      dataForEachYear(selectedYear);
+      dataForEachYear(selectedYear, selectedGenderId);
     }
-  }, [selectedYear]);
+  }, [selectedYear, selectedGenderId]);
 
-
-
-
+  const handleGenderChange = (event) => {
+    setSelectedGenderId(event.target.value);
+  };
+  
   return (
-    <div className='mapView'>
+    <div className='nation-mapView'>
      <div className='container'>
       {/*return data for asthma in children for the typed in location*/}
       <h2>Asthma in Children in U.S.</h2>
@@ -80,7 +68,7 @@ const SimpleMap = ({ map }) => {
         <label> Year: </label>
         <select
           value={selectedYear}
-          onChange={(e) => dataForEachYear(e.target.value)}
+          onChange={(e) => setSelectedYear(e.target.value)}
         >
           <option value=""> Select Year </option>
           <option value="2020">2020</option>
@@ -94,6 +82,14 @@ const SimpleMap = ({ map }) => {
           <option value="2012">2012</option>
           <option value="2011">2011</option>
         </select>
+      </div>
+      <div className='dropdown'>
+      <label htmlFor="gender">Select Gender:</label>
+      <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
+        
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
       </div>
 
 
@@ -109,11 +105,15 @@ const SimpleMap = ({ map }) => {
       geographies.map((geo) => {
         const stateData = data.find((d) => d.geo === geo.properties.name);
         const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
+        
+        
+
         return (
+          
           <Geography
             key={geo.rsmKey}
             geography={geo}
-            data-tip={`${geo.properties.name}: ${stateData && stateData.displayValue }`}
+            data-tip={`${geo.properties.name} (Percent): ${stateData && stateData.displayValue }`}
             style={{
               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -125,46 +125,20 @@ const SimpleMap = ({ map }) => {
             }}
           />
         );
+          
       })
     }
   </Geographies>
 </ComposableMap>
 
-      <ReactTooltip />
-  <div className="legend">
-  <h3>Percent Concentration</h3>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#D6D6DA' }}></div>
-    <span>Null Data</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#bbe9fa' }}></div>
-    <span>0-9</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#8bdefc' }}></div>
-    <span>9-12</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#62cdf5' }}></div>
-    <span>12-14</span>
-  </div>
-  <div className="legend-item">
-    <div className="legend-color" style={{ backgroundColor: '#1ab3eb' }}></div>
-    <span>14+</span>
-  </div>
-</div>
 
-{/*
-      {selectedState && (
-        <div className="tooltip">
-          <p>Percent Concentration: {selectedState.displayValue}</p>
-        </div>
-      )}
-      */}
+      <ReactTooltip />
+ 
     </div>
   );
 }
+
+
 
 
 

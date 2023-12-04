@@ -1,0 +1,104 @@
+.mapView-individual,
+.mapView-states {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  min-height: 100px; 
+  margin-bottom: 150px;
+}
+
+  .mapView-states {
+    
+    margin-bottom: 200px;
+    
+  }
+  
+  .geography-attributes {
+    margin-bottom: 120px;
+    font-size: 18px;
+  }
+  .mapView-individual .legend {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    width: 30%;
+    padding-bottom: 200px;
+    margin-bottom: 150px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .mapView-individual .legend h3 {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .mapView-individual.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }
+  
+  
+  .mapView-individual .legend-color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .mapView-individual .legend-item span {
+    margin: 0;
+  }
+
+  .bold-text {
+    font-weight: bold;
+  }
+
+
+  /*Responsive styles - Al-Taimee Hassan*/
+@media screen and (max-width: 768px) {
+
+  .legend-container {
+    top: 5px;
+    right: 5px;
+  }
+
+  .mapView-individual .legend {
+    font-size: 12px;
+    
+  }
+  
+  .mapView-individual,
+  .mapView-states {
+    min-height: 200px;
+    margin-bottom: 150px;
+  }
+  
+  .geography-attributes {
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+
+  .mapView-individual .legend h3 {
+    font-size: 12px;
+  }
+
+  .mapView-individual .legend-item {
+    margin: 3px 0;
+  }
+
+  .mapView-individual .legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+
+  .bold-text {
+    font-weight: normal;
+  }
+}
+  

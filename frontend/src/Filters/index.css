@@ -1,17 +1,14 @@
 .control-header {
-  flex: 0.7;  /* Changed from 1 to keep filtering bar 1 line long for most searches */
+  margin-top: 10px; /* Amrita - Added to make it appear more centered than at the top */
+  flex: 0.6;  /* Amrita - Changed from 1 to keep filtering bar 1 line long for most searches */
   text-align: center;
   display: inline-block;
   background: #fafbfc;
 }
 
-select {
-  max-width: 20em;
-}
-
 .checkbox-group {
   display: flex;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .control-container {
@@ -20,7 +17,7 @@ select {
   display: flex;
   justify-content: flex-start;
   background: #fafbfc;
-  padding-top: 13px;
+  padding-top: 3px;
 
   --primary: #9c27b0;
   --primary-light: #d05ce3;
@@ -29,15 +26,22 @@ select {
 }
 
 .control-container .content {
-  cursor: pointer;
+  cursor: text;
   border-radius: 0 0 5px 5px;
   min-height: 30px;
   font-size: 18px;
 }
 
+/* Amrita - Formatting text on top of filters on TRI page */
+.control-container .content p {
+  font-weight: bold;
+  margin-left: 20px;
+  margin-bottom: 2px;
+}
+
 .control-container .content input,
 .control-container .content select {
-  margin: 15px;
+  margin: 20px;
 }
 
 .control-container .content input[type="checkbox"] {
@@ -50,7 +54,7 @@ select {
   padding-left: 3px;
   padding-right: 20px;
   font-size: 18px;
-  /* max-width: 190px; */
+  max-width: 350px; /* Amrita - Added so filter bar does not get too big due size of content in drop-downs */
 }
 
 .control-container .checkbox-group {
