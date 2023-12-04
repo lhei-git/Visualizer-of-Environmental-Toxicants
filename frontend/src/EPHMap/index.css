@@ -1,58 +1,104 @@
-.mapView-individual {
-    position: relative;
-    width: 700px;
-    margin: 0 auto;
-    margin-bottom: 80px;
-    min-height: 500px;
-  }
+.mapView-individual,
+.mapView-states {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  min-height: 100px; 
+  margin-bottom: 150px;
+}
 
   .mapView-states {
-    position: relative;
-    width: 600px;
+    
     margin-bottom: 200px;
-    min-height: 500px;
+    
   }
   
   .geography-attributes {
     margin-bottom: 120px;
     font-size: 18px;
   }
-  .mapView-individual .legend {
+  .legend {
     position: absolute;
-    bottom: 0px;
-    left: 600px;
-    margin-bottom: 200px;
+    left: 10px;
+    right: 10px;
+    width: 30%;
+    padding-bottom: 200px;
+    margin-bottom: 150px;
     background: white;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
   }
   
-  .mapView-individual .legend h3 {
+  .legend h3 {
     margin: 0;
     font-size: 16px;
     text-align: center;
   }
   
-  .mapView-individual .legend-item {
+  .legend-item {
     display: flex;
     align-items: center;
     margin: 5px 0;
   }
   
   
-  .mapView-individual .legend-color {
+  .legend-color {
     width: 20px;
     height: 20px;
     display: inline-block;
     margin-right: 10px;
   }
   
-  .mapView-individual .legend-item span {
+  .legend-item span {
     margin: 0;
   }
 
   .bold-text {
     font-weight: bold;
   }
+
+
+  /*Responsive styles - Al-Taimee Hassan*/
+@media screen and (max-width: 768px) {
+
+  .legend-container {
+    top: 5px;
+    right: 5px;
+  }
+
+  .legend {
+    font-size: 12px;
+    
+  }
+  
+  .mapView-individual,
+  .mapView-states {
+    min-height: 200px;
+    margin-bottom: 150px;
+  }
+  
+  .geography-attributes {
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+
+  .legend h3 {
+    font-size: 12px;
+  }
+
+  .legend-item {
+    margin: 3px 0;
+  }
+
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+
+  .bold-text {
+    font-weight: normal;
+  }
+}
   
