@@ -3,10 +3,10 @@
 import "./index.css";
 import "./county.css";
 import CountyTimeSeries from "../EPHCharts/county";
+import CountyTimeSeriesWater from "../EPHCharts/countyWater";
 import CountyTable from "../EPHTable/county";
 import {useEffect, useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
-import SimpleMap from "../EPHMapView";
 import EPHThematicStateMap from "../EPHThematicStateMap";
 import Accordion from "../Accordion/Accordion";
 import EPHThematicWaterStateMap from "../EPHThematicStateView(Water)";
@@ -18,7 +18,7 @@ const {getLocationParents, getYearString} = require("../helpers");
 
 
 //calling County Data on the eph page will generate a data layout for any measure selected
-const CountyData = ({measure, measureID, units, currentMap}) => {
+const CountyData = ({measure, measureID, units}) => {
 //this section of code handles filter changes
     const [selectedPercentile, setSelectedPercentile] = React.useState(
         parseInt(sessionStorage.getItem("currentTab")) || 1
@@ -307,11 +307,11 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
             <div className = "time-series">
             <FadeInSection>
                 <CountyTimeSeries
-                size={{ width: 800, height: 400 }}
-                measureID={measureID}
-                units={units}
-                percentile={1} 
-                demographic={selectedDemographic}
+                    size={{ width: 800, height: 400 }}
+                    measureID={measureID}
+                    units={units}
+                    percentile={1} 
+                    demographic={selectedDemographic}
                 />
             </FadeInSection>
             </div>
@@ -466,7 +466,7 @@ const CountyData = ({measure, measureID, units, currentMap}) => {
             </FadeInSection>
             <FadeInSection>
             <div className="eph-table-container">
-                <CountyTable measureID={measureID} />
+                <CountyTable measureID={measureID} units={units} />
             </div>
             </FadeInSection>
             {currentAccordionMeasure &&

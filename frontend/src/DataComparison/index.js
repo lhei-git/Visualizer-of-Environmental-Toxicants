@@ -338,7 +338,6 @@ if (!state.map.state) {
               {currentMeasure === "Childhood Cancer Brain & Central Nervous System" && (<StateEPHCompare measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} 
                                                                                                          units={"Age-adjusted Incidence Rate of Brain and Other Nervous System Cancer per 100,000 Population"} />)}
               {currentMeasure === "Childhood Cancer Leukemia" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"Annual Number of Leukemia among Children <20 Years of Age"} />)}
-              {currentMeasure === "Premature Birth" && (<StateEPHCompare measure={"Premature Birth"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
 
               {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
             {currentMeasure === "Arsenic in Water" && (<CountyEPHCompare measure={"Arsenic in Water"} measureID={769} units={"Annual Mean Concentration of Arsenic (µg/L)"} />)}
@@ -355,6 +354,8 @@ if (!state.map.state) {
             {currentMeasure === "Radium in Water" && (<CountyEPHCompare measure={"Radium in Water"} measureID={817} units={"Annual Mean Concentration of Radium (pCi/L)"} />)}
             {currentMeasure === "TCE in Water" && (<CountyEPHCompare measure={"TCE in Water"} measureID={812} units={"Annual Mean Concentration of TCE (µg/L)"} />)}
             {currentMeasure === "Uranium in Water" && (<CountyEPHCompare measure={"Uranium in Water"} measureID={822} units={"Annual Mean Concentration of Uranium (µg/L)"} />)}
+            {/*CHANGED TP COUNTY - double check!*/}
+            {currentMeasure === "Premature Birth" && (<CountyEPHCompare measure={"Premature Birth"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
 
             </div>
           </div>

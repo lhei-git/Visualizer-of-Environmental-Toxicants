@@ -73,7 +73,7 @@ class CustomTooltip extends Tooltip {
             margin={200}/>
         </YAxis>
         <CustomTooltip></CustomTooltip>
-        <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9c27b0" />
+        <CustomLine name={units} type="monotone" dataKey="dataValue" stroke="#9c27b0" />
       </LineChart>
     </div>
     );
