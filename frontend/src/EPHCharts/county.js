@@ -89,7 +89,6 @@ class CountyTimeSeries extends Component {
         console.log("setting new error message!");
         newErrorMessage = "No data available for selected health issue in " + getLocationParents(this.state.map, 'county') + " County";
       }
-      console.log("new erorr message: " + newErrorMessage)
 
       this.setState((prevState) => ({
         ...prevState,

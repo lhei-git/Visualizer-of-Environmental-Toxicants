@@ -299,6 +299,11 @@ const CountyData = ({measure, measureID, units}) => {
       );
 
 
+      
+    //generate different county time series for water & non water measures  
+    //arsenic: 769 deph: 802 pce: 807 pfas:734 radium: 817 tce: 812 uranium: 822
+    const waterMeasureIDs = [769, 802, 807, 734, 817, 812, 822];
+
     //.jsx layout
     return(
         <FadeInSection>
@@ -310,13 +315,17 @@ const CountyData = ({measure, measureID, units}) => {
           
             <div className = "time-series">
             <FadeInSection>
-                <CountyTimeSeries
+                {!waterMeasureIDs.includes(measureID) && (
+                    <CountyTimeSeries
                     size={{ width: 800, height: 400 }}
                     measureID={measureID}
                     units={units}
                     percentile={1} 
                     demographic={selectedDemographic}
                 />
+                )}
+               
+                
             </FadeInSection>
             </div>
             <FadeInSection>
