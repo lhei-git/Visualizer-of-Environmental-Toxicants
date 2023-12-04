@@ -1,6 +1,9 @@
 //==========================================
 // Author: Farzana Israt
 //==========================================
+//Some of this code mimics the previous team's code in ThematicStateMap
+
+//Creating maps for each state for county-level that are non-drinking water measures
 import LoadingSpinner from "../LoadingSpinner";
 import "./index.css";
 import data from "../data/stateLocationData.json";
@@ -9,13 +12,13 @@ import EPHMap from "../EPHMap/index";
 const React = require("react");
 const Component = React.Component;
 
+//Creating class
 class EPHThematicStateMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       /*update to latest year*/
       selectedYear: this.props.yearRange[0],
-      //contentCounty: "",
       geoUrl: "",
       stateName: "",
       prevStateName: "",
@@ -28,12 +31,11 @@ class EPHThematicStateMap extends Component {
 
     };
     
-    this.handleContentCountyState = this.handleContentCountyState.bind(this);
     this.handleYearChange = this.handleYearChange.bind(this);
   }
   
  
-
+//Getting county data on mount
   componentDidMount() {
     this.getCountyData();
   }
@@ -53,7 +55,6 @@ class EPHThematicStateMap extends Component {
     if (this.state.prevStateName !== this.props.stateName) {
       this.setState({ prevStateName: this.props.stateName });
       const found = data.find((e) => e.state === this.props.stateName);
-      
       
       if(found) {
         this.setState({
@@ -79,61 +80,12 @@ class EPHThematicStateMap extends Component {
   }
   
     
-  
-
-  
-  handleContentCountyState(content) {
-    this.setState({ content: content });
-  }
-
-
-/*
-  getMeasureInfo(measure) {
-    
-    const measureInfo = {
-      "adult asthma": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1038/2/all/all/1/{year}/0/0`,
-        yearRange: [2020, 2019, 2018],
-      },
-      "asthma hospitalizations": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/99/2/all/all/1/{year}/0/0`,
-        yearRange: [2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014],
-      },
-      "prevalence of cancer": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/1095/2/all/all/1/{year}/0/0`,
-        yearRange: [2020, 2019, 2018],
-      },
-      "fertility rate": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/45/2/all/all/1/{year}/0/0`,
-        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
-      },
-      "heart attack": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/{year}/1/0`,
-        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
-      },
-      "infant mortality": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/279/2/all/all/2/2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004/1/0`,
-        yearRange: [2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004],
-      },
-      "low birthweight": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/553/2/all/all/1/{year}/1/0`,
-        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
-      },
-      "prematurity": {
-        apiUrl: `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/2/all/all/1/{year}/1/0`,
-        yearRange: [ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
-      },
-    };
-
-    return measureInfo[measure] || null;
-  }
-
-*/
-
-/*get url from eph site*/
+//Get URL from EPH API
   getApiURL() {
     
+    //Filtering through years for each measure
     const selectedYear = this.state.selectedYear;
+    //Filtering through gender for each measure that has a gender dropdown
     const selectedGender = this.state.gender;
 
     if(this.props.measure === "Asthma Among Adults") {
@@ -163,24 +115,10 @@ class EPHThematicStateMap extends Component {
       return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/30/10/all/all/1/${selectedYear}/1/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     
-    /*
-
-    const { measure, selectedYear } = this.state;
-    const measureInfo = this.getMeasureInfo(measure);
-
-    if (measureInfo && measureInfo.yearRange.includes(selectedYear)) {
-      // Replace "{year}" in the URL with the selected year
-      return measureInfo.apiUrl.replace("{year}", selectedYear);
-    } else {
-      console.error(
-        `Selected year ${selectedYear} is not available for the current measure.`
-      );
-      return "";
-    }
-    */
+    
   }
 
-  /*get units for tooltip*/
+  //Get units for displaying in tooltip of the map
   getUnits(endUnits) {
     if(this.props.measure === "Asthma Among Adults") {
       return endUnits = "(Percent)"; 
@@ -212,7 +150,7 @@ class EPHThematicStateMap extends Component {
   }
 
 
-  /*more descriptive title under the main title for each measure*/
+  //More descriptive title under the main title for each measure
   getSubtitle(subtitle) {
     if(this.props.measure === "Asthma Among Adults") {
       return subtitle = "Crude Prevalence of Current Asthma among Adults >= 18 Years of Age"; 
@@ -244,7 +182,7 @@ class EPHThematicStateMap extends Component {
   }
 
 
-  /*get data or each county that is not a drinking water measure*/
+  //Get data for each county that is not a drinking water measure
   async getCountyData() {
     const apiUrl = this.getApiURL();
 
@@ -257,27 +195,24 @@ class EPHThematicStateMap extends Component {
       }
     } catch (error) {
       if (error.response) {
-        // Server responded with a non-2xx status code
         console.error("Error response from the server:", error.response.status);
       } else if (error.request) {
-        // Request was made but no response was received
         console.error("No response received. Request made but no response.");
       } else {
-        // Something happened in setting up the request
         console.error("Error setting up the request:", error.message);
       }
     }
     
   }
   
-  /*year dropdown configuration*/
+  //Year dropdown configuration
   handleYearChange = (event) => {
     this.setState({ selectedYear: event.target.value }, () => {
       this.getCountyData(); 
     });
   };
   
-  /*gender dropdown configuration*/
+  //Gender dropdown configuration
   handleGenderChange = (event) => {
     this.setState({ gender: event.target.value }, () => {
       this.getCountyData(); 
@@ -298,6 +233,7 @@ class EPHThematicStateMap extends Component {
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <h3>{this.getSubtitle()}</h3>
         <div className="centered-dropdown">
+          {/* Year dropdown */}
         <div className="centered-year">
           <label>Select a Year of Interest: </label>
         <select
@@ -315,6 +251,7 @@ class EPHThematicStateMap extends Component {
         </select>
         </div>
         
+         {/* Gender dropdown */}
         {["Heart Attack", "Low Birthweight", "Prematurity"].includes(this.props.measure) && (
           <div className="centered-gender">
             <label>Select a Gender: </label>
@@ -331,6 +268,7 @@ class EPHThematicStateMap extends Component {
         )}
         </div>
         
+        {/* If data loads, create county-level state map. If not, load spinner */}
           {this.state.countyData ? (
             
               <EPHMap

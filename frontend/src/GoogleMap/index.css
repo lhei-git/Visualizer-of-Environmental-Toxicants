@@ -2,10 +2,6 @@
   --primary-dark: #6a0080;
 }
 
-/*.map-container.loading {
-  opacity: 0.3;
-}*/
-
 .map-container .map {
   position: absolute;
   top: 0;
@@ -44,4 +40,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* Amrita - Responsiveness for "RECENTER" button */
+@media (max-width: 870px) {
+  .map-container .refresh {
+    font-size: 15px;
+    padding: 5px 15px;
+  }
 }
