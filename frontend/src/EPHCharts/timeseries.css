@@ -10,7 +10,7 @@
   @media screen and (max-width: 600px) {
     /* Adjust styles for screens with a width up to 600 pixels */
     .time-series-container {
-      width: 300px;
+      width: 400px;
       height: 200px; /* Set a fixed height for smaller screens */
     }
   }
