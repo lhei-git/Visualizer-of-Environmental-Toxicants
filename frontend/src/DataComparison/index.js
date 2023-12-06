@@ -290,20 +290,20 @@ if (!state.map.state) {
             {/* Amrita - Don't show county measures in drop-down if user searched for a state */}
             {countyName !== null && (
               <optgroup label="County-Level Data">
-                <option>Arsenic in Water</option>
+                {/*<option>Arsenic in Water</option>*/}
                 <option>Asthma in Adults</option>
                 <option>Asthma Hospitalizations</option>
                 <option>Prevalence of Cancer</option>
-                <option>DEPH in Water</option>
+                {/*<option>DEPH in Water</option>*/}
                 <option>Fertility Rate</option>
                 <option>Heart Attack</option>
                 <option>Infant Mortality</option>
                 <option>Low Birthweight</option>
-                <option>PCE in Water</option>
-                <option>PFAS in Water</option>
-                <option>Radium in Water</option>
-                <option>TCE in Water</option>
-                <option>Uranium in Water</option>
+                {/*<option>PCE in Water</option>*/}
+                {/*<option>PFAS in Water</option>*/}
+                {/*<option>Radium in Water</option>*/}
+                {/*<option>TCE in Water</option>*/}
+                {/*<option>Uranium in Water</option>*/}
               </optgroup>
             )}
 

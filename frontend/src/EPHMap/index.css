@@ -102,3 +102,45 @@
   }
 }
   
+
+@media screen and (max-width: 950px) {
+
+  .legend-container {
+    top: 5px;
+    right: 5px;
+  }
+
+  .mapView-states .legend {
+    font-size: 12px;
+    
+  }
+  
+  .mapView-individual,
+  .mapView-states {
+    min-height: 200px;
+    margin-bottom: 150px;
+  }
+  
+  .geography-attributes {
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+
+  .mapView-states .legend h3 {
+    font-size: 12px;
+  }
+
+  .mapView-states .legend-item {
+    margin: 3px 0;
+  }
+
+  .mapView-states .legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+
+  .bold-text {
+    font-weight: normal;
+  }
+}
