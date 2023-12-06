@@ -120,7 +120,7 @@ class CountyTimeSeries extends Component {
     const { errorMessage, loading } = this.state;
 
     if (errorMessage) {
-      return <div className="timeseries-error-message"><span className="error-icon">&#9888; </span>{errorMessage} in a time series graph</div>;
+      return <div className="timeseries-error-message"><span className="error-icon">&#9888; </span>{errorMessage}</div>;
     }
 
     return (
