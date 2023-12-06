@@ -71,7 +71,7 @@ const CountyData = ({measure, measureID, units}) => {
 
     //get name of searched state from session storage
     const stateAbbr = getLocationParents(state.map, "state");
-    const countyName = getLocationParents(state.map, "county") + " County";
+    const countyName = getLocationParents(state.map, "county");
     const stateLong = getLocationParents(state.map, "stateLong");
 
     //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
@@ -300,20 +300,25 @@ const CountyData = ({measure, measureID, units}) => {
 
 
       
-    //generate different county time series for water & non water measures  
+    /*generate different county data pages water & non water measures  
+    no time series graphs exist for water measures, so if the measure ID is in waterMeasureIDs, 
+    the time series graph and relevant header will be hidden*/
+
     //arsenic: 769 deph: 802 pce: 807 pfas:734 radium: 817 tce: 812 uranium: 822
     const waterMeasureIDs = [769, 802, 807, 734, 817, 812, 822];
-
+    
     //.jsx layout
     return(
         <FadeInSection>
         <div className="county-container">
         <FadeInSection>
-            <h1>{measure} in {countyName}, {stateAbbr}</h1>
+        {(!waterMeasureIDs.includes(measureID) && countyName != null) && (
+                <h1>{measure} in {countyName} County, {stateAbbr}</h1>
+        )}                  
         </FadeInSection>
             {/*change time series info based on filter changes*/}
-          
             <div className = "time-series">
+
             <FadeInSection>
                 {!waterMeasureIDs.includes(measureID) && (
                     <CountyTimeSeries
@@ -323,9 +328,7 @@ const CountyData = ({measure, measureID, units}) => {
                     percentile={1} 
                     demographic={selectedDemographic}
                 />
-                )}
-               
-                
+                )}                
             </FadeInSection>
             </div>
             <FadeInSection>
