@@ -16,3 +16,44 @@
 .thematic-view-container .flex-item {
   flex: 1;
 }
+
+/* Amrita - Responsiveness for thematic maps on Summary Page */
+@media (max-width: 1290px) {
+  .thematic-view-container {
+    min-width: 500px;
+    max-width: 40vw;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .thematic-view-container {
+    min-width: 640px;
+    max-width: 50vw;
+  }
+}
+
+@media (max-width: 885px) {
+  .thematic-view-container {
+    min-width: 640px;
+    max-width: 50vw;
+  }
+}
+
+@media (max-width: 585px) {
+  .thematic-view-container {
+    min-width: 540px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thematic-view-container {
+    min-width: 540px;
+  }
+}
+
+@media (max-width: 435px) {
+  .thematic-view-container {
+    min-width: 440px;
+  }
+}

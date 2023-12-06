@@ -5,7 +5,7 @@
     gap: 20px;
   }
 
-.thematic-view-container .eph-flex-item h1 {
+.eph-thematic-view-container .eph-flex-item h1 {
     text-align: center;
     margin-top: 50px;
     padding: 0;
@@ -13,12 +13,12 @@
 
 
   
-.thematic-view-container .eph-flex-item h3 {
+.eph-thematic-view-container .eph-flex-item h3 {
     text-align: center;
     color: grey;
 }
 
-.thematic-view-container{
+.eph-thematic-view-container{
     align-items: center;
-    padding-left: 150px;
+    margin: 0px auto;
 }

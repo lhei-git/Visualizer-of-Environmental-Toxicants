@@ -78,4 +78,10 @@
       position: static; 
     }
   }
+
+  @media screen and (max-width: 950px) {
+    .state-container h1 {
+      margin-left: 0px;
+    }
+  }
   
