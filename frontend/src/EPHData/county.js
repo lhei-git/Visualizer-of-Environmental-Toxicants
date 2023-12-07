@@ -85,7 +85,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Asthma Prevalence among Children.',
             },  
             {
                 title: 'Where did the CDC get this data?',
@@ -101,7 +101,7 @@ const CountyData = ({measure, measureID, units}) => {
             
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Hospitalizations for Asthma.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Hospitalizations for Asthma.',
             },
     
             {
@@ -117,7 +117,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on 12/01/2023',
+                content: `https://ephtracking.cdc.gov/DataExplorer/ Citation: Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -135,7 +135,7 @@ const CountyData = ({measure, measureID, units}) => {
             },
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -149,7 +149,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Mortality for Heart Attack.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Mortality for Heart Attack.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -163,7 +163,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -177,7 +177,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -190,7 +190,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. National Center for Health Statistics. Reproductive and Birth Outcomes.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -204,7 +204,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Health Tracking Network. Arsenic in Community Water Systems.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Health Tracking Network. Arsenic in Community Water Systems.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -218,7 +218,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -231,7 +231,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -244,7 +244,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on 12/01/2023',
+                content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -257,7 +257,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -270,7 +270,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -283,7 +283,7 @@ const CountyData = ({measure, measureID, units}) => {
             sections: [
             {
                 title: 'Where did we get this data?',
-                content: 'Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
+                content: 'https://ephtracking.cdc.gov/DataExplorer/ Citation: Centers for Disease Control and Prevention. Environmental Public Health Tracking Network. Community Drinking Water.',
             },
             {
                 title: 'Where did CDC get this data from?',
@@ -331,7 +331,7 @@ const CountyData = ({measure, measureID, units}) => {
                 )}                
             </FadeInSection>
             </div>
-            <FadeInSection>
+            
             <div className = "map-container">
                 {measureID === 769 && (
                     <EPHThematicWaterStateMap 
@@ -479,7 +479,7 @@ const CountyData = ({measure, measureID, units}) => {
                 </EPHThematicWaterStateMap>)}
 
             </div>
-            </FadeInSection>
+            
             <FadeInSection>
             <div className="eph-table-container">
             {!waterMeasureIDs.includes(measureID) && (
