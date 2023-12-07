@@ -1,3 +1,5 @@
+// Page started by Katherine O'Donnell and finalized by Amrita Dhar
+
 import "./index.css";
 import NationalEPHCompare from "./nationalEPHCompare.js";
 import React, { useState, useReducer } from 'react';
@@ -5,14 +7,11 @@ import StateEPHCompare from "./stateEPHCompare.js"
 import CountyEPHCompare from "./countyEPHCompare";
 import TRITimeline from "./TRItimeline";
 import history from "../history";
+
 const vetapi = require("../api/vetapi");
-
-
 const {getLocationParents, getYearString} = require("../helpers");
-
 const { years } = require("../contants");
 const { amountAsLabel, formatAmount } = require("../helpers");
-//created by Katherine O'Donnell
 
 const {
   CartesianGrid,
@@ -24,8 +23,6 @@ const {
   ResponsiveContainer,
 } = require("recharts");
 
-
-
 /* individual state setters */
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
@@ -33,7 +30,7 @@ const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const timelineAspectRatio = 17 / 9;
 const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
 
-
+/* Customizes TRI timeline's tooltips */
 class CustomTooltip extends Tooltip {
   static defaultProps = {
     ...Tooltip.defaultProps,
@@ -50,6 +47,7 @@ class CustomTooltip extends Tooltip {
   };
 }
 
+/* Customizes TRI timeline's lines */
 class CustomLine extends Line {
   static defaultProps = {
     ...Line.defaultProps,
@@ -60,6 +58,7 @@ class CustomLine extends Line {
   };
 }
 
+/* Customizes TRI timeline's YAxis */
 class CustomYAxis extends YAxis {
   static defaultProps = {
     ...YAxis.defaultProps,
@@ -127,7 +126,7 @@ const reducer = (state, action) => {
   const [chemicals, setChemicals] = React.useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Amrita - Check if countyName is null (user searched for state) & change default measure timeline if null
+  // Amrita - Check if countyName is null (user searched for state) & change default EPH measure timeline if null
   const countyName = getLocationParents(state.map, "county");
 
   if (countyName === null) {
@@ -143,26 +142,6 @@ if (!state.map.state) {
   history.push("/");  // redirect to the search page
   return null;
 }
-
-  /* farzana
-  React.useEffect(() => {
-    async function fetchChemicalList(map) {
-      const params = {
-        city: map.city,
-        county: map.county,
-        state: map.state,
-      };
-      try {
-        const res = await vetapi.get("/chemicals", { params });
-        const tmp = [...new Set(res.data.map((d) => formatChemical(d)).sort())];
-        setChemicals(tmp);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
-    if (props.map) fetchChemicalList(props.map);
-  }, [props.filters, props.map]); */
 
   function handleError(err) {
     console.error(err);
@@ -269,16 +248,6 @@ if (!state.map.state) {
               onApiError={toggleError}
               onFilterChange={(filters) => dispatch(setFilters(filters))}
             ></TRITimeline>
-
-            {/* farzana
-                        <select
-                          name="chemical"
-                          value={props.filters.chemical}
-                          onChange={onFilterChange}
-                          id=""
-                        >
-                          {getChemicals()}
-                        </select>*/}
           </div>
 
           <div className="eph-data">

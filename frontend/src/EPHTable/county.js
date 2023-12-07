@@ -16,7 +16,7 @@ class CountyTable extends Component {
         releaseType: 'all',
         year: 2022,
       },
-      errorMessage: '',
+      errorMessage: null,
       countyID: '',
       years: [],
       data: [],

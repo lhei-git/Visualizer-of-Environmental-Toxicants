@@ -160,7 +160,7 @@ const ThematicMap = (props) => {
                           props.setTooltipContent(null);
                           props.setTooltipContent(`<h1><p style="text-align:center;">${geo.properties.name.toUpperCase()}</h1></p> <br /><span class="geography-attributes">
                                                 Total: ${rounded(
-                                                  Math.trunc(cur.total)
+                                                  Math.trunc(cur.total + cur.air + cur.land + cur.water)  /* Amrita - Editing total to add air, land, water */
                                                 )} lbs. <br />
                                                 Land: ${rounded(
                                                   Math.trunc(cur.land)
@@ -417,7 +417,7 @@ const ThematicMap = (props) => {
                             cur.facility__state === "LA" ? "" : "COUNTY"
                           }</p></h1><span class="geography-attributes"><br />
                                                 Total: ${rounded(
-                                                  Math.trunc(cur.total)
+                                                  Math.trunc(cur.total + cur.air + cur.land + cur.water)  /* Amrita - Editing total to add air, land, water */
                                                 )} lbs. <br />
                                                 Land: ${rounded(
                                                   Math.trunc(cur.land)

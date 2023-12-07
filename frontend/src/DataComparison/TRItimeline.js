@@ -96,7 +96,7 @@ const {
 
 const timelineAspectRatio = 17 / 9;
 
-
+/* Amrita - Adding useEffect and fetchData to previous TimelineTotal function */
 const TimelineTotal = ({ map, filters }) => {
   const [data, setData] = useState(null);
 
@@ -163,10 +163,12 @@ TimelineTotal.propTypes = {
   filters: PropTypes.object,
 };
 
+/* Amrita - Created function to show chemical drop-down and selected chemical's timeline */
 function TRITimeline({ map, filters, onFilterChange }) {
 
   return (
     <div className="comp-graph-container">
+      {/* Amrita - Asks user to choose a chemical and shows chemical drop-down list from TRIFilters */}
       <div className="tri-filter-container">
         <p>Choose a specific chemical:</p>
           <TRIFilters
@@ -176,6 +178,7 @@ function TRITimeline({ map, filters, onFilterChange }) {
           ></TRIFilters>
       </div>
         
+        {/* Amrita - Shows timeline for selected option in drop-down */}
         <div className="comp-timeline-total">
             <TimelineTotal map={map} filters={filters} />
         </div>
@@ -186,17 +189,6 @@ function TRITimeline({ map, filters, onFilterChange }) {
 TRITimeline.propTypes = {
     filters: PropTypes.shape({
         chemical: PropTypes.string.isRequired,
-        pbt: PropTypes.bool.isRequired,
-        carcinogen: PropTypes.bool.isRequired,
-        releaseType: PropTypes.oneOf([
-          "all",
-          "air",
-          "water",
-          "land",
-          "on_site",
-          "off_site",
-        ]).isRequired,
-        year: PropTypes.number.isRequired,
       }),
       map: PropTypes.shape({
         city: PropTypes.string,
