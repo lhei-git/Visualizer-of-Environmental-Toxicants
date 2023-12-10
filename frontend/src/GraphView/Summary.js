@@ -35,6 +35,10 @@ function GraphSummary({ map, filters }) {
       Object.keys(data).forEach((k) => {
         data[k] = formatAmount(data[k]);
       });
+
+      // Amrita - Removes commas from string numbers and turns string into float number
+      const removeTotalsCommas = (totalNum) => parseFloat(totalNum.replace(/,/g, ""));
+      
       const country = unitedStates[year];
       const body = (
         <tbody>
@@ -50,8 +54,9 @@ function GraphSummary({ map, filters }) {
           </tr>
           <tr>
             <td>Total disposal amount (lbs)</td>
-            <td>{data["total"]}</td>
-            <td>{formatAmount(country["total"])}</td>
+            {/* Amrita - Edited so total releases adds offsite, onsite, air, water, & land after removing their commas */}
+            <td>{(formatAmount(removeTotalsCommas(data["total"]) + removeTotalsCommas(data["total_air"]) + removeTotalsCommas(data["total_water"]) + removeTotalsCommas(data["total_land"])))}</td>
+            <td>{(formatAmount(country["total"] + country["total_air"] + country["total_water"] + country["total_land"]))}</td>
           </tr>
           <tr>
             <td>On-Site releases (lbs)</td>

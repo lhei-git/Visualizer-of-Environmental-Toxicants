@@ -45,9 +45,10 @@
   padding-bottom: 30px;
 }
 
-.time-series {
-  display: flex;
-  justify-content: center;
+.comp-time-series {
+    display: flex;
+    justify-content: center;
+    margin-inline-start: -150px;  /* Amrita - Centers EPH Timeline */
 }
 
 /* Amrita - Formats the drop-down boxes */
@@ -73,33 +74,12 @@
   opacity: 0.7;
   left: 10%;
 }
-.comp-state-container h1 {
+.comp-container h1 {
   font-size: 20px;
   opacity: 0.7;
   left: 10%;
 }
-.comp-county-container h1 {
-  font-size: 20px;
-  opacity: 0.7;
-  left: 10%;
-}
-.comp-national-container h1 {
-  font-size: 20px;
-  opacity: 0.7;
-  left: 10%;
-}
-
-.comp-state-container h2 {
-  font-size: 15px;
-  opacity: 0.7;
-  left: 10%;
-}
-.comp-county-container h2 {
-  font-size: 15px;
-  opacity: 0.7;
-  left: 10%;
-}
-.comp-national-container h2 {
+.comp-container h2 {
   font-size: 15px;
   opacity: 0.7;
   left: 10%;

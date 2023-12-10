@@ -1,3 +1,5 @@
+// Page started by Katherine O'Donnell and finalized by Amrita Dhar
+
 import "./index.css";
 import NationalEPHCompare from "./nationalEPHCompare.js";
 import React, { useState, useReducer } from 'react';
@@ -5,14 +7,11 @@ import StateEPHCompare from "./stateEPHCompare.js"
 import CountyEPHCompare from "./countyEPHCompare";
 import TRITimeline from "./TRItimeline";
 import history from "../history";
+
 const vetapi = require("../api/vetapi");
-
-
 const {getLocationParents, getYearString} = require("../helpers");
-
 const { years } = require("../contants");
 const { amountAsLabel, formatAmount } = require("../helpers");
-//created by Katherine O'Donnell
 
 const {
   CartesianGrid,
@@ -24,8 +23,6 @@ const {
   ResponsiveContainer,
 } = require("recharts");
 
-
-
 /* individual state setters */
 const setFilters = (payload) => ({ type: "setFilters", payload });
 const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
@@ -33,7 +30,7 @@ const setErrorMessage = (payload) => ({ type: "setErrorMessage", payload });
 const timelineAspectRatio = 17 / 9;
 const customYAxisTickFormatter = (val) => amountAsLabel(val) + " ";
 
-
+/* Customizes TRI timeline's tooltips */
 class CustomTooltip extends Tooltip {
   static defaultProps = {
     ...Tooltip.defaultProps,
@@ -50,6 +47,7 @@ class CustomTooltip extends Tooltip {
   };
 }
 
+/* Customizes TRI timeline's lines */
 class CustomLine extends Line {
   static defaultProps = {
     ...Line.defaultProps,
@@ -60,6 +58,7 @@ class CustomLine extends Line {
   };
 }
 
+/* Customizes TRI timeline's YAxis */
 class CustomYAxis extends YAxis {
   static defaultProps = {
     ...YAxis.defaultProps,
@@ -127,7 +126,7 @@ const reducer = (state, action) => {
   const [chemicals, setChemicals] = React.useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Amrita - Check if countyName is null (user searched for state) & change default measure timeline if null
+  // Amrita - Check if countyName is null (user searched for state) & change default EPH measure timeline if null
   const countyName = getLocationParents(state.map, "county");
 
   if (countyName === null) {
@@ -143,26 +142,6 @@ if (!state.map.state) {
   history.push("/");  // redirect to the search page
   return null;
 }
-
-  /* farzana
-  React.useEffect(() => {
-    async function fetchChemicalList(map) {
-      const params = {
-        city: map.city,
-        county: map.county,
-        state: map.state,
-      };
-      try {
-        const res = await vetapi.get("/chemicals", { params });
-        const tmp = [...new Set(res.data.map((d) => formatChemical(d)).sort())];
-        setChemicals(tmp);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
-    if (props.map) fetchChemicalList(props.map);
-  }, [props.filters, props.map]); */
 
   function handleError(err) {
     console.error(err);
@@ -269,16 +248,6 @@ if (!state.map.state) {
               onApiError={toggleError}
               onFilterChange={(filters) => dispatch(setFilters(filters))}
             ></TRITimeline>
-
-            {/* farzana
-                        <select
-                          name="chemical"
-                          value={props.filters.chemical}
-                          onChange={onFilterChange}
-                          id=""
-                        >
-                          {getChemicals()}
-                        </select>*/}
           </div>
 
           <div className="eph-data">
@@ -290,20 +259,13 @@ if (!state.map.state) {
             {/* Amrita - Don't show county measures in drop-down if user searched for a state */}
             {countyName !== null && (
               <optgroup label="County-Level Data">
-                <option>Arsenic in Water</option>
                 <option>Asthma in Adults</option>
                 <option>Asthma Hospitalizations</option>
                 <option>Prevalence of Cancer</option>
-                <option>DEPH in Water</option>
                 <option>Fertility Rate</option>
                 <option>Heart Attack</option>
                 <option>Infant Mortality</option>
                 <option>Low Birthweight</option>
-                <option>PCE in Water</option>
-                <option>PFAS in Water</option>
-                <option>Radium in Water</option>
-                <option>TCE in Water</option>
-                <option>Uranium in Water</option>
               </optgroup>
             )}
 
@@ -340,22 +302,14 @@ if (!state.map.state) {
               {currentMeasure === "Childhood Cancer Leukemia" && (<StateEPHCompare measure={"Leukemia among Children"} measureID={71} units={"Annual Number of Leukemia among Children <20 Years of Age"} />)}
 
               {/* Amrita - Calls timeline from CountyEPHCompare to display timeline for Public Health Data section */}
-            {currentMeasure === "Arsenic in Water" && (<CountyEPHCompare measure={"Arsenic in Water"} measureID={769} units={"Annual Mean Concentration of Arsenic (µg/L)"} />)}
               {currentMeasure === "Asthma in Adults" && (<CountyEPHCompare measure={"Asthma Among Adults"} measureID={1120} units={"Percent of Adults with Asthma"} />)}
               {currentMeasure === "Asthma Hospitalizations" && (<CountyEPHCompare measure={"Asthma Hospitalizations"} measureID={103} units={"Counts of Asthma Hospitalization"} />)}
-            {currentMeasure === "DEPH in Water" && (<CountyEPHCompare measure={"DEPH in Water"} measureID={""} units={"Annual Mean Concentration of DEHP (µg/L)"} />)}
               {currentMeasure === "Fertility Rate" && (<CountyEPHCompare measure={"Fertility Rate"} measureID={45} units={"Total Fertility Rate per 1000 women"} />)}
               {currentMeasure === "Heart Attack" && (<CountyEPHCompare measure={"Heart Attack"} measureID={553} units={"Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population"} />)}
               {currentMeasure === "Infant Mortality" && (<CountyEPHCompare measure={"Infant Mortality"} measureID={279} units={"Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period"} />)}
               {currentMeasure === "Low Birthweight" && (<CountyEPHCompare measure={"Low Birthweight"} measureID={36} units={"Percent of Low Birthweight (<2500g) Live Singleton Births"} />)}
-            {currentMeasure === "PCE in Water" && (<CountyEPHCompare measure={"PCE in Community Water"} measureID={807} units={"Annual Mean Concentration of PCE (µg/L)"} />)}
-            {currentMeasure === "PFAS in Water" && (<CountyEPHCompare measure={"PFAS in Community Water"} measureID={734} units={"CWS with Detections of PFAS Chemicals (PFOS, PFOA, PFNA, PFBS, PFHxS, PFHpA)"} />)}
               {currentMeasure === "Prevalence of Cancer" && (<CountyEPHCompare measure={"Prevalence of Cancer"} measureID={1095} units={"Crude Prevalence of Cancer among Adults >= 18 Years of Age"} />)}
-            {currentMeasure === "Radium in Water" && (<CountyEPHCompare measure={"Radium in Water"} measureID={817} units={"Annual Mean Concentration of Radium (pCi/L)"} />)}
-            {currentMeasure === "TCE in Water" && (<CountyEPHCompare measure={"TCE in Water"} measureID={812} units={"Annual Mean Concentration of TCE (µg/L)"} />)}
-            {currentMeasure === "Uranium in Water" && (<CountyEPHCompare measure={"Uranium in Water"} measureID={822} units={"Annual Mean Concentration of Uranium (µg/L)"} />)}
-            {/*CHANGED TP COUNTY - double check!*/}
-            {currentMeasure === "Premature Birth" && (<CountyEPHCompare measure={"Premature Birth"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
+              {currentMeasure === "Premature Birth" && (<CountyEPHCompare measure={"Premature Birth"} measureID={30} units={"Percent of Preterm (<37 Weeks Gestation) Live Singleton Births"} />)}
 
             </div>
           </div>

@@ -9,6 +9,7 @@ import "./index.css";
 import data from "../data/stateLocationData.json";
 import axios from "axios";
 import EPHMap from "../EPHMap/index";
+import FadeInSection from "../FadeInSection";
 const React = require("react");
 const Component = React.Component;
 
@@ -229,10 +230,13 @@ class EPHThematicStateMap extends Component {
     return (
       <div className="thematic-eph-state-container">
         <div className="state-flex">
-          
+      <FadeInSection>
+        <FadeInSection>
         <h1>{this.props.measure} in {this.props.stateLongName}</h1>
         <h3>{this.getSubtitle()}</h3>
+        </FadeInSection>
         <div className="centered-dropdown">
+        <FadeInSection>
           {/* Year dropdown */}
         <div className="centered-year">
           <label>Select a Year of Interest: </label>
@@ -266,8 +270,9 @@ class EPHThematicStateMap extends Component {
             </select>
           </div>
         )}
+        </FadeInSection>
         </div>
-        
+        <FadeInSection>
         {/* If data loads, create county-level state map. If not, load spinner */}
           {this.state.countyData ? (
             
@@ -286,8 +291,9 @@ class EPHThematicStateMap extends Component {
           )
           
           }
+          </FadeInSection>
 
-
+      </FadeInSection>
         </div>
       </div>
     );

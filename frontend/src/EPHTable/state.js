@@ -15,7 +15,7 @@ class StateTable extends Component {
         releaseType: 'all',
         year: 2022,
       },
-      errorMessage: '',
+      errorMessage: null,
       stateID: '',
       years: [],
       data: [],

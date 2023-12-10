@@ -7,6 +7,8 @@ import NationalTimeSeries from "../EPHCharts/national";
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import NationalTable from "../EPHTable/national";
+import FadeInSection from "../FadeInSection";
+import Accordion from "../Accordion/Accordion";
 const React = require("react");
 
 
@@ -36,11 +38,100 @@ const NationalData = ({measure, units, measureID}) => {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
+    const accordionMeasure = [
+        {
+          measureID: 858,
+          sections: [
+            {
+              title: 'Where did we get this data?',
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: 'Where did CDC get this data?',
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 856,
+          sections: [
+            {
+              title: 'Where did we get this data?',
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did CDC get this data?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 863,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 859,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 826,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+        {
+          measureID: 861,
+          sections: [
+            {
+              title: "Where did we get this data from?",
+              content: `Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on ${formattedDate}`,
+            },
+            {
+              title: "Where did the CDC get this data from?",
+              content: "Data provided by Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals, Updated Tables  (http://www.cdc.gov/exposurereport/)",
+            },
+          ],
+        },
+      ];
+    
+      const currentAccordionMeasure = accordionMeasure.find(
+        section => section.measureID === measureID
+      );
+
     //.jsx layout
     return(
         <div className="national-container">
+            <FadeInSection>
+            <FadeInSection>
             <h1>{measure +" (National Data)"}</h1>
+            </FadeInSection>
             <div className="filter-container">
+                <FadeInSection>
                 <div className="percentile-filter">
                     <p>Select a percentile estimate:</p>
                     <select value={selectedPercentile} onChange={(e) => chooseFilters(parseInt(e.target.value), selectedDemographic)}>
@@ -49,6 +140,8 @@ const NationalData = ({measure, units, measureID}) => {
                         <option value={2}>95th percentile</option>
                     </select>
                 </div>
+                </FadeInSection>
+                <FadeInSection>
                 <div className="demographic-filter">
                     <p>Select a demographic group:</p>
                     <select value={selectedDemographic} onChange={(e) => chooseFilters(selectedPercentile, parseInt(e.target.value))}>
@@ -67,71 +160,54 @@ const NationalData = ({measure, units, measureID}) => {
                         <option value={15}>Non-Hispanic Whites</option> {/*api endpoint demographic ID = 1 for 1-5 y/o*/}
                     </select>
                 </div>
+                </FadeInSection>
             </div>
             {/*code below changes data representation based on filter changes*/}
-            <div className = "time-series">
-            {selectedPercentile === 1 && (
-                <NationalTimeSeries
-                size ={{width:800, height:400 }}
-                measure={measure}
-                units={units}
-                percentile={1}
-                demographic={selectedDemographic} />
-                
-            )}
-            {selectedPercentile === 2 && (
-                <NationalTimeSeries
-                size ={{width:800, height:400 }}
-                measure={measure}
-                units={units}
-                percentile={2}
-                demographic={selectedDemographic}
-                />
-            )}
             
+            
+            <div className="time-series">
+                <FadeInSection>
+                    {selectedPercentile === 1 && (
+                    <NationalTimeSeries
+                        size={{ width: 800, height: 400 }}
+                        measure={measure}
+                        units={units}
+                        percentile={1}
+                        demographic={selectedDemographic}
+                    />
+                    )}
+                </FadeInSection>
+
+                <FadeInSection>
+                    {selectedPercentile === 2 && (
+                    <NationalTimeSeries
+                        size={{ width: 800, height: 400 }}
+                        measure={measure}
+                        units={units}
+                        percentile={2}
+                        demographic={selectedDemographic}
+                    />
+                    )}
+                </FadeInSection>
             </div>
             <div className = "desc-container">
-                <p>The data above is obtained from the CDC Environmental Public Health Tracking</p>
             </div>
-
-            {/*
-             <div className="desc"><p>The time series graph above shows national estimates by year for the average levels of {details[measure].desc}The data comes from the National Report on Human Exposure to Environmental Chemicals (details below).</p>
-            <div className="about-data">
-                <h2>About the Data</h2>
-                <h3>Where is the data from?</h3>
-                <p>The data above is provided by the Centers for Disease Control and Prevention, National Center for Health Statistics (NCHS), National Health and Nutrition Examination Survey (NHANES) (http://www.cdc.gov/nchs/nhanes.htm) as presented in the National Report on Human Exposure to Environmental Chemicals. You can find the official updated tables for the report here: http://www.cdc.gov/exposurereport/</p>
-                <p>{samples}</p>
-                <p>Accessed From: https://ephtracking.cdc.gov/DataExplorer. Accessed on {formattedDate}.</p>
-                <h3>What group does the data represent?</h3>
-                <p>Data samples are population-weighted, representing the U.S. civilian non-institutionalized Census population. The purpose of weighting the samples is to create unbiased national estimates, meaning that the measures represent the entire U.S. population. </p>
-                <p>Each demographic filter changes the scope of data collected to provide data estimates for each measure in different demographic groups.</p>
-                <h3>What do the different percentiles mean?</h3>
-                <p>Percentiles give us information about the shape of the distribution of various estimated data concentrations. The 50th percentile is the median estimated concentration where half the measured values are greater than and half are less than the 50th percentile estimated concentration. The 95th percentile indicates high-end exposure concentrations, which are at or above the 95th percentile estimated concentration.</p>
-                <h3>Limit of detection</h3>
-                <p>The limit of detection (LOD) is the smallest amount of substance that can be reliably distinguished from zero. LOD means less than the limit of detection, which may vary for some chemicals by year and by individual sample. {details[measure].lod}</p>
-            </div>
-            </div>
-            
-            */}
-           
-            {/*Function to change tables based on measure selected created by AL-Taimee */}
-            {/*
-             {details[measure] && (
-                <div className="eph-table-container">
-                <h2>EPHTable for {measure}</h2>
-                <EPHTable url={apiURL} />
-                </div>
-            )}
-
-            
-             */}
+             
             <div className="eph-table-container">
+            <FadeInSection>
                 <h2>Table for {measure}</h2>
                 <NationalTable measure={measure} />
+            </FadeInSection>
             </div>
-            <p className="citation">Data obtained from https://ephtracking.cdc.gov/DataExplorer on {formattedDate}.</p>
+            {currentAccordionMeasure &&
+          currentAccordionMeasure.sections.map(section => (
+            <FadeInSection key={section.title}>
+              <Accordion title={section.title} content={section.content} />
+            </FadeInSection>
+          ))}
 
-
+            
+            </FadeInSection>
         </div>
     );
 }

@@ -10,6 +10,7 @@ const { formatChemical, getLocationString } = require("../helpers");
 function TRIFilters(props) {
   const [chemicals, setChemicals] = React.useState([]);
 
+  /* Farzana - Edited previous team's fetchChemicalList function to not include year, release type, pbt, carcinogen in params
   /* Update chemical list with chemicals found in the selected window under the current search parameters */
   React.useEffect(() => {
     async function fetchChemicalList(map) {
@@ -17,10 +18,6 @@ function TRIFilters(props) {
         city: map.city,
         county: map.county,
         state: map.state,
-        year: props.filters.year,
-        release_type: props.filters.releaseType,
-        pbt: props.filters.pbt,
-        carcinogen: props.filters.carcinogen || null,
       };
       try {
         const res = await vetapi.get("/chemicals", { params });

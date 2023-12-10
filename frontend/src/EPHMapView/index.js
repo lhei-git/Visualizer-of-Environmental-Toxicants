@@ -1,146 +1,217 @@
 //==========================================
 // Author: Farzana Israt
 //==========================================
+//Some of this code mimics the previous team's code in ThematicMapView
 
-import React, { useState, useEffect } from 'react';
+//Creating national map for state-level data
+import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-} from 'react-simple-maps';
-import "./index.css"
-import ReactTooltip from 'react-tooltip';
+import EPHMap from '../EPHMap/index';
 import LoadingSpinner from '../LoadingSpinner';
+import "./index.css"
+import FadeInSection from '../FadeInSection';
+
+//geoUrl for creating the map of the whole United States
+const stateGeoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 
-const GEOJSON_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+//Creating the class
+class StateMap extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedYear: this.props.yearRange[0],
+      measure: "",
+      stateData: null,
+      gender: "1",
+    };
 
-function getColorScale(dataValue) {
-  return dataValue == null
-    ? '#D6D6DA'
-    : dataValue < 9
-    ? '#bbe9fa'
-    : dataValue < 12
-    ? '#8bdefc'
-    : dataValue < 14
-    ? '#62cdf5'
-    : '#1ab3eb';
+    this.handleContentCountyState = this.handleContentCountyState.bind(this);
+    this.handleYearChange = this.handleYearChange.bind(this);
+  }
+  handleContentCountyState(content) {
+    this.setState({ content: content });
+  }
+  
+//When the component mounts, get the data from the EPH API
+  componentDidMount() {
+    this.getStateData();
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.measure !== this.props.measure) {
+        this.setState(
+        {
+            stateData: null,
+        },
+        () => {
+            this.getStateData();
+        }
+        )
+    }
+    
+  }
+
+  //Get URL for each measure 
+  getApiURL() {
+    //Filter by year
+    const selectedYear = this.state.selectedYear;
+    //Filter by gender
+    const selectedGender = this.state.gender;
+
+    if (this.props.measure === "Asthma in Children") {
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
+    } else if (this.props.measure === "Childhood Brain and Nervous System Cancer") {
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
+    } else if (this.props.measure === "Childhood Cancer Leukemia") {
+        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
+    }
 }
 
-const SimpleMap = ({ map }) => {
-  const [selectedYear, setSelectedYear] = useState('2020');
-  const [data, setData] = useState([]);
-  const [selectedState, setSelectedState] = useState([]);
-  const [selectedGenderId, setSelectedGenderId] = useState(['1']);
-  
-  
-  const dataForEachYear = (year, genderId) => {
-    setSelectedYear(year);
-
-    axios
-      .get(`https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/4/all/all/1/${year}/0/0?GenderId=${genderId}?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`)
-      .then((response) => {
-        setData(response.data.tableResult);
-      })
-      .catch((error) => {
-        console.error("error:", error);
-      });
-  };
-
-  useEffect(() => {
-    if (selectedYear) {
-      dataForEachYear(selectedYear, selectedGenderId);
+//Get the data from the API and store it in stateData
+async getStateData() {
+    const apiUrl = this.getApiURL();
+    try {
+      const response = await axios.get(apiUrl);
+      if (response.status === 200) {
+        this.setState({ stateData: response.data.tableResult });
+      } else {
+        console.error("Unexpected error. Status code: ", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-  }, [selectedYear, selectedGenderId]);
+  }
 
-  const handleGenderChange = (event) => {
-    setSelectedGenderId(event.target.value);
+  //Get units for each measure for the tooltip on the map
+  getUnits(endUnits) {
+    if (this.props.measure === "Asthma in Children") {
+      return endUnits = "(Percent)"
+    }
+    else if (this.props.measure === "Childhood Brain and Nervous System Cancer") {
+      return endUnits = "(Counts)"
+    }
+    else if (this.props.measure === "Childhood Cancer Leukemia") {
+      return endUnits = "(Counts)"
+    }
+  }
+
+  //Get subtitle for each measure
+  getSubtitle(subtitle) {
+    if(this.props.measure === "Asthma in Children") {
+      return subtitle = "Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma"
+    }
+    else if (this.props.measure === "Childhood Brain and Nervous System Cancer") {
+      return subtitle = "Annual Number of Cases of Brain and Central Nervous System Cancer among Children <20 Years of Age"
+    }
+    else if (this.props.measure === "Childhood Cancer Leukemia") {
+      return subtitle = "Annual Number of Leukemia among Children <20 Years of Age"
+    }
+  }
+  
+
+  //When gender input from user changes
+  handleGenderChange = (event) => {
+    this.setState({ gender: event.target.value }, () => {
+      this.getStateData(); 
+    });
   };
-  
-  return (
-    <div className='nation-mapView'>
-     <div className='container'>
-      {/*return data for asthma in children for the typed in location*/}
-      <h2>Asthma in Children in U.S.</h2>
-      </div>
-      <div className="dropdown">
-        <label> Year: </label>
-        <select
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-        >
-          <option value=""> Select Year </option>
-          <option value="2020">2020</option>
-          <option value="2019">2019</option>
-          <option value="2018">2018</option>
-          <option value="2017">2017</option>
-          <option value="2016">2016</option>
-          <option value="2015">2015</option>
-          <option value="2014">2014</option>
-          <option value="2013">2013</option>
-          <option value="2012">2012</option>
-          <option value="2011">2011</option>
-        </select>
-      </div>
-      <div className='dropdown'>
-      <label htmlFor="gender">Select Gender:</label>
-      <select id="gender" value={selectedGenderId} onChange={handleGenderChange}>
+
+  //When year input from user changes
+  handleYearChange = (event) => {
+    this.setState({ selectedYear: event.target.value }, () => {
+      this.getStateData(); 
+    });
+  };
+
+  //Render the map
+  render() {
+    const selectedYear = this.state.selectedYear;
+    const yearOptions = this.props.yearRange;
+
+    return (
+      <div className='nation-mapView'>
+        <div className='container'>
+          <FadeInSection>
+          <FadeInSection>
+          <h1>{this.props.measure} in the U.S.</h1>
+          <h3>{this.getSubtitle()}</h3>
+          </FadeInSection>
+        <div className='centered-dropdown'>
         
-        <option value="1">Male</option>
-        <option value="2">Female</option>
-      </select>
-      </div>
+          {/* Year dropdown */}
+        <div className="dropdown-center-year">
+          <label> Year: </label>
+          <select
+            value={selectedYear}
+            onChange={this.handleYearChange}
+            style={{ fontSize: '18px', marginBottom: '50px'}}
+          >
+            {yearOptions.map((year) => (
+                <option key={year} value={year}>
+                    {year}
+                </option>
+            ))}
+          </select>
+        </div>
 
 
-<ComposableMap
-  projection="geoAlbers"
-  projectionConfig={{
-    scale: 1000
-  }}
->
-  
-  <Geographies geography={GEOJSON_URL}>
-    {({ geographies }) =>
-      geographies.map((geo) => {
-        const stateData = data.find((d) => d.geo === geo.properties.name);
-        const fillColor = stateData ? getColorScale(stateData.dataValue) : '#D6D6DA';
-        
-        
-
-        return (
+        {/* Gender dropdown */}
+          <div className="dropdown-center-gender">
+            <label>Select a Gender: </label>
+            <select
+              value={this.state.gender}
+              onChange={this.handleGenderChange}
+              style={{ fontSize: '18px', marginBottom: '50px' }}
+            >
+              <option>Select a Gender</option>
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+            </select>
+          </div>
           
-          <Geography
-            key={geo.rsmKey}
-            geography={geo}
-            data-tip={`${geo.properties.name} (Percent): ${stateData && stateData.displayValue }`}
-            style={{
-              default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
-              hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
-              pressed: { outline: "none" }
-            }}
+          </div>
+        
+        {/* If data loads, create the map. If not, loading symbol */}
+        <FadeInSection>
+        {this.state.stateData ? (
             
-            onMouseEnter={() => {
-              ReactTooltip.rebuild();
-            }}
-          />
-        );
-          
-      })
-    }
-  </Geographies>
-</ComposableMap>
-
-
-      <ReactTooltip />
- 
-    </div>
-  );
+        <EPHMap
+            
+            geoUrl={stateGeoUrl}
+            data={this.state.stateData}
+            mapType={"states"}
+            units={this.getUnits()}
+           />
+           
+           
+        ) : (
+            <LoadSpinner />
+        )}
+        </FadeInSection>
+        </FadeInSection>
+      </div>
+      </div>
+    );
+  }
 }
 
 
+function LoadSpinner() {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <LoadingSpinner></LoadingSpinner>
+      </div>
+    );
+  }
 
-
-
-
-export default SimpleMap;
+export default StateMap;

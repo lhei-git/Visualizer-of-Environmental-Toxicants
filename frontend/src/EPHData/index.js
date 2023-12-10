@@ -200,7 +200,7 @@ if (!state.map.state) {
 
         {currentTab === "22" && (<StateData measure={"Asthma among Children"} measureID={587} units={"Percent of Children with Asthma"} />)} 
         {currentTab === "23" && (<StateData measure={"Brain and Central Nervous System Cancer among Children"} measureID={67} units={"Age-adjusted Incidence Rate of Brain and Other Nervous System Cancer per 100,000 Population"} />)} 
-        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={"Annual Number of Leukemia among Children <20 Years of Age"} />)}         
+        {currentTab === "4" && (<StateData measure={"Leukemia among Children"} measureID={71} units={`Annual Number of Leukemia among \nChildren <20 Years of Age`} />)}         
 
       </div>
      

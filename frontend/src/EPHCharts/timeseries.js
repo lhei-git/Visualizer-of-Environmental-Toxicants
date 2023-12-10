@@ -1,3 +1,4 @@
+//created by katie
 import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Label} from 'recharts';
@@ -5,7 +6,8 @@ import "./timeseries.css";
 
 const TimeSeries = ({ data, size, units }) => {
     const chartContainer = useRef(null);        //get size of container
-    const [sizeDynamic, setSize] = useState({ width: 0, height: 0 });
+    const [sizeDynamic, setSize] = useState({ width: 0, height: 0 }); //initalize size var for time series size
+    const [yAxisDomain, setYAxisDomain] = useState([0, 100]); // initialize y axis domain
 
     
 /* Amrita - Customize Line and Tooltip to matching TRI timelines */
@@ -33,13 +35,14 @@ class CustomTooltip extends Tooltip {
   };
 }
     
+//katie: made timelines responsive
     useEffect(() => {
         const updateDimensions = () => {
           if (chartContainer.current) {
             const containerWidth = chartContainer.current.clientWidth;
             const containerHeight = chartContainer.current.clientHeight;
             const padding = 20;
-            const calculatedWidth = containerWidth - 200;
+            const calculatedWidth = containerWidth - 50;
             const calculatedHeight = containerHeight - padding;
     
             // set size dynamically
@@ -58,19 +61,73 @@ class CustomTooltip extends Tooltip {
         };
       }, []);
 
+      useEffect(() => {
+        const dataValues = data.map(item => parseFloat(item.dataValue)); // convert dataValue to numbers to be read
+        //get min and max, then pass to y axis domain variable
+        const minValue = Math.min(...dataValues);
+        const maxValue = Math.max(...dataValues) + 5; //set upper bumper
+        if (minValue < 5) {
+          setYAxisDomain([Math.floor(minValue), Math.ceil(maxValue)]);
+        } else {
+          setYAxisDomain([Math.floor(minValue) - 5, Math.ceil(maxValue)]); //set bottom bumper
+        }
+      }, [data]); //'data' in dependency array makes use effect run whenever data set changes
+    
+      //if the unit label is too long to fit on one line, split into two strings
+      function splitUnits(inputUnits) {
+        if (inputUnits.length <= 36) { //check length
+          return { units1: inputUnits, units2: null, units3: null };
+        } else {
+          const lastSpaceIndex = inputUnits.lastIndexOf(' ', 36); //ensure that string gets split at a space, not the middle of a word
+          const units1 = inputUnits.substring(0, lastSpaceIndex);
+          let units2 = inputUnits.substring(lastSpaceIndex + 1);
+
+          /* Amrita - Adding code for when units2 is too long */
+          if (units2.length >= 36) {
+            const lastSpaceIndex2 = inputUnits.lastIndexOf(' ', 36); //ensure that string gets split at a space, not the middle of a word
+            const units3 = units2.substring(lastSpaceIndex2); // splits original units2 and initializes it as the 2nd part of unit2
+            units2 = units2.substring(0, lastSpaceIndex2);  //  re-initializes units2 to be 1st part of original unit2
+
+            return { units1, units2, units3 };
+          }
+
+          return { units1, units2, units3: null };
+        }
+      }
+      const newUnits = splitUnits(units)
+
+      //return .jsx layout of time series
     return (
     <div ref={chartContainer} className='time-series-container'>
        
-      <LineChart width={sizeDynamic.width} height={sizeDynamic.height} data={data}>
+      <LineChart width={sizeDynamic.width} height={sizeDynamic.height} data={data} margin={{left:50, right:70}}>
       <CartesianGrid vertical={false} />
         <XAxis dataKey="year" />
-        <YAxis>
-          <Label 
-            style={{textAnchor: "middle"}}
-            angle={270} 
-            position='insideLeft'
-            value={units}
-            margin={200}/>
+        <YAxis domain={yAxisDomain}>
+          <Label
+            style={{ textAnchor: 'middle', whiteSpace: 'pre-line' }}
+            angle={270}
+            position="insideLeft"
+            value={newUnits.units1}
+            dx={-30} 
+            
+          />
+          <Label
+            style={{ textAnchor: 'middle', whiteSpace: 'pre-line' }}
+            angle={270}
+            position="insideLeft"
+            value={newUnits.units2}
+            dx={-10} 
+         
+          />
+          <Label
+            style={{ textAnchor: 'middle', whiteSpace: 'pre-line' }}
+            angle={270}
+            position="insideLeft"
+            value={newUnits.units3}
+            dx={10} 
+         
+          />
         </YAxis>
         <CustomTooltip></CustomTooltip>
         <CustomLine name={units} type="monotone" dataKey="dataValue" stroke="#9c27b0" />
