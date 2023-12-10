@@ -4,6 +4,12 @@
     padding-left: 0%;
     padding-right: 20%;
   }
+
+/* Amrita - Adjusts timeseries on Health Outcomes page */
+.time-series {
+  display: flex;
+  justify-content: center;
+}
   
   /* Add media queries for responsiveness */
   

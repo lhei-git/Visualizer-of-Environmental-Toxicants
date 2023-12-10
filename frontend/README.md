@@ -2,7 +2,7 @@
 
 ## Development
 
-1. Create a .env variable with the following:
+1. Create a new `.env` file in the Project's `frontend/` folder and copy the following into it:
 ```sh
 REACT_APP_GOOGLE_API_KEY=<your key>
 REACT_APP_API_URL=http://localhost:8000

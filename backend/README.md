@@ -2,7 +2,7 @@
 
 ## Development (API only)
 
-0. create `.env` file in `backend/` directory with the following:
+1. Create a new `.env` file in the Project's `backend/` directory with the following:
 ```
 DB_HOST=127.0.0.1
 API_KEY=<vet api key>
@@ -14,19 +14,19 @@ DB_NAME=ubuntu
 API_URL=api.vet.lhei.org
 ```
 
-1. Downloading and installing respective package to create a local virtual environment (dependencies work best with virtualenv):
+2. Downloading and installing respective package to create a local virtual environment (dependencies work best with virtualenv):
 ```sh
 python -m pip install --user virtualenv
 ```
 
-2. Creating and activating the virtual environment (in the root of the backend folder)
+3. Creating and activating the virtual environment (in the root of the backend folder)
 ```sh
 virtualenv <environmentname>
 <environmentname>\Scripts\activate
 ```
 NOTE: filepath system is for Windows, refer to documentation for Linux steps.
  
-3. Install the following dependencies with ```pip install```
+4. Install the following dependencies with ```pip install```
 ```sh
 asgiref==3.2.10
 Django==3.1.2

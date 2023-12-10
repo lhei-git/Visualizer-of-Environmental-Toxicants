@@ -76,13 +76,22 @@ class CustomTooltip extends Tooltip {
       //if the unit label is too long to fit on one line, split into two strings
       function splitUnits(inputUnits) {
         if (inputUnits.length <= 36) { //check length
-          return { units1: inputUnits, units2: null };
+          return { units1: inputUnits, units2: null, units3: null };
         } else {
           const lastSpaceIndex = inputUnits.lastIndexOf(' ', 36); //ensure that string gets split at a space, not the middle of a word
           const units1 = inputUnits.substring(0, lastSpaceIndex);
-          const units2 = inputUnits.substring(lastSpaceIndex + 1);
-      
-          return { units1, units2 };
+          let units2 = inputUnits.substring(lastSpaceIndex + 1);
+
+          /* Amrita - Adding code for when units2 is too long */
+          if (units2.length >= 36) {
+            const lastSpaceIndex2 = inputUnits.lastIndexOf(' ', 36); //ensure that string gets split at a space, not the middle of a word
+            const units3 = units2.substring(lastSpaceIndex2); // splits original units2 and initializes it as the 2nd part of unit2
+            units2 = units2.substring(0, lastSpaceIndex2);  //  re-initializes units2 to be 1st part of original unit2
+
+            return { units1, units2, units3 };
+          }
+
+          return { units1, units2, units3: null };
         }
       }
       const newUnits = splitUnits(units)
@@ -109,6 +118,14 @@ class CustomTooltip extends Tooltip {
             position="insideLeft"
             value={newUnits.units2}
             dx={-10} 
+         
+          />
+          <Label
+            style={{ textAnchor: 'middle', whiteSpace: 'pre-line' }}
+            angle={270}
+            position="insideLeft"
+            value={newUnits.units3}
+            dx={10} 
          
           />
         </YAxis>
