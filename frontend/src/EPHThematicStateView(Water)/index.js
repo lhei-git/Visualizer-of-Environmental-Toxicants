@@ -15,6 +15,9 @@ import FadeInSection from "../FadeInSection";
 const React = require("react");
 const Component = React.Component;
 
+const apiBeginning = "https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder";
+
+
 //Creating class
 class EPHThematicWaterStateMap extends Component {
   constructor(props) {
@@ -61,11 +64,8 @@ class EPHThematicWaterStateMap extends Component {
     //sets scaling and positioning for the map projection
     if (this.state.prevStateName !== this.props.stateName) {
       this.setState({ prevStateName: this.props.stateName });
-
       const found = data.find((e) => e.state === this.props.stateName);
 
-      
-      
       if(found) {
         this.setState({
           lat: found.latitude,
@@ -73,42 +73,25 @@ class EPHThematicWaterStateMap extends Component {
           scale: found.scale,
           geoUrl: found.geoUrl,
           stateLongName: found.name,
-
-        
         });
       }
-    else {
-        this.setState({
-          lat: 45.3504,
-          lon: -85.5603,
-          scale: 3400,
-          geoUrl: "https://raw.githubusercontent.com/missisrat/topology/main/MI.json",
-          
-        })
+      else {
+          this.setState({
+            lat: 45.3504,
+            lon: -85.5603,
+            scale: 3400,
+            geoUrl: "https://raw.githubusercontent.com/missisrat/topology/main/MI.json",
+            
+          })
+        }
       }
-    }
   }
-  
-    
-  
-
   
   handleContentCountyState(content) {
     this.setState({ content: content });
   }
 
 
-
-  /*
-    "arsenic in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
-    "deph in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
-    "pce in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
-    "pfas in water": [2015]
-    "radium in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
-    "tce in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
-    "uranium in water": [2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]
-
-  */
 
  //Get URL from EPH API
   getApiURL() {
@@ -117,28 +100,28 @@ class EPHThematicWaterStateMap extends Component {
     const selectedContaminant = this.state.contaminant;
 
     if(this.props.measure === "Arsenic in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/769/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
+      return `${apiBeginning}/769/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "DEPH in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/802/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`    
+      return `${apiBeginning}/802/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`    
     }
     
     else if (this.props.measure === "PCE in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/807/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
+      return `${apiBeginning}/807/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
 
     else if (this.props.measure === "PFAS in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/734/184/all/all/2/${selectedYear}/0/0?ContaminantId=${selectedContaminant}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
+      return `${apiBeginning}/734/184/all/all/2/${selectedYear}/0/0?ContaminantId=${selectedContaminant}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "Radium in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/817/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
+      return `${apiBeginning}/817/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`
     }
     else if (this.props.measure === "TCE in Community Water") { //not sure if this is the right one 
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/812/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
+      return `${apiBeginning}/812/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
       `
     }
     else if (this.props.measure === "Uranium in Community Water") {
-      return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/822/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
+      return `${apiBeginning}/822/102/all/all/1/${selectedYear}/0/0?PMDisplayId=${selectedLevel}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744
       `
     }
     
@@ -148,11 +131,13 @@ class EPHThematicWaterStateMap extends Component {
   /*get data or each county that is not a drinking water measure*/
   async getCountyData() {
     const apiUrl = this.getApiURL();
+    const stateName = this.props.stateName;
   
     try {
       const response = await axios.get(apiUrl);
       if (response.status === 200) {
         const rawData = response.data.cwsTableResult;
+        const stateData = rawData.filter(entry => entry.stateName === stateName);
   
         const geoIdData = {};
   
@@ -173,6 +158,7 @@ class EPHThematicWaterStateMap extends Component {
         });
   
         this.setState({ countyData: averagedData });
+                
       } else {
         console.error("Unexpected error. Status code:", response.status);
       }
@@ -237,11 +223,8 @@ class EPHThematicWaterStateMap extends Component {
     }
     else if (this.props.measure === "Uranium in Community Water") {
       return subtitle = "Annual Mean Concentration of Uranium (µg/L)"
-      
     }
-
   }  
-  
   
   //Year dropdown configuration
   handleYearChange = (event) => {
@@ -271,7 +254,7 @@ class EPHThematicWaterStateMap extends Component {
     const yearOptions = this.props.yearRange;
 
     return (
-      <div className="thematic-view-container">
+      <div className="eph-thematic-view-container">
         <div className="eph-flex-item">
         <FadeInSection>
         <FadeInSection>
@@ -337,6 +320,8 @@ class EPHThematicWaterStateMap extends Component {
         </div>
           
         <FadeInSection>
+
+          
        {/* If data loads, create county-level state map. If not, load spinner */}
 
           {this.state.countyData ? (

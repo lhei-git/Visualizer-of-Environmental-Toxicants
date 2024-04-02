@@ -38,6 +38,30 @@ const NationalData = ({measure, units, measureID}) => {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
+    function getSubtitle(subtitle) { 
+      if(measureID === 858) {
+          return subtitle = "National Report on Human Exposure to Environmental Chemicals | Lead in Blood"; 
+        }
+        else if (measureID === 856) {
+          return subtitle = "National Report on Human Exposure to Environmental Chemicals | Metals and Metalloids in Urine 1999-2014 (Creatinine Corrected)"    
+        }
+        
+        else if (measureID === 863) {
+          return subtitle = "National Report on Human Exposure to Environmental Chemicals | Phthalate Metabolites in Urine (Creatinine Corrected)"  
+        }
+    
+        else if (measureID === 859) {
+          return subtitle = "National Report on Human Exposure to Environmental Chemicals | Personal Care and Consumer Products Metabolites in Urine (Creatinine Corrected)" 
+        }
+        else if (measureID === 826) {
+          return subtitle = "National Report on Human Exposure to Environmental Chemicals | Perfluoroalkyl and Polyfluoroalkyl Substances: Surfactants in Blood" 
+        }
+        else if (measureID === 861) {
+          return subtitle = "National Report on Human Exposure to Environmental Chemicals | Pesticide Metabolites: Herbicide Metabolites in Urine (Creatinine Corrected)"
+        }
+        
+  }
+
     const accordionMeasure = [
         {
           measureID: 858,
@@ -128,7 +152,8 @@ const NationalData = ({measure, units, measureID}) => {
         <div className="national-container">
             <FadeInSection>
             <FadeInSection>
-            <h1>{measure +" (national data)"}</h1>
+            <h1>{measure +" (National Data)"}</h1>
+            <h3>{getSubtitle()}</h3>
             </FadeInSection>
             <div className="filter-container">
                 <FadeInSection>

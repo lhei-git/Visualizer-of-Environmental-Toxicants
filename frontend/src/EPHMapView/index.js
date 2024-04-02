@@ -13,6 +13,7 @@ import FadeInSection from '../FadeInSection';
 
 //geoUrl for creating the map of the whole United States
 const stateGeoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+const apiBeginning = "https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder";
 
 
 //Creating the class
@@ -61,11 +62,11 @@ class StateMap extends Component {
     const selectedGender = this.state.gender;
 
     if (this.props.measure === "Asthma in Children") {
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/587/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
+        return `${apiBeginning}/587/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
     } else if (this.props.measure === "Childhood Brain and Nervous System Cancer") {
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/67/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
+        return `${apiBeginning}/67/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
     } else if (this.props.measure === "Childhood Cancer Leukemia") {
-        return `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/71/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
+        return `${apiBeginning}/71/4/all/all/1/${selectedYear}/0/0?GenderId=${selectedGender}&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`;
     }
 }
 

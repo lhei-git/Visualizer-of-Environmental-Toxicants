@@ -60,6 +60,18 @@ const StateData = ({ measure, measureID, units }) => {
   const [state] = useReducer(reducer, initialState);
   const stateName = getLocationParents(state.map, 'stateLong');
 
+
+  function getSubtitle(subtitle) {
+    if(measureID === 587) {
+      return subtitle = "Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma"
+    }
+    else if (measureID === 67) {
+      return subtitle = "Annual Number of Cases of Brain and Central Nervous System Cancer among Children <20 Years of Age"
+    }
+    else if (measureID === 71) {
+      return subtitle = "Annual Number of Leukemia among Children <20 Years of Age"
+    }
+  }
   const accordionMeasure = [
     {
       measureID: 587,
@@ -111,6 +123,7 @@ const StateData = ({ measure, measureID, units }) => {
       <div className="state-container" ref={containerRef}>
         <FadeInSection>
           <h1>{measure} in {stateName}</h1>
+          <h3>{getSubtitle()}</h3>
         </FadeInSection>
 
         <div className={`time-series`}>
@@ -136,7 +149,7 @@ const StateData = ({ measure, measureID, units }) => {
 
         <FadeInSection>
           <div className={'eph-table-container'}>
-            <StateTable measureID={measureID} />
+            <StateTable measureID={measureID} units={units} />
           </div>
         </FadeInSection>
 

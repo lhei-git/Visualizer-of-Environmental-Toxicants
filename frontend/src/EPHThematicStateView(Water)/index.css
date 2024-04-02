@@ -1,24 +1,25 @@
-
-
 .centered-dropdown {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 100px;
+    gap: 20px;
   }
 
-.thematic-view-container .eph-flex-item h1 {
+.eph-thematic-view-container .eph-flex-item h1 {
     text-align: center;
-    margin-top: 50px;
+    margin-top: -30px;
     padding: 0;
 }
 
 
   
-.thematic-view-container .eph-flex-item h3 {
+.eph-thematic-view-container .eph-flex-item h3 {
     text-align: center;
     color: grey;
+    margin-top: -50px;
 }
-.eph-flex-item {
-    margin-left: 220px;
+
+.eph-thematic-view-container{
+    align-items: center;
+    margin: 0px auto;
 }

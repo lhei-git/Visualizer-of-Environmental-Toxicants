@@ -16,11 +16,7 @@ import ReactTooltip from 'react-tooltip';
 import "./index.css"
 
 const EPHMap = (props) => {
-    const [position, setPosition] = useState({coordinates: [-96, 38], zoom: 1});
-
-      function handleMoveEnd(position) {
-        setPosition(position);
-      }
+    
       
       const [minValue, setMinValue] = useState(null);
       const [maxValue, setMaxValue] = useState(null);
@@ -32,8 +28,7 @@ const EPHMap = (props) => {
         
       }, [props.data]);
 
-//Genderate colors for the legend and map for county maps
-
+//Generate colors for the legend and map for county maps
 function generateColor(value, minValue, maxValue) {
   const numColors = 4; // Number of distinct colors
   const colorScale = [
@@ -41,20 +36,15 @@ function generateColor(value, minValue, maxValue) {
   ];
 
   // Ensure value is within the range [minValue, maxValue]
-  const clampedValue = Math.max(minValue, Math.min(maxValue, value));
+  const cvalue = Math.max(minValue, Math.min(maxValue, value));
 
-  // Map clampedValue to the color scale
-  const colorIndex = Math.floor((clampedValue - minValue) / (maxValue - minValue) * numColors);
+  // Map cvalue to the color scale
+  const colorIndex = Math.floor((cvalue - minValue) / (maxValue - minValue) * numColors);
 
   return colorScale[colorIndex];
 }
 
 
-
-      
-      
-      
-      
       
       //Return color for county maps
       function getColorScale(dataValue, minValue, maxValue) {
@@ -65,13 +55,33 @@ function generateColor(value, minValue, maxValue) {
       function getColorScaleState(dataValue) {
         return dataValue == null
         ? '#D6D6DA'
+        : dataValue < 5
+        ? '#C0D9E9'
+        : dataValue < 10
+        ? '#A3CCE6'
+        : dataValue < 15
+        ? '#85B0E3'
         : dataValue < 20
-        ? '#bbe9fa'
+        ? '#6693E0'
+        : dataValue < 30
+        ? '#4886DD'
+        : dataValue < 40
+        ? '#2A6AD9'
         : dataValue < 50
-        ? '#8bdefc'
+        ? '#1C5BC5'
+        : dataValue < 60
+        ? '#154CAE'
+        : dataValue < 70
+        ? '#0E3D97'
+        : dataValue < 80
+        ? '#082E80'
+        : dataValue < 90
+        ? '#05246B'
         : dataValue < 100
-        ? '#62cdf5'
-        : '#1ab3eb';
+        ? '#031B55'
+        : dataValue < 110
+        ? '#02133F'
+        : '#010B2A';
       }
 
 
@@ -212,7 +222,7 @@ if(props.mapType === "states")
                                             key={geo.rsmKey}
                                             geography={geo}
                                             //tooltip for hovering
-                                            data-tip={`${geo.properties.NAME} ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"} ${props.units}`}
+                                            data-tip={`${geo.properties.NAME}: ${countyData && countyData.dataValue !== null ? Number(countyData.dataValue).toFixed(2) : "No Data"} ${props.units}`}
                                             style={{
                                               default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
                                               hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
@@ -222,30 +232,27 @@ if(props.mapType === "states")
                                                 ReactTooltip.rebuild();
 
                                             }}
-
                                             />
-
-                                            
                                         )
-  
-                                        
+
                                     } else {
                                         return (
                                           
-                                            <Geography
-                                                key={geo.rsmKey}
-                                                geography={geo}
-                                                data-tip={geo.properties.NAME}
-                                                style={{
-                                                  default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
-                                                  hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
-                                                  pressed: { outline: "none" }
-                                                }}
-                                                onMouseEnter={() => {
-                                                    ReactTooltip.rebuild();
-                                                }}
-
-                                                />
+                                          <Geography
+                                          
+                                            key={geo.rsmKey}
+                                            geography={geo}
+                                            data-tip={`No Data Available for this County`}
+                                            style={{
+                                              default: { fill: fillColor, stroke: '#000', strokeWidth: 1, outline: "none" },
+                                              hover: { fill: fillColor, cursor: 'pointer', stroke: '#000', strokeWidth: 2, outline: "none" },
+                                              pressed: { outline: "none" }
+                                            }}
+                                            onMouseEnter={() => {
+                                                ReactTooltip.rebuild();
+                                            }}
+                                          
+                                          />
                                         )
                                     }
 

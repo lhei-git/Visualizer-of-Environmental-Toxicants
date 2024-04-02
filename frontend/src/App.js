@@ -122,7 +122,7 @@ const Navbar = (props) => {
             </li>
             <li className={location.pathname === "/datacomp" ? "active" : ""}>
               {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
-              <Link to="/datacomp" onClick={() => setShowMenu(false)}>Comparison</Link>
+              <Link to="/datacomp" onClick={() => setShowMenu(false)}>Comparisons</Link>
             </li>
             
             

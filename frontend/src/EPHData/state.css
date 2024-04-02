@@ -7,6 +7,12 @@
     align-items: center;
     
   }
+  .state-container h3{
+    text-align: center;
+    color: grey;
+    margin-top: -50px;
+  }
+  
   .state-container .filter-container{
   display: flex;
   width: 100%;
@@ -34,6 +40,7 @@
       padding-top: 30px;
       padding-right: 80px;
       font-size: 1.5rem;
+      text-align: center;
     }
     .state-container p {
         padding-top: 30px;
