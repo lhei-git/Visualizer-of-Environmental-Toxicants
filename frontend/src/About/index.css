@@ -12,7 +12,7 @@
   height: 100%;
   opacity: 1;
   overflow: auto; /* Amrita - Changed this because if user scrolls while window is minimized, it had white-space when user maximizes again */
-  background-image: url("../../src/assets/oil.jpg");
+  background-image: url("../../src/assets/newbg.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
