@@ -7,6 +7,12 @@
     align-items: center;
     
   }
+  .state-container .state-header h3{
+    text-align: center;
+    color: #808080;
+    margin-top: -50px;
+  }
+  
   .state-container .filter-container{
   display: flex;
   width: 100%;

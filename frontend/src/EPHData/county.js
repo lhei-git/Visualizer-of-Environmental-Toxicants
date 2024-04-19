@@ -77,7 +77,70 @@ const CountyData = ({measure, measureID, units}) => {
     //create date object to be used in data citation - shows that the app pulls from the EPH API the day the user is accessing the site
     const currentDate = new Date();
     const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-
+    
+    function getSubtitle(subtitle) { 
+        if(measureID === 1120) {
+            return subtitle = "Crude Prevalence of Current Asthma among Adults >= 18 Years of Age"; 
+          }
+          else if (measureID === 99) {
+            return subtitle = "Annual Number of Hospitalizations for Asthma"    
+          }
+          
+          else if (measureID === 1095) {
+            return subtitle = "Crude Prevalence of Cancer among Adults >= 18 Years of Age"  
+          }
+      
+          else if (measureID === 45) {
+            return subtitle = "Total Fertility Rate per 1000 women" 
+          }
+          else if (measureID === 553) {
+            return subtitle = "Crude Death Rate from Heart Attack among People >=35 Years of Age per 100,000 Population" 
+          }
+          else if (measureID === 279) { 
+            return subtitle = "Infant (<1 Year of Age) Mortality Rate per 1000 Live Births Over a 5-year Period" 
+          }
+          else if (measureID === 36) {
+            return subtitle = "Percent of Low Birthweight (<2500g) Live Singleton Births" 
+          }
+          else if (measureID === 30) {
+            return subtitle = "Percent of Preterm (<37 Weeks Gestation) Live Singleton Births" 
+          }
+          if(measureID === 769) {
+            return subtitle = "Annual Mean Concentration of Arsenic (µg/L)"
+          }
+          else if (measureID === 802) {
+            return subtitle = "Annual Mean Concentration of DEHP (µg/L)"
+          }
+          
+          else if (measureID === 807) {
+            return subtitle = "Annual Mean Concentration of PCE (µg/L)"
+          }
+      
+          else if (measureID === 734) {
+            return subtitle = "CWS with Detections of PFAS Chemicals (PFOS, PFOA, PFNA, PFBS, PFHxS, PFHpA)"
+          }
+          else if (measureID === 817) {
+            return subtitle = "Annual Mean Concentration of Radium (pCi/L)"
+          }
+          else if (measureID === 812) { 
+            return subtitle = "Annual Mean Concentration of TCE (µg/L)"
+            
+          }
+          else if (measureID === 822) {
+            return subtitle = "Annual Mean Concentration of Uranium (µg/L)"
+            
+          }
+          if(measureID === 587) {
+            return subtitle = "Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma"
+          }
+          else if (measureID === 67) {
+            return subtitle = "Annual Number of Cases of Brain and Central Nervous System Cancer among Children <20 Years of Age"
+          }
+          else if (measureID === 71) {
+            return subtitle = "Annual Number of Leukemia among Children <20 Years of Age"
+          }
+    }
+    
     const accordionMeasure = [
 
         {
@@ -485,6 +548,7 @@ const CountyData = ({measure, measureID, units}) => {
             {!waterMeasureIDs.includes(measureID) && (
                     <CountyTable measureID={measureID} units={units} />
                 )}   
+                
                 
             </div>
             </FadeInSection>

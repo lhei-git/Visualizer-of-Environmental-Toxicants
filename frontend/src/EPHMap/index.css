@@ -1,27 +1,32 @@
 .mapView-individual,
 .mapView-states {
   position: relative;
-  width: 80%;
+  width: 65%;
   margin: 0 auto;
   min-height: 100px; 
   margin-bottom: 150px;
+  margin-top: -50px;
 }
 
   .mapView-states {
     
+    
     margin-bottom: 200px;
+    
     
   }
   
+
   .geography-attributes {
     margin-bottom: 120px;
     font-size: 18px;
   }
   .mapView-individual .legend {
     position: absolute;
-    left: 10px;
+    left: -150px;
     right: 10px;
-    width: 30%;
+    top: 200px;
+    width: 20%;
     padding-bottom: 200px;
     margin-bottom: 150px;
     background: white;
@@ -35,6 +40,7 @@
     font-size: 16px;
     text-align: center;
   }
+  
   
   .mapView-individual.legend-item {
     display: flex;
@@ -74,7 +80,7 @@
   
   .mapView-individual,
   .mapView-states {
-    min-height: 200px;
+    min-height: 250px;
     margin-bottom: 150px;
   }
   
@@ -101,9 +107,8 @@
     font-weight: normal;
   }
 }
-  
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 768px) {
 
   .legend-container {
     top: 5px;
@@ -117,7 +122,7 @@
   
   .mapView-individual,
   .mapView-states {
-    min-height: 200px;
+    min-height: 250px;
     margin-bottom: 150px;
   }
   
@@ -144,3 +149,4 @@
     font-weight: normal;
   }
 }
+  

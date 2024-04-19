@@ -20,6 +20,7 @@ const NationalEPHCompare = ({ measure, units, measureID }) => {
         16 // Set an initial value for demographic filter
     );
 
+
     function chooseFilters(percentile, demographic) {
         sessionStorage.setItem("selectedPercentile", percentile);
         setSelectedDemographic(demographic);
