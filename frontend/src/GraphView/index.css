@@ -38,6 +38,7 @@
 .graph-container .selector ul {
   text-align: center;
   border-radius: 5px;
+  padding-inline-start: 0px;
 }
 
 .graph-container .selector li {
@@ -253,5 +254,181 @@
   .summary-table-header {
     font-size: 14px; 
     padding: 8px; 
+  }
+}
+
+/* Amrita - Responsiveness for TRI Page - Tab Bar, Top Tens, Timelines, Appendix */
+@media (max-width: 1200px) {
+  .graph-container .graphs {
+    width: 70%;
+    margin: 0px auto;
+
+  }
+  .graph-container .graph {
+    padding-top: 0px;
+    margin-left: 0px;
+    padding-bottom: 100px;
+    width: 85%;
+  }
+
+  .graph-container .timeline-total {
+    width: 100%;
+    max-width: 120em;
+    left: 0%;
+  }
+  .graph-container .timeline-top-fac {
+    width: 80%;
+    top: 100%;
+    left: 0%;
+  }
+  .graph-container .timeline-top-parents {
+    padding-left: 0em;
+    width: 80%;
+    top: 180%;
+    left: 0%;
+  }
+  .graph-container .timeline-top-chem {
+    width: 80%;
+    top: 250%;
+    left: 0%;
+  }
+  .graph-container .timeline-top-pbts {
+    padding-left: 0em;
+    width: 80%;
+    top: 320%;
+    left: 0%;
+  }
+
+  .graph-container .appendix-fac-graph {
+    width: 80%;
+    left: 2%;
+  }
+  
+  .graph-container .appendix-fac-table {
+    width: 80%;
+    top: 90%;
+    left: 2%;
+    padding-left: 0em;
+  }
+  
+  .graph-container .appendix-chem-graph {
+    width: 80%;
+    top: 170%;
+    left: 2%;
+  }
+  
+  .graph-container .appendix-chem-table {
+    width: 80%;
+    top: 245%;
+    left: 2%;
+    padding-left: 0em;
+  }
+}
+@media (max-width: 700px) {
+  .graph-container .selector li {
+    display: inline-block;
+    cursor: pointer;
+    background: #efefef;
+    color: #444;
+    border: 1px solid #e2e2e2;
+    padding: 10px 40px;
+  }
+  .graph-container .graphs {
+    width: 90%;
+    margin: 0px auto;
+
+  }
+  .graph-container .graph {
+    margin-left: 0px;
+    padding-bottom: 100px;
+    width: 85%;
+  }
+  .graph-container .timeline-total {
+    position: absolute;
+    width: 120%;
+    max-width: 120em;
+    left: 0%;
+  }
+  .graph-container .timeline-top-fac {
+    position: absolute;
+    width: 80%;
+    top: 70%;
+  }
+  .graph-container .timeline-top-parents {
+    position: absolute;
+    padding-left: 0em;
+    width: 80%;
+    top: 120%;
+    left: 0%;
+  }
+  .graph-container .timeline-top-chem {
+    position: absolute;
+    width: 80%;
+    top: 170%;
+  }
+  .graph-container .timeline-top-pbts {
+    position: absolute;
+    padding-left: 0em;
+    width: 80%;
+    top: 220%;
+    left: 0%;
+  }
+}
+
+/* Amrita - Responsiveness for TRI Headings */
+@media (max-width: 600px) {
+  .summary table {
+    table-layout: auto;
+  }
+  .graph-container .graphs {
+    width: 100%;
+    margin: 0px auto;
+
+  }
+  .graph-container .graph {
+    padding-top: 100px;
+    margin-left: 10px;
+    padding-bottom: 100px;
+    width: 85%;
+  }
+}
+
+@media (max-width: 500px) {
+  .graph-header {
+    padding-left: 0px;
+    text-align: center;
+  }
+  .graph-header h1,
+  .graph-header h2 {
+    font-size: 20px;
+  }
+  .summary table {
+    table-layout: auto;
+  }
+}
+
+@media (max-width: 470px) {
+  .graph-header {
+    padding-left: 0px;
+    text-align: center;
+  }
+  .graph-header h1,
+  .graph-header h2 {
+    font-size: 15px;
+  }
+  .summary th,
+  .summary td {
+    padding: 5px;
+    font-size: 15px;
+  }
+  .graph-container .graphs {
+    width: 100%;
+    margin: 0px auto;
+  }
+  .graph-container .graph {
+    padding-top: 100px;
+    margin-left: 10px;
+    padding-bottom: 100px;
+    width: 95%;
   }
 }

@@ -33,18 +33,14 @@
   .county-container .time-series{
     align-items: center;
     justify-content: center;
+    padding-right: 150px;
   }
   
     .county-container h1 {
       text-align: center;
       padding-top: 30px;
       font-size: 1.5rem;
-      
-    }
-    .county-container h3 {
       text-align: center;
-      color: grey;
-      margin-top: -50px;
     }
     .county-container p {
         padding-top: 30px;

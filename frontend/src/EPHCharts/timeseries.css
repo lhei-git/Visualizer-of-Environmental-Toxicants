@@ -4,13 +4,19 @@
     padding-left: 0%;
     padding-right: 20%;
   }
+
+/* Amrita - Adjusts timeseries on Health Outcomes page */
+.time-series {
+  display: flex;
+  justify-content: center;
+}
   
   /* Add media queries for responsiveness */
   
   @media screen and (max-width: 600px) {
     /* Adjust styles for screens with a width up to 600 pixels */
     .time-series-container {
-      width: 300px;
+      width: 400px;
       height: 200px; /* Set a fixed height for smaller screens */
     }
   }

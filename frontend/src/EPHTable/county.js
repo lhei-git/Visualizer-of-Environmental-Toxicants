@@ -16,7 +16,7 @@ class CountyTable extends Component {
         releaseType: 'all',
         year: 2022,
       },
-      errorMessage: '',
+      errorMessage: null,
       countyID: '',
       years: [],
       data: [],
@@ -55,7 +55,11 @@ class CountyTable extends Component {
       if (error == 'Error: Error fetching county ID'){
         console.log("setting new error message!");
         newErrorMessage = "No data available for selected health issue in " + getLocationParents(this.state.map, 'county') + " County";
+      } else if (error == 'Error: Null county name for location searched'){
+        console.log("setting new error message!");
+        newErrorMessage = "Search a smaller location (address, city, or county) to view data on a specific county";
       }
+
       this.setState({ errorMessage: newErrorMessage });
     }
   }

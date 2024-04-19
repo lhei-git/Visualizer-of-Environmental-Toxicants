@@ -122,8 +122,10 @@ const StateData = ({ measure, measureID, units }) => {
     <FadeInSection>
       <div className="state-container" ref={containerRef}>
         <FadeInSection>
+          <div className='state-header'>
           <h1>{measure} in {stateName}</h1>
           <h3>{getSubtitle()}</h3>
+          </div>
         </FadeInSection>
 
         <div className={`time-series`}>
@@ -154,11 +156,11 @@ const StateData = ({ measure, measureID, units }) => {
         </FadeInSection>
 
         {currentAccordionMeasure &&
-          currentAccordionMeasure.sections.map(section => (
+        currentAccordionMeasure.sections.map(section => (
             <FadeInSection key={section.title}>
-              <Accordion title={section.title} content={section.content} />
-            </FadeInSection>
-          ))}
+          <Accordion key={section.title} title={section.title} content={section.content} />
+          </FadeInSection>
+        ))}
       </div>
     </FadeInSection>
   );

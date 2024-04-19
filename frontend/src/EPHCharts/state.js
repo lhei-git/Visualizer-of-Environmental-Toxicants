@@ -1,14 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  Label,
-} from 'recharts';
 import axios from 'axios';
 import { getStateID } from '../EPHFilters/stateID';
 import { getLocationParents, getYearString } from '../helpers';
@@ -30,7 +21,7 @@ class StateTimeSeries extends Component {
       },
       errorMessage: '', 
       years: [],
-      data: [],
+      data: null,
     };
   }
 
@@ -53,6 +44,7 @@ class StateTimeSeries extends Component {
   
       const apiResponse = await axios.get(apiURL);
       console.log('API RESPONSE: ', apiResponse);
+      console.log('API endpoint: ', `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/1/1/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`)
       const responseData = apiResponse.data.tableResult.map((item) => ({
         year: item.year,
         dataValue: item.dataValue,
@@ -116,41 +108,22 @@ class StateTimeSeries extends Component {
   render() {
     // Your component rendering logic using this.state and this.props
   
-    const { errorMessage, loading } = this.state;
+    const { errorMessage } = this.state;
 
     if (errorMessage) {
       return <div>Error: {errorMessage}</div>;
-    }
-
-    if (loading) {
-      return <LoadSpinner />;
     }
 
     return (
       <div>
        {/* {this.props.stateData ? ( */}
        <div className="TimeSeries" >
-
-       {/*
-            <LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
-              <CartesianGrid />
-              <XAxis dataKey="year" />
-              <YAxis>
-                <Label
-                  style={{ textAnchor: 'middle' }}
-                  angle={270}
-                  position="insideLeft"
-                  value={this.props.units}
-                  margin={200}
-                />
-              </YAxis>
-              <Tooltip />
-              <CustomLine name="Percent" type="monotone" dataKey="dataValue" stroke="#9d27b0" />
-            </LineChart>
-        */}
-         
+            {/*loading spinner shows if data has not loaded*/}
+          {this.state.data ? (
             <TimeSeries data={this.state.data} size ={{width:this.props.size.width, height:this.props.size.height }} units={this.props.units}/>
-
+            ) : (
+                <LoadSpinner />
+            )}
           </div>
     
       </div>

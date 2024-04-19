@@ -10,7 +10,9 @@
 
   .mapView-states {
     
+    
     margin-bottom: 200px;
+    
     
   }
   
@@ -38,6 +40,7 @@
     font-size: 16px;
     text-align: center;
   }
+  
   
   .mapView-individual.legend-item {
     display: flex;

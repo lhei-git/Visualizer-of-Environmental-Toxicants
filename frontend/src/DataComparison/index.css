@@ -45,9 +45,10 @@
   padding-bottom: 30px;
 }
 
-.time-series {
-  display: flex;
-  justify-content: center;
+.comp-time-series {
+    display: flex;
+    justify-content: center;
+    margin-inline-start: -150px;  /* Amrita - Centers EPH Timeline */
 }
 
 /* Amrita - Formats the drop-down boxes */
@@ -73,23 +74,12 @@
   opacity: 0.7;
   left: 10%;
 }
-.comp-state-container h1 {
+.comp-container h1 {
   font-size: 20px;
   opacity: 0.7;
   left: 10%;
 }
-.comp-county-container h1 {
-  font-size: 20px;
-  opacity: 0.7;
-  left: 10%;
-}
-.comp-national-container h1 {
-  font-size: 20px;
-  opacity: 0.7;
-  left: 10%;
-}
-
-.comp-state-container h2 {
+.comp-container h2 {
   font-size: 15px;
   opacity: 0.7;
   left: 10%;
@@ -103,61 +93,4 @@
   font-size: 15px;
   opacity: 0.7;
   left: 10%;
-}
-
- /* Amrita - Responsiveness for timelines and headers */
-@media (max-width: 1300px) {
-  .comp-timeline-total {
-    width: 80%;
-  }
-}
-
-@media (max-width: 1000px) {
-  .comp-timeline-total {
-    width: 85%;
-  }
-}
-
-@media (max-width: 800px) {
-  .comp-timeline-total {
-    width: 90%;
-  }
-}
-
-@media (max-width: 770px) {
-  .comp-timeline-total {
-    width: 120%;
-  }
-  .data-comp-container .content-group {
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 650px) {
-  .comp-timeline-total {
-    width: 120%;
-  }
-  .data-comp-container .content-group {
-    margin-top: 0px;
-  }
-  .data-comp-container .comp-header h1 {
-    font-size: 25px;
-    margin-bottom: 0px;
-  }
-  .data-comp-container .tri-data h2 {
-    font-size: 20px;
-  }
-  .data-comp-container .eph-data h2 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 400px) {
-  .comp-timeline-total {
-    width: 150%;
-    margin: 0;
-  }
-  .data-comp-container .content-group {
-    margin-top: 0px;
-  }
 }

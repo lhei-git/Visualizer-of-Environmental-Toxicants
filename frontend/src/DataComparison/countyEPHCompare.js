@@ -69,14 +69,15 @@ const CountyEPHCompare = ({measure, measureID, units}) => {
 
 
 
+
     //.jsx layout
     return(
-        <div className="comp-county-container">
+        <div className="comp-container">
             {/* Amrita - Adjusted header to only say stateName and added h2*/}
             <h1>{countyName}, {stateAbbr}</h1>
             <h2> Showing Data Based on 50th Percentile </h2>
             {/*change time series info based on filter changes*/}
-            <div className = "time-series">
+            <div className = "comp-time-series">
                     <CountyTimeSeries
                     size={{ width: 800, height: 400 }}
                     measureID={measureID}

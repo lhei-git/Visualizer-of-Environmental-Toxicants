@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+
 import axios from 'axios';
 import { getCountyID } from '../EPHFilters/countyID';
 import { getLocationParents, getYearString } from '../helpers';
@@ -22,7 +23,7 @@ class CountyTimeSeries extends Component {
       },
       errorMessage: '', 
       years: [],
-      data: [],
+      data: null,
     };
   }
 
@@ -47,6 +48,7 @@ class CountyTimeSeries extends Component {
   
       const apiResponse = await axios.get(apiURL);
       console.log('API RESPONSE: ', apiResponse);
+      
       
       const responseData = apiResponse.data.tableResult.map((item) => ({
         year: item.year,
@@ -88,6 +90,9 @@ class CountyTimeSeries extends Component {
       if (error == 'Error: Error fetching county ID'){
         console.log("setting new error message!");
         newErrorMessage = "No data available for selected health issue in " + getLocationParents(this.state.map, 'county') + " County";
+      } else if (error == 'Error: Null county name for location searched'){
+        console.log("setting new error message!");
+        newErrorMessage = "Search a smaller location (address, city, or county) to view data on a specific county";
       }
 
       this.setState((prevState) => ({
@@ -120,18 +125,15 @@ class CountyTimeSeries extends Component {
       return <div className="timeseries-error-message"><span className="error-icon">&#9888; </span>{errorMessage}</div>;
     }
 
-    if (loading) {
-      /*load spinner from previous group*/
-      return <LoadSpinner />;
-    }
-
     return (
       <div>
-       {/* {this.props.stateData ? ( */}
           <div className="TimeSeries" >
- 
+            {/*loading spinner shows if data has not loaded*/}
+          {this.state.data ? (
             <TimeSeries data={this.state.data} size ={{width:this.props.size.width, height:this.props.size.height }} units={this.props.units}/>
-
+            ) : (
+                <LoadSpinner />
+            )}
           </div>
 
       </div>
