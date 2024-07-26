@@ -73,20 +73,9 @@ function About() {
 
         <div className="credits">
           <span>
-            Home page photo by{" "}
-            <a href="https://unsplash.com/@punkidu?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-              Ella Ivanescu
-            </a>{" "}
-            on{" "}
-            <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-              Unsplash
-            </a>
-          </span>
-          <br />
-          <span>
-            About page photo by{" "}
-            <a href="https://unsplash.com/@worldsbetweenlines?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-              Patrick Hendry
+            Home and About page photo by{" "}
+            <a href="https://unsplash.com/@chrisliverani?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+              Chris Liverani
             </a>{" "}
             on{" "}
             <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">

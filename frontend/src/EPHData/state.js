@@ -60,6 +60,18 @@ const StateData = ({ measure, measureID, units }) => {
   const [state] = useReducer(reducer, initialState);
   const stateName = getLocationParents(state.map, 'stateLong');
 
+
+  function getSubtitle(subtitle) {
+    if(measureID === 587) {
+      return subtitle = "Crude Prevalence of Children <=17 Years of Age Ever Diagnosed with Asthma"
+    }
+    else if (measureID === 67) {
+      return subtitle = "Annual Number of Cases of Brain and Central Nervous System Cancer among Children <20 Years of Age"
+    }
+    else if (measureID === 71) {
+      return subtitle = "Annual Number of Leukemia among Children <20 Years of Age"
+    }
+  }
   const accordionMeasure = [
     {
       measureID: 587,
@@ -110,7 +122,10 @@ const StateData = ({ measure, measureID, units }) => {
     <FadeInSection>
       <div className="state-container" ref={containerRef}>
         <FadeInSection>
+          <div className='state-header'>
           <h1>{measure} in {stateName}</h1>
+          <h3>{getSubtitle()}</h3>
+          </div>
         </FadeInSection>
 
         <div className={`time-series`}>
@@ -141,11 +156,11 @@ const StateData = ({ measure, measureID, units }) => {
         </FadeInSection>
 
         {currentAccordionMeasure &&
-          currentAccordionMeasure.sections.map(section => (
+        currentAccordionMeasure.sections.map(section => (
             <FadeInSection key={section.title}>
-              <Accordion title={section.title} content={section.content} />
-            </FadeInSection>
-          ))}
+          <Accordion key={section.title} title={section.title} content={section.content} />
+          </FadeInSection>
+        ))}
       </div>
     </FadeInSection>
   );

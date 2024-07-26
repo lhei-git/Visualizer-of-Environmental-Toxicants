@@ -62,7 +62,8 @@ class CustomTooltip extends Tooltip {
       }, []);
 
       useEffect(() => {
-        const dataValues = data.map(item => parseFloat(item.dataValue)); // convert dataValue to numbers to be read
+        const removedEmptyData = data.filter(item => !isNaN(parseFloat(item.dataValue)));   // Amrita - filtering out NaN values
+        const dataValues = removedEmptyData.map(item => parseFloat(item.dataValue)); // convert dataValue to numbers to be read
         //get min and max, then pass to y axis domain variable
         const minValue = Math.min(...dataValues);
         const maxValue = Math.max(...dataValues) + 5; //set upper bumper

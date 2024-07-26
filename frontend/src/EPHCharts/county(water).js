@@ -1,15 +1,21 @@
 import React, { Component, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Label,
+} from 'recharts';
 import axios from 'axios';
 import { getCountyID } from '../EPHFilters/countyID';
 import { getLocationParents, getYearString } from '../helpers';
 import LoadingSpinner from '../LoadingSpinner';
-import TimeSeries from './timeseries';
 
 /*farzana -- created the class*/
-class CountyTimeSeries extends Component {
+class CountyTimeSeriesWater extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +29,7 @@ class CountyTimeSeries extends Component {
       },
       errorMessage: '', 
       years: [],
-      data: null,
+      data: [],
     };
   }
 
@@ -36,36 +42,31 @@ class CountyTimeSeries extends Component {
       );
       this.setState({ countyID: id });
   
-      const yearResponse = await axios.get(
+      const response = await axios.get(
         `https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${this.props.measureID}/2/all/all?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`//farzana added in apiToken
       );
-      const yearData = yearResponse.data.map((item) => item.temporal);
+      const yearData = response.data.map((item) => item.temporal);
       this.setState({ years: yearData });
   
       const yearString = getYearString(yearData);
-      
-      const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
+      const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/102/1/${id}/1/${yearString}/0/0?PMDisplayId=2&apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
   
       const apiResponse = await axios.get(apiURL);
       console.log('API RESPONSE: ', apiResponse);
-      
-      
-      const responseData = apiResponse.data.tableResult.map((item) => ({
+      const responseData = apiResponse.data.cwsTableResult.map((item) => ({
         year: item.year,
         dataValue: item.dataValue,
         state: item.geo, 
       }));
-    
+  
       // Update state and set loading to false
       this.setState((prevState) => ({
         ...prevState,
-        countyID: id,
+        stateID: id,
         years: yearData,
         data: responseData,
         errorMessage: '',
       }));
-
-      console.log("Measure data: " + responseData)
   
       // Store data in session storage with a dynamic key based on measureID
       //sessionStorage.setItem(`ephData_${this.props.measureID}`, JSON.stringify(responseData));
@@ -84,20 +85,10 @@ class CountyTimeSeries extends Component {
     
       // Log the full error object
       console.log('Full error object:', error);
-
-      var newErrorMessage = "Error retrieving data from EPH API";
-      //add a different error message if there is no county data
-      if (error == 'Error: Error fetching county ID'){
-        console.log("setting new error message!");
-        newErrorMessage = "No data available for selected health issue in " + getLocationParents(this.state.map, 'county') + " County";
-      } else if (error == 'Error: Null county name for location searched'){
-        console.log("setting new error message!");
-        newErrorMessage = "Search a smaller location (address, city, or county) to view data on a specific county";
-      }
-
+    
       this.setState((prevState) => ({
         ...prevState,
-        errorMessage: newErrorMessage,
+        errorMessage: 'Error retrieving data from EPH API',
       }));
     }}
 
@@ -117,31 +108,48 @@ class CountyTimeSeries extends Component {
   }
 
   render() {
-    // Rendering component using this.state and this.props
+    // Your component rendering logic using this.state and this.props
   
     const { errorMessage, loading } = this.state;
 
     if (errorMessage) {
-      return <div className="timeseries-error-message"><span className="error-icon">&#9888; </span>{errorMessage}</div>;
+      return <div>Error: {errorMessage}</div>;
+    }
+
+    if (loading) {
+      /*load spinner from previous group*/
+      return <LoadSpinner />;
     }
 
     return (
       <div>
-          <div className="TimeSeries" >
-            {/*loading spinner shows if data has not loaded*/}
-          {this.state.data ? (
-            <TimeSeries data={this.state.data} size ={{width:this.props.size.width, height:this.props.size.height }} units={this.props.units}/>
-            ) : (
-                <LoadSpinner />
-            )}
+       {/* {this.props.stateData ? ( */}
+          <div className="TimeSeries" style={{ width: this.props.size.width, height: this.props.size.height }}>
+            <LineChart width={this.props.size.width} height={this.props.size.height} data={this.state.data}>
+              <CartesianGrid />
+              <XAxis dataKey="year" />
+              <YAxis>
+                <Label
+                  style={{ textAnchor: 'middle' }}
+                  angle={270}
+                  position="insideLeft"
+                  value={this.props.units}
+                  margin={200}
+                />
+              </YAxis>
+              <Tooltip />
+              <Line name="Percent" type="monotone" dataKey="dataValue" stroke="purple" />
+            </LineChart>
           </div>
-
+      {/*  ) : (
+          <LoadSpinner />
+      )} */}
       </div>
     );
   }
 }
 
-CountyTimeSeries.propTypes = {
+CountyTimeSeriesWater.propTypes = {
   size: PropTypes.shape({
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
@@ -150,7 +158,6 @@ CountyTimeSeries.propTypes = {
   units: PropTypes.string.isRequired,
   percentile: PropTypes.number.isRequired,
   demographic: PropTypes.number.isRequired,
-
 };
 
 function LoadSpinner() {
@@ -169,4 +176,4 @@ function LoadSpinner() {
   );
 }
 
-export default CountyTimeSeries;
+export default CountyTimeSeriesWater;
