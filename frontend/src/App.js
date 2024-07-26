@@ -135,7 +135,7 @@ const Navbar = (props) => {
       </ul>
       <div className="logo">
         {/*Al-Taimee - Collapse into hamburger and call Link when clicked*/}
-        <Link to="/" onClick={() => setShowMenu(false)}>VETHOS.</Link>
+        <Link to="/" onClick={() => setShowMenu(false)}>VEHRS.</Link>
       </div>
       
     </div>
@@ -155,7 +155,7 @@ Navbar.propTypes = {
 function Footer() {
   return (
     <div className="footer">
-      <div className="copyright">&#169; VETHOS 2023</div>
+      <div className="copyright">&#169; VEHRS 2023</div>
     </div>
   );
 }

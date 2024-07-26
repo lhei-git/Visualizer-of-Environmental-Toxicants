@@ -86,7 +86,7 @@ function Home(props) {
       </div>
       <div className="content-group">
         <div className="header">
-          Visualizer of Environmental Toxicants and Health Outcomes
+          Visualizer of Environmental Health Risks
         </div>
         <div className="caption">
           Please select a location to see U.S. facilities emitting toxic
