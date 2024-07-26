@@ -10,64 +10,92 @@ function About() {
       <div className="content">
         <h1>About</h1>
         <div>
-          VETHOS, previously known as The Visualizer of Environmental Toxicants (VET) web application was
-          developed to obtain information from the{" "}
-          <a href="https://www.epa.gov/toxics-release-inventory-tri-program">
-            Toxic Releases Inventory (TRI)
+          Chemicals and products released into the environment, applied to our foods, and present in the 
+          products we consume, are some of the most dangerous risks to human health and quality of life. 
+          <br />
+          <br />
+          The European Environmental Agency considers air pollution{" "}
+          <a href="https://www.eea.europa.eu/themes/air/">
+            "the biggest environmental health risk in Europe."
           </a>{" "}
-          data of the U.S. Environmental Protection Agency, and associated
-          chemical information from the{" "}
-          <a href="https://pubchem.ncbi.nlm.nih.gov">
-            PubChem database of the National Library of Medicine
+          Studies indicate that in general, {" "}
+          <a href="https://link.springer.com/article/10.1007/s11356-020-09042-2">
+            "air pollution is one of the most important reasons for serious human health effects including 
+            cardiovascular and respiratory illnesses."
+          </a>{" "}
+          Industries emit various toxic chemicals (e.g. carcinogens, endocrine disruptors, 
+          environmental hazards) into the air, land and water everyday, including "dioxins" and persistent 
+          bioaccumulative toxic (PBT) chemicals. They are released by the thousands of pounds every year 
+          across the United States, near to cities and villages, or farms and lakes. These releases are known 
+          and the data of reports {" "}
+          <a href="https://www.epa.gov/toxics-release-inventory-tri-program/tri-listed-chemicals">
+            are publicly available.
           </a>
-          , to map, organize and visualize information about releases of toxic
-          chemicals into the air, land and water across the United States. It was
-          recently updated to further expand its goal to include awareness on Public
-          Health conditions in varying areas of the United States using data from the {" "}
-          <a href="https://ephtracking.cdc.gov/">
-            CDC's Environmental Public Health (EPH) Tracking Network. 
+          <br />
+          <br />
+          More recently, evidence has accumulated regarding the {" "}
+          <a href="https://www.plasticpollutioncoalition.org/blog/2022/07/12/plastic-tox-shanna-swan">
+            association between phthalates - plasticizers used to make plastic - and sex hormone development,
           </a>{" "}
-        </div>
-        <br />
+          including the current {" "}
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4214967/">
+            crisis of infertility and allergies.
+          </a>{" "}
+          Similarly, PFAS — a family of synthetic chemicals used in non-stick pans and several other consumer 
+          products — have been dubbed "forever chemicals" given their strong and long lasting bonds. They have also been {" "}
+          <a href="https://www.niehs.nih.gov/health/topics/agents/pfc">
+            associated with several health issues.
+          </a>{" "}
+          Various other chemicals in consumer products and industrial processes,{" "}
+          <a href="https://www.niehs.nih.gov/health/topics/agents/pfc">
+            such as Bisphenol A (BPA) and hexavalent chromium,
+          </a>{" "}
+          which have serious health implications, are released into the environment or come in direct contact 
+          with our bodies on a daily basis (e.g. plastic receipts that contain BPA).
+          <br />
+          <br />
+          <hr />
+          <br />
+          <div>
+            To bring awareness to these environmental health risks, we have developed the Visualizer of 
+            Environmental Health Risks (VEHRS) web application. This application was developed to inform the 
+            public, scientists and policy makers alike to learn about toxic releases into the air, land and water 
+            across regions and localities in the United States. VEHRS obtains information from the Toxic 
+            Release Inventory (TRI) database of the US Environmental Protection Agency (EPA), as well as 
+            associated chemical information from the PubChem database of the National Library of Medicine, 
+            to map, organize and visualize releases of toxic chemicals in any city, county or state in the US 
+            searched by the user. VEHRS also obtains data from the CDC's Environmental Public Health 
+            Tracking Network to highlight specific health outcomes associated with various environmental toxins.
+          
+            <br />
+            <br />
+            When data is available, VEHRS shows specific toxic releases, most released chemicals, and 
+            various types of related health outcomes and conditions, in or around the locality searched for by 
+            the user, including historical trends in the data (i.e. years of available data up to the end of 2023). 
+            Toxicity is a complex issue, and the hazards of a chemical or compound are dependent on amount 
+            and concentration, the population at question, and a specific time frame. This tool is thus for 
+            informative and exploratory purposes only, and it is not intended to diagnose or treat any particular 
+            disease for any specific person. Further documentation about the application and the data herein 
+            can be found in the following sites:
 
-        <div>
-          This tool was created to expand knowledge about environmental
-          pollutants and enable the public, scientists and policymakers to learn
-          about patterns of releases of toxic chemicals into the air, land and
-          water, and how these releases may be affecting communities across the
-          U.S.
-        </div>
-        <br />
+            <ul>
+              <li><a href="https://www.epa.gov/toxics-release-inventory-tri-program">Toxic Releases Inventory (TRI)</a></li>
+              <li><a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a></li>
+              <li><a href="https://ephtracking.cdc.gov/">CDC Environmental Public Health Tracking</a></li>
+              <li><a href="https://github.com/lhei-git/Visualizer-of-Environmental-Toxicants">Application Github</a></li>
+            </ul>
+          </div>
 
-        <div>
-          Toxicity is a complex issue, and the hazards of a chemical are
-          dependent on amount and concentration of the chemical. While correlations
-          may be found between the toxicant release levels and the public health data, 
-          it is important to consider other factors that may impact the results.
-          This tool is thus for exploratory purposes only, and it is
-          not intended to diagnose any particular disease or prescribe any
-          particular treatment. Further documentation about the variables used
-          here are found under the{" "}
-          <a href="https://www.epa.gov/toxics-release-inventory-tri-program/what-toxics-release-inventory">
-            TRI documentation
-          </a>{" "}
-          <a href="https://pubchem.ncbi.nlm.nih.gov/docs/about">
-          , the PubChem website, and
-          </a>{" "}
-          <a href="https://www.cdc.gov/nceh/tracking/about.htm">
-            the CDC EPH Tracking website.
-          </a>{" "}
         </div>
+
         <br />
         <div>
-          <h2>Creators of VET</h2>
-          VET was developed for the Lab for Health and Environmental Information
-          (LHEI) at Wayne State University by Evan de Jesus, Adwait Wadekar,
-          Richard Moore, and Calvin Brooks as part of their Senior Capstone
-          Project, during the Fall of 2020. VETHOS, the updated version of the website,
-          was revised by Al-Taimee Hassan, Katherine O’Donnell, Amrita Dhar, and Farzana
-          Israt. The project was guided by Nic DePaula, Director of LHEI and Assistant 
-          Professor at the School of Information Sciences at Wayne State University.
+          <h2>Creators of VEHRS</h2>
+          VEHRS was developed by Taimee Hassan, Katherine O'Donnell, Amrita Dhar, and Farzana Israt, 
+          for their senior capstone project (Winter 2023). This project built upon the VET application 
+          created by Evan de Jesus, Adwait Wadekar, Richard Moore and Calvin Brooks (Fall 2020). The 
+          project was conceptualized and guided by Nic DePaula for the
+          <a href="https://www.lhei.org/" > Lab for Health and Environmental Informatics (LHEI).</a>
         </div>
         <br />
 
