@@ -46,7 +46,7 @@ class StateTimeSeries extends Component {
       console.log('API RESPONSE: ', apiResponse);
       console.log('API endpoint: ', `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/1/1/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`)
       const responseData = apiResponse.data.tableResult.map((item) => ({
-        year: item.year,
+        year: item.temporal,
         dataValue: item.dataValue,
         state: item.geo, 
       }));
