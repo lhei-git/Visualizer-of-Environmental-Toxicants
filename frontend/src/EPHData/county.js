@@ -398,7 +398,7 @@ const CountyData = ({measure, measureID, units}) => {
             <div className = "map-container">
                 {measureID === 769 && (
                     <EPHThematicWaterStateMap 
-                    yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                    yearRange={[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
                     level={[1, 2, 3]}
                     measure={"Arsenic in Community Water"}
                     stateName={stateAbbr}
@@ -408,7 +408,7 @@ const CountyData = ({measure, measureID, units}) => {
                     {/*asthma*/}
                 {measureID === 1120 && (
                     <EPHThematicStateMap 
-                    yearRange={[2020, 2019, 2018]}
+                    yearRange={[2021, 2020, 2019, 2018]}
                     measure={"Asthma Among Adults"}
                     stateName={stateAbbr}
                     stateLongName={stateLong}>
@@ -417,7 +417,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/*cancer*/}
                  {measureID === 1095 && (
                     <EPHThematicStateMap 
-                    yearRange={[2020, 2019, 2018]}
+                    yearRange={[2021,2020, 2019, 2018]}
                     measure={"Prevalence of Cancer"}
                     stateName={stateAbbr}
                     stateLongName={stateLong}>
@@ -426,7 +426,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/*fertility*/}
                  {measureID === 45 && (
                     <EPHThematicStateMap 
-                    yearRange={[ 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
+                    yearRange={[2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]}
                     measure={"Fertility Rate"}
                     stateName={stateAbbr}
                     stateLongName={stateLong}>
@@ -445,7 +445,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/*infant mort*/}
                  {measureID === 279 && (
                     <EPHThematicStateMap 
-                        yearRange={[2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004]}
+                        yearRange={[2020,2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004]}
                         measure={"Infant Mortality"}
                         stateName={stateAbbr}
                     stateLongName={stateLong}>
@@ -464,7 +464,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/*pce*/}
                  {measureID === 807 && (
                     <EPHThematicWaterStateMap 
-                        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                        yearRange={[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
                         level={[1, 2, 3]}
                         measure={"PCE in Community Water"}
                         stateName={stateAbbr}
@@ -494,7 +494,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/**/}
                 {measureID === 817 && ( 
                 <EPHThematicWaterStateMap 
-                        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                        yearRange={[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
                         level={[1, 2, 3]}
                         measure={"Radium in Community Water"}
                         stateName={stateAbbr}
@@ -504,7 +504,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/**/}
                 {measureID === 812 && ( 
                 <EPHThematicWaterStateMap 
-                        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                        yearRange={[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
                         level={[1, 2, 3]}
                         measure={"TCE in Community Water"}
                         stateName={stateAbbr}
@@ -514,7 +514,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/**/}
                 {measureID === 822 && ( 
                 <EPHThematicWaterStateMap 
-                        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                        yearRange={[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
                         level={[1, 2, 3]}
                         measure={"Uranium in Community Water"}
                         stateName={stateAbbr}
@@ -525,7 +525,7 @@ const CountyData = ({measure, measureID, units}) => {
                 {measureID === 99 && ( 
                 /*farzana -- making state maps for each measure*/
                 <EPHThematicStateMap 
-                        yearRange={[2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]}
+                        yearRange={[2022,2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014]}
                         measure={"Hospitalizations from Asthma"}
                         stateName={stateAbbr}
                         stateLongName={stateLong}>
@@ -534,7 +534,7 @@ const CountyData = ({measure, measureID, units}) => {
                  {/**/}
                 {measureID === 802 && (
                 <EPHThematicWaterStateMap 
-                        yearRange={[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
+                        yearRange={[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999]}
                         level={[1, 2, 3]}
                         measure={"DEPH in Community Water"}
                         stateName={stateAbbr}
