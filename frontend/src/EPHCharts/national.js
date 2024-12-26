@@ -23,7 +23,7 @@ const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => 
     axios.get(apiURL)
       .then((response) => {
         const newData = response.data.sampleSizeTableResult.map((item) => ({
-          year: item.year,
+          year: item.minimumTemporalId,
           dataValue: item.dataValue,
         }));
         setData(newData);

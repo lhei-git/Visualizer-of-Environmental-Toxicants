@@ -19,7 +19,7 @@ class CountyTimeSeries extends Component {
         pbt: false,
         carcinogen: false,
         releaseType: 'all',
-        year: 2022,
+        year: 2021,
       },
       errorMessage: '', 
       years: [],
@@ -39,7 +39,7 @@ class CountyTimeSeries extends Component {
       const yearResponse = await axios.get(
         `https://ephtracking.cdc.gov/apigateway/api/v1/temporalItems/${this.props.measureID}/2/all/all?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`//farzana added in apiToken
       );
-      const yearData = yearResponse.data.map((item) => item.temporal);
+      const yearData = yearResponse.data.map((item) => item.temporalId);
       this.setState({ years: yearData });
   
       const yearString = getYearString(yearData);
@@ -51,7 +51,7 @@ class CountyTimeSeries extends Component {
       
       
       const responseData = apiResponse.data.tableResult.map((item) => ({
-        year: item.year,
+        year: item.temporal,
         dataValue: item.dataValue,
         state: item.geo, 
       }));
