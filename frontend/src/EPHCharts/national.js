@@ -23,7 +23,8 @@ const NationalTimeSeries = ({size, measure, units, percentile, demographic}) => 
     axios.get(apiURL)
       .then((response) => {
         const newData = response.data.sampleSizeTableResult.map((item) => ({
-          year: item.minimumTemporalId,
+          //farzana -- changing year to be minimum temporal to temporal from new api name
+          year: `${item.minimumTemporal} - ${item.temporal}`,
           dataValue: item.dataValue,
         }));
         setData(newData);
