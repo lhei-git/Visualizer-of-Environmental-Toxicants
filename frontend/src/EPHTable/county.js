@@ -43,7 +43,8 @@ class CountyTable extends Component {
 
       const apiResponse = await axios.get(apiURL);
       const newData = apiResponse.data.tableResult.map((item) => ({
-        year: item.year,
+        //farzana -- changing to temporal for new api naming
+        year: item.temporal,
         dataValue: item.dataValue,
       }));
 
