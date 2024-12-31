@@ -1,4 +1,4 @@
-# ToxicantVisualizer
+# Visualizer of Environmental Health Risks (previously VET)
 ![Build Status](https://github.com/lhei-git/ToxicantVisualizer/actions/workflows/deploy.yml/badge.svg)
 
 Fall 2023 Capstone Project
