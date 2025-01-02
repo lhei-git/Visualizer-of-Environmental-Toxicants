@@ -89,12 +89,9 @@ function Home(props) {
           Visualizer of Environmental Health Risks
         </div>
         <div className="caption">
-          Please select a location to see U.S. facilities emitting toxic
-          chemicals into the air, land and water; statistics and trends on
-          releases of toxicants into the environment; as well as detailed
-          information on potential health hazards from these toxic chemicals.
-          You will also be able to view information on public health measures
-          concerning the people in the specified location.
+          Type a U.S. city, county or state to visualize: facilities releasing toxic chemicals into the environment, 
+          specific chemical information associated with the releases, and measures of various public health issues in 
+          the searched location.
         </div>
 
         <div className="search-bar">
