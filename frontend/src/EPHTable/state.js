@@ -44,7 +44,7 @@ class StateTable extends Component {
         dataValue: item.dataValue,
         sampleSize: item.sampleSize,
         concentration: item.Concentration,
-        year: item.year,
+        year: item.temporal,
       }));
 
       this.setState({ data: APIdata });

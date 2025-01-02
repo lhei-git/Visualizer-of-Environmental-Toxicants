@@ -46,7 +46,7 @@ function NationalTable({ measure }) {
           dataValue: item.dataValue,
           sampleSize: item.sampleSize,
           concentration: item.Concentration,
-          year: item.year
+          year: `${item.minimumTemporal} - ${item.temporal}`
         }));
         setData(APIdata);
       })
