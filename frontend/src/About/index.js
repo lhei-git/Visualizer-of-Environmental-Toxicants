@@ -65,12 +65,12 @@ function About() {
             associated chemical information from the PubChem database of the National Library of Medicine, 
             to map, organize and visualize releases of toxic chemicals in any city, county or state in the US 
             searched by the user. VEHRS also obtains data from the CDC's Environmental Public Health 
-            Tracking Network to highlight specific health outcomes associated with various environmental toxins.
+            Tracking Network to highlight specific health outcomes potentially associated with environmental toxicants.
           
             <br />
             <br />
             When data is available, VEHRS shows specific toxic releases, most released chemicals, and 
-            various types of related health outcomes and conditions, in or around the locality searched for by 
+            various types of potentially related health outcomes and conditions, in or around the locality searched for by 
             the user, including historical trends in the data (i.e. years of available data up to the end of 2023). 
             Toxicity is a complex issue, and the hazards of a chemical or compound are dependent on amount 
             and concentration, the population at question, and a specific time frame. This tool is thus for 
@@ -96,6 +96,15 @@ function About() {
           created by Evan de Jesus, Adwait Wadekar, Richard Moore and Calvin Brooks (Fall 2020). The 
           project was conceptualized and guided by Nic DePaula for the
           <a href="https://www.lhei.org/" > Lab for Health and Environmental Informatics (LHEI).</a>
+        </div>
+        <br />
+
+        <br />
+        <div>
+          <h2>DISCLAIMER</h2>
+          This application is intended for exploratory purposes only. Data and information from this product 
+          have not been thoroughly validated, and individuals should consult the data sources to better understand 
+          the information presented herein.
         </div>
         <br />
 
