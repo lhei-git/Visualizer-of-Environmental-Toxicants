@@ -93,7 +93,8 @@ function About() {
           <h2>Creators of VEHRS</h2>
           VEHRS was developed by Taimee Hassan, Katherine O'Donnell, Amrita Dhar, and Farzana Israt, 
           for their senior capstone project (Winter 2023). This project built upon the VET application 
-          created by Evan de Jesus, Adwait Wadekar, Richard Moore and Calvin Brooks (Fall 2020). The 
+          created by Evan de Jesus, Adwait Wadekar, Richard Moore and Calvin Brooks (Fall 2020). 
+          The application was updated by Amrita Dhar and Farzana Israt in 2024-2025. The 
           project was conceptualized and guided by Nic DePaula for the
           <a href="https://www.lhei.org/" > Lab for Health and Environmental Informatics (LHEI).</a>
         </div>
@@ -101,7 +102,7 @@ function About() {
 
         <br />
         <div>
-          <h2>DISCLAIMER</h2>
+          <h3>DISCLAIMER</h3>
           This application is intended for exploratory purposes only. Data and information from this product 
           have not been thoroughly validated, and individuals should consult the data sources to better understand 
           the information presented herein.

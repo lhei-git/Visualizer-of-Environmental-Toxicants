@@ -155,7 +155,7 @@ Navbar.propTypes = {
 function Footer() {
   return (
     <div className="footer">
-      <div className="copyright">&#169; VEHRS 2023</div>
+      <div className="copyright">&#169; VEHRS 2025</div>
     </div>
   );
 }
