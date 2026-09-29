@@ -46,6 +46,7 @@ function NationalTable({ measure }) {
           dataValue: item.dataValue,
           sampleSize: item.sampleSize,
           concentration: item.Concentration,
+          //farzana -- changing year to be minimum temporal to temporal from new api naming
           year: `${item.minimumTemporal} - ${item.temporal}`
         }));
         setData(APIdata);

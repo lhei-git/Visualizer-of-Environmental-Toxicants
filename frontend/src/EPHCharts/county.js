@@ -51,6 +51,7 @@ class CountyTimeSeries extends Component {
       
       
       const responseData = apiResponse.data.tableResult.map((item) => ({
+        //farzana -- changing to temporal for new api naming
         year: item.temporal,
         dataValue: item.dataValue,
         state: item.geo, 

@@ -90,8 +90,8 @@ function Home(props) {
         </div>
         <div className="caption">
           Type a U.S. city, county or state to visualize: facilities releasing toxic chemicals into the environment, 
-	  specific chemical information associated with the releases, and measures of various public health issues in 
-	  the searched location.
+          specific chemical information associated with the releases, and measures of various public health issues in 
+          the searched location.
         </div>
 
         <div className="search-bar">
