@@ -44,7 +44,7 @@ class CountyTimeSeries extends Component {
   
       const yearString = getYearString(yearData);
       
-      const apiURL = `https:ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
+      const apiURL = `https://ephtracking.cdc.gov/apigateway/api/v1/getCoreHolder/${this.props.measureID}/2/2/${id}/1/${yearString}/0/0?apiToken=BDB5CA62-FE5C-4608-A621-D4B198DF7744`; //farzana added in apiToken
   
       const apiResponse = await axios.get(apiURL);
       console.log('API RESPONSE: ', apiResponse);

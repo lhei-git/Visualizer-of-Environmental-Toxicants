@@ -1,6 +1,6 @@
 # Author: Evan de Jesus
 
-FROM python:3
+FROM python:3.11
 ENV PYTHONUNBUFFERED=1
 RUN apt update -y && apt install -y postgresql-client
 RUN mkdir /code
