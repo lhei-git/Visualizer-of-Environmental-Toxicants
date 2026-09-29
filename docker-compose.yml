@@ -16,13 +16,14 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - 3000:3000
+      - 80:3000
     stdin_open: true
     volumes:
       - ./frontend:/reactApp
       - /reactApp/node_modules
     depends_on:
       - backend
+    restart: unless-stopped
   backend:
     build: ./backend
     command: sh -c 'until pg_isready --username=postgres --host=postgres_local; do sleep 1; done && python manage.py runserver 0.0.0.0:8000'
@@ -35,6 +36,7 @@ services:
       - ./backend:/code
     ports:
       - 8000:8000
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
